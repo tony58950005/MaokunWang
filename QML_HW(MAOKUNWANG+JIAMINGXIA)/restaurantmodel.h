@@ -1,10 +1,4 @@
-//todolist.h
-//ToDoItem==RestaurantItem
-//ToDoList==RestaurantModel
-//ToDoItem==RestaurantItem
-//ToDoList==RestaurantModel
-//ToDoList==RestaurantModel
-//ToDoModel==RestaurantTableModel
+
 #ifndef RESTAURANTMODEL_H
 #define RESTAURANTMODEL_H
 

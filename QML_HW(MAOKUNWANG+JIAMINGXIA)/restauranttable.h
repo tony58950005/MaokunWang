@@ -1,8 +1,4 @@
-//todomodel.h
-//ToDoItem==RestaurantItem
-//ToDoList==RestaurantModel
-//ToDoList==RestaurantModel
-//ToDoModel==RestaurantTableModel
+
 #ifndef RESTAURANTTABLE_H
 #define RESTAURANTTABLE_H
 
