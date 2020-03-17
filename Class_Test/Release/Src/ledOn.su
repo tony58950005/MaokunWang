@@ -1,0 +1,3 @@
+ledOn.cpp:32:1:ledOn::~ledOn()	0	static
+ledOn.cpp:32:1:virtual ledOn::~ledOn()	8	static
+ledOn.cpp:12:1:ledOn::ledOn()	16	static
