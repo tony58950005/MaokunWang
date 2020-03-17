@@ -22,7 +22,7 @@
 #include "main.h"
 #include <stdbool.h>
 #include "stm32f4xx_hal.h"
-#include "PushButtonLedToggle.h"
+
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -58,7 +58,8 @@ static void MX_GPIO_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+bool flag=true;
+int LED_State=0;
 /* USER CODE END 0 */
 
 /**
@@ -92,7 +93,7 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
-  PushButtonLedToggle pushButtonLedToggle;
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -101,6 +102,17 @@ int main(void)
   {
     /* USER CODE END WHILE */
 
+	  	 if (HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13) && flag)
+	  		  {
+	  			  HAL_Delay(5);//reduce the bounce
+	  			  HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
+	  			  LED_State=HAL_GPIO_ReadPin(GPIOA,GPIO_PIN_5);
+	  			  flag = false;
+	  		  }else if(HAL_GPIO_ReadPin(GPIOC, GPIO_PIN_13)== GPIO_PIN_RESET)
+	  		  {
+	  			  HAL_Delay(5);//reduce the bounce
+	  			  flag=true;
+	  		  }
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
