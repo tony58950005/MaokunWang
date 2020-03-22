@@ -15,16 +15,15 @@
 
 PwmClass::PwmClass() {
 
-	uint16_t ledpwmval=0;
-	void setLedpwmval(uint16_t ledpwmval);
 
 
-};
-
-void PwmClass::setLedpwmval(uint16_t ledpwmval){
-				TIM2->CCR1 = ledpwmval;
 }
 
+
+void PwmClass::setLedpwmval(uint16_t ledpwmval)
+	{
+		TIM2->CCR1 = ledpwmval;
+	}
 PwmClass::~PwmClass() {
 	// TODO Auto-generated destructor stub
 }

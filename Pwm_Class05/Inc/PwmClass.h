@@ -7,10 +7,8 @@
 
 #ifndef PWMTESTCLASS_H_
 #define PWMTESTCLASS_H_
-#include <PwmClass.h>
 #include "main.h"
 #include "tim.h"
-#include "usart.h"
 #include "gpio.h"
 class PwmClass {
 
