@@ -24,7 +24,7 @@ bool ClassUartTest::sendMessage(uint8_t* buffer, uint32_t bufferLength, uint32_t
 {
 	//TODO: Implement this function using HAL_UART_Transmit
 		HAL_UART_Transmit(&huart, buffer, bufferLength, timeout);
-
+	//TODO-AKOS: Check the return type of HAL_UART_Transmit
 
 
 	//Does the HAL_UART_Transmit function use interrupt?Ans:No
@@ -34,26 +34,12 @@ bool ClassUartTest::sendMessage(uint8_t* buffer, uint32_t bufferLength, uint32_t
 bool ClassUartTest::receiveMessage(uint8_t* buffer, uint32_t bufferLength, uint32_t timeout)
 {
 	//TODO: Implement this function using HAL_UART_Receive
-	if(buffer[0]=='c')
+	if(buffer[0]=='c')	//TODO-AKOS: Check the result in the main.cpp, where you uses receiveMessage fcn.
 	{
-		HAL_UART_Receive_IT(&huart, buffer, timeout);
+		HAL_UART_Receive_IT(&huart, buffer, timeout); //TODO-AKOS: Use HAL_UART_Receive instead of HAL_UART_Receive_IT
 		return true;
+		//TODO-AKOS: Check the return type of HAL_UART_Receive
 	}
 	//Does the HAL_UART_Receive function use interrupt for the receiving?Ans:Yes
 	//Return, when receive is succeeded
 }
-
- void ClassUartTest::HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart,uint8_t* buffer, uint32_t bufferLength, uint32_t timeout)
-{
-  /* Prevent unused argument(s) compilation warning */
-  //UNUSED(huart);
-  sendMessage(buffer, bufferLength, timeout);
-  HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
-  HAL_Delay(500);
-  /* NOTE: This function should not be modified, when the callback is needed,
-           the HAL_UART_RxCpltCallback could be implemented in the user file
-   */
-}
-
-
-

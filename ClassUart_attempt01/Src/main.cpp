@@ -99,6 +99,8 @@ int main(void)
   //MX_DMA_Init();
   //MX_SPI1_Init();
 
+  uint8_t myTxData[14]= "Hello World\r\n";
+  uint8_t myRxData[1];
   ClassUartTest uartTest1(huart2);
   /* USER CODE END 2 */
   /* Infinite loop */
@@ -106,16 +108,16 @@ int main(void)
 
   while (1)
   {
-    /* USER CODE END WHILE */
-	//TODO: Implement the following program using uartTest1 variable:
-	//		Send some string (e.g. "Hello World") when you receive a specific character (e.g. 'c').
+	  /* USER CODE END WHILE */
+	  //TODO: Implement the following program using uartTest1 variable:
+	  //		Send some string (e.g. "Hello World") when you receive a specific character (e.g. 'c').
 
-	 if (uartTest1.receiveMessage(myRxData, 2, 100) == true)
+	  if (uartTest1.receiveMessage(myRxData, sizeof(myRxData), 100) == true)	//TODO-AKOS: You used an invalid size for myRxData.
 	  {
-		 uartTest1.HAL_UART_RxCpltCallback(&huart2,myRxData, 2, 100);
+
 	  }
 	  HAL_Delay(500);
-    /* USER CODE BEGIN 3 */
+	  /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
 }
@@ -162,35 +164,6 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-}
-
-/**
-  * @brief USART2 Initialization Function
-  * @param None
-  * @retval None
-  */
-void MX_USART2_UART_Init(void)
-{
-
-  /* USER CODE BEGIN USART2_Init 0 */
-
-  /* USER CODE END USART2_Init 0 */
-
-  /* USER CODE BEGIN USART2_Init 1 */
-
-  /* USER CODE END USART2_Init 1 */
-  huart2.Instance = USART2;
-  huart2.Init.BaudRate = 115200;
-  huart2.Init.WordLength = UART_WORDLENGTH_8B;
-  huart2.Init.StopBits = UART_STOPBITS_1;
-  huart2.Init.Parity = UART_PARITY_NONE;
-  huart2.Init.Mode = UART_MODE_TX_RX;
-  huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
-  huart2.Init.OverSampling = UART_OVERSAMPLING_16;
-  /* USER CODE BEGIN USART2_Init 2 */
-
-  /* USER CODE END USART2_Init 2 */
-
 }
 
 /**

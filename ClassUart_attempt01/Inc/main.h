@@ -29,14 +29,11 @@ extern "C" {
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
-#include "ClassUartTest.h"
 #include "stm32f4xx_hal_uart.h"
 #include "stm32f4xx_hal_tim.h"
 #include "string.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-uint8_t myTxData[14]= "Hello World\r\n";
-uint8_t myRxData[1];
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
