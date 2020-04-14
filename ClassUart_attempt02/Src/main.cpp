@@ -107,36 +107,32 @@ int main(void)
   /* USER CODE END 2 */
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+	HAL_Delay(500);
+	/* USER CODE BEGIN 3 */
+	while (1)
+	{
+		/* USER CODE END WHILE */
+		if (uartTest1.receiveMessage(myRxData, sizeof(myRxData), 100) == true)
+		{
+			if (myRxData[0] == 'c')
+			{
+				if (uartTest1.sendMessage(myTxData, sizeof(myTxData), 100) == true)
+				{
+					HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
+					HAL_Delay(10);
+				}
+				else
+				{
+					Error_Handler();
+				}
+			}
+		}
+		else
+		{
+			Error_Handler();
+		}
 
-
-
-  	  HAL_Delay(500);
-  	  /* USER CODE BEGIN 3 */
-  while (1)
-  {
-	  /* USER CODE END WHILE */
-	  //TODO: Implement the following program using uartTest1 variable:
-	  //		Send some string (e.g. "Hello World") when you receive a specific character (e.g. 'c').
-	 // HAL_UART_Transmit(&huart2, myTxData, 14, 100);
-	  //TODO-AKOS: You used an invalid size for myRxData.
-	  if(uartTest1.receiveMessage(myRxData, 1, 100)==true)	//TODO-AKOS: Check the result in the main.cpp, where you uses receiveMessage fcn.
-	   {
-	   	  		//TODO-AKOS: Use HAL_UART_Receive instead of HAL_UART_Receive_IT
-	   		  if((uartTest1.sendMessage(myTxData, 16, 100)==true) && (myRxData[0]=='c'))
-	   		  {
-	   			  HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
-	   			  HAL_Delay(10);
-	   		  }else
-	   		  {
-	   			  Error_Handler();
-	   		  }
-	   	  		//TODO-AKOS: Check the return type of HAL_UART_Receive
-	   }else
-	   {
-	   		  Error_Handler();
-	   }
-
-  }
+	}
   /* USER CODE END 3 */
 }
 

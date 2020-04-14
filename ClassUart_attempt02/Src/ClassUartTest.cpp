@@ -22,35 +22,10 @@ ClassUartTest::ClassUartTest(UART_HandleTypeDef h) :
 
 bool ClassUartTest::sendMessage(uint8_t* buffer, uint16_t bufferLength, uint32_t timeout)
 {
-	//TODO: Implement this function using HAL_UART_Transmit
-		if(HAL_UART_Transmit(&huart, buffer, bufferLength, timeout)==HAL_OK)
-		{
-			return true;
-		}else
-		{
-			return false;
-		}
-	//TODO-AKOS: Check the return type of HAL_UART_Transmit
-
-
-	//Does the HAL_UART_Transmit function use interrupt?Ans:No
-	//Return, when transmit is succeeded
+	return (HAL_UART_Transmit(&huart, buffer, bufferLength, timeout) == HAL_OK);
 }
 
 bool ClassUartTest::receiveMessage(uint8_t* buffer, uint16_t bufferLength, uint32_t timeout)
 {
-	//TODO: Implement this function using HAL_UART_Receive
-	while (HAL_UART_Receive(&huart, buffer, bufferLength,timeout) != HAL_OK)
-	{
-		HAL_Delay(10);
-	}
-	if(HAL_UART_Receive(&huart, buffer, bufferLength, timeout)==HAL_OK)
-	{
-		return true;
-	}else
-	{
-		return false;
-	}
-	//Does the HAL_UART_Receive function use interrupt for the receiving?Ans:No
-	//Return, when receive is succeeded
+	return (HAL_UART_Receive(&huart, buffer, bufferLength, timeout) == HAL_OK);
 }
