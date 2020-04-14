@@ -20,8 +20,8 @@ class ClassUartTest
 {
 	public:
 		ClassUartTest(UART_HandleTypeDef huart);
-		bool 	sendMessage(uint8_t* buffer, uint32_t bufferLength, uint32_t timeout = UART_DEFAULT_TIMEOUT);
-		bool	receiveMessage(uint8_t* buffer, uint32_t bufferLength, uint32_t timeout = UART_DEFAULT_TIMEOUT);
+		bool 	sendMessage(uint8_t* buffer, uint16_t bufferLength, uint32_t timeout = UART_DEFAULT_TIMEOUT);
+		bool	receiveMessage(uint8_t* buffer, uint16_t bufferLength, uint32_t timeout = UART_DEFAULT_TIMEOUT);
 	private:
 		UART_HandleTypeDef huart;
 };

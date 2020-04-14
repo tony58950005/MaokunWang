@@ -101,13 +101,17 @@ int main(void)
   //MX_DMA_Init();
   //MX_SPI1_Init();
 
-  uint8_t myTxData[14]= "Hello Nagyy\r\n";
+  uint8_t myTxData[16]= "Hello Jasmine\r\n";
   uint8_t myRxData[1];
   ClassUartTest uartTest1(huart2);
   /* USER CODE END 2 */
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 
+
+
+  	  HAL_Delay(500);
+  	  /* USER CODE BEGIN 3 */
   while (1)
   {
 	  /* USER CODE END WHILE */
@@ -115,21 +119,23 @@ int main(void)
 	  //		Send some string (e.g. "Hello World") when you receive a specific character (e.g. 'c').
 	 // HAL_UART_Transmit(&huart2, myTxData, 14, 100);
 	  //TODO-AKOS: You used an invalid size for myRxData.
+	  if(uartTest1.receiveMessage(myRxData, 1, 100)==true)	//TODO-AKOS: Check the result in the main.cpp, where you uses receiveMessage fcn.
+	   {
+	   	  		//TODO-AKOS: Use HAL_UART_Receive instead of HAL_UART_Receive_IT
+	   		  if((uartTest1.sendMessage(myTxData, 16, 100)==true) && (myRxData[0]=='c'))
+	   		  {
+	   			  HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
+	   			  HAL_Delay(10);
+	   		  }else
+	   		  {
+	   			  Error_Handler();
+	   		  }
+	   	  		//TODO-AKOS: Check the return type of HAL_UART_Receive
+	   }else
+	   {
+	   		  Error_Handler();
+	   }
 
-	  if(uartTest1.receiveMessage(myRxData, 1, 100)==HAL_OK && myRxData[0]=='c')	//TODO-AKOS: Check the result in the main.cpp, where you uses receiveMessage fcn.
-	  {
-	  		//TODO-AKOS: Use HAL_UART_Receive instead of HAL_UART_Receive_IT
-		  if(uartTest1.sendMessage(myTxData, 14, 100)==HAL_OK)
-		  {
-			  HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
-			  HAL_Delay(10);
-		  }
-	  		//TODO-AKOS: Check the return type of HAL_UART_Receive
-	  }
-
-
-	  HAL_Delay(500);
-	  /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
 }
