@@ -111,6 +111,7 @@ int main(void)
 	/* USER CODE BEGIN 3 */
 	while (1)
 	{
+		//TODO: Set LED intensity, when character 'l' is received. The pwm percentage should be a parameter, and use the PWM class for the intensity control
 		/* USER CODE END WHILE */
 		if (uartTest1.receiveMessage(myRxData, sizeof(myRxData), 100) == true)
 		{
