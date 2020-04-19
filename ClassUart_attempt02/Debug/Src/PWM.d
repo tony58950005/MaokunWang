@@ -1,5 +1,4 @@
-Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o: \
- ../Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c \
+Src/PWM.o: ../Src/PWM.cpp ../Inc/PWM.h ../Inc/main.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  ../Inc/stm32f4xx_hal_conf.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h \
@@ -27,7 +26,12 @@ Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o: \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
- ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
+ ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h ../Inc/main.h \
+ ../Inc/gpio.h
+
+../Inc/PWM.h:
+
+../Inc/main.h:
 
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 
@@ -84,3 +88,7 @@ Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.o: \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h:
 
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
+
+../Inc/main.h:
+
+../Inc/gpio.h:

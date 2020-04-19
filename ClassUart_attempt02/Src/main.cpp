@@ -21,14 +21,13 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "stm32f4xx_hal.h"
+#include "stm32f4xx.h"
 #include "stm32f4xx_hal_uart.h"
 #include "stm32f4xx_hal_tim.h"
-#include "stm32f4xx_hal_dma.h"
-#include "cstdint"
 #include <ClassUartTest.h>
-#include "string.h"
-#include<iostream>
-using namespace std;
+#include "PWM.h"
+#include "stdint.h"
+#include "tim.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -38,6 +37,10 @@ using namespace std;
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
 UART_HandleTypeDef huart2;
+TIM_HandleTypeDef htim2;
+uint8_t percent=50;
+
+//TIM_HandleTypeDef htim2;
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
@@ -100,38 +103,44 @@ int main(void)
   MX_USART2_UART_Init();
   //MX_DMA_Init();
   //MX_SPI1_Init();
-
-  uint8_t myTxData[16]= "Hello Jasmine\r\n";
+  //MX_TIM2_Init();
+  //HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_1);
+  uint8_t myTxData[15]= "Hello World\r\n";
   uint8_t myRxData[1];
   ClassUartTest uartTest1(huart2);
+  PWM pwmT(htim2);
   /* USER CODE END 2 */
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-	HAL_Delay(500);
 	/* USER CODE BEGIN 3 */
 	while (1)
 	{
 		//TODO: Set LED intensity, when character 'l' is received. The pwm percentage should be a parameter, and use the PWM class for the intensity control
 		/* USER CODE END WHILE */
+
 		if (uartTest1.receiveMessage(myRxData, sizeof(myRxData), 100) == true)
 		{
-			if (myRxData[0] == 'c')
-			{
-				if (uartTest1.sendMessage(myTxData, sizeof(myTxData), 100) == true)
-				{
-					HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
-					HAL_Delay(10);
-				}
-				else
-				{
-					Error_Handler();
+			if (myRxData[0] == 'l') {
+				HAL_Delay(100);
+				if (pwmT.setPWM(percent)) {
+					HAL_Delay(1000);
 				}
 			}
+
 		}
-		else
-		{
-			Error_Handler();
+
+		if (uartTest1.receiveMessage(myRxData, sizeof(myRxData), 100) == true) {
+			if (myRxData[0] == 'c')
+			{
+				HAL_Delay(100);
+				if (uartTest1.sendMessage(myTxData, sizeof(myTxData), 100)== true)
+				{
+					HAL_Delay(10);
+				}
+
+			}
 		}
+
 
 	}
   /* USER CODE END 3 */

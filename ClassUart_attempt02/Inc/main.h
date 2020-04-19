@@ -29,6 +29,7 @@ extern "C" {
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
+#include "stm32f4xx.h"
 #include "stm32f4xx_hal_uart.h"
 #include "stm32f4xx_hal_tim.h"
 #include "string.h"

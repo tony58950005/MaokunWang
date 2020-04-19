@@ -7,6 +7,12 @@
 
 #include "PWM.h"
 #include "main.h"
+#include"stm32f4xx_hal_tim.h"
+#include "stm32f4xx.h"
+#include "stm32f4xx_hal.h"
+#include "gpio.h"
+#include "string.h"
+#include "stdint.h"
 
 PWM::PWM(TIM_HandleTypeDef htim)
 {
@@ -22,7 +28,7 @@ PWM::PWM(TIM_HandleTypeDef htim)
 	htim.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
 	if (HAL_TIM_Base_Init(&htim) != HAL_OK)
 	{
-		Error_Handler();
+			Error_Handler();
 	}
 
 	sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
@@ -32,6 +38,7 @@ PWM::PWM(TIM_HandleTypeDef htim)
 	}
 
 	if (HAL_TIM_PWM_Init(&htim) != HAL_OK)
+
 	{
 		Error_Handler();
 	}
@@ -44,9 +51,39 @@ PWM::PWM(TIM_HandleTypeDef htim)
 	}
 
 	//TODO: Initialize the PWM channel using HAL_TIM_PWM_ConfigChannel function and the variable sConfigOC.
+	//MX_TIM2_Init();
+
+	  sConfigOC.OCMode = TIM_OCMODE_PWM1;
+	  sConfigOC.Pulse = 500;
+	  sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
+	  sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
+
+	if(HAL_TIM_PWM_ConfigChannel(&htim, &sConfigOC, TIM_CHANNEL_1)!=HAL_OK)
+	{
+			Error_Handler();
+	}
+	 HAL_TIM_IC_MspInit(&htim);
+	/*if(HAL_TIM_PWM_Init(&htim)!=HAL_OK)
+	{
+		Error_Handler();
+	}*/
+	/*if (HAL_TIM_PWM_Start(&htim,TIM_CHANNEL_1)!=HAL_OK)
+	{
+		Error_Handler();
+	}*/
 }
 
 bool PWM::setPWM(uint8_t percent)
 {
 	//TODO: Implement this task using a HAL function
+	//TIM2->CCR1 = percent;
+	if(percent>=0 && percent<=100)
+	{
+		__HAL_TIM_SET_COMPARE(&htim,TIM_CHANNEL_1, percent*10);
+		return true;
+	}else
+	{
+		return false;
+	}
 }
+

@@ -196,6 +196,7 @@ all interrupt callbacks are set to the corresponding weak functions:
 
 #ifdef HAL_TIM_MODULE_ENABLED
 
+
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Private macro -------------------------------------------------------------*/
