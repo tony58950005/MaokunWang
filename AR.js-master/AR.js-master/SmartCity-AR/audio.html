@@ -17,7 +17,7 @@
                 with proper Content-Type headers -->
                 <!-- first entity: reference to the above glTF model -->
 					<a-entity
-					position="0 -1 0"
+					position="0 0.5 0"
 					scale="0.5 0.5 0.5"
 					gltf-model="#helmet"
 					>
@@ -25,13 +25,7 @@
 							<a-cursor></a-cursor>
 						</a-camera>
 					</a-entity>
-				<a-cylinder color="#8888FF" height="5" position="-2 2.5 0"
-					sound="src:helmet_sound;
-					on: click;
-					volume:1;
-					refDistance: 4;
-					rolloffFactor:1">
-				</a-cylinder>
+				
                 <!-- second entity: reference to the above audio -->
                 <a-entity sound="src: #helmet_sound; volume: 1; loop: true">
                 </a-entity>
@@ -40,5 +34,28 @@
             <!-- add a camera to the scene that renders the objects for us -->
             <a-entity camera></a-entity>
         </a-scene>
+		
+		  AFRAME.registerComponent('soundhander', {
+        init:function() {
+            let playing = false;
+            var el = this.el;
+            let audioEl = document.querySelector('[sound]');
+            audioEl.setAttribute("src", "#helmet_sound");
+            audioEl.addEventListener("loaded", (e) => {
+                console.log("AUDIO LOADED")
+                console.log(e)
+                var audio = audioEl.components.sound;
+                el.addEventListener('click', (ee) => {
+                    console.log(ee)
+                    if(!playing){
+                        audio.playSound();
+                    } else {
+                        audio.stopSound();
+                    }
+                    playing = !playing;
+                });
+            })
+    }
+})
     </body>
 </html>

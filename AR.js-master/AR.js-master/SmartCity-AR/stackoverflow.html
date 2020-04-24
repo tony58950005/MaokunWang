@@ -1,0 +1,50 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+    <title>VR GAME 1</title>
+    <meta name="description" content="VR GAME 1"/>
+    <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto%7CRoboto+Mono" media="all"/>
+   <script src="https://cdn.jsdelivr.net/npm/aframe-gif-shader@0.2.0/dist/aframe-gif-shader.min.js"></script>
+   <script src="https://rawgit.com/mayognaise/aframe-gif-component/master/dist/aframe-gif-component.min.js"></script>
+   <body class="a-body ">
+   <a-scene class="fullscreen" inspector="" keyboard-shortcuts="" screenshot="" vr-mode-ui="">
+
+
+    <!--ASSETS-->
+        <a-assets>
+           <img id="robot" src="shooterrobot.gif">
+           <img id="scared" src="scared.gif">
+           <audio id="no" src="no.wav"></audio>
+           <audio id="no" src="no.mp3"></audio>
+    </a-assets>
+
+
+
+    <!--CAMERA-->
+    <a-camera camera="" position="0 0 600" rotation="" look-controls="" wasd-    controls="" data-aframe-inspector-original-camera="">
+            <a-cursor material="" raycaster="" cursor="" geometry=""></a-cursor>
+    </a-camera>
+
+
+    <!--ANIMATED GIF-->
+     <a-entity geometry="primitive:plane" position="+100 -300 0"     material="shader:gif;transparent:true;src:url(scared.gif);" gif="" scale="1000,     1000, 0"></a-entity>
+
+
+     <!--AUDIO-->
+     <a-audio src="no.wav" autoplay="true"></a-audio>
+     <audio id="no" src="no.wav" preload="auto"></audio>
+     <a-sound src="no" src="no.wav" autoplay="true"></a-sound>
+     <a-sound id="no" crossorigin="anonymous" src="no.mp3"></a-sound>
+
+
+    <!--CONTROLS-->
+    <a-entity laser-controls="" daydream-controls="hand:right" gearvr-    controls="hand:right" oculus-touch-controls="hand:right" vive-    controls="hand:right" windows-motion-controls=""></a-entity>
+
+
+
+     <a-sky src="1.jpg" rotation="0 0 0"></a-sky>
+
+
+  </a-scene>
+</body>
+</html>
