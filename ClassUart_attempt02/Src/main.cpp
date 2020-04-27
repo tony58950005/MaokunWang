@@ -27,7 +27,6 @@
 #include <ClassUartTest.h>
 #include "PWM.h"
 #include "stdint.h"
-#include "tim.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -38,7 +37,7 @@
 /* USER CODE BEGIN PTD */
 UART_HandleTypeDef huart2;
 TIM_HandleTypeDef htim2;
-uint8_t percent=50;
+uint8_t percent=80;
 
 //TIM_HandleTypeDef htim2;
 /* USER CODE END PTD */

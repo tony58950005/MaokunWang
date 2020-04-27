@@ -7,7 +7,6 @@
 
 #include "PWM.h"
 #include "main.h"
-#include "tim.h"
 #include"stm32f4xx_hal_tim.h"
 #include "stm32f4xx.h"
 #include "stm32f4xx_hal.h"
@@ -15,11 +14,29 @@
 #include "string.h"
 #include "stdint.h"
 
-PWM::PWM(TIM_HandleTypeDef htim)
+PWM::PWM(TIM_HandleTypeDef h) :
+	htim(h)
 {
+	GPIO_InitTypeDef GPIO_InitStruct = {0};
 	TIM_ClockConfigTypeDef sClockSourceConfig = {0};
 	TIM_MasterConfigTypeDef sMasterConfig = {0};
 	TIM_OC_InitTypeDef sConfigOC = {0};
+
+	__HAL_RCC_GPIOA_CLK_ENABLE();
+	__HAL_RCC_TIM2_CLK_ENABLE();
+
+	// PA5 -> TIM2_CH1
+	GPIO_InitStruct.Pin = GPIO_PIN_5;
+	GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+	GPIO_InitStruct.Pull = GPIO_NOPULL;
+	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+	GPIO_InitStruct.Alternate = GPIO_AF1_TIM2;
+	HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+	if (HAL_TIM_Base_DeInit(&htim) != HAL_OK)
+	{
+		Error_Handler();
+	}
 
 	htim.Instance = TIM2;
 	htim.Init.Prescaler = 84;
@@ -30,7 +47,7 @@ PWM::PWM(TIM_HandleTypeDef htim)
 	htim.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
 	if (HAL_TIM_Base_Init(&htim) != HAL_OK)
 	{
-			Error_Handler();
+		Error_Handler();
 	}
 
 	sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
@@ -40,7 +57,6 @@ PWM::PWM(TIM_HandleTypeDef htim)
 	}
 
 	if (HAL_TIM_PWM_Init(&htim) != HAL_OK)
-
 	{
 		Error_Handler();
 	}
@@ -64,7 +80,6 @@ PWM::PWM(TIM_HandleTypeDef htim)
 	{
 		Error_Handler();
 	}
-	HAL_TIM_MspPostInit(&htim);
 
 	if (HAL_TIM_PWM_Start(&htim, TIM_CHANNEL_1)!=HAL_OK)
 	{
