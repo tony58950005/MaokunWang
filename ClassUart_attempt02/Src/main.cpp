@@ -37,7 +37,7 @@
 /* USER CODE BEGIN PTD */
 UART_HandleTypeDef huart2;
 TIM_HandleTypeDef htim2;
-uint8_t percent=80;
+uint8_t percent=20;
 
 //TIM_HandleTypeDef htim2;
 /* USER CODE END PTD */
