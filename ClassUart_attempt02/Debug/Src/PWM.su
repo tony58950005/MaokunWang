@@ -1,2 +1,0 @@
-PWM.cpp:19:1:PWM::PWM(TIM_HandleTypeDef)	72	static
-PWM.cpp:80:6:bool PWM::setPWM(uint8_t)	16	static

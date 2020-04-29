@@ -1,4 +1,0 @@
-PwmClass.cpp:16:1:PwmClass::PwmClass()	16	static
-PwmClass.cpp:23:6:void PwmClass::setLedpwmval(uint16_t)	16	static
-PwmClass.cpp:27:1:PwmClass::~PwmClass()	16	static
-PwmClass.cpp:27:1:virtual PwmClass::~PwmClass()	16	static
