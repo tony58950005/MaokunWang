@@ -17,22 +17,21 @@ bool Queue::IsBuffer_Full()
 bool Queue::IsBuffer_Empty()
 {
 	if((head==tail)&&(full==false))
-		return 1;
+		return true;
 	else
-		return 0;
+		return false;
 }
 bool Queue::Buffer_Write(uint8_t item)//overwrite the oldest value
 {
-	buffer[head]=&item;
+	*(buffer[head])=item;
 	if(full==true)
 	{
 		tail=(tail+1) % QUEUE_MAX_SIZE;
 	}
 	head=(head+1)%QUEUE_MAX_SIZE;
-	if(head==tail)
-		full=true;
-	else
-		full=false;
+	return ((head==tail)? (full=true):(full=false));
+	return true;
+
 }
 bool Queue::Buffer_Read(uint8_t* item)
 {
@@ -42,13 +41,13 @@ bool Queue::Buffer_Read(uint8_t* item)
 		return false;
 	}
 
-	item =buffer[tail];//read the data and move the tail
+	item =(buffer[tail]);//read the data and move the value in the tail
 	full=false;
 	tail=(tail+1) % QUEUE_MAX_SIZE;
 	return true;
 
 }
-uint8_t Queue::size()
+/*uint8_t Queue::size()
 {
 	uint8_t size=QUEUE_MAX_SIZE;
 	if(!full)
@@ -63,4 +62,4 @@ uint8_t Queue::size()
 
 	}
 	return size;
-}
+}*/

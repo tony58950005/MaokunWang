@@ -111,14 +111,16 @@ int main(void)
   ClassUartTest uartTest1(huart2);
   PWM pwmT(htim2);
   Queue q1;
-  if(q1.Buffer_Write(1))
+  if(q1.Buffer_Write(8))
   {
-	  HAL_Delay(1000);
+	  HAL_Delay(100);
 	  if (q1.Buffer_Read(item_read))
 	  {
+//		  for (int i=0;i<15;i++)
+//		  {
+			  myTxData[5]=*item_read;
+//		  }
 
-		  myTxData[0]=&item_read;
-		  //HAL_Delay(1000);
 	  }
 
 
