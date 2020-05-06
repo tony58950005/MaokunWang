@@ -39,7 +39,7 @@
 UART_HandleTypeDef huart2;
 TIM_HandleTypeDef htim2;
 uint8_t percent=20;
-uint8_t* item1;
+uint8_t* item_read;
 
 //TIM_HandleTypeDef htim2;
 /* USER CODE END PTD */
@@ -111,14 +111,14 @@ int main(void)
   ClassUartTest uartTest1(huart2);
   PWM pwmT(htim2);
   Queue q1;
-  if(q1.Buffer_Write(8))
+  if(q1.Buffer_Write(1))
   {
 	  HAL_Delay(1000);
-	  if (q1.Buffer_Read(item1))
+	  if (q1.Buffer_Read(item_read))
 	  {
-		  //myTxData[0]=item1;
-		  myTxData[5]=&item1;
-		  HAL_Delay(1000);
+
+		  myTxData[0]=&item_read;
+		  //HAL_Delay(1000);
 	  }
 
 

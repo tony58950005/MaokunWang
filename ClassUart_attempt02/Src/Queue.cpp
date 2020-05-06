@@ -45,6 +45,7 @@ bool Queue::Buffer_Read(uint8_t* item)
 	item =buffer[tail];//read the data and move the tail
 	full=false;
 	tail=(tail+1) % QUEUE_MAX_SIZE;
+	return true;
 
 }
 uint8_t Queue::size()
