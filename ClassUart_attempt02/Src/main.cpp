@@ -27,6 +27,7 @@
 #include <ClassUartTest.h>
 #include "PWM.h"
 #include "stdint.h"
+#include "Queue.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -38,6 +39,7 @@
 UART_HandleTypeDef huart2;
 TIM_HandleTypeDef htim2;
 uint8_t percent=20;
+uint8_t* item1;
 
 //TIM_HandleTypeDef htim2;
 /* USER CODE END PTD */
@@ -108,6 +110,21 @@ int main(void)
   uint8_t myRxData[1];
   ClassUartTest uartTest1(huart2);
   PWM pwmT(htim2);
+  Queue q1;
+  if(q1.Buffer_Write(8))
+  {
+	  HAL_Delay(1000);
+	  if (q1.Buffer_Read(item1))
+	  {
+		  //myTxData[0]=item1;
+		  myTxData[5]=&item1;
+		  HAL_Delay(1000);
+	  }
+
+
+
+  }
+
   /* USER CODE END 2 */
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
@@ -139,6 +156,8 @@ int main(void)
 
 			}
 		}
+
+
 
 
 	}
