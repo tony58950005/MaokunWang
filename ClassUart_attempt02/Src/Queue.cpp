@@ -23,13 +23,16 @@ bool Queue::IsBuffer_Empty()
 }
 bool Queue::Buffer_Write(uint8_t item)//overwrite the oldest value
 {
-	*(buffer[head])=item;
+	buffer[head]=item;//left is a pointer, right is a value
 	if(full==true)
 	{
 		tail=(tail+1) % QUEUE_MAX_SIZE;
 	}
 	head=(head+1)%QUEUE_MAX_SIZE;
-	return ((head==tail)? (full=true):(full=false));
+	if (head==tail)
+			full=true;
+	else
+			full=false;
 	return true;
 
 }
@@ -41,7 +44,7 @@ bool Queue::Buffer_Read(uint8_t* item)
 		return false;
 	}
 
-	item =(buffer[tail]);//read the data and move the value in the tail
+	*item =buffer[tail];//read the data and move the value in the tail;left is a pointer, right is a value
 	full=false;
 	tail=(tail+1) % QUEUE_MAX_SIZE;
 	return true;
