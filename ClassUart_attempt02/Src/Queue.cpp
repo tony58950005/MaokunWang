@@ -6,7 +6,6 @@
 #include "cstdlib"
 Queue::Queue()
 {
-	buffer[QUEUE_MAX_SIZE];
 }
 
 bool Queue::IsBuffer_Full()

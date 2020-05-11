@@ -19,7 +19,7 @@ public:
 	uint8_t head=0;
 		uint8_t tail=0;
 		bool full = false; //a flag to judge if buffer is full or not. if fill, full_=1;
-		uint8_t* buffer[QUEUE_MAX_SIZE]; //Store the queue in this array
+		uint8_t buffer[QUEUE_MAX_SIZE]; //Store the queue in this array
 		uint8_t size();
 private:
 
