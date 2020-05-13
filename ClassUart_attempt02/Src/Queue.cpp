@@ -1,4 +1,3 @@
-
 #include "stm32f4xx_hal.h"
 #include "string.h"
 #include "main.h"
@@ -43,7 +42,7 @@ bool Queue::Buffer_Read(uint8_t* item)
 		return false;
 	}
 
-	*item =buffer[tail];//read the data and move the value in the tail;left is a pointer, right is a value
+	*(item) =buffer[tail];//read the data and move the value in the tail;left is a pointer, right is a value
 	full=false;
 	tail=(tail+1) % QUEUE_MAX_SIZE;
 	return true;
@@ -61,7 +60,6 @@ bool Queue::Buffer_Read(uint8_t* item)
 		{
 			size=(QUEUE_MAX_SIZE+head-tail);
 		}
-
 	}
 	return size;
 }*/
