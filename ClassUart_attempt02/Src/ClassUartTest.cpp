@@ -29,3 +29,5 @@ bool ClassUartTest::receiveMessage(uint8_t* buffer, uint16_t bufferLength, uint3
 {
 	return (HAL_UART_Receive(&huart, buffer, bufferLength, timeout) == HAL_OK);
 }
+
+

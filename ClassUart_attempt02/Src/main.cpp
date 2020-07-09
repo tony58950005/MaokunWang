@@ -25,9 +25,13 @@
 #include "stm32f4xx_hal_uart.h"
 #include "stm32f4xx_hal_tim.h"
 #include <ClassUartTest.h>
+#include <MotorSetting.h>
+#include <ReturnInfo.h>
 #include "PWM.h"
 #include "stdint.h"
 #include "Queue.h"
+
+
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -38,8 +42,10 @@
 /* USER CODE BEGIN PTD */
 UART_HandleTypeDef huart2;
 TIM_HandleTypeDef htim2;
-uint8_t percent=20;
+uint8_t percent=10;
 uint8_t item_read;
+
+
 
 //TIM_HandleTypeDef htim2;
 /* USER CODE END PTD */
@@ -63,6 +69,8 @@ uint8_t item_read;
 void SystemClock_Config(void);
 void MX_GPIO_Init(void);
 void MX_USART2_UART_Init(void);
+
+
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -75,6 +83,7 @@ void MX_USART2_UART_Init(void);
   * @brief  The application entry point.
   * @retval int
   */
+
 int main(void)
 {
   /* USER CODE BEGIN 1 */
@@ -106,11 +115,14 @@ int main(void)
   //MX_SPI1_Init();
   //MX_TIM2_Init();
   //HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_1);
-  uint8_t myTxData[15]= "Hello World\r\n";
-  uint8_t myRxData[1];
-  ClassUartTest uartTest1(huart2);
-  PWM pwmT(htim2);
-  Queue q1;
+
+
+
+
+  PWM pwmTest(htim2);
+  MotorSetting motorSetting;
+  ReturnInfo returnInfo;
+  /*Queue q1;
   if(q1.Buffer_Write('Z')&&q1.Buffer_Write('X')&&q1.Buffer_Write('C'))
   {
 	  HAL_Delay(100);
@@ -118,7 +130,7 @@ int main(void)
 	  {
 			  myTxData[0]=item_read;
 	  }
-  }
+  }*/
 
   /* USER CODE END 2 */
   /* Infinite loop */
@@ -126,38 +138,19 @@ int main(void)
 	/* USER CODE BEGIN 3 */
 	while (1)
 	{
-		//TODO: Set LED intensity, when character 'l' is received. The pwm percentage should be a parameter, and use the PWM class for the intensity control
 		/* USER CODE END WHILE */
-
-		if (uartTest1.receiveMessage(myRxData, sizeof(myRxData), 100) == true)
-		{
-			if (myRxData[0] == 'l') {
-				HAL_Delay(100);
-				if (pwmT.setPWM(percent)) {
-					HAL_Delay(1000);
-				}
-			}
-
-		}
-
-		if (uartTest1.receiveMessage(myRxData, sizeof(myRxData), 100) == true) {
-			if (myRxData[0] == 'c')
-			{
-				HAL_Delay(100);
-				if (uartTest1.sendMessage(myTxData, sizeof(myTxData), 100)== true)
-				{
-					HAL_Delay(10);
-				}
-
-			}
-		}
-
-
-
+		if(motorSetting.detectMove(50)){HAL_Delay(100);}
+		if(motorSetting.detectStop()){HAL_Delay(100);}
+		if(motorSetting.detectTurn()){HAL_Delay(100);}
+		if(returnInfo.showBattery()){HAL_Delay(100);}
+		if(returnInfo.showDistance()){HAL_Delay(100);}
 
 	}
   /* USER CODE END 3 */
 }
+
+
+
 
 /**
   * @brief System Clock Configuration
