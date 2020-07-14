@@ -136,10 +136,10 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 	/* USER CODE BEGIN 3 */
-	while (1)
+	while (1)	//Akos: A project file is missing from the GIT repository (.project file)
 	{
 		/* USER CODE END WHILE */
-		if(motorSetting.detectMove(50)){HAL_Delay(100);}
+		if(motorSetting.detectMove(50)){HAL_Delay(100);}	//Akos: Create one class for the communication. Name it for example HighLevelComm, store one ClassUartTest in this class, and parse every message in that class.
 		if(motorSetting.detectStop()){HAL_Delay(100);}
 		if(motorSetting.detectTurn()){HAL_Delay(100);}
 		if(returnInfo.showBattery()){HAL_Delay(100);}
