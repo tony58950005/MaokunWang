@@ -24,10 +24,7 @@
 #include "stm32f4xx.h"
 #include "stm32f4xx_hal_uart.h"
 #include "stm32f4xx_hal_tim.h"
-#include <ClassUartTest.h>
-#include <MotorSetting.h>
-#include <ReturnInfo.h>
-#include "PWM.h"
+#include <HighLevelComm.h>
 #include "stdint.h"
 #include "Queue.h"
 
@@ -40,14 +37,8 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-UART_HandleTypeDef huart2;
-TIM_HandleTypeDef htim2;
-uint8_t percent=10;
-uint8_t item_read;
 
 
-
-//TIM_HandleTypeDef htim2;
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
@@ -116,12 +107,8 @@ int main(void)
   //MX_TIM2_Init();
   //HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_1);
 
+  HighLevelComm HighLevelCommTest;
 
-
-
-  PWM pwmTest(htim2);
-  MotorSetting motorSetting;
-  ReturnInfo returnInfo;
   /*Queue q1;
   if(q1.Buffer_Write('Z')&&q1.Buffer_Write('X')&&q1.Buffer_Write('C'))
   {
@@ -139,11 +126,11 @@ int main(void)
 	while (1)
 	{
 		/* USER CODE END WHILE */
-		if(motorSetting.detectMove(50)){HAL_Delay(100);}
-		if(motorSetting.detectStop()){HAL_Delay(100);}
-		if(motorSetting.detectTurn()){HAL_Delay(100);}
-		if(returnInfo.showBattery()){HAL_Delay(100);}
-		if(returnInfo.showDistance()){HAL_Delay(100);}
+		if(HighLevelCommTest.Move(50)){HAL_Delay(100);}
+		if(HighLevelCommTest.Stop()){HAL_Delay(100);}
+		if(HighLevelCommTest.Turn(50)){HAL_Delay(100);}
+		if(HighLevelCommTest.showBattery()){HAL_Delay(100);}
+		if(HighLevelCommTest.showDistance()){HAL_Delay(100);}
 
 	}
   /* USER CODE END 3 */

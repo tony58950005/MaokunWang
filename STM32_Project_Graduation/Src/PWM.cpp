@@ -11,7 +11,6 @@
 #include "stm32f4xx.h"
 #include "stm32f4xx_hal.h"
 #include "gpio.h"
-#include "string.h"
 #include "stdint.h"
 
 PWM::PWM(TIM_HandleTypeDef h) :
