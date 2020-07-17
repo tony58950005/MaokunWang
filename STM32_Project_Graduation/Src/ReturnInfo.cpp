@@ -18,9 +18,9 @@ ReturnInfo::ReturnInfo()
 
 bool ReturnInfo::showBattery()
 {
-	ClassUartTest uartTest(huart2);
+	ClassUartTest uartTest(huart2);		//Akos: You created separate ClassUartTest object for the messages. Use only one ClassUartTest for the whole communication.
 	if (uartTest.receiveMessage(myRxData, sizeof(myRxData), 100) == true) {
-		if (myRxData[0] == 'b') {	//'b' means "Battery life info"
+		if (myRxData[0] == 'b') {	//'b' means "Battery life info"	//Akos: Your communication protocol is different. You should catch the followign message for the battery info: "Battery\n".
 			HAL_Delay(100);
 			if (uartTest.sendMessage(myTxData_Battery, sizeof(myTxData_Battery), 100) == true) {
 				return true;
