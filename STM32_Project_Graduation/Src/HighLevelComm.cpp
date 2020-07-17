@@ -13,9 +13,9 @@
 #include "string.h"
 #include "main.h"
 
-//HighLevelComm::HighLevelComm() {
+HighLevelComm::HighLevelComm() {
 //nothing
-//}
+}
 TIM_HandleTypeDef htim2;
 ClassUartTest uartTest(huart2);
 PWM pwmTest(htim2);
