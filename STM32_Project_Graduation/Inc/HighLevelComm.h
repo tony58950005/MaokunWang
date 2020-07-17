@@ -22,7 +22,6 @@ public:
 		bool showBattery();
 		bool showDistance();
 		bool isRun=false;
-		//uint8_t myTxData[15]="Hello World\r\n";
 		uint8_t myTxData_OK[5]= "OK\r\n";
 		uint8_t myTxData_Battery[6]= "50\r\n"; //initial battery life is 50%
 		uint8_t myTxData_Distance[6]= "50\r\n"; //initial distance is 50mm
@@ -31,8 +30,7 @@ public:
 		uint8_t myRxData_9bits[10];
 
 	private:
-		UART_HandleTypeDef huart2;
-		//TIM_HandleTypeDef htim2;
+
 
 };
 
