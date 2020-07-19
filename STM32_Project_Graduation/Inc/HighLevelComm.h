@@ -15,23 +15,22 @@
 
 class HighLevelComm {
 public:
-		HighLevelComm();
+		HighLevelComm(UART_HandleTypeDef& uart, TIM_HandleTypeDef& pwm);
 		bool Move(int x);
 		bool Stop();
 		bool Turn(int x);
 		bool showBattery();
 		bool showDistance();
 		bool isRun=false;
-		uint8_t myTxData_OK[5]= "OK\r\n";
-		uint8_t myTxData_Battery[6]= "50\r\n"; //initial battery life is 50%
-		uint8_t myTxData_Distance[6]= "50\r\n"; //initial distance is 50mm
+	private:
 		uint8_t myRxData_4bits[5];
 		uint8_t myRxData_8bits[8];
 		uint8_t myRxData_9bits[10];
-
-	private:
-
-
+		uint8_t myTxData_OK[5];
+		uint8_t myTxData_Battery[10];
+		uint8_t myTxData_Distance[10];
+		ClassUartTest uart;
+		PWM pwm;
 };
 
 #endif /* HIGHLEVELCOMM_H_ */

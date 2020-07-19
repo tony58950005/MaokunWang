@@ -68,6 +68,8 @@ void MX_USART2_UART_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+UART_HandleTypeDef huart2;
+TIM_HandleTypeDef htim2;
 /* USER CODE END 0 */
 
 /**
@@ -107,7 +109,7 @@ int main(void)
   //MX_TIM2_Init();
   //HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_1);
 
-  HighLevelComm HighLevelCommTest;
+  HighLevelComm HighLevelCommTest(huart2, htim2);
 
   /*Queue q1;
   if(q1.Buffer_Write('Z')&&q1.Buffer_Write('X')&&q1.Buffer_Write('C'))
