@@ -20,13 +20,13 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "stm32f4xx_hal.h"
-#include "stm32f4xx.h"
 #include "stm32f4xx_hal_uart.h"
 #include "stm32f4xx_hal_tim.h"
+#include "string.h"
 #include <HighLevelComm.h>
 #include "stdint.h"
-#include "Queue.h"
+#include "stdlib.h"
+#include <cstdlib>
 
 
 
@@ -125,14 +125,27 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 	/* USER CODE BEGIN 3 */
+
+ const char * str1="Move\n";
+ const char * str2="Stop\n";
+ const char * str3="Turn\n";
+ const char * str4="Battery\n";
+ const char * str5="Distance\n";
+ uint8_t message1 = std::atoi(str1);
+ uint8_t message2 = std::atoi(str2);
+ uint8_t message3 = std::atoi(str3);
+ uint8_t message4 = std::atoi(str4);
+ uint8_t message5 = std::atoi(str5);
 	while (1)
 	{
 		/* USER CODE END WHILE */
-		if(HighLevelCommTest.Move(50)){HAL_Delay(100);}
-		if(HighLevelCommTest.Stop()){HAL_Delay(100);}
-		if(HighLevelCommTest.Turn(50)){HAL_Delay(100);}
-		if(HighLevelCommTest.showBattery()){HAL_Delay(100);}
-		if(HighLevelCommTest.showDistance()){HAL_Delay(100);}
+		if(HighLevelCommTest.ReceiveMessage(message1)){HighLevelCommTest.Move(50);}
+		if(HighLevelCommTest.ReceiveMessage(message2)){HighLevelCommTest.Stop();}
+		if(HighLevelCommTest.ReceiveMessage(message3)){HighLevelCommTest.Turn(50);}
+		if(HighLevelCommTest.ReceiveMessage(message4)){HighLevelCommTest.showBattery();}
+		if(HighLevelCommTest.ReceiveMessage(message5)){HighLevelCommTest.showDistance();}
+
+
 
 	}
   /* USER CODE END 3 */

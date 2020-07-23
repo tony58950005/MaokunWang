@@ -1,4 +1,5 @@
-Src/main.o: ../Src/main.cpp ../Inc/main.h \
+Src/HighLevelComm.o: ../Src/HighLevelComm.cpp ../Inc/HighLevelComm.h \
+ ../Inc/ClassUartTest.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h \
  ../Inc/stm32f4xx_hal_conf.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h \
@@ -26,11 +27,13 @@ Src/main.o: ../Src/main.cpp ../Inc/main.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h \
- ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
- ../Inc/HighLevelComm.h ../Inc/ClassUartTest.h ../Inc/usart.h \
- ../Inc/main.h ../Inc/Queue.h ../Inc/PWM.h
+ ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h ../Inc/usart.h \
+ ../Inc/main.h ../Inc/Queue.h ../Inc/PWM.h ../Inc/ClassUartTest.h \
+ ../Inc/PWM.h ../Inc/main.h
 
-../Inc/main.h:
+../Inc/HighLevelComm.h:
+
+../Inc/ClassUartTest.h:
 
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 
@@ -88,10 +91,6 @@ Src/main.o: ../Src/main.cpp ../Inc/main.h \
 
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
 
-../Inc/HighLevelComm.h:
-
-../Inc/ClassUartTest.h:
-
 ../Inc/usart.h:
 
 ../Inc/main.h:
@@ -99,3 +98,9 @@ Src/main.o: ../Src/main.cpp ../Inc/main.h \
 ../Inc/Queue.h:
 
 ../Inc/PWM.h:
+
+../Inc/ClassUartTest.h:
+
+../Inc/PWM.h:
+
+../Inc/main.h:
