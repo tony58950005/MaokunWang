@@ -31,8 +31,8 @@ public:
 		//uint8_t myRxData_8bits[8];
 		uint8_t myRxData_9bits[9];
 		uint8_t myTxData_OK[5];
-		uint8_t myTxData_Battery[10];
-		uint8_t myTxData_Distance[10];
+		uint8_t myTxData_Battery[6];
+		uint8_t myTxData_Distance[6];
 		uint8_t itemread;
 		ClassUartTest uart;
 		PWM pwm;
