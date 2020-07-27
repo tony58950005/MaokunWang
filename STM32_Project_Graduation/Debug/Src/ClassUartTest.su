@@ -1,3 +1,0 @@
-ClassUartTest.cpp:14:1:ClassUartTest::ClassUartTest(UART_HandleTypeDef)	24	static
-ClassUartTest.cpp:23:6:bool ClassUartTest::sendMessage(uint8_t*, uint16_t, uint32_t)	24	static
-ClassUartTest.cpp:28:6:bool ClassUartTest::receiveMessage(uint8_t*, uint16_t, uint32_t)	24	static

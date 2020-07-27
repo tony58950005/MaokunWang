@@ -1,5 +1,0 @@
-Queue.cpp:5:1:Queue::Queue()	16	static
-Queue.cpp:9:6:bool Queue::IsBuffer_Full()	16	static
-Queue.cpp:14:6:bool Queue::IsBuffer_Empty()	16	static
-Queue.cpp:21:6:bool Queue::Buffer_Write(uint8_t)	16	static
-Queue.cpp:36:6:bool Queue::Buffer_Read(uint8_t*)	16	static
