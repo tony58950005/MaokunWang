@@ -25,18 +25,19 @@ HighLevelComm::HighLevelComm(UART_HandleTypeDef& uart,TIM_HandleTypeDef& pwm) :
 	pwm(pwm)
 {
 }
-bool HighLevelComm::ReceiveMessage(uint8_t myRxData_9bits)
+bool HighLevelComm::ReceiveMessage(uint8_t myRxData_9bits)	//TODO-Akos: Rename this function to ParseMessage. Create a private class member variable from myRxData_9bits, and also check its type (currently it is one byte).
 {
 	if (uart.receiveMessage(&myRxData_9bits, sizeof(myRxData_9bits), 100) == true)
 	{
-		HAL_Delay(100);
+		HAL_Delay(100);	//TODO-Akos: Why are you waiting 100 ms here?
 		QueueTest.Buffer_Write(myRxData_9bits);
+		//TODO-Akos: Call the other class functions (Move, Stop, etc.) from here
 		return true;
 	}else
 		return false;
 }
 bool HighLevelComm::Move(int x)  //x means moving at x millimeter/second.
-{
+{		//TODO-Akos: In this format, your code is not ok. Buffer read only reads one character, it will never gives you a complete string. And you should push it back (or don't remove from the queue), when it is not "Move\n".
 		if (strcmp((const char*)(QueueTest.Buffer_Read(&itemread)), "Move\n")) {	//"Move\n" means move forward
 			HAL_Delay(1000);
 			if (pwm.setPWM(x/MaxSpeed)) {
