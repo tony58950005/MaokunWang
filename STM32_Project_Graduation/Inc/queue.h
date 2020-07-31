@@ -4,7 +4,7 @@
 #include "stm32f4xx.h"
 #include "stm32f4xx_hal.h"
 
-#define QUEUE_MAX_SIZE	(100)
+#define QUEUE_MAX_SIZE	(10)
 
 #ifdef __cplusplus
 class Queue {

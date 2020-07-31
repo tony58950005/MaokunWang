@@ -42,6 +42,8 @@ bool Queue::Buffer_Read(uint8_t* item)
 	}
 
 	*(item) =buffer[tail];//read the data and move the value in the tail;left is a pointer, right is a value
+	if(*item == '\0')
+		return false;
 	full=false;
 	tail=(tail+1) % QUEUE_MAX_SIZE;
 	return true;

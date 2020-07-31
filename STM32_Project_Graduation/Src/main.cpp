@@ -126,24 +126,19 @@ int main(void)
   /* USER CODE BEGIN WHILE */
 	/* USER CODE BEGIN 3 */
 
- const char * str1="Move\n";
- const char * str2="Stop\n";
- const char * str3="Turn\n";
- const char * str4="Battery\n";
- const char * str5="Distance\n";
- uint8_t message1 = std::atoi(str1);
- uint8_t message2 = std::atoi(str2);
- uint8_t message3 = std::atoi(str3);
- uint8_t message4 = std::atoi(str4);
- uint8_t message5 = std::atoi(str5);
+ //uint8_t str1[6]="Move\n";
+  uint8_t str1[6]={'0'};
+  uint8_t str2[9]={'0'};
+  uint8_t str3[10]={'0'};
+
 	while (1)
 	{
 		/* USER CODE END WHILE */
-		if(HighLevelCommTest.ReceiveMessage(message1)){HighLevelCommTest.Move(50);}
-		if(HighLevelCommTest.ReceiveMessage(message2)){HighLevelCommTest.Stop();}
-		if(HighLevelCommTest.ReceiveMessage(message3)){HighLevelCommTest.Turn(50);}
-		if(HighLevelCommTest.ReceiveMessage(message4)){HighLevelCommTest.showBattery();}
-		if(HighLevelCommTest.ReceiveMessage(message5)){HighLevelCommTest.showDistance();}
+		if(HighLevelCommTest.ParseMessage(str1)){HighLevelCommTest.Move(50);}
+		if(HighLevelCommTest.ParseMessage(str1)){HighLevelCommTest.Stop();}
+		if(HighLevelCommTest.ParseMessage(str1)){HighLevelCommTest.Turn(50);}
+		if(HighLevelCommTest.ParseMessage(str2)){HighLevelCommTest.showBattery();}
+		if(HighLevelCommTest.ParseMessage(str3)){HighLevelCommTest.showDistance();}
 
 
 
