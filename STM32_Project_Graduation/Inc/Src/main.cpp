@@ -127,14 +127,18 @@ int main(void)
 	/* USER CODE BEGIN 3 */
 
  //uint8_t str1[6]="Move\n";
-  /*uint8_t str1[6]={'0'};
+  uint8_t str1[6]={'0'};
   uint8_t str2[9]={'0'};
-  uint8_t str3[10]={'0'};*/
+  uint8_t str3[10]={'0'};
 
 	while (1)
 	{
 		/* USER CODE END WHILE */
-		HighLevelCommTest.ParseMessage();
+		if(HighLevelCommTest.ParseMessage(str1)){HighLevelCommTest.Move(50);}
+		if(HighLevelCommTest.ParseMessage(str1)){HighLevelCommTest.Stop();}
+		if(HighLevelCommTest.ParseMessage(str1)){HighLevelCommTest.Turn(50);}
+		if(HighLevelCommTest.ParseMessage(str2)){HighLevelCommTest.showBattery();}
+		if(HighLevelCommTest.ParseMessage(str3)){HighLevelCommTest.showDistance();}
 
 
 

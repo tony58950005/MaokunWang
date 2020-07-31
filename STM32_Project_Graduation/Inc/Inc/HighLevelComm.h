@@ -20,7 +20,7 @@
 class HighLevelComm {
 public:
 		HighLevelComm(UART_HandleTypeDef& uart, TIM_HandleTypeDef& pwm);
-		bool ParseMessage();
+		bool ParseMessage(uint8_t message[]);
 		bool Move(int x);
 		bool Stop();
 		bool Turn(int x);
@@ -28,6 +28,8 @@ public:
 		bool showDistance();
 		bool isRun=false;
 	private:
+		//uint8_t myRxData_4bits[4];
+		//uint8_t myRxData_8bits[8];
 		int x;
 		std::string s2="Move";
 		std::string s3="Turn";
