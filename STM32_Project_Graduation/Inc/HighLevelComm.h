@@ -28,19 +28,22 @@ public:
 		bool showDistance();
 		bool isRun=false;
 	private:
-		int x;
-		std::string s2="Move";
-		std::string s3="Turn";
-		std::string s4="Stop";
-		std::string s5="Battery";
-		std::string s6="Distance";
-		uint8_t myRxData_9bits[9];
+		int x=50;
+		char s2[10]="Move";
+		char s3[10]="Turn";
+		char s4[10]="Stop";
+		char s5[10]="Battery";
+		char s6[10]="Distance";
+		uint8_t myRxData_9bits[4];
+		//uint8_t *myRxData_9bits = new uint8_t[10];
 		uint8_t myTxData_OK[5];
 		uint8_t myTxData_Battery[6];
 		uint8_t myTxData_Distance[6];
 		uint8_t itemread;
+
 		ClassUartTest uart;
 		PWM pwm;
+
 };
 
 #endif /* HIGHLEVELCOMM_H_ */

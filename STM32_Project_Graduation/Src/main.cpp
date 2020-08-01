@@ -104,45 +104,17 @@ int main(void)
 
   MX_GPIO_Init();
   MX_USART2_UART_Init();
-  //MX_DMA_Init();
-  //MX_SPI1_Init();
-  //MX_TIM2_Init();
-  //HAL_TIM_PWM_Start(&htim2,TIM_CHANNEL_1);
-
-  HighLevelComm HighLevelCommTest(huart2, htim2);
-
-  /*Queue q1;
-  if(q1.Buffer_Write('Z')&&q1.Buffer_Write('X')&&q1.Buffer_Write('C'))
-  {
-	  HAL_Delay(100);
-	  if (q1.Buffer_Read(&item_read))
-	  {
-			  myTxData[0]=item_read;
-	  }
-  }*/
-
   /* USER CODE END 2 */
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-	/* USER CODE BEGIN 3 */
-
- //uint8_t str1[6]="Move\n";
-  /*uint8_t str1[6]={'0'};
-  uint8_t str2[9]={'0'};
-  uint8_t str3[10]={'0'};*/
-
-	while (1)
-	{
+  /* USER CODE BEGIN 3 */
+	HighLevelComm HighLevelCommTest(huart2, htim2);
+	while (1) {
 		/* USER CODE END WHILE */
 		HighLevelCommTest.ParseMessage();
-
-
-
 	}
   /* USER CODE END 3 */
 }
-
-
 
 
 /**

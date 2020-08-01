@@ -18,7 +18,7 @@
 
 
 Queue QueueTest;
-std::string s1;
+char s1[10];
 
 
 HighLevelComm::HighLevelComm(UART_HandleTypeDef& uart,TIM_HandleTypeDef& pwm) :
@@ -29,29 +29,73 @@ HighLevelComm::HighLevelComm(UART_HandleTypeDef& uart,TIM_HandleTypeDef& pwm) :
 	pwm(pwm)
 {
 }
-bool HighLevelComm::ParseMessage()	//TODO-Akos: Rename this function to ParseMessage. Create a private class member variable from myRxData_9bits, and also check its type (currently it is one byte).
+bool HighLevelComm::ParseMessage()	//TODO-Akos: Rename this function to ParseMessage.
+//Create a private class member variable from myRxData_9bits, and also check its type (currently it is one byte).
 {
-	if (uart.receiveMessage(myRxData_9bits, sizeof(myRxData_9bits), 100) == true){
-	 for(int i=0; i<sizeof(myRxData_9bits); i++)
-	 {
-		 if(myRxData_9bits[i]!='\0')
-			 QueueTest.Buffer_Write(myRxData_9bits[i]);
-		 else
-			 break;
-	 }
-	 while(QueueTest.Buffer_Read(&itemread))
-	 {
-
-	 		s1=s1+(char)itemread;
-	 }
-	 return true;
+	bool arraysEqual1 = true;
+	bool arraysEqual2 = true;
+	bool arraysEqual3 = true;
+	bool arraysEqual4 = true;
+	bool arraysEqual5 = true;
+	int count=0;
+	if (uart.receiveMessage(myRxData_9bits, sizeof(myRxData_9bits), 1000) == true){
+		HAL_Delay(500);
+			for (int i = 0; i < sizeof(myRxData_9bits); i++) {
+				if (myRxData_9bits[i] != '\\')
+					QueueTest.Buffer_Write(myRxData_9bits[i]);
+			}
+			int i = 0;
+			while (QueueTest.Buffer_Read(&itemread)) {
+				s1[i] = itemread;
+				i++;
+			}
+			//memcpy(s1[i], itemread,1);
 	}
 
-	if (s2.compare(s1)==0) {Move(x);s1={'\0'};}
-	if (s3.compare(s1)==0) {Stop();s1={'\0'};}
-	if (s4.compare(s1)==0) {Turn(x);s1={'\0'};}
-	if (s5.compare(s1)==0) {showBattery();s1={'\0'};}
-	if (s6.compare(s1)==0) {showDistance();s1={'\0'};}
+
+	while (count < sizeof(myRxData_9bits))
+	{
+		if (s2[count] != s1[count]){
+	        arraysEqual1 = false;
+		}
+		if (s3[count] != s1[count]){
+			arraysEqual2 = false;
+		}
+		if (s4[count] != s1[count]){
+			arraysEqual3 = false;
+		}
+		if (s5[count] != s1[count]){
+			arraysEqual4 = false;
+		}
+		if (s6[count] != s1[count]){
+			arraysEqual5 = false;
+		}
+		count++;
+	}
+	if (arraysEqual1) {
+		if(Move(x)){
+			memset(s1,0,10);
+		}
+	}else if (arraysEqual2) {
+		if(Turn(x)){
+			memset(s1,0,10);
+		}
+	}else if (arraysEqual3) {
+		if(Stop()){
+			memset(s1,0,10);
+		}
+	}else if (arraysEqual4) {
+		if(showBattery()){
+			memset(s1,0,10);
+		}
+	}else if (arraysEqual5) {
+		if(showDistance()){
+			memset(s1,0,10);
+		}
+	}else
+	{
+		memset(s1,0,10);
+	}
 
 }
 bool HighLevelComm::Move(int x)  //x means moving at x millimeter/second.
@@ -66,23 +110,18 @@ bool HighLevelComm::Move(int x)  //x means moving at x millimeter/second.
 			return false;
 	} else
 		return false;
-
 }
 
 bool HighLevelComm::Stop()
 {
-
 	if (isRun == true) {	//"Stop\n"
 		if (pwm.setPWM(0)) {
 			isRun = false;
 			if (uart.sendMessage(myTxData_OK, sizeof(myTxData_OK), 100)
 					== true) {
-
 				return true;
-
 			} else
 				return false;
-
 		} else
 			return false;
 	} else
@@ -113,21 +152,18 @@ bool HighLevelComm::showBattery()
 		return true;
 	} else
 		return false;
-
-
 }
 
 bool HighLevelComm::showDistance()
  {
-	if (isRun == true) {//"Distance\n" means getting the distance of the nearest obstacle information
+	//if (isRun == true) {//"Distance\n" means getting the distance of the nearest obstacle information
 		if (uart.sendMessage(myTxData_Distance, sizeof(myTxData_Distance), 100)== true) {
 			//myTxData_Distance saves the data from the distance sensor.
 			return true;
 		} else
 			return false;
-
-	} else
-		return false;
+	//} else
+		//return false;
 }
 
 
