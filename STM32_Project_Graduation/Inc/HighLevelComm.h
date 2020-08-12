@@ -40,7 +40,8 @@ public:
 		uint8_t myTxData_Battery[6];
 		uint8_t myTxData_Distance[6];
 		uint8_t itemread;
-
+		Queue receivedQueue;
+		char receivedCommand[100];
 		ClassUartTest uart;
 		PWM pwm;
 

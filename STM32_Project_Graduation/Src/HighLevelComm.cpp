@@ -14,13 +14,6 @@
 #include "main.h"
 #include <iostream>
 
-
-
-
-Queue QueueTest;
-char s1[10];
-
-
 HighLevelComm::HighLevelComm(UART_HandleTypeDef& uart,TIM_HandleTypeDef& pwm) :
 	myTxData_OK("OK\r\n"),
 	myTxData_Battery("50\r\n"), //initial battery life is 50%
@@ -32,70 +25,14 @@ HighLevelComm::HighLevelComm(UART_HandleTypeDef& uart,TIM_HandleTypeDef& pwm) :
 bool HighLevelComm::ParseMessage()	//TODO-Akos: Rename this function to ParseMessage.
 //Create a private class member variable from myRxData_9bits, and also check its type (currently it is one byte).
 {
-	bool arraysEqual1 = true;
-	bool arraysEqual2 = true;
-	bool arraysEqual3 = true;
-	bool arraysEqual4 = true;
-	bool arraysEqual5 = true;
-	int count=0;
-	if (uart.receiveMessage(myRxData_9bits, sizeof(myRxData_9bits), 1000) == true){
-		HAL_Delay(500);
-			for (int i = 0; i < sizeof(myRxData_9bits); i++) {
-				if (myRxData_9bits[i] != '\\')
-					QueueTest.Buffer_Write(myRxData_9bits[i]);
-			}
-			int i = 0;
-			while (QueueTest.Buffer_Read(&itemread)) {
-				s1[i] = itemread;
-				i++;
-			}
-			//memcpy(s1[i], itemread,1);
-	}
+	/*TODO-Akos: You should do the followings in this function:
+	 * -Read one byte from uart. Use uart.receiveMessage function.
+	 * -If the received char is NOT '\n', push it to the receivedQueue. Use Buffer_Write function.
+	 * -If the received char is '\n', read the whole content of the receivedQueue to the string receivedCommand. Use Buffer_Read function.
+	 * -Parse the received string using scanf of strstr. Use scanf, when an argument is also sent (e.q "Move, 10"). Use strstr, when there isn't any argument (e.q. "Stop").
+	 * -Use switch-case for every command, and call the proper function for every command (e.q. Stop)
+	*/
 
-
-	while (count < sizeof(myRxData_9bits))
-	{
-		if (s2[count] != s1[count]){
-	        arraysEqual1 = false;
-		}
-		if (s3[count] != s1[count]){
-			arraysEqual2 = false;
-		}
-		if (s4[count] != s1[count]){
-			arraysEqual3 = false;
-		}
-		if (s5[count] != s1[count]){
-			arraysEqual4 = false;
-		}
-		if (s6[count] != s1[count]){
-			arraysEqual5 = false;
-		}
-		count++;
-	}
-	if (arraysEqual1) {
-		if(Move(x)){
-			memset(s1,0,10);
-		}
-	}else if (arraysEqual2) {
-		if(Turn(x)){
-			memset(s1,0,10);
-		}
-	}else if (arraysEqual3) {
-		if(Stop()){
-			memset(s1,0,10);
-		}
-	}else if (arraysEqual4) {
-		if(showBattery()){
-			memset(s1,0,10);
-		}
-	}else if (arraysEqual5) {
-		if(showDistance()){
-			memset(s1,0,10);
-		}
-	}else
-	{
-		memset(s1,0,10);
-	}
 
 }
 bool HighLevelComm::Move(int x)  //x means moving at x millimeter/second.
