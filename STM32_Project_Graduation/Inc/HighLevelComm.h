@@ -34,7 +34,7 @@ public:
 		char s4[10]="Stop";
 		char s5[10]="Battery";
 		char s6[10]="Distance";
-		uint8_t myRxData_9bits[4];
+		uint8_t myRxData_9bits[8];
 		//uint8_t *myRxData_9bits = new uint8_t[10];
 		uint8_t myTxData_OK[5];
 		uint8_t myTxData_Battery[6];
@@ -44,9 +44,10 @@ public:
 		char receivedCommand[100];
 		ClassUartTest uart;
 		PWM pwm;
+		int number;
+		std::string str;
+		std::string str_num;
 
 };
 
 #endif /* HIGHLEVELCOMM_H_ */
-
-

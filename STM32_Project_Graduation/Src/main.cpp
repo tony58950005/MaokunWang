@@ -112,6 +112,7 @@ int main(void)
 	while (1) {
 		/* USER CODE END WHILE */
 		HighLevelCommTest.ParseMessage();
+		//HAL_Delay(5000);
 	}
   /* USER CODE END 3 */
 }
