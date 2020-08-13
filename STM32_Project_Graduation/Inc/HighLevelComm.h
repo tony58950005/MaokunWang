@@ -29,7 +29,7 @@ public:
 		bool isRun=false;
 	private:
 		int x=50;
-		uint8_t myRxData_1bit[1];
+		uint8_t myRxData_1byte[1];
 		uint8_t myTxData_OK[5];
 		uint8_t myTxData_Battery[6];
 		uint8_t myTxData_Distance[6];

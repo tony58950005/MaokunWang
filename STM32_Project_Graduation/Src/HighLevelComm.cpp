@@ -26,7 +26,7 @@ HighLevelComm::HighLevelComm(UART_HandleTypeDef& uart,TIM_HandleTypeDef& pwm) :
 {
 }
 bool HighLevelComm::ParseMessage()	//TODO-Akos: Rename this function to ParseMessage.
-//Create a private class member variable from myRxData_1bit, and also check its type (currently it is one byte).
+//Create a private class member variable from myRxData_1byte, and also check its type (currently it is one byte).
 {
 	/*TODO-Akos: You should do the followings in this function:
 	 * -Read one byte from uart. Use uart.receiveMessage function.
@@ -37,9 +37,9 @@ bool HighLevelComm::ParseMessage()	//TODO-Akos: Rename this function to ParseMes
 	*/
 	int j=0;
 	str.clear();
-	memset(myRxData_1bit,0,1);
-	while (uart.receiveMessage(myRxData_1bit, sizeof(myRxData_1bit), 100)== true && myRxData_1bit[0]!='\n') {
-		receivedQueue.Buffer_Write(myRxData_1bit[0]);
+	memset(myRxData_1byte,0,1);
+	while (uart.receiveMessage(myRxData_1byte, sizeof(myRxData_1byte), 100)== true && myRxData_1byte[0]!='\n') {
+		receivedQueue.Buffer_Write(myRxData_1byte[0]);
 	}
 	while (receivedQueue.Buffer_Read(&itemread)) {
 		receivedCommand[j] = itemread;
