@@ -29,13 +29,7 @@ public:
 		bool isRun=false;
 	private:
 		int x=50;
-		char s2[10]="Move";
-		char s3[10]="Turn";
-		char s4[10]="Stop";
-		char s5[10]="Battery";
-		char s6[10]="Distance";
-		uint8_t myRxData_9bits[8];
-		//uint8_t *myRxData_9bits = new uint8_t[10];
+		uint8_t myRxData_1bit[1];
 		uint8_t myTxData_OK[5];
 		uint8_t myTxData_Battery[6];
 		uint8_t myTxData_Distance[6];

@@ -26,7 +26,7 @@ HighLevelComm::HighLevelComm(UART_HandleTypeDef& uart,TIM_HandleTypeDef& pwm) :
 {
 }
 bool HighLevelComm::ParseMessage()	//TODO-Akos: Rename this function to ParseMessage.
-//Create a private class member variable from myRxData_9bits, and also check its type (currently it is one byte).
+//Create a private class member variable from myRxData_1bit, and also check its type (currently it is one byte).
 {
 	/*TODO-Akos: You should do the followings in this function:
 	 * -Read one byte from uart. Use uart.receiveMessage function.
@@ -37,76 +37,61 @@ bool HighLevelComm::ParseMessage()	//TODO-Akos: Rename this function to ParseMes
 	*/
 	int j=0;
 	str.clear();
-	memset(myRxData_9bits,0,sizeof(myRxData_9bits));
-	if (uart.receiveMessage(myRxData_9bits, sizeof(myRxData_9bits), 1000)== true) {
-		for (int i = 0; i < sizeof(myRxData_9bits); i++) {
-			if (myRxData_9bits[i] != '\n' )
-				receivedQueue.Buffer_Write(myRxData_9bits[i]);
-			else {
-				while (receivedQueue.Buffer_Read(&itemread)) {
-					receivedCommand[j] = itemread;
-					j++;
-				}
-				receivedCommand[j] = '\n';
-			}
-		}
-		memset(myRxData_9bits,0,sizeof(myRxData_9bits));
+	memset(myRxData_1bit,0,1);
+	while (uart.receiveMessage(myRxData_1bit, sizeof(myRxData_1bit), 100)== true && myRxData_1bit[0]!='\n') {
+		receivedQueue.Buffer_Write(myRxData_1bit[0]);
 	}
+	while (receivedQueue.Buffer_Read(&itemread)) {
+		receivedCommand[j] = itemread;
+		j++;
+	}
+	receivedCommand[j] = '\n';
 	char *p =NULL;
 	p=strstr(receivedCommand,",");
-	if(*p=='\0')
+	if(*p==NULL)
 	{
-		for (int i = 0; i < 8; i++) {
-			if (receivedCommand[i] != '\n') {
-				str += receivedCommand[i];
-			} else
-				break;
+		int i = 0;
+		while(receivedCommand[i] != '\n')
+		{
+			str += receivedCommand[i];
+			i++;
 		}
+
 	}else
 	{
-		for (int i = 0; i < 8; i++) {
-			if (isalpha(receivedCommand[i])) {
-				str += receivedCommand[i];
-			} else if ((receivedCommand[i] >= '0') && (receivedCommand[i] <= '9')) {
-				str_num += receivedCommand[i];
-			}else
-				continue;
-		}
+			int i = 0;
+			while((receivedCommand[i])!='\0'){
+				if(receivedCommand[i]=='\n')
+					break;
+				if (isalpha(receivedCommand[i])) {
+					str += receivedCommand[i];
+				}
+				if(isdigit(receivedCommand[i])){
+					//(receivedCommand[i] >= '0') && (receivedCommand[i] <= '9'))
+					str_num += receivedCommand[i];
+				}
+				i++;
+			}
 	}
 			number=(str_num[0]-48)*10+(str_num[1]-48);
 
 		if (str == "Move") {
-			//str.clear();
 			if (Move(x)) {
-				//memset(myRxData_9bits,0,sizeof(myRxData_9bits));
-				//str.clear();
 			}
 		} else if (str == "Turn") {
-			//str.clear();
 			if (Turn(x)) {
-				//memset(myRxData_9bits,0,sizeof(myRxData_9bits));
-				//str.clear();
 			}
 		}else if (str == "Stop") {
-			//str.clear();
 			if (Stop()) {
-
 			}
 		} else if (str == "Battery") {
-			//str.clear();
 			if (showBattery()) {
-
 			}
-		} else if (str == "Distanc") {
-			//str.clear();
+		} else if (str == "Distance") {
 			if (showDistance()) {
-
 			}
-		} else {
-			//str.clear();
-		}
-	//}
-
+		} else  {
+				}
 
 }
 bool HighLevelComm::Move(int x)  //x means moving at x millimeter/second.
