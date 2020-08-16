@@ -28,20 +28,13 @@ public:
 		bool showDistance();
 		bool isRun=false;
 	private:
-		int x=50;
-		uint8_t myRxData_1byte[1];
 		uint8_t myTxData_OK[5];
 		uint8_t myTxData_Battery[6];
 		uint8_t myTxData_Distance[6];
-		uint8_t itemread;
 		Queue receivedQueue;
 		char receivedCommand[100];
 		ClassUartTest uart;
 		PWM pwm;
-		int number;
-		std::string str;
-		std::string str_num;
-
 };
 
 #endif /* HIGHLEVELCOMM_H_ */

@@ -25,80 +25,36 @@ HighLevelComm::HighLevelComm(UART_HandleTypeDef& uart,TIM_HandleTypeDef& pwm) :
 	pwm(pwm)
 {
 }
-bool HighLevelComm::ParseMessage()	//TODO-Akos: Rename this function to ParseMessage.
-//Create a private class member variable from myRxData_1byte, and also check its type (currently it is one byte).
+bool HighLevelComm::ParseMessage()
 {
-	/*TODO-Akos: You should do the followings in this function:
-	 * -Read one byte from uart. Use uart.receiveMessage function.
-	 * -If the received char is NOT '\n', push it to the receivedQueue. Use Buffer_Write function.
-	 * -If the received char is '\n', read the whole content of the receivedQueue to the string receivedCommand. Use Buffer_Read function.
-	 * -Parse the received string using scanf of strstr. Use scanf, when an argument is also sent (e.q "Move, 10"). Use strstr, when there isn't any argument (e.q. "Stop").
-	 * -Use switch-case for every command, and call the proper function for every command (e.q. Stop)
-	*/
-	int j=0;
-	str.clear();
-	memset(myRxData_1byte,0,1);
-	while (uart.receiveMessage(myRxData_1byte, sizeof(myRxData_1byte), 100)== true && myRxData_1byte[0]!='\n') {
-		receivedQueue.Buffer_Write(myRxData_1byte[0]);
+	uint8_t myRxData_1byte;
+	if (!uart.receiveMessage(&myRxData_1byte, sizeof(myRxData_1byte), 100))
+		return false;
+
+	if (myRxData_1byte != '\n')	//Store character, if it is not '\n'
+	{
+		receivedQueue.Buffer_Write(myRxData_1byte);
+		return false;
 	}
-	while (receivedQueue.Buffer_Read(&itemread)) {
-		receivedCommand[j] = itemread;
+
+	//Parse received line
+	size_t j=0;
+	while (receivedQueue.Buffer_Read((uint8_t*)(receivedCommand + j)) && j < sizeof(receivedCommand)) {
 		j++;
 	}
-	receivedCommand[j] = '\n';
-	char *p =NULL;
-	p=strstr(receivedCommand,",");
-	if(*p==NULL)
-	{
-		int i = 0;
-		while(receivedCommand[i] != '\n')
-		{
-			str += receivedCommand[i];
-			i++;
-		}
 
-	}else
-	{
-			int i = 0;
-			while((receivedCommand[i])!='\0'){
-				if(receivedCommand[i]=='\n')
-					break;
-				if (isalpha(receivedCommand[i])) {
-					str += receivedCommand[i];
-				}
-				if(isdigit(receivedCommand[i])){
-					//(receivedCommand[i] >= '0') && (receivedCommand[i] <= '9'))
-					str_num += receivedCommand[i];
-				}
-				i++;
-			}
-	}
-			number=(str_num[0]-48)*10+(str_num[1]-48);
+	if (j == sizeof(receivedCommand))	//Check receivedCommand length
+		return false;
 
-		if (str == "Move") {
-			if (Move(x)) {
-			}
-		} else if (str == "Turn") {
-			if (Turn(x)) {
-			}
-		}else if (str == "Stop") {
-			if (Stop()) {
-			}
-		} else if (str == "Battery") {
-			if (showBattery()) {
-			}
-		} else if (str == "Distance") {
-			if (showDistance()) {
-			}
-		} else  {
-				}
+	//TODO-Akos: You get the received line in receivedCommand, parse the line using strstr and sscanf. I give you an example:
+	if (strstr(receivedCommand, "Stop") != NULL)
+		Stop();
+	//else if...
 
+	return true;
 }
 bool HighLevelComm::Move(int x)  //x means moving at x millimeter/second.
-{		//TODO-Akos: In this format, your code is not ok. Buffer read only reads one character,
-	//it will never gives you a complete string. And you should push it back (or don't remove from the queue), when it is not "Move\n".
-		//"Move\n" means move forward
-	x=number;
+{
 	if (pwm.setPWM(x / MaxSpeed)) {
 		isRun = true;
 		if (uart.sendMessage(myTxData_OK, sizeof(myTxData_OK), 100) == true) {
@@ -127,7 +83,6 @@ bool HighLevelComm::Stop()
 
 bool HighLevelComm::Turn(int x) //'x' means the angle of the steering system from -180 degrees to 180 degrees
 {
-	x=number;
 	if (isRun == true) {	//"Turn\n"
 		//if (setSteering(x)) {//finish the turning
 		if (uart.sendMessage(myTxData_OK, sizeof(myTxData_OK), 100) == true) {
