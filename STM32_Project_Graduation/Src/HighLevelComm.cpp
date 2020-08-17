@@ -32,7 +32,8 @@ bool HighLevelComm::ParseMessage()
 {
 
 	uint8_t myRxData_1byte=0;
-	char receivedNumber[1];
+	char receivedNumber[1]={'0'};
+	//memset(receivedNumber,0,1);
 	if (!uart.receiveMessage(&myRxData_1byte, sizeof(myRxData_1byte), 100))
 		return false;
 
@@ -58,21 +59,25 @@ bool HighLevelComm::ParseMessage()
 		showBattery();
 	}else if (strstr(receivedCommand, "Distance") != NULL){
 		showDistance();
-	}else if (strstr(receivedCommand, "Move") != NULL){
-		sscanf(receivedCommand,"%*4s%*c%d", &receivedNumber);
+	}else if (((strstr(receivedCommand, "Move") != NULL) && (strstr(receivedCommand, ",") != NULL))){
+		if((sscanf(receivedCommand,"%*4s%*c%d", &receivedNumber)>0) && (receivedNumber[0]>0))
 		//sscanf(receivedCommand,"%*[A-Z]%*[a-z]%*1c%d", &receivedNumber);
 	    //sscanf(receivedCommand,"%*4s%*[,]%d",&receivedNumber);
 	    /*for(int i=sizeof(receivedNumber);i>0;i--){
 	    	realNumber=realNumber+((int)receivedNumber[i-1]-48)*pow(10,(sizeof(receivedNumber)-i));
 	    }*/
 		//realNumber=((int)(receivedNumber[0])-48)*10+((int)(receivedNumber[1]-48));
-		Move(receivedNumber[0]);
+		{
+			Move(receivedNumber[0]);
+		}
 	}else if (strstr(receivedCommand, "Turn") != NULL){
 		sscanf(receivedCommand,"%*4s%*1c%d",&receivedNumber);
 		Turn(receivedNumber[0]);
 	}else{
 		return false;
 	}
+	int i=0;
+	while(receivedCommand[i])
 
 	return true;
 }
