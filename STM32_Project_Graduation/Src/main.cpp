@@ -26,6 +26,7 @@
 #include <HighLevelComm.h>
 #include "stdint.h"
 #include "stdlib.h"
+#include "stdio.h"
 #include <cstdlib>
 
 
@@ -59,6 +60,16 @@
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 void MX_GPIO_Init(void);
+
+int _write(int file, char *ptr, int len)
+{
+/* Implement your write code here, this is used by puts and printf for example */
+	int i=0;
+	for(i=0 ; i<len ; i++)
+	  ITM_SendChar((*ptr++));
+	return len;
+}
+
 void MX_USART2_UART_Init(void);
 
 
@@ -104,14 +115,19 @@ int main(void)
 
   MX_GPIO_Init();
   MX_USART2_UART_Init();
+  //printf("Hello World\n");
   /* USER CODE END 2 */
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   /* USER CODE BEGIN 3 */
+
 	HighLevelComm HighLevelCommTest(huart2, htim2);
 	while (1) {
 		/* USER CODE END WHILE */
-		HighLevelCommTest.ParseMessage();
+		if(HighLevelCommTest.ParseMessage()){
+			//HAL_Delay(2000);
+		}
+
 		//HAL_Delay(5000);
 	}
   /* USER CODE END 3 */

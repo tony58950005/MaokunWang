@@ -14,6 +14,10 @@
 #include "PWM.h"
 #include "main.h"
 #include <iostream>
+
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
 #define MaxSpeed	(100)
 
 
@@ -33,6 +37,7 @@ public:
 		uint8_t myTxData_Distance[6];
 		Queue receivedQueue;
 		char receivedCommand[100];
+		uint8_t realNumber=0;
 		ClassUartTest uart;
 		PWM pwm;
 };
