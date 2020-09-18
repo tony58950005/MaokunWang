@@ -32,6 +32,7 @@ bool HighLevelComm::ParseMessage()
 {
 	uint8_t myRxData_1byte;
 	int32_t receivedNumber;
+	memset(receivedCommand,0,100);
 
 	if (!uart.receiveMessage(&myRxData_1byte, sizeof(myRxData_1byte), 100))
 		return false;
@@ -42,6 +43,7 @@ bool HighLevelComm::ParseMessage()
 		return false;
 	}
 
+	//receivedQueue.Buffer_Write('\0');
 	//Parse received line
 	size_t j=0;
 	while (receivedQueue.Buffer_Read((uint8_t*)(receivedCommand + j)) && j < sizeof(receivedCommand)) {
