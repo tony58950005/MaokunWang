@@ -26,7 +26,7 @@
 #include "stm32f4xx_hal_tim.h"
 #include "string.h"
 #include <HighLevelComm.h>
-#include <Inc/ADC.h>
+#include "ADC.h"
 #include "stdint.h"
 #include "stdlib.h"
 #include "stdio.h"

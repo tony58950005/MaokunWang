@@ -5,13 +5,13 @@
  *      Author: 59488
  */
 
-#include <Inc/ADC.h>
+#include "ADC.h"
 #include "main.h"
 #include"stm32f4xx_hal_tim.h"
 #include "stm32f4xx.h"
 #include "stm32f4xx_hal.h"
 
-ADC::ADC(ADC_HandleTypeDef h):
+ADCClass::ADCClass(ADC_HandleTypeDef h):
     hadc1(h)
 {
 	if (HAL_ADC_Init(&hadc1) != HAL_OK)

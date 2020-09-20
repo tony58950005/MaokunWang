@@ -13,9 +13,9 @@
 #include "stm32f4xx_hal.h"
 
 
-class ADC {
+class ADCClass {
 	public:
-		ADC(ADC_HandleTypeDef hadc1);
+		ADCClass(ADC_HandleTypeDef hadc1);
 	private:
 		ADC_HandleTypeDef hadc1;
 
