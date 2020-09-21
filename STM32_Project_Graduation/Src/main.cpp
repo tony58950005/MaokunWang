@@ -19,6 +19,7 @@
 /* USER CODE END Header */
 
 /* Includes ------------------------------------------------------------------*/
+#include <ADCClass.h>
 #include "main.h"
 #include "stm32f4xx.h"
 #include "stm32f4xx_hal.h"
@@ -26,7 +27,6 @@
 #include "stm32f4xx_hal_tim.h"
 #include "string.h"
 #include <HighLevelComm.h>
-#include "ADC.h"
 #include "stdint.h"
 #include "stdlib.h"
 #include "stdio.h"
@@ -89,6 +89,7 @@ int _write(int file, char *ptr, int len)
 /* USER CODE BEGIN 0 */
 UART_HandleTypeDef huart2;
 TIM_HandleTypeDef htim2;
+ADC_HandleTypeDef hadc1;
 /* USER CODE END 0 */
 
 /**
@@ -125,6 +126,7 @@ int main(void)
 
   MX_GPIO_Init();
   MX_USART2_UART_Init();
+  HAL_ADC_Start(&hadc1);
   //printf("Hello World\n");
   /* USER CODE END 2 */
   /* Infinite loop */
@@ -132,14 +134,11 @@ int main(void)
   /* USER CODE BEGIN 3 */
 
 	HighLevelComm HighLevelCommTest(huart2, htim2);
-	ADC Adc1(hadc1);
+	ADCClass Adc1(hadc1);
 	while (1) {
 		/* USER CODE END WHILE */
 		if (HighLevelCommTest.ParseMessage()) {
-			//HAL_Delay(2000);
 		}
-
-		//HAL_Delay(5000);
 	}
   /* USER CODE END 3 */
 }
@@ -191,20 +190,20 @@ void SystemClock_Config(void)
 
 void USART2_Config(uint32_t uBaud)
 {
-	USART2_Configuration(uBaud);
-	USART2_NVIC_Configuration();
+	//USART2_Configuration(uBaud);
+	//USART2_NVIC_Configuration();
 }
 
 void USART2_Configuration(uint32_t uBaud)
 {
 	//GPIO_InitTypeDef GPIO_InitStructure;
-	USART_InitTypeDef USART_InitStructure;
+	//USART_InitTypeDef USART_InitStructure;
 	/* config USART2 clock */
-	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA,ENABLE);
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART2 , ENABLE);
+	//RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA,ENABLE);
+	//RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART2 , ENABLE);
 
-	GPIO_PinAFConfig(GPIOA, GPIO_PinSource9, GPIO_AF_USART2);
-    GPIO_PinAFConfig(GPIOA, GPIO_PinSource10, GPIO_AF_USART2);
+	//GPIO_PinAFConfig(GPIOA, GPIO_PinSource9, GPIO_AF_USART2);
+    //GPIO_PinAFConfig(GPIOA, GPIO_PinSource10, GPIO_AF_USART2);
 
 	/* USART2 GPIO config */
 	/* Configure USART2 Tx (PA.9) as alternate function push-pull */
@@ -230,26 +229,24 @@ void USART2_Configuration(uint32_t uBaud)
 	//USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
 	//USART_InitStructure.USART_Mode = USART_Mode_Rx | USART_Mode_Tx;
 	//USART_Init(USART2, &USART_InitStructure);
-	USART_ITConfig(USART2, USART_IT_RXNE, ENABLE);
-	USART_Cmd(USART2, ENABLE);
+	//USART_ITConfig(USART2, USART_IT_RXNE, ENABLE);
+	//(USART2, ENABLE);
 }
 
 
-void USART2_NVIC_Configuration(void)
+/*void USART2_NVIC_Configuration(void)
 {
 	NVIC_InitTypeDef NVIC_InitStructure;
-	/* Configure the NVIC Preemption Priority Bits */
 	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4);
 
-	/* Enable the USARTy Interrupt */
 	NVIC_InitStructure.NVIC_IRQChannel = USART2_IRQn;
 	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 2;
 	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
-}
+}*/
 
-void USART2_IRQHandler(void)
+/*void USART2_IRQHandler(void)
 {
 	uint8_t c;
 	if(USART_GetITStatus(USART2,USART_IT_RXNE))
@@ -258,7 +255,7 @@ void USART2_IRQHandler(void)
 		c=(uint8_t)USART_ReceiveData(USART2);
 		printf("%c",c);
 	}
-}
+}*/
 
 /**
   * @brief GPIO Initialization Function
@@ -291,7 +288,7 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  //do some port setting for three sensors, ADC, UART
+  //do some port setting for three sensors, ADC, UART Written by Maokun WANG
   GPIO_InitStruct.Pin = GPIO_PIN_8;//PC0
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
