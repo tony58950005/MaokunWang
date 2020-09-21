@@ -62,7 +62,7 @@ ADCClass::ADCClass(ADC_HandleTypeDef h):
 	 // ADC_StartCalibration(ADC1);
 	    /* Check the end of ADC1 calibration */
 	 // while(ADC_GetCalibrationStatus(ADC1));
-	  if (HAL_ADC_ConfigChannel(&hadc1, &ADC1) != HAL_OK)
+	  if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
 	  {
 	  	    Error_Handler();
 	  }

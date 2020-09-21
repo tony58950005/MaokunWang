@@ -115,8 +115,8 @@ int main(void)
 
   /* Configure the system clock */
   SystemClock_Config();
-  ADC_Multichannel_Config();
-  DMA_Configuration();
+ // ADC_Multichannel_Config();
+  //DMA_Configuration();
 
   /* USER CODE BEGIN SysInit */
 
