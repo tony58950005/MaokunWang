@@ -10,7 +10,6 @@
 
 #include "stm32f4xx_hal.h"
 #include "stm32f4xx_hal_uart.h"
-#include "usart.h"
 #include "string.h"
 #include "main.h"
 #define UART_DEFAULT_TIMEOUT	(100)

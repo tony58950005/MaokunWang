@@ -10,34 +10,23 @@
 #include"stm32f4xx_hal_tim.h"
 #include "stm32f4xx.h"
 #include "stm32f4xx_hal.h"
-#include "gpio.h"
 #include "stdint.h"
 
 PWM::PWM(TIM_HandleTypeDef h) :
 	htim(h)
 {
-	GPIO_InitTypeDef GPIO_InitStruct = {0};
 	TIM_ClockConfigTypeDef sClockSourceConfig = {0};
 	TIM_MasterConfigTypeDef sMasterConfig = {0};
 	TIM_OC_InitTypeDef sConfigOC = {0};
 
-	__HAL_RCC_GPIOA_CLK_ENABLE();
-	__HAL_RCC_TIM2_CLK_ENABLE();
-
-	// PA5 -> TIM2_CH1
-	GPIO_InitStruct.Pin = GPIO_PIN_5;
-	GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-	GPIO_InitStruct.Pull = GPIO_NOPULL;
-	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-	GPIO_InitStruct.Alternate = GPIO_AF1_TIM2;
-	HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+	__HAL_RCC_TIM8_CLK_ENABLE();
 
 	if (HAL_TIM_Base_DeInit(&htim) != HAL_OK)
 	{
 		Error_Handler();
 	}
 
-	htim.Instance = TIM2;
+	htim.Instance = TIM8;
 	htim.Init.Prescaler = 84;
 	htim.Init.CounterMode = TIM_COUNTERMODE_UP;
 	htim.Init.Period = 1000;
@@ -67,7 +56,6 @@ PWM::PWM(TIM_HandleTypeDef h) :
 		Error_Handler();
 	}
 
-	//TODO: Initialize the PWM channel using HAL_TIM_PWM_ConfigChannel function and the variable sConfigOC.
 	sConfigOC.OCMode = TIM_OCMODE_PWM1;
 	sConfigOC.Pulse = 500;
 	sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
@@ -84,6 +72,8 @@ PWM::PWM(TIM_HandleTypeDef h) :
 	{
 		Error_Handler();
 	}
+
+	//TODO: Config Channel 2 also for motor control
 }
 
 bool PWM::setPWM(uint8_t percent)

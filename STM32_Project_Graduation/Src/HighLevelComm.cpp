@@ -6,8 +6,6 @@
  */
 
 #include <HighLevelComm.h>
-
-
 #include "ClassUartTest.h"
 #include "PWM.h"
 #include "string.h"
@@ -17,8 +15,6 @@
 #include<string.h>
 #include<math.h>
 #include <iostream>
-
-
 
 HighLevelComm::HighLevelComm(UART_HandleTypeDef& uart,TIM_HandleTypeDef& pwm) :
 	myTxData_OK("OK\r\n"),
