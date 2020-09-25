@@ -48,3 +48,10 @@ ADCClass::ADCClass(ADC_HandleTypeDef h) :
 }
 
 //TODO: Create a function, which returns back the measures voltages
+int ADCClass::getAnalogValue(void){
+	    if( HAL_ADC_PollForConversion(&hadc1, 1000) == HAL_OK )
+	    {
+	      int analogValue = HAL_ADC_GetValue(&hadc1);
+	      return analogValue;
+	    }
+}

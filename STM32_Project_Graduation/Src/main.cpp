@@ -135,6 +135,7 @@ int main(void)
 
 	HighLevelComm HighLevelCommTest(huart2, htim2);
 	ADCClass Adc1(hadc1);
+	Adc1.getAnalogValue();
 	while (1) {
 		/* USER CODE END WHILE */
 		if (HighLevelCommTest.ParseMessage()) {
