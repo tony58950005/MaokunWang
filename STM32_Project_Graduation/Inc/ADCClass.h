@@ -18,6 +18,7 @@ class ADCClass {
 		ADCClass(ADC_HandleTypeDef hadc1);
 	private:
 		ADC_HandleTypeDef hadc1;
+		ADC_ChannelConfTypeDef myADCchannel;
 
 };
 
