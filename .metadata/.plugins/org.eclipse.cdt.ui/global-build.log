@@ -104,3 +104,437 @@ Finished building: STM32_Project_Graduation.bin
  
 Finished building: STM32_Project_Graduation.list
  
+11:28:18 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/ADCClass.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ADCClass.d" -MT"Src/ADCClass.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ADCClass.o"
+../Src/ADCClass.cpp: In member function 'int ADCClass::getAnalogValue()':
+../Src/ADCClass.cpp:55:29: error: 'VREFINT_CAL_ADDR' was not declared in this scope
+        analogValue = 3300*(*VREFINT_CAL_ADDR)/analogValue;
+                             ^~~~~~~~~~~~~~~~
+../Src/ADCClass.cpp:58:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [Src/subdir.mk:58: Src/ADCClass.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+11:28:50 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/ADCClass.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ADCClass.d" -MT"Src/ADCClass.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ADCClass.o"
+../Src/ADCClass.cpp: In member function 'int ADCClass::getAnalogValue()':
+../Src/ADCClass.cpp:59:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F446RETX_FLASH.ld" -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32_Project_Graduation.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
+arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 304400	   2796	   7576	 314772	  4cd94	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_Project_Graduation.bin
+ 
+Finished building: STM32_Project_Graduation.list
+ 
+11:29:09 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 304400	   2796	   7576	 314772	  4cd94	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+11:29:41 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 304400	   2796	   7576	 314772	  4cd94	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+11:30:19 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+../Src/main.cpp: In function 'int main()':
+../Src/main.cpp:138:6: warning: unused variable 'val' [-Wunused-variable]
+  int val=Adc1.getAnalogValue();
+      ^~~
+arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F446RETX_FLASH.ld" -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32_Project_Graduation.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
+arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 304400	   2796	   7576	 314772	  4cd94	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_Project_Graduation.bin
+ 
+Finished building: STM32_Project_Graduation.list
+ 
+11:30:38 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 304400	   2796	   7576	 314772	  4cd94	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+11:32:09 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 304400	   2796	   7576	 314772	  4cd94	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+11:32:36 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 304400	   2796	   7576	 314772	  4cd94	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+11:33:25 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 304400	   2796	   7576	 314772	  4cd94	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+11:34:09 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 304400	   2796	   7576	 314772	  4cd94	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+11:35:02 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+../Src/main.cpp: In function 'int main()':
+../Src/main.cpp:135:7: warning: unused variable 'val' [-Wunused-variable]
+   int val=Adc1.getAnalogValue();
+       ^~~
+arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F446RETX_FLASH.ld" -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32_Project_Graduation.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
+arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 304400	   2796	   7576	 314772	  4cd94	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_Project_Graduation.bin
+ 
+Finished building: STM32_Project_Graduation.list
+ 
+11:36:10 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 304400	   2796	   7576	 314772	  4cd94	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+11:36:58 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/ADCClass.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ADCClass.d" -MT"Src/ADCClass.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ADCClass.o"
+../Src/ADCClass.cpp: In member function 'int ADCClass::getAnalogValue()':
+../Src/ADCClass.cpp:59:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F446RETX_FLASH.ld" -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32_Project_Graduation.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
+arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 304392	   2796	   7576	 314764	  4cd8c	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_Project_Graduation.bin
+ 
+Finished building: STM32_Project_Graduation.list
+ 
+11:37:54 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 304392	   2796	   7576	 314764	  4cd8c	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+11:38:24 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/ADCClass.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ADCClass.d" -MT"Src/ADCClass.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ADCClass.o"
+../Src/ADCClass.cpp: In member function 'int ADCClass::getAnalogValue()':
+../Src/ADCClass.cpp:59:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F446RETX_FLASH.ld" -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32_Project_Graduation.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
+arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 304400	   2796	   7576	 314772	  4cd94	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_Project_Graduation.bin
+ 
+Finished building: STM32_Project_Graduation.list
+ 
+11:38:59 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 304400	   2796	   7576	 314772	  4cd94	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+11:39:02 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 304400	   2796	   7576	 314772	  4cd94	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+11:42:11 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/ADCClass.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ADCClass.d" -MT"Src/ADCClass.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ADCClass.o"
+../Src/ADCClass.cpp: In member function 'int ADCClass::getAnalogValue()':
+../Src/ADCClass.cpp:59:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F446RETX_FLASH.ld" -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32_Project_Graduation.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
+arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 304400	   2796	   7576	 314772	  4cd94	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_Project_Graduation.bin
+ 
+Finished building: STM32_Project_Graduation.list
+ 
+11:43:44 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/ADCClass.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ADCClass.d" -MT"Src/ADCClass.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ADCClass.o"
+../Src/ADCClass.cpp: In member function 'int ADCClass::getAnalogValue()':
+../Src/ADCClass.cpp:60:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F446RETX_FLASH.ld" -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32_Project_Graduation.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
+arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 304872	   2796	   7576	 315244	  4cf6c	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_Project_Graduation.bin
+ 
+Finished building: STM32_Project_Graduation.list
+ 
+16:43:46 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/ADCClass.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ADCClass.d" -MT"Src/ADCClass.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ADCClass.o"
+arm-none-eabi-g++ "../Src/ClassUartTest.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ClassUartTest.d" -MT"Src/ClassUartTest.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ClassUartTest.o"
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+../Src/ADCClass.cpp: In member function 'int ADCClass::getAnalogValue()':
+../Src/ADCClass.cpp:68:3: error: 'adcBuffer' was not declared in this scope
+   adcBuffer[0] = 3300*(*VREFINT_CAL_ADDR)/analogValue_voltage;
+   ^~~~~~~~~
+../Src/ADCClass.cpp:68:3: note: suggested alternative: 'ITM_RxBuffer'
+   adcBuffer[0] = 3300*(*VREFINT_CAL_ADDR)/analogValue_voltage;
+   ^~~~~~~~~
+   ITM_RxBuffer
+../Src/ADCClass.cpp:73:3: error: 'sensorValue' was not declared in this scope
+   sensorValue=sensorValue*ADC_REFERENCE_VOLTAGE_MV / ADC_MAX_OUTPUT_VALUE;
+   ^~~~~~~~~~~
+../Src/ADCClass.cpp:73:3: note: suggested alternative: 'analogValue'
+   sensorValue=sensorValue*ADC_REFERENCE_VOLTAGE_MV / ADC_MAX_OUTPUT_VALUE;
+   ^~~~~~~~~~~
+   analogValue
+../Src/ADCClass.cpp:74:3: error: 'temperature' was not declared in this scope
+   temperature=(int32_t)(sensorValue-TEMP_SENSOR_VOLTAGE_MV_AT_25) / TEMP_SENSOR_AVG_SLOPE_MV_PER_CELCIUS+25);
+   ^~~~~~~~~~~
+../Src/ADCClass.cpp:74:69: error: 'TEMP_SENSOR_AVG_SLOPE_MV_PER_CELCIUS' was not declared in this scope
+   temperature=(int32_t)(sensorValue-TEMP_SENSOR_VOLTAGE_MV_AT_25) / TEMP_SENSOR_AVG_SLOPE_MV_PER_CELCIUS+25);
+                                                                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Src/ADCClass.cpp:74:69: note: suggested alternative: 'TEMP_SENSOR_AVG_SLOPE_MV_PER_CELSIUS'
+   temperature=(int32_t)(sensorValue-TEMP_SENSOR_VOLTAGE_MV_AT_25) / TEMP_SENSOR_AVG_SLOPE_MV_PER_CELCIUS+25);
+                                                                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                                                     TEMP_SENSOR_AVG_SLOPE_MV_PER_CELSIUS
+../Src/ADCClass.cpp:78:7: error: redeclaration of 'int analogValue_voltage'
+   int analogValue_voltage = HAL_ADC_GetValue(&hadc1);
+       ^~~~~~~~~~~~~~~~~~~
+../Src/ADCClass.cpp:67:7: note: 'int analogValue_voltage' previously declared here
+   int analogValue_voltage = HAL_ADC_GetValue(&hadc1);
+       ^~~~~~~~~~~~~~~~~~~
+make: *** [Src/subdir.mk:58: Src/ADCClass.o] Error 1
+make: *** Waiting for unfinished jobs....
+../Src/main.cpp: In function 'int main()':
+../Src/main.cpp:135:7: warning: unused variable 'val' [-Wunused-variable]
+   int val=Adc1.getAnalogValue();
+       ^~~
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::Move(int)':
+../Src/HighLevelComm.cpp:82:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+16:44:35 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+arm-none-eabi-g++ "../Src/ADCClass.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ADCClass.d" -MT"Src/ADCClass.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ADCClass.o"
+../Src/ADCClass.cpp: In member function 'int ADCClass::getAnalogValue()':
+../Src/ADCClass.cpp:73:3: error: 'sensorValue' was not declared in this scope
+   sensorValue=sensorValue*ADC_REFERENCE_VOLTAGE_MV / ADC_MAX_OUTPUT_VALUE;
+   ^~~~~~~~~~~
+../Src/ADCClass.cpp:73:3: note: suggested alternative: 'analogValue'
+   sensorValue=sensorValue*ADC_REFERENCE_VOLTAGE_MV / ADC_MAX_OUTPUT_VALUE;
+   ^~~~~~~~~~~
+   analogValue
+../Src/ADCClass.cpp:74:3: error: 'temperature' was not declared in this scope
+   temperature=(int32_t)(sensorValue-TEMP_SENSOR_VOLTAGE_MV_AT_25) / TEMP_SENSOR_AVG_SLOPE_MV_PER_CELCIUS+25);
+   ^~~~~~~~~~~
+../Src/ADCClass.cpp:74:69: error: 'TEMP_SENSOR_AVG_SLOPE_MV_PER_CELCIUS' was not declared in this scope
+   temperature=(int32_t)(sensorValue-TEMP_SENSOR_VOLTAGE_MV_AT_25) / TEMP_SENSOR_AVG_SLOPE_MV_PER_CELCIUS+25);
+                                                                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Src/ADCClass.cpp:74:69: note: suggested alternative: 'TEMP_SENSOR_AVG_SLOPE_MV_PER_CELSIUS'
+   temperature=(int32_t)(sensorValue-TEMP_SENSOR_VOLTAGE_MV_AT_25) / TEMP_SENSOR_AVG_SLOPE_MV_PER_CELCIUS+25);
+                                                                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                                                     TEMP_SENSOR_AVG_SLOPE_MV_PER_CELSIUS
+../Src/ADCClass.cpp:78:7: error: redeclaration of 'int analogValue_voltage'
+   int analogValue_voltage = HAL_ADC_GetValue(&hadc1);
+       ^~~~~~~~~~~~~~~~~~~
+../Src/ADCClass.cpp:67:7: note: 'int analogValue_voltage' previously declared here
+   int analogValue_voltage = HAL_ADC_GetValue(&hadc1);
+       ^~~~~~~~~~~~~~~~~~~
+../Src/ADCClass.cpp:81:10: error: invalid conversion from 'uint8_t* {aka unsigned char*}' to 'int' [-fpermissive]
+   return adcBuffer;
+          ^~~~~~~~~
+make: *** [Src/subdir.mk:58: Src/ADCClass.o] Error 1
+make: *** Waiting for unfinished jobs....
+../Src/main.cpp: In function 'int main()':
+../Src/main.cpp:135:7: warning: unused variable 'val' [-Wunused-variable]
+   int val=Adc1.getAnalogValue();
+       ^~~
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+16:49:06 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/ADCClass.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ADCClass.d" -MT"Src/ADCClass.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ADCClass.o"
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+../Src/ADCClass.cpp: In member function 'int ADCClass::getAnalogValue()':
+../Src/ADCClass.cpp:74:78: error: 'TEMP_SENSOR_AVG_SLOPE_MV_PER_CELCIUS' was not declared in this scope
+   uint32_t temperature=(int32_t)(sensorValue-TEMP_SENSOR_VOLTAGE_MV_AT_25) / TEMP_SENSOR_AVG_SLOPE_MV_PER_CELCIUS+25);
+                                                                              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Src/ADCClass.cpp:74:78: note: suggested alternative: 'TEMP_SENSOR_AVG_SLOPE_MV_PER_CELSIUS'
+   uint32_t temperature=(int32_t)(sensorValue-TEMP_SENSOR_VOLTAGE_MV_AT_25) / TEMP_SENSOR_AVG_SLOPE_MV_PER_CELCIUS+25);
+                                                                              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                                                              TEMP_SENSOR_AVG_SLOPE_MV_PER_CELSIUS
+../Src/ADCClass.cpp:78:12: error: redeclaration of 'uint32_t analogValue_voltage'
+   uint32_t analogValue_voltage = HAL_ADC_GetValue(&hadc1);
+            ^~~~~~~~~~~~~~~~~~~
+../Src/ADCClass.cpp:67:12: note: 'uint32_t analogValue_voltage' previously declared here
+   uint32_t analogValue_voltage = HAL_ADC_GetValue(&hadc1);
+            ^~~~~~~~~~~~~~~~~~~
+../Src/ADCClass.cpp:81:10: error: invalid conversion from 'uint8_t* {aka unsigned char*}' to 'int' [-fpermissive]
+   return adcBuffer;
+          ^~~~~~~~~
+../Src/ADCClass.cpp:74:12: warning: unused variable 'temperature' [-Wunused-variable]
+   uint32_t temperature=(int32_t)(sensorValue-TEMP_SENSOR_VOLTAGE_MV_AT_25) / TEMP_SENSOR_AVG_SLOPE_MV_PER_CELCIUS+25);
+            ^~~~~~~~~~~
+make: *** [Src/subdir.mk:58: Src/ADCClass.o] Error 1
+make: *** Waiting for unfinished jobs....
+../Src/main.cpp: In function 'int main()':
+../Src/main.cpp:135:7: warning: unused variable 'val' [-Wunused-variable]
+   int val=Adc1.getAnalogValue();
+       ^~~
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+16:55:51 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/ADCClass.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ADCClass.d" -MT"Src/ADCClass.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ADCClass.o"
+../Src/ADCClass.cpp: In member function 'int ADCClass::getAnalogValue()':
+../Src/ADCClass.cpp:74:117: error: expected ',' or ';' before ')' token
+   uint32_t temperature=(int32_t)(sensorValue-TEMP_SENSOR_VOLTAGE_MV_AT_25) / TEMP_SENSOR_AVG_SLOPE_MV_PER_CELCIUS+25);
+                                                                                                                     ^
+../Src/ADCClass.cpp:81:10: error: invalid conversion from 'uint8_t* {aka unsigned char*}' to 'int' [-fpermissive]
+   return adcBuffer;
+          ^~~~~~~~~
+../Src/ADCClass.cpp:74:12: warning: unused variable 'temperature' [-Wunused-variable]
+   uint32_t temperature=(int32_t)(sensorValue-TEMP_SENSOR_VOLTAGE_MV_AT_25) / TEMP_SENSOR_AVG_SLOPE_MV_PER_CELCIUS+25);
+            ^~~~~~~~~~~
+make: *** [Src/subdir.mk:58: Src/ADCClass.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+16:56:20 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/ADCClass.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ADCClass.d" -MT"Src/ADCClass.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ADCClass.o"
+../Src/ADCClass.cpp: In member function 'int ADCClass::getAnalogValue()':
+../Src/ADCClass.cpp:81:10: error: invalid conversion from 'uint8_t* {aka unsigned char*}' to 'int' [-fpermissive]
+   return adcBuffer;
+          ^~~~~~~~~
+../Src/ADCClass.cpp:74:12: warning: unused variable 'temperature' [-Wunused-variable]
+   uint32_t temperature=(int32_t)(sensorValue-TEMP_SENSOR_VOLTAGE_MV_AT_25) / (TEMP_SENSOR_AVG_SLOPE_MV_PER_CELCIUS+25);
+            ^~~~~~~~~~~
+make: *** [Src/subdir.mk:58: Src/ADCClass.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+16:57:08 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/ADCClass.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ADCClass.d" -MT"Src/ADCClass.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ADCClass.o"
+../Src/ADCClass.cpp:58:9: error: prototype for 'uint8_t ADCClass::getAnalogValue()' does not match any in class 'ADCClass'
+ uint8_t ADCClass::getAnalogValue(void){
+         ^~~~~~~~
+In file included from ../Src/ADCClass.cpp:8:0:
+../Inc/ADCClass.h:19:11: error: candidate is: int ADCClass::getAnalogValue()
+   int     getAnalogValue();
+           ^~~~~~~~~~~~~~
+make: *** [Src/subdir.mk:58: Src/ADCClass.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+16:58:00 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/ADCClass.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ADCClass.d" -MT"Src/ADCClass.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ADCClass.o"
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+../Src/ADCClass.cpp: In member function 'uint8_t ADCClass::getAnalogValue()':
+../Src/ADCClass.cpp:81:10: error: invalid conversion from 'uint8_t* {aka unsigned char*}' to 'uint8_t {aka unsigned char}' [-fpermissive]
+   return adcBuffer;
+          ^~~~~~~~~
+../Src/ADCClass.cpp:74:12: warning: unused variable 'temperature' [-Wunused-variable]
+   uint32_t temperature=(int32_t)(sensorValue-TEMP_SENSOR_VOLTAGE_MV_AT_25) / (TEMP_SENSOR_AVG_SLOPE_MV_PER_CELCIUS+25);
+            ^~~~~~~~~~~
+make: *** [Src/subdir.mk:58: Src/ADCClass.o] Error 1
+make: *** Waiting for unfinished jobs....
+../Src/main.cpp: In function 'int main()':
+../Src/main.cpp:135:7: warning: unused variable 'val' [-Wunused-variable]
+   int val=Adc1.getAnalogValue();
+       ^~~
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+16:58:53 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/ADCClass.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ADCClass.d" -MT"Src/ADCClass.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ADCClass.o"
+../Src/ADCClass.cpp: In member function 'uint8_t ADCClass::getAnalogValue()':
+../Src/ADCClass.cpp:74:12: warning: unused variable 'temperature' [-Wunused-variable]
+   uint32_t temperature=(int32_t)(sensorValue-TEMP_SENSOR_VOLTAGE_MV_AT_25) / (TEMP_SENSOR_AVG_SLOPE_MV_PER_CELCIUS+25);
+            ^~~~~~~~~~~
+../Src/ADCClass.cpp:73:35: warning: 'sensorValue' is used uninitialized in this function [-Wuninitialized]
+   uint32_t sensorValue=sensorValue*ADC_REFERENCE_VOLTAGE_MV / ADC_MAX_OUTPUT_VALUE;
+                                   ^
+arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F446RETX_FLASH.ld" -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32_Project_Graduation.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
+arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 305160	   2796	   7584	 315540	  4d094	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_Project_Graduation.bin
+ 
+Finished building: STM32_Project_Graduation.list
+ 

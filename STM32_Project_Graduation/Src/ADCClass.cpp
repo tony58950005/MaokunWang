@@ -10,6 +10,13 @@
 #include "stm32f4xx.h"
 #include "stm32f4xx_hal.h"
 #include "stm32f446xx.h"
+#define VREFINT_CAL_ADDR ((uint16_t*)((uint32_t)0x1FFF7A2A))
+#define ADC_REFERENCE_VOLTAGE_MV 									760.f
+#define ADC_MAX_OUTPUT_VALUE 										4095.f
+#define TEMP_SENSOR_AVG_SLOPE_MV_PER_CELCIUS                        2.5f
+#define TEMP_SENSOR_VOLTAGE_MV_AT_25                                760.0f
+__IO uint32_t analogValue,temperature;
+__IO float temp;
 
 ADCClass::ADCClass(ADC_HandleTypeDef h) :
 	hadc1(h)
@@ -48,10 +55,29 @@ ADCClass::ADCClass(ADC_HandleTypeDef h) :
 }
 
 //TODO: Create a function, which returns back the measures voltages
-int ADCClass::getAnalogValue(void){
-	    if( HAL_ADC_PollForConversion(&hadc1, 1000) == HAL_OK )
+uint8_t ADCClass::getAnalogValue(void){
+		HAL_ADC_Start(&hadc1);
+	   /* if( HAL_ADC_PollForConversion(&hadc1, 1000) == HAL_OK )
 	    {
 	      int analogValue = HAL_ADC_GetValue(&hadc1);
+	      analogValue = 3300*(*VREFINT_CAL_ADDR)/analogValue;
 	      return analogValue;
-	    }
+	    }*/
+		HAL_ADC_PollForConversion(&hadc1,100);
+		uint32_t analogValue_voltage = HAL_ADC_GetValue(&hadc1);
+		adcBuffer[0] = 3300*(*VREFINT_CAL_ADDR)/analogValue_voltage;
+
+		HAL_ADC_PollForConversion(&hadc1,100);
+		uint32_t analogValue_temperature=HAL_ADC_GetValue(&hadc1);
+		temp = ((float)analogValue_temperature) / 4095 * 3300;
+		uint32_t sensorValue=sensorValue*ADC_REFERENCE_VOLTAGE_MV / ADC_MAX_OUTPUT_VALUE;
+		uint32_t temperature=(int32_t)(sensorValue-TEMP_SENSOR_VOLTAGE_MV_AT_25) / (TEMP_SENSOR_AVG_SLOPE_MV_PER_CELCIUS+25);
+		adcBuffer[1] = ((temp - 760.0) / 2.5) + 25;
+
+		HAL_ADC_PollForConversion(&hadc1,100);
+		analogValue_voltage = HAL_ADC_GetValue(&hadc1);
+		adcBuffer[2] = 3300*(*VREFINT_CAL_ADDR)/analogValue_voltage;
+
+		return *adcBuffer;
+
 }

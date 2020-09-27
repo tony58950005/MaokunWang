@@ -16,10 +16,11 @@
 class ADCClass {
 	public:
 		ADCClass(ADC_HandleTypeDef hadc1);
-		int     getAnalogValue();
+		uint8_t     getAnalogValue();
 	private:
 		ADC_HandleTypeDef hadc1;
 		ADC_ChannelConfTypeDef myADCchannel;
+		uint8_t adcBuffer[3];
 
 };
 

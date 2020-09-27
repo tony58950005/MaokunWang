@@ -131,11 +131,11 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   /* USER CODE BEGIN 3 */
-
+  ADCClass Adc1(hadc1);
+  int val=Adc1.getAnalogValue();
 
 	HighLevelComm HighLevelCommTest(huart2, htim2);
-	ADCClass Adc1(hadc1);
-	Adc1.getAnalogValue();
+
 	while (1) {
 		/* USER CODE END WHILE */
 		if (HighLevelCommTest.ParseMessage()) {

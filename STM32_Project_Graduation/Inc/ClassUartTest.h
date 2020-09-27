@@ -23,6 +23,7 @@ class ClassUartTest
 		bool	receiveMessage(uint8_t* buffer, uint16_t bufferLength, uint32_t timeout = UART_DEFAULT_TIMEOUT);
 	private:
 		UART_HandleTypeDef huart;
+		uint16_t adcBuffer[3];
 };
 #endif
 #endif /* CLASSUARTTEST_H_ */
