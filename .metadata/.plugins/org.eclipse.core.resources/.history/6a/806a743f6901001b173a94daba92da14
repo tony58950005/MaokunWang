@@ -55,7 +55,7 @@ ADCClass::ADCClass(ADC_HandleTypeDef h) :
 }
 
 //TODO: Create a function, which returns back the measures voltages
-uint8_t* ADCClass::getAnalogValue(void){
+uint8_t ADCClass::getAnalogValue(void){
 		HAL_ADC_Start(&hadc1);
 	   /* if( HAL_ADC_PollForConversion(&hadc1, 1000) == HAL_OK )
 	    {

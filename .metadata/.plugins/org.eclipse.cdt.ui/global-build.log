@@ -538,3 +538,231 @@ Finished building: STM32_Project_Graduation.bin
  
 Finished building: STM32_Project_Graduation.list
  
+10:59:31 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/ADCClass.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ADCClass.d" -MT"Src/ADCClass.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ADCClass.o"
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+../Src/ADCClass.cpp: In member function 'uint8_t ADCClass::getAnalogValue()':
+../Src/ADCClass.cpp:81:10: error: invalid conversion from 'uint8_t** {aka unsigned char**}' to 'uint8_t {aka unsigned char}' [-fpermissive]
+   return adcBuffer;
+          ^~~~~~~~~
+../Src/ADCClass.cpp:74:12: warning: unused variable 'temperature' [-Wunused-variable]
+   uint32_t temperature=(int32_t)(sensorValue-TEMP_SENSOR_VOLTAGE_MV_AT_25) / (TEMP_SENSOR_AVG_SLOPE_MV_PER_CELCIUS+25);
+            ^~~~~~~~~~~
+make: *** [Src/subdir.mk:58: Src/ADCClass.o] Error 1
+make: *** Waiting for unfinished jobs....
+../Src/main.cpp: In function 'int main()':
+../Src/main.cpp:135:7: warning: unused variable 'val' [-Wunused-variable]
+   int val=Adc1.getAnalogValue();
+       ^~~
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+10:59:54 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/ADCClass.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ADCClass.d" -MT"Src/ADCClass.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ADCClass.o"
+../Src/ADCClass.cpp: In member function 'uint8_t ADCClass::getAnalogValue()':
+../Src/ADCClass.cpp:81:10: error: invalid conversion from 'uint8_t* {aka unsigned char*}' to 'uint8_t {aka unsigned char}' [-fpermissive]
+   return *adcBuffer;
+          ^~~~~~~~~~
+../Src/ADCClass.cpp:74:12: warning: unused variable 'temperature' [-Wunused-variable]
+   uint32_t temperature=(int32_t)(sensorValue-TEMP_SENSOR_VOLTAGE_MV_AT_25) / (TEMP_SENSOR_AVG_SLOPE_MV_PER_CELCIUS+25);
+            ^~~~~~~~~~~
+make: *** [Src/subdir.mk:58: Src/ADCClass.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+11:01:22 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/ADCClass.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ADCClass.d" -MT"Src/ADCClass.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ADCClass.o"
+../Src/ADCClass.cpp: In member function 'uint8_t ADCClass::getAnalogValue()':
+../Src/ADCClass.cpp:68:42: error: invalid conversion from 'long unsigned int' to 'uint8_t* {aka unsigned char*}' [-fpermissive]
+   adcBuffer[0] = 3300*(*VREFINT_CAL_ADDR)/analogValue_voltage;
+                  ~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~
+../Src/ADCClass.cpp:75:43: error: cannot convert 'double' to 'uint8_t* {aka unsigned char*}' in assignment
+   adcBuffer[1] = ((temp - 760.0) / 2.5) + 25;
+                                           ^~
+../Src/ADCClass.cpp:79:42: error: invalid conversion from 'long unsigned int' to 'uint8_t* {aka unsigned char*}' [-fpermissive]
+   adcBuffer[2] = 3300*(*VREFINT_CAL_ADDR)/analogValue_voltage;
+                  ~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~
+../Src/ADCClass.cpp:81:10: error: invalid conversion from 'uint8_t** {aka unsigned char**}' to 'uint8_t {aka unsigned char}' [-fpermissive]
+   return adcBuffer;
+          ^~~~~~~~~
+../Src/ADCClass.cpp:74:12: warning: unused variable 'temperature' [-Wunused-variable]
+   uint32_t temperature=(int32_t)(sensorValue-TEMP_SENSOR_VOLTAGE_MV_AT_25) / (TEMP_SENSOR_AVG_SLOPE_MV_PER_CELCIUS+25);
+            ^~~~~~~~~~~
+make: *** [Src/subdir.mk:58: Src/ADCClass.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+11:01:51 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/ADCClass.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ADCClass.d" -MT"Src/ADCClass.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ADCClass.o"
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+../Src/ADCClass.cpp: In member function 'uint8_t ADCClass::getAnalogValue()':
+../Src/ADCClass.cpp:68:15: error: invalid type argument of unary '*' (have 'uint8_t {aka unsigned char}')
+   *adcBuffer[0] = 3300*(*VREFINT_CAL_ADDR)/analogValue_voltage;
+               ^
+../Src/ADCClass.cpp:75:15: error: invalid type argument of unary '*' (have 'uint8_t {aka unsigned char}')
+   *adcBuffer[1] = ((temp - 760.0) / 2.5) + 25;
+               ^
+../Src/ADCClass.cpp:79:15: error: invalid type argument of unary '*' (have 'uint8_t {aka unsigned char}')
+   *adcBuffer[2] = 3300*(*VREFINT_CAL_ADDR)/analogValue_voltage;
+               ^
+../Src/ADCClass.cpp:81:10: error: invalid conversion from 'uint8_t* {aka unsigned char*}' to 'uint8_t {aka unsigned char}' [-fpermissive]
+   return adcBuffer;
+          ^~~~~~~~~
+../Src/ADCClass.cpp:74:12: warning: unused variable 'temperature' [-Wunused-variable]
+   uint32_t temperature=(int32_t)(sensorValue-TEMP_SENSOR_VOLTAGE_MV_AT_25) / (TEMP_SENSOR_AVG_SLOPE_MV_PER_CELCIUS+25);
+            ^~~~~~~~~~~
+make: *** [Src/subdir.mk:58: Src/ADCClass.o] Error 1
+make: *** Waiting for unfinished jobs....
+../Src/main.cpp: In function 'int main()':
+../Src/main.cpp:135:7: warning: unused variable 'val' [-Wunused-variable]
+   int val=Adc1.getAnalogValue();
+       ^~~
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+11:02:13 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/ADCClass.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ADCClass.d" -MT"Src/ADCClass.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ADCClass.o"
+../Src/ADCClass.cpp: In member function 'uint8_t ADCClass::getAnalogValue()':
+../Src/ADCClass.cpp:74:12: warning: unused variable 'temperature' [-Wunused-variable]
+   uint32_t temperature=(int32_t)(sensorValue-TEMP_SENSOR_VOLTAGE_MV_AT_25) / (TEMP_SENSOR_AVG_SLOPE_MV_PER_CELCIUS+25);
+            ^~~~~~~~~~~
+../Src/ADCClass.cpp:73:35: warning: 'sensorValue' is used uninitialized in this function [-Wuninitialized]
+   uint32_t sensorValue=sensorValue*ADC_REFERENCE_VOLTAGE_MV / ADC_MAX_OUTPUT_VALUE;
+                                   ^
+arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F446RETX_FLASH.ld" -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32_Project_Graduation.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
+arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 305160	   2796	   7584	 315540	  4d094	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_Project_Graduation.bin
+ 
+Finished building: STM32_Project_Graduation.list
+ 
+11:04:10 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/ADCClass.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ADCClass.d" -MT"Src/ADCClass.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ADCClass.o"
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+../Src/ADCClass.cpp: In member function 'uint8_t ADCClass::getAnalogValue()':
+../Src/ADCClass.cpp:81:10: error: invalid conversion from 'uint8_t** {aka unsigned char**}' to 'uint8_t {aka unsigned char}' [-fpermissive]
+   return adcBuffer;
+          ^~~~~~~~~
+../Src/ADCClass.cpp:74:12: warning: unused variable 'temperature' [-Wunused-variable]
+   uint32_t temperature=(int32_t)(sensorValue-TEMP_SENSOR_VOLTAGE_MV_AT_25) / (TEMP_SENSOR_AVG_SLOPE_MV_PER_CELCIUS+25);
+            ^~~~~~~~~~~
+make: *** [Src/subdir.mk:58: Src/ADCClass.o] Error 1
+make: *** Waiting for unfinished jobs....
+../Src/main.cpp: In function 'int main()':
+../Src/main.cpp:135:7: warning: unused variable 'val' [-Wunused-variable]
+   int val=Adc1.getAnalogValue();
+       ^~~
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+11:04:38 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/ADCClass.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ADCClass.d" -MT"Src/ADCClass.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ADCClass.o"
+../Src/ADCClass.cpp: In member function 'uint8_t ADCClass::getAnalogValue()':
+../Src/ADCClass.cpp:81:10: error: invalid conversion from 'uint8_t* {aka unsigned char*}' to 'uint8_t {aka unsigned char}' [-fpermissive]
+   return *adcBuffer;
+          ^~~~~~~~~~
+../Src/ADCClass.cpp:74:12: warning: unused variable 'temperature' [-Wunused-variable]
+   uint32_t temperature=(int32_t)(sensorValue-TEMP_SENSOR_VOLTAGE_MV_AT_25) / (TEMP_SENSOR_AVG_SLOPE_MV_PER_CELCIUS+25);
+            ^~~~~~~~~~~
+make: *** [Src/subdir.mk:58: Src/ADCClass.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+11:04:56 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/ADCClass.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ADCClass.d" -MT"Src/ADCClass.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ADCClass.o"
+../Src/ADCClass.cpp: In member function 'uint8_t ADCClass::getAnalogValue()':
+../Src/ADCClass.cpp:81:10: error: invalid conversion from 'uint8_t** {aka unsigned char**}' to 'uint8_t {aka unsigned char}' [-fpermissive]
+   return adcBuffer;
+          ^~~~~~~~~
+../Src/ADCClass.cpp:74:12: warning: unused variable 'temperature' [-Wunused-variable]
+   uint32_t temperature=(int32_t)(sensorValue-TEMP_SENSOR_VOLTAGE_MV_AT_25) / (TEMP_SENSOR_AVG_SLOPE_MV_PER_CELCIUS+25);
+            ^~~~~~~~~~~
+make: *** [Src/subdir.mk:58: Src/ADCClass.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+11:05:24 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/ADCClass.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ADCClass.d" -MT"Src/ADCClass.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ADCClass.o"
+../Src/ADCClass.cpp: In member function 'uint8_t ADCClass::getAnalogValue()':
+../Src/ADCClass.cpp:81:10: error: invalid conversion from 'uint8_t* (*)[3] {aka unsigned char* (*)[3]}' to 'uint8_t {aka unsigned char}' [-fpermissive]
+   return &adcBuffer;
+          ^~~~~~~~~~
+../Src/ADCClass.cpp:74:12: warning: unused variable 'temperature' [-Wunused-variable]
+   uint32_t temperature=(int32_t)(sensorValue-TEMP_SENSOR_VOLTAGE_MV_AT_25) / (TEMP_SENSOR_AVG_SLOPE_MV_PER_CELCIUS+25);
+            ^~~~~~~~~~~
+make: *** [Src/subdir.mk:58: Src/ADCClass.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+11:05:35 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/ADCClass.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ADCClass.d" -MT"Src/ADCClass.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ADCClass.o"
+../Src/ADCClass.cpp: In member function 'uint8_t ADCClass::getAnalogValue()':
+../Src/ADCClass.cpp:81:10: error: invalid conversion from 'uint8_t** {aka unsigned char**}' to 'uint8_t {aka unsigned char}' [-fpermissive]
+   return adcBuffer;
+          ^~~~~~~~~
+../Src/ADCClass.cpp:74:12: warning: unused variable 'temperature' [-Wunused-variable]
+   uint32_t temperature=(int32_t)(sensorValue-TEMP_SENSOR_VOLTAGE_MV_AT_25) / (TEMP_SENSOR_AVG_SLOPE_MV_PER_CELCIUS+25);
+            ^~~~~~~~~~~
+make: *** [Src/subdir.mk:58: Src/ADCClass.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+11:08:15 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/ADCClass.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ADCClass.d" -MT"Src/ADCClass.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ADCClass.o"
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+../Src/ADCClass.cpp:58:10: error: prototype for 'uint8_t* ADCClass::getAnalogValue()' does not match any in class 'ADCClass'
+ uint8_t* ADCClass::getAnalogValue(void){
+          ^~~~~~~~
+In file included from ../Src/ADCClass.cpp:8:0:
+../Inc/ADCClass.h:19:15: error: candidate is: uint8_t ADCClass::getAnalogValue()
+   uint8_t     getAnalogValue();
+               ^~~~~~~~~~~~~~
+make: *** [Src/subdir.mk:58: Src/ADCClass.o] Error 1
+make: *** Waiting for unfinished jobs....
+../Src/main.cpp: In function 'int main()':
+../Src/main.cpp:135:7: warning: unused variable 'val' [-Wunused-variable]
+   int val=Adc1.getAnalogValue();
+       ^~~
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+11:08:32 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+arm-none-eabi-g++ "../Src/ADCClass.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ADCClass.d" -MT"Src/ADCClass.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ADCClass.o"
+../Src/ADCClass.cpp: In member function 'uint8_t* ADCClass::getAnalogValue()':
+../Src/ADCClass.cpp:74:12: warning: unused variable 'temperature' [-Wunused-variable]
+   uint32_t temperature=(int32_t)(sensorValue-TEMP_SENSOR_VOLTAGE_MV_AT_25) / (TEMP_SENSOR_AVG_SLOPE_MV_PER_CELCIUS+25);
+            ^~~~~~~~~~~
+../Src/ADCClass.cpp:73:35: warning: 'sensorValue' is used uninitialized in this function [-Wuninitialized]
+   uint32_t sensorValue=sensorValue*ADC_REFERENCE_VOLTAGE_MV / ADC_MAX_OUTPUT_VALUE;
+                                   ^
+../Src/main.cpp: In function 'int main()':
+../Src/main.cpp:135:30: error: invalid conversion from 'uint8_t* {aka unsigned char*}' to 'int' [-fpermissive]
+   int val=Adc1.getAnalogValue();
+           ~~~~~~~~~~~~~~~~~~~^~
+../Src/main.cpp:135:7: warning: unused variable 'val' [-Wunused-variable]
+   int val=Adc1.getAnalogValue();
+       ^~~
+make: *** [Src/subdir.mk:68: Src/main.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+11:11:17 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+../Src/main.cpp: In function 'int main()':
+../Src/main.cpp:135:12: warning: unused variable 'val' [-Wunused-variable]
+   uint8_t *val=Adc1.getAnalogValue();
+            ^~~
+arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F446RETX_FLASH.ld" -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32_Project_Graduation.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
+arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 305152	   2796	   7584	 315532	  4d08c	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_Project_Graduation.bin
+ 
+Finished building: STM32_Project_Graduation.list
+ 
