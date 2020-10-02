@@ -72,15 +72,11 @@ PWM::PWM(TIM_HandleTypeDef h) :
 	{
 		Error_Handler();
 	}
-
-	//TODO: Config Channel 2 also for motor control
 }
 
 bool PWM::setPWM(uint8_t percent)
 {
-	//TODO: Implement this task using a HAL function
-	//TIM2->CCR1 = percent;
-	if(percent>=0 && percent<=100)	//TODO-AKOS: How can be variable percent negative? I ask it, because of your code "percent>= 0".
+	if(percent <= 100)
 	{
 		__HAL_TIM_SET_COMPARE(&htim,TIM_CHANNEL_1, percent*10);
 		return true;

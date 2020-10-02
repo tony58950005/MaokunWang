@@ -10,13 +10,6 @@
 #include "stm32f4xx.h"
 #include "stm32f4xx_hal.h"
 #include "stm32f446xx.h"
-#define VREFINT_CAL_ADDR ((uint16_t*)((uint32_t)0x1FFF7A2A))
-#define ADC_REFERENCE_VOLTAGE_MV 									760.f
-#define ADC_MAX_OUTPUT_VALUE 										4095.f
-#define TEMP_SENSOR_AVG_SLOPE_MV_PER_CELCIUS                        2.5f
-#define TEMP_SENSOR_VOLTAGE_MV_AT_25                                760.0f
-__IO uint32_t analogValue,temperature;
-__IO float temp;
 
 ADCClass::ADCClass(ADC_HandleTypeDef h) :
 	hadc1(h)
@@ -35,49 +28,49 @@ ADCClass::ADCClass(ADC_HandleTypeDef h) :
 	if (HAL_ADC_Init(&hadc1) != HAL_OK) {
 		Error_Handler();
 	}
-	/**Configure for the selected ADC regular channel to be converted.
-	 */
-
-	myADCchannel.Channel = ADC_CHANNEL_10;
-	myADCchannel.Rank = 1;
-	myADCchannel.SamplingTime = ADC_SAMPLETIME_144CYCLES;
-	HAL_ADC_ConfigChannel(&hadc1, &myADCchannel);
-
-	myADCchannel.Channel = ADC_CHANNEL_11;
-	myADCchannel.Rank = 2;
-	myADCchannel.SamplingTime = ADC_SAMPLETIME_144CYCLES;
-	HAL_ADC_ConfigChannel(&hadc1, &myADCchannel);
-
-	myADCchannel.Channel = ADC_CHANNEL_12;
-	myADCchannel.Rank = 3;
-	myADCchannel.SamplingTime = ADC_SAMPLETIME_144CYCLES;
-	HAL_ADC_ConfigChannel(&hadc1, &myADCchannel);
 }
 
-//TODO: Create a function, which returns back the measures voltages
-uint8_t* ADCClass::getAnalogValue(void){
-		HAL_ADC_Start(&hadc1);
-	   /* if( HAL_ADC_PollForConversion(&hadc1, 1000) == HAL_OK )
-	    {
-	      int analogValue = HAL_ADC_GetValue(&hadc1);
-	      analogValue = 3300*(*VREFINT_CAL_ADDR)/analogValue;
-	      return analogValue;
-	    }*/
-		HAL_ADC_PollForConversion(&hadc1,100);
-		uint32_t analogValue_voltage = HAL_ADC_GetValue(&hadc1);
-		adcBuffer[0] = 3300*(*VREFINT_CAL_ADDR)/analogValue_voltage;
+float ADCClass::getAnalogValue(uint8_t sensorIndex)
+{
+	ADC_ChannelConfTypeDef myADCchannel;
 
-		HAL_ADC_PollForConversion(&hadc1,100);
-		uint32_t analogValue_temperature=HAL_ADC_GetValue(&hadc1);
-		temp = ((float)analogValue_temperature) / 4095 * 3300;
-		uint32_t sensorValue=sensorValue*ADC_REFERENCE_VOLTAGE_MV / ADC_MAX_OUTPUT_VALUE;
-		uint32_t temperature=(int32_t)(sensorValue-TEMP_SENSOR_VOLTAGE_MV_AT_25) / (TEMP_SENSOR_AVG_SLOPE_MV_PER_CELCIUS+25);
-		adcBuffer[1] = ((temp - 760.0) / 2.5) + 25;
+	//Config selected channel
+	switch (sensorIndex)
+	{
+		case 0:
+			myADCchannel.Channel = ADC_CHANNEL_10;
+			myADCchannel.Rank = 1;
+			myADCchannel.SamplingTime = ADC_SAMPLETIME_144CYCLES;
+			HAL_ADC_ConfigChannel(&hadc1, &myADCchannel);
+			break;
 
-		HAL_ADC_PollForConversion(&hadc1,100);
-		analogValue_voltage = HAL_ADC_GetValue(&hadc1);
-		adcBuffer[2] = 3300*(*VREFINT_CAL_ADDR)/analogValue_voltage;
+		case 1:
+			myADCchannel.Channel = ADC_CHANNEL_11;
+			myADCchannel.Rank = 1;
+			myADCchannel.SamplingTime = ADC_SAMPLETIME_144CYCLES;
+			HAL_ADC_ConfigChannel(&hadc1, &myADCchannel);
+			break;
 
-		return adcBuffer;
+		case 2:
+			myADCchannel.Channel = ADC_CHANNEL_12;
+			myADCchannel.Rank = 1;
+			myADCchannel.SamplingTime = ADC_SAMPLETIME_144CYCLES;
+			HAL_ADC_ConfigChannel(&hadc1, &myADCchannel);
+			break;
 
+		default:
+			Error_Handler();
+			break;
+	}
+
+	if (HAL_ADC_Start(&hadc1) != HAL_OK)
+		Error_Handler();
+
+	if (HAL_ADC_PollForConversion(&hadc1,100) != HAL_OK)
+		Error_Handler();
+
+	uint32_t analogValue_voltage = HAL_ADC_GetValue(&hadc1);
+	float val = 3300.0f * analogValue_voltage / 4095;
+
+	return val;
 }

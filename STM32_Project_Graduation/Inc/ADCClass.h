@@ -16,12 +16,9 @@
 class ADCClass {
 	public:
 		ADCClass(ADC_HandleTypeDef hadc1);
-		uint8_t*     getAnalogValue();
+		float     getAnalogValue(uint8_t sensorIndex);
 	private:
 		ADC_HandleTypeDef hadc1;
-		ADC_ChannelConfTypeDef myADCchannel;
-		uint8_t adcBuffer[3];
-
 };
 
 #endif /* ADC_H_ */

@@ -36,7 +36,6 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-uint8_t *p,val[3];
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -69,6 +68,9 @@ void USART2_Config(uint32_t uBaud);
 void USART2_Configuration(uint32_t uBaud);
 void USART2_NVIC_Configuration(void);
 void USART2f_IRQHandler(void);
+bool obstacleDetection(ADCClass& adc);
+void controlSpeed(PWM& motorPWM, float referenceSpeed, float actualSpeed);
+void setSteering(PWM& servoPWM, float steeringAngle);
 
 int _write(int file, char *ptr, int len)
 {
@@ -97,7 +99,9 @@ ADC_HandleTypeDef hadc1;
   * @retval int
   */
 
-//TODO: Change uC to STM32F405xx
+//TODO (Akos): Change uC to STM32F405xx
+//TODO (Akos): PWM class with three channels
+//TODO (Akos): High-level architecture
 
 int main(void)
 {
@@ -132,19 +136,37 @@ int main(void)
 	/* USER CODE BEGIN WHILE */
 	/* USER CODE BEGIN 3 */
 	ADCClass Adc1(hadc1);
-	p = Adc1.getAnalogValue();
-	for (int i = 0; i < 3; i++) {
-		val[i] = *(p + i);
-	}
-
 	HighLevelComm HighLevelCommTest(huart2, htim2);
 
-	while (1) {
-		/* USER CODE END WHILE */
-		if (HighLevelCommTest.ParseMessage()) {
-		}
+	while (1)
+	{
+		HighLevelCommTest.ParseMessage();
+		obstacleDetection();
 	}
-  /* USER CODE END 3 */
+
+}
+
+bool obstacleDetection(ADCClass& adc)
+{
+	//Measure the signals of the Sharp sensors
+	float sensorsVoltage[3];
+	for (int i = 0; i < 3; i++) {
+		sensorsVoltage[i] = adc.getAnalogValue(i);
+	}
+
+	//TODO: convert the voltage to distance using the characteristics of the sensor
+
+	//TODO: check distances: return true when there is some obstacle in front of the car. Use some threshold value (e.g, 10 cm)
+}
+
+void controlSpeed(PWM& motorPWM, float referenceSpeed, float actualSpeed)
+{
+	//TODO: implement a PID controller for speed
+}
+
+void setSteering(PWM& servoPWM, float steeringAngle)
+{
+	//TODO: set the steering for the servo
 }
 
 
