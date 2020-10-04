@@ -1,0 +1,20 @@
+/*
+ * PIDController.cpp
+ *
+ *  Created on: 2020年10月2日
+ *      Author: 59488
+ */
+
+#include <PIDController.h>
+PIDController::PIDController(){
+
+}
+
+void PIDController::PIDController_Init(PIDController *pid){
+
+}
+
+void PIDController::PIDController_Update(PIDController *pid, float setpoint, float measurement){
+
+}
+

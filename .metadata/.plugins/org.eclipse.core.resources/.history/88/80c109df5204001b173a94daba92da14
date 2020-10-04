@@ -1,0 +1,14 @@
+/*
+ * PIDController.h
+ *
+ *  Created on: 2020年10月2日
+ *      Author: 59488
+ */
+
+#ifndef PIDCONTROLLER_H_
+#define PIDCONTROLLER_H_
+
+class PID_Controller {
+};
+
+#endif /* PIDCONTROLLER_H_ */

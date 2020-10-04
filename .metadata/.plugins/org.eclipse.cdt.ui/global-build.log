@@ -816,3 +816,852 @@ Finished building: STM32_Project_Graduation.bin
  
 Finished building: STM32_Project_Graduation.list
  
+04:18:12 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+arm-none-eabi-g++ "../Src/PIDController.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/PIDController.d" -MT"Src/PIDController.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/PIDController.o"
+In file included from ../Src/PIDController.cpp:8:0:
+../Inc/PIDController.h:13:31: error: expected ')' before '*' token
+  PID_Controller(PIDController *pid);
+                               ^
+../Inc/PIDController.h:14:29: error: 'PIDController' has not been declared
+  float PIDController_Update(PIDController *pid, float setpoint, float measurement);
+                             ^~~~~~~~~~~~~
+../Src/PIDController.cpp:9:1: error: 'PIDController' does not name a type; did you mean 'PID_Controller'?
+ PIDController::PIDController(PIDController *pid){
+ ^~~~~~~~~~~~~
+ PID_Controller
+../Src/PIDController.cpp:20:7: error: 'PIDController' has not been declared
+ float PIDController::PIDController_Update(PIDController *pid, float setpoint, float measurement){
+       ^~~~~~~~~~~~~
+../Src/PIDController.cpp:20:43: error: 'PIDController' was not declared in this scope
+ float PIDController::PIDController_Update(PIDController *pid, float setpoint, float measurement){
+                                           ^~~~~~~~~~~~~
+../Src/PIDController.cpp:20:43: note: suggested alternative: 'PID_Controller'
+ float PIDController::PIDController_Update(PIDController *pid, float setpoint, float measurement){
+                                           ^~~~~~~~~~~~~
+                                           PID_Controller
+../Src/PIDController.cpp:20:58: error: 'pid' was not declared in this scope
+ float PIDController::PIDController_Update(PIDController *pid, float setpoint, float measurement){
+                                                          ^~~
+../Src/PIDController.cpp:20:58: note: suggested alternative: 'void'
+ float PIDController::PIDController_Update(PIDController *pid, float setpoint, float measurement){
+                                                          ^~~
+                                                          void
+../Src/PIDController.cpp:20:63: error: expected primary-expression before 'float'
+ float PIDController::PIDController_Update(PIDController *pid, float setpoint, float measurement){
+                                                               ^~~~~
+../Src/PIDController.cpp:20:79: error: expected primary-expression before 'float'
+ float PIDController::PIDController_Update(PIDController *pid, float setpoint, float measurement){
+                                                                               ^~~~~
+../Src/PIDController.cpp:20:96: error: expression list treated as compound expression in initializer [-fpermissive]
+ float PIDController::PIDController_Update(PIDController *pid, float setpoint, float measurement){
+                                                                                                ^
+make: *** [Src/subdir.mk:67: Src/PIDController.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+04:19:39 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/PIDController.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/PIDController.d" -MT"Src/PIDController.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/PIDController.o"
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+../Src/PIDController.cpp:9:1: error: 'PIDController' does not name a type; did you mean 'PID_Controller'?
+ PIDController::PIDController(float *pid){
+ ^~~~~~~~~~~~~
+ PID_Controller
+../Src/PIDController.cpp:20:7: error: 'PIDController' has not been declared
+ float PIDController::PIDController_Update(float *pid, float setpoint, float measurement){
+       ^~~~~~~~~~~~~
+../Src/PIDController.cpp: In function 'float PIDController_Update(float*, float, float)':
+../Src/PIDController.cpp:26:27: error: request for member 'Kp' in '* pid', which is of non-class type 'float'
+  float proportional =pid->Kp * error;
+                           ^~
+../Src/PIDController.cpp:29:7: error: request for member 'integrator' in '* pid', which is of non-class type 'float'
+  pid->integrator = pid->integrator + 0.5f * pid->Ki * pid->T * (error+ pid-> prevError);
+       ^~~~~~~~~~
+../Src/PIDController.cpp:29:25: error: request for member 'integrator' in '* pid', which is of non-class type 'float'
+  pid->integrator = pid->integrator + 0.5f * pid->Ki * pid->T * (error+ pid-> prevError);
+                         ^~~~~~~~~~
+../Src/PIDController.cpp:29:50: error: request for member 'Ki' in '* pid', which is of non-class type 'float'
+  pid->integrator = pid->integrator + 0.5f * pid->Ki * pid->T * (error+ pid-> prevError);
+                                                  ^~
+../Src/PIDController.cpp:29:60: error: request for member 'T' in '* pid', which is of non-class type 'float'
+  pid->integrator = pid->integrator + 0.5f * pid->Ki * pid->T * (error+ pid-> prevError);
+                                                            ^
+../Src/PIDController.cpp:29:78: error: request for member 'prevError' in '* pid', which is of non-class type 'float'
+  pid->integrator = pid->integrator + 0.5f * pid->Ki * pid->T * (error+ pid-> prevError);
+                                                                              ^~~~~~~~~
+../Src/PIDController.cpp:35:10: error: request for member 'linMax' in '* pid', which is of non-class type 'float'
+  if(pid->linMax > proportional){
+          ^~~~~~
+../Src/PIDController.cpp:36:18: error: request for member 'limMax' in '* pid', which is of non-class type 'float'
+   limMaxInt=pid->limMax-proportional;
+                  ^~~~~~
+../Src/PIDController.cpp:41:10: error: request for member 'limMin' in '* pid', which is of non-class type 'float'
+  if(pid->limMin < proportional){
+          ^~~~~~
+../Src/PIDController.cpp:42:18: error: request for member 'limMin' in '* pid', which is of non-class type 'float'
+   limMinInt=pid->limMin-proportional;
+                  ^~~~~~
+../Src/PIDController.cpp:48:10: error: request for member 'integrator' in '* pid', which is of non-class type 'float'
+  if(pid->integrator > limMaxInt){
+          ^~~~~~~~~~
+../Src/PIDController.cpp:49:8: error: request for member 'integrator' in '* pid', which is of non-class type 'float'
+   pid->integrator = limMaxInt;
+        ^~~~~~~~~~
+../Src/PIDController.cpp:50:16: error: request for member 'integrator' in '* pid', which is of non-class type 'float'
+  }else if(pid->integrator < limMinInt){
+                ^~~~~~~~~~
+../Src/PIDController.cpp:51:8: error: request for member 'integrator' in '* pid', which is of non-class type 'float'
+   pid->integrator = limMinInt;
+        ^~~~~~~~~~
+../Src/PIDController.cpp:55:7: error: request for member 'differentiator' in '* pid', which is of non-class type 'float'
+  pid->differentiator= (2.0f* pid->Kd * (measurement -pid->prevMeasurement)
+       ^~~~~~~~~~~~~~
+../Src/PIDController.cpp:55:35: error: request for member 'Kd' in '* pid', which is of non-class type 'float'
+  pid->differentiator= (2.0f* pid->Kd * (measurement -pid->prevMeasurement)
+                                   ^~
+../Src/PIDController.cpp:55:59: error: request for member 'prevMeasurement' in '* pid', which is of non-class type 'float'
+  pid->differentiator= (2.0f* pid->Kd * (measurement -pid->prevMeasurement)
+                                                           ^~~~~~~~~~~~~~~
+../Src/PIDController.cpp:56:18: error: request for member 'tau' in '* pid', which is of non-class type 'float'
+    +(2.0f * pid->tau-pid->T)* pid->differentiator)
+                  ^~~
+../Src/PIDController.cpp:56:27: error: request for member 'T' in '* pid', which is of non-class type 'float'
+    +(2.0f * pid->tau-pid->T)* pid->differentiator)
+                           ^
+../Src/PIDController.cpp:56:36: error: request for member 'differentiator' in '* pid', which is of non-class type 'float'
+    +(2.0f * pid->tau-pid->T)* pid->differentiator)
+                                    ^~~~~~~~~~~~~~
+../Src/PIDController.cpp:57:20: error: request for member 'tau' in '* pid', which is of non-class type 'float'
+      /(2.0f * pid->tau + pid->T);
+                    ^~~
+../Src/PIDController.cpp:57:31: error: request for member 'T' in '* pid', which is of non-class type 'float'
+      /(2.0f * pid->tau + pid->T);
+                               ^
+../Src/PIDController.cpp:60:7: error: request for member 'out' in '* pid', which is of non-class type 'float'
+  pid->out=proportional + pid->integrator +pid->differentiator;
+       ^~~
+../Src/PIDController.cpp:60:31: error: request for member 'integrator' in '* pid', which is of non-class type 'float'
+  pid->out=proportional + pid->integrator +pid->differentiator;
+                               ^~~~~~~~~~
+../Src/PIDController.cpp:60:48: error: request for member 'differentiator' in '* pid', which is of non-class type 'float'
+  pid->out=proportional + pid->integrator +pid->differentiator;
+                                                ^~~~~~~~~~~~~~
+../Src/PIDController.cpp:61:10: error: request for member 'out' in '* pid', which is of non-class type 'float'
+  if(pid->out > pid->limMax){
+          ^~~
+../Src/PIDController.cpp:61:21: error: request for member 'limMax' in '* pid', which is of non-class type 'float'
+  if(pid->out > pid->limMax){
+                     ^~~~~~
+../Src/PIDController.cpp:62:8: error: request for member 'out' in '* pid', which is of non-class type 'float'
+   pid->out = pid->limMax;
+        ^~~
+../Src/PIDController.cpp:62:19: error: request for member 'limMax' in '* pid', which is of non-class type 'float'
+   pid->out = pid->limMax;
+                   ^~~~~~
+../Src/PIDController.cpp:63:16: error: request for member 'out' in '* pid', which is of non-class type 'float'
+  }else if(pid->out < pid->limMax){
+                ^~~
+../Src/PIDController.cpp:63:27: error: request for member 'limMax' in '* pid', which is of non-class type 'float'
+  }else if(pid->out < pid->limMax){
+                           ^~~~~~
+../Src/PIDController.cpp:64:8: error: request for member 'out' in '* pid', which is of non-class type 'float'
+   pid->out=pid->limMin;
+        ^~~
+../Src/PIDController.cpp:64:17: error: request for member 'limMin' in '* pid', which is of non-class type 'float'
+   pid->out=pid->limMin;
+                 ^~~~~~
+../Src/PIDController.cpp:67:7: error: request for member 'prevError' in '* pid', which is of non-class type 'float'
+  pid->prevError = error;
+       ^~~~~~~~~
+../Src/PIDController.cpp:68:7: error: request for member 'prevMeasurement' in '* pid', which is of non-class type 'float'
+  pid->prevMeasurement = measurement;
+       ^~~~~~~~~~~~~~~
+../Src/PIDController.cpp:71:14: error: request for member 'output' in '* pid', which is of non-class type 'float'
+  return pid->output;
+              ^~~~~~
+make: *** [Src/subdir.mk:67: Src/PIDController.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+04:21:10 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/PIDController.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/PIDController.d" -MT"Src/PIDController.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/PIDController.o"
+In file included from ../Src/PIDController.cpp:8:0:
+../Inc/PIDController.h:14:26: error: 'PIDController' has not been declared
+  void PIDController_Init(PIDController *pid);
+                          ^~~~~~~~~~~~~
+../Inc/PIDController.h:15:29: error: 'PIDController' has not been declared
+  float PIDController_Update(PIDController *pid, float setpoint, float measurement);
+                             ^~~~~~~~~~~~~
+../Src/PIDController.cpp:9:1: error: 'PIDController' does not name a type; did you mean 'PID_Controller'?
+ PIDController::PIDController(){
+ ^~~~~~~~~~~~~
+ PID_Controller
+../Src/PIDController.cpp:13:6: error: 'PIDController' has not been declared
+ void PIDController::PIDController_Init(PIDController *pid){
+      ^~~~~~~~~~~~~
+../Src/PIDController.cpp:13:40: error: variable or field 'PIDController_Init' declared void
+ void PIDController::PIDController_Init(PIDController *pid){
+                                        ^~~~~~~~~~~~~
+../Src/PIDController.cpp:13:40: error: 'PIDController' was not declared in this scope
+../Src/PIDController.cpp:13:40: note: suggested alternative: 'PID_Controller'
+ void PIDController::PIDController_Init(PIDController *pid){
+                                        ^~~~~~~~~~~~~
+                                        PID_Controller
+../Src/PIDController.cpp:13:55: error: 'pid' was not declared in this scope
+ void PIDController::PIDController_Init(PIDController *pid){
+                                                       ^~~
+../Src/PIDController.cpp:13:55: note: suggested alternative: 'void'
+ void PIDController::PIDController_Init(PIDController *pid){
+                                                       ^~~
+                                                       void
+../Src/PIDController.cpp:24:7: error: 'PIDController' has not been declared
+ float PIDController::PIDController_Update(PIDController *pid, float setpoint, float measurement){
+       ^~~~~~~~~~~~~
+../Src/PIDController.cpp:24:43: error: 'PIDController' was not declared in this scope
+ float PIDController::PIDController_Update(PIDController *pid, float setpoint, float measurement){
+                                           ^~~~~~~~~~~~~
+../Src/PIDController.cpp:24:43: note: suggested alternative: 'PID_Controller'
+ float PIDController::PIDController_Update(PIDController *pid, float setpoint, float measurement){
+                                           ^~~~~~~~~~~~~
+                                           PID_Controller
+../Src/PIDController.cpp:24:58: error: 'pid' was not declared in this scope
+ float PIDController::PIDController_Update(PIDController *pid, float setpoint, float measurement){
+                                                          ^~~
+../Src/PIDController.cpp:24:58: note: suggested alternative: 'void'
+ float PIDController::PIDController_Update(PIDController *pid, float setpoint, float measurement){
+                                                          ^~~
+                                                          void
+../Src/PIDController.cpp:24:63: error: expected primary-expression before 'float'
+ float PIDController::PIDController_Update(PIDController *pid, float setpoint, float measurement){
+                                                               ^~~~~
+../Src/PIDController.cpp:24:79: error: expected primary-expression before 'float'
+ float PIDController::PIDController_Update(PIDController *pid, float setpoint, float measurement){
+                                                                               ^~~~~
+../Src/PIDController.cpp:24:96: error: expression list treated as compound expression in initializer [-fpermissive]
+ float PIDController::PIDController_Update(PIDController *pid, float setpoint, float measurement){
+                                                                                                ^
+make: *** [Src/subdir.mk:67: Src/PIDController.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+04:22:51 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/PIDController.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/PIDController.d" -MT"Src/PIDController.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/PIDController.o"
+In file included from ../Src/PIDController.cpp:8:0:
+../Inc/PIDController.h:14:26: error: 'PIDController' has not been declared
+  void PIDController_Init(PIDController *pid);
+                          ^~~~~~~~~~~~~
+../Inc/PIDController.h:15:29: error: 'PIDController' has not been declared
+  float PIDController_Update(PIDController *pid, float setpoint, float measurement);
+                             ^~~~~~~~~~~~~
+../Src/PIDController.cpp:13:37: error: variable or field 'PID_Controller' declared void
+ void PID_Controller::PID_Controller(PIDController *pid){
+                                     ^~~~~~~~~~~~~
+../Src/PIDController.cpp:13:37: error: 'PIDController' was not declared in this scope
+../Src/PIDController.cpp:13:37: note: suggested alternative: 'PID_Controller'
+ void PID_Controller::PID_Controller(PIDController *pid){
+                                     ^~~~~~~~~~~~~
+                                     PID_Controller
+../Src/PIDController.cpp:13:52: error: 'pid' was not declared in this scope
+ void PID_Controller::PID_Controller(PIDController *pid){
+                                                    ^~~
+../Src/PIDController.cpp:13:52: note: suggested alternative: 'void'
+ void PID_Controller::PID_Controller(PIDController *pid){
+                                                    ^~~
+                                                    void
+../Src/PIDController.cpp:24:44: error: 'float PID_Controller::PIDController_Update' is not a static data member of 'class PID_Controller'
+ float PID_Controller::PIDController_Update(PIDController *pid, float setpoint, float measurement){
+                                            ^~~~~~~~~~~~~
+../Src/PIDController.cpp:24:44: error: 'PIDController' was not declared in this scope
+../Src/PIDController.cpp:24:44: note: suggested alternative: 'PID_Controller'
+ float PID_Controller::PIDController_Update(PIDController *pid, float setpoint, float measurement){
+                                            ^~~~~~~~~~~~~
+                                            PID_Controller
+../Src/PIDController.cpp:24:59: error: 'pid' was not declared in this scope
+ float PID_Controller::PIDController_Update(PIDController *pid, float setpoint, float measurement){
+                                                           ^~~
+../Src/PIDController.cpp:24:59: note: suggested alternative: 'void'
+ float PID_Controller::PIDController_Update(PIDController *pid, float setpoint, float measurement){
+                                                           ^~~
+                                                           void
+../Src/PIDController.cpp:24:64: error: expected primary-expression before 'float'
+ float PID_Controller::PIDController_Update(PIDController *pid, float setpoint, float measurement){
+                                                                ^~~~~
+../Src/PIDController.cpp:24:80: error: expected primary-expression before 'float'
+ float PID_Controller::PIDController_Update(PIDController *pid, float setpoint, float measurement){
+                                                                                ^~~~~
+../Src/PIDController.cpp:24:97: error: expression list treated as compound expression in initializer [-fpermissive]
+ float PID_Controller::PIDController_Update(PIDController *pid, float setpoint, float measurement){
+                                                                                                 ^
+make: *** [Src/subdir.mk:67: Src/PIDController.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+04:23:18 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/PIDController.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/PIDController.d" -MT"Src/PIDController.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/PIDController.o"
+In file included from ../Src/PIDController.cpp:8:0:
+../Inc/PIDController.h:14:26: error: 'PIDController' has not been declared
+  void PIDController_Init(PIDController *pid);
+                          ^~~~~~~~~~~~~
+../Src/PIDController.cpp:13:56: error: return type specification for constructor invalid
+ void PID_Controller::PID_Controller(PID_Controller *pid){
+                                                        ^
+../Src/PIDController.cpp:13:6: error: prototype for 'PID_Controller::PID_Controller(PID_Controller*)' does not match any in class 'PID_Controller'
+ void PID_Controller::PID_Controller(PID_Controller *pid){
+      ^~~~~~~~~~~~~~
+In file included from ../Src/PIDController.cpp:8:0:
+../Inc/PIDController.h:11:7: error: candidates are: constexpr PID_Controller::PID_Controller(PID_Controller&&)
+ class PID_Controller {
+       ^~~~~~~~~~~~~~
+../Inc/PIDController.h:11:7: error:                 constexpr PID_Controller::PID_Controller(const PID_Controller&)
+../Src/PIDController.cpp:9:1: error:                 PID_Controller::PID_Controller()
+ PID_Controller::PID_Controller(){
+ ^~~~~~~~~~~~~~
+../Src/PIDController.cpp:24:44: error: 'float PID_Controller::PIDController_Update' is not a static data member of 'class PID_Controller'
+ float PID_Controller::PIDController_Update(PIDController *pid, float setpoint, float measurement){
+                                            ^~~~~~~~~~~~~
+../Src/PIDController.cpp:24:44: error: 'PIDController' was not declared in this scope
+../Src/PIDController.cpp:24:44: note: suggested alternative: 'PID_Controller'
+ float PID_Controller::PIDController_Update(PIDController *pid, float setpoint, float measurement){
+                                            ^~~~~~~~~~~~~
+                                            PID_Controller
+../Src/PIDController.cpp:24:59: error: 'pid' was not declared in this scope
+ float PID_Controller::PIDController_Update(PIDController *pid, float setpoint, float measurement){
+                                                           ^~~
+../Src/PIDController.cpp:24:59: note: suggested alternative: 'void'
+ float PID_Controller::PIDController_Update(PIDController *pid, float setpoint, float measurement){
+                                                           ^~~
+                                                           void
+../Src/PIDController.cpp:24:64: error: expected primary-expression before 'float'
+ float PID_Controller::PIDController_Update(PIDController *pid, float setpoint, float measurement){
+                                                                ^~~~~
+../Src/PIDController.cpp:24:80: error: expected primary-expression before 'float'
+ float PID_Controller::PIDController_Update(PIDController *pid, float setpoint, float measurement){
+                                                                                ^~~~~
+../Src/PIDController.cpp:24:97: error: expression list treated as compound expression in initializer [-fpermissive]
+ float PID_Controller::PIDController_Update(PIDController *pid, float setpoint, float measurement){
+                                                                                                 ^
+make: *** [Src/subdir.mk:67: Src/PIDController.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+04:24:09 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/PIDController.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/PIDController.d" -MT"Src/PIDController.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/PIDController.o"
+../Src/PIDController.cpp: In constructor 'PID_Controller::PID_Controller()':
+../Src/PIDController.cpp:10:2: error: 'pid' was not declared in this scope
+  pid->integrator =0.0f;
+  ^~~
+../Src/PIDController.cpp:10:2: note: suggested alternative: 'void'
+  pid->integrator =0.0f;
+  ^~~
+  void
+../Src/PIDController.cpp: At global scope:
+../Src/PIDController.cpp:20:44: error: 'float PID_Controller::PIDController_Update' is not a static data member of 'class PID_Controller'
+ float PID_Controller::PIDController_Update(PIDController *pid, float setpoint, float measurement){
+                                            ^~~~~~~~~~~~~
+../Src/PIDController.cpp:20:44: error: 'PIDController' was not declared in this scope
+../Src/PIDController.cpp:20:44: note: suggested alternative: 'PID_Controller'
+ float PID_Controller::PIDController_Update(PIDController *pid, float setpoint, float measurement){
+                                            ^~~~~~~~~~~~~
+                                            PID_Controller
+../Src/PIDController.cpp:20:59: error: 'pid' was not declared in this scope
+ float PID_Controller::PIDController_Update(PIDController *pid, float setpoint, float measurement){
+                                                           ^~~
+../Src/PIDController.cpp:20:59: note: suggested alternative: 'void'
+ float PID_Controller::PIDController_Update(PIDController *pid, float setpoint, float measurement){
+                                                           ^~~
+                                                           void
+../Src/PIDController.cpp:20:64: error: expected primary-expression before 'float'
+ float PID_Controller::PIDController_Update(PIDController *pid, float setpoint, float measurement){
+                                                                ^~~~~
+../Src/PIDController.cpp:20:80: error: expected primary-expression before 'float'
+ float PID_Controller::PIDController_Update(PIDController *pid, float setpoint, float measurement){
+                                                                                ^~~~~
+../Src/PIDController.cpp:20:97: error: expression list treated as compound expression in initializer [-fpermissive]
+ float PID_Controller::PIDController_Update(PIDController *pid, float setpoint, float measurement){
+                                                                                                 ^
+make: *** [Src/subdir.mk:67: Src/PIDController.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+04:24:44 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/PIDController.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/PIDController.d" -MT"Src/PIDController.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/PIDController.o"
+../Src/PIDController.cpp: In constructor 'PID_Controller::PID_Controller(PID_Controller*)':
+../Src/PIDController.cpp:13:8: error: 'class PID_Controller' has no member named 'differentiator'
+   pid->differentiator=0.0f;
+        ^~~~~~~~~~~~~~
+../Src/PIDController.cpp: At global scope:
+../Src/PIDController.cpp:20:44: error: 'float PID_Controller::PIDController_Update' is not a static data member of 'class PID_Controller'
+ float PID_Controller::PIDController_Update(PIDController *pid, float setpoint, float measurement){
+                                            ^~~~~~~~~~~~~
+../Src/PIDController.cpp:20:44: error: 'PIDController' was not declared in this scope
+../Src/PIDController.cpp:20:44: note: suggested alternative: 'PID_Controller'
+ float PID_Controller::PIDController_Update(PIDController *pid, float setpoint, float measurement){
+                                            ^~~~~~~~~~~~~
+                                            PID_Controller
+../Src/PIDController.cpp:20:59: error: 'pid' was not declared in this scope
+ float PID_Controller::PIDController_Update(PIDController *pid, float setpoint, float measurement){
+                                                           ^~~
+../Src/PIDController.cpp:20:59: note: suggested alternative: 'void'
+ float PID_Controller::PIDController_Update(PIDController *pid, float setpoint, float measurement){
+                                                           ^~~
+                                                           void
+../Src/PIDController.cpp:20:64: error: expected primary-expression before 'float'
+ float PID_Controller::PIDController_Update(PIDController *pid, float setpoint, float measurement){
+                                                                ^~~~~
+../Src/PIDController.cpp:20:80: error: expected primary-expression before 'float'
+ float PID_Controller::PIDController_Update(PIDController *pid, float setpoint, float measurement){
+                                                                                ^~~~~
+../Src/PIDController.cpp:20:97: error: expression list treated as compound expression in initializer [-fpermissive]
+ float PID_Controller::PIDController_Update(PIDController *pid, float setpoint, float measurement){
+                                                                                                 ^
+make: *** [Src/subdir.mk:67: Src/PIDController.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+04:25:32 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/PIDController.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/PIDController.d" -MT"Src/PIDController.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/PIDController.o"
+../Src/PIDController.cpp:20:44: error: 'float PID_Controller::PIDController_Update' is not a static data member of 'class PID_Controller'
+ float PID_Controller::PIDController_Update(PIDController *pid, float setpoint, float measurement){
+                                            ^~~~~~~~~~~~~
+../Src/PIDController.cpp:20:44: error: 'PIDController' was not declared in this scope
+../Src/PIDController.cpp:20:44: note: suggested alternative: 'PID_Controller'
+ float PID_Controller::PIDController_Update(PIDController *pid, float setpoint, float measurement){
+                                            ^~~~~~~~~~~~~
+                                            PID_Controller
+../Src/PIDController.cpp:20:59: error: 'pid' was not declared in this scope
+ float PID_Controller::PIDController_Update(PIDController *pid, float setpoint, float measurement){
+                                                           ^~~
+../Src/PIDController.cpp:20:59: note: suggested alternative: 'void'
+ float PID_Controller::PIDController_Update(PIDController *pid, float setpoint, float measurement){
+                                                           ^~~
+                                                           void
+../Src/PIDController.cpp:20:64: error: expected primary-expression before 'float'
+ float PID_Controller::PIDController_Update(PIDController *pid, float setpoint, float measurement){
+                                                                ^~~~~
+../Src/PIDController.cpp:20:80: error: expected primary-expression before 'float'
+ float PID_Controller::PIDController_Update(PIDController *pid, float setpoint, float measurement){
+                                                                                ^~~~~
+../Src/PIDController.cpp:20:97: error: expression list treated as compound expression in initializer [-fpermissive]
+ float PID_Controller::PIDController_Update(PIDController *pid, float setpoint, float measurement){
+                                                                                                 ^
+make: *** [Src/subdir.mk:67: Src/PIDController.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+04:25:50 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/PIDController.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/PIDController.d" -MT"Src/PIDController.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/PIDController.o"
+../Src/PIDController.cpp:20:64: error: expected ',' or '...' before '*' token
+ float PID_Controller::PIDController_Update(PID_Controller *pid *pid, float setpoint, float measurement){
+                                                                ^
+../Src/PIDController.cpp:20:7: error: prototype for 'float PID_Controller::PIDController_Update(PID_Controller*)' does not match any in class 'PID_Controller'
+ float PID_Controller::PIDController_Update(PID_Controller *pid *pid, float setpoint, float measurement){
+       ^~~~~~~~~~~~~~
+In file included from ../Src/PIDController.cpp:8:0:
+../Inc/PIDController.h:15:8: error: candidate is: float PID_Controller::PIDController_Update(PID_Controller*, float, float)
+  float PIDController_Update(PID_Controller *pid, float setpoint, float measurement);
+        ^~~~~~~~~~~~~~~~~~~~
+make: *** [Src/subdir.mk:67: Src/PIDController.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+04:26:20 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/PIDController.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/PIDController.d" -MT"Src/PIDController.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/PIDController.o"
+../Src/PIDController.cpp: In member function 'float PID_Controller::PIDController_Update(PID_Controller*, float, float)':
+../Src/PIDController.cpp:35:10: error: 'class PID_Controller' has no member named 'linMax'; did you mean 'limMax'?
+  if(pid->linMax > proportional){
+          ^~~~~~
+          limMax
+../Src/PIDController.cpp:71:14: error: 'class PID_Controller' has no member named 'output'; did you mean 'out'?
+  return pid->output;
+              ^~~~~~
+              out
+make: *** [Src/subdir.mk:67: Src/PIDController.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+04:26:33 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/PIDController.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/PIDController.d" -MT"Src/PIDController.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/PIDController.o"
+../Src/PIDController.cpp: In member function 'float PID_Controller::PIDController_Update(PID_Controller*, float, float)':
+../Src/PIDController.cpp:71:14: error: 'class PID_Controller' has no member named 'output'; did you mean 'out'?
+  return pid->output;
+              ^~~~~~
+              out
+make: *** [Src/subdir.mk:67: Src/PIDController.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+04:26:44 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/PIDController.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/PIDController.d" -MT"Src/PIDController.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/PIDController.o"
+arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F446RETX_FLASH.ld" -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32_Project_Graduation.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
+arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 305216	   2796	   7592	 315604	  4d0d4	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_Project_Graduation.bin
+ 
+Finished building: STM32_Project_Graduation.list
+ 
+23:34:44 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/PIDController.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/PIDController.d" -MT"Src/PIDController.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/PIDController.o"
+arm-none-eabi-g++ "../Src/ADCClass.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ADCClass.d" -MT"Src/ADCClass.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ADCClass.o"
+arm-none-eabi-g++ "../Src/PWM.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/PWM.d" -MT"Src/PWM.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/PWM.o"
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+../Src/main.cpp: In function 'int main()':
+../Src/main.cpp:146:21: error: too few arguments to function 'bool obstacleDetection(ADCClass&)'
+   obstacleDetection();
+                     ^
+../Src/main.cpp:72:6: note: declared here
+ bool obstacleDetection(ADCClass& adc);
+      ^~~~~~~~~~~~~~~~~
+../Src/main.cpp: In function 'void controlSpeed(PWM&, float, float)':
+../Src/main.cpp:188:30: error: 'reference' was not declared in this scope
+  motorPWM.setPWM=actualSpeed/reference*100;
+                              ^~~~~~~~~
+../Src/main.cpp:188:30: note: suggested alternative: 'referenceSpeed'
+  motorPWM.setPWM=actualSpeed/reference*100;
+                              ^~~~~~~~~
+                              referenceSpeed
+../Src/main.cpp: In function 'void setSteering(PWM&, float)':
+../Src/main.cpp:196:11: error: invalid use of member function 'bool PWM::setPWM(uint8_t)' (did you forget the '()' ?)
+  servoPWM.setPWM=1/9*steeringAngle+100;
+  ~~~~~~~~~^~~~~~
+../Src/main.cpp: In function 'bool obstacleDetection(ADCClass&)':
+../Src/main.cpp:181:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [Src/subdir.mk:73: Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+23:35:51 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/PIDController.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/PIDController.d" -MT"Src/PIDController.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/PIDController.o"
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+../Src/main.cpp: In function 'int main()':
+../Src/main.cpp:146:29: error: expected primary-expression before '&' token
+   obstacleDetection(ADCClass& adc);
+                             ^
+../Src/main.cpp:146:31: error: 'adc' was not declared in this scope
+   obstacleDetection(ADCClass& adc);
+                               ^~~
+../Src/main.cpp:146:31: note: suggested alternative: 'Adc1'
+   obstacleDetection(ADCClass& adc);
+                               ^~~
+                               Adc1
+../Src/main.cpp: In function 'void controlSpeed(PWM&, float, float)':
+../Src/main.cpp:188:18: error: no matching function for call to 'PWM::setPWM()'
+  motorPWM.setPWM()=actualSpeed/referenceSpeed*100;
+                  ^
+In file included from ../Inc/HighLevelComm.h:14:0,
+                 from ../Src/main.cpp:29:
+../Inc/PWM.h:20:7: note: candidate: bool PWM::setPWM(uint8_t)
+  bool setPWM(uint8_t percent);
+       ^~~~~~
+../Inc/PWM.h:20:7: note:   candidate expects 1 argument, 0 provided
+../Src/main.cpp: In function 'void setSteering(PWM&, float)':
+../Src/main.cpp:196:18: error: no matching function for call to 'PWM::setPWM()'
+  servoPWM.setPWM()=1/9*steeringAngle+100;
+                  ^
+In file included from ../Inc/HighLevelComm.h:14:0,
+                 from ../Src/main.cpp:29:
+../Inc/PWM.h:20:7: note: candidate: bool PWM::setPWM(uint8_t)
+  bool setPWM(uint8_t percent);
+       ^~~~~~
+../Inc/PWM.h:20:7: note:   candidate expects 1 argument, 0 provided
+../Src/main.cpp: In function 'bool obstacleDetection(ADCClass&)':
+../Src/main.cpp:181:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [Src/subdir.mk:73: Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+23:39:04 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+../Src/main.cpp: In function 'int main()':
+../Src/main.cpp:146:29: error: expected primary-expression before '&' token
+   obstacleDetection(ADCClass& adc);
+                             ^
+../Src/main.cpp:146:31: error: 'adc' was not declared in this scope
+   obstacleDetection(ADCClass& adc);
+                               ^~~
+../Src/main.cpp:146:31: note: suggested alternative: 'Adc1'
+   obstacleDetection(ADCClass& adc);
+                               ^~~
+                               Adc1
+../Src/main.cpp: In function 'bool obstacleDetection(ADCClass&)':
+../Src/main.cpp:181:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [Src/subdir.mk:73: Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+23:39:26 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+../Src/main.cpp: In function 'int main()':
+../Src/main.cpp:146:21: error: too few arguments to function 'bool obstacleDetection(ADCClass&)'
+   obstacleDetection();
+                     ^
+../Src/main.cpp:72:6: note: declared here
+ bool obstacleDetection(ADCClass& adc);
+      ^~~~~~~~~~~~~~~~~
+../Src/main.cpp: In function 'bool obstacleDetection(ADCClass&)':
+../Src/main.cpp:181:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [Src/subdir.mk:73: Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+23:40:35 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+../Src/main.cpp: In function 'int main()':
+../Src/main.cpp:146:29: error: expected primary-expression before '&' token
+   obstacleDetection(ADCClass& adc);
+                             ^
+../Src/main.cpp:146:31: error: 'adc' was not declared in this scope
+   obstacleDetection(ADCClass& adc);
+                               ^~~
+../Src/main.cpp:146:31: note: suggested alternative: 'Adc1'
+   obstacleDetection(ADCClass& adc);
+                               ^~~
+                               Adc1
+../Src/main.cpp: In function 'bool obstacleDetection(ADCClass&)':
+../Src/main.cpp:181:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [Src/subdir.mk:73: Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+23:41:01 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+../Src/main.cpp: In function 'int main()':
+../Src/main.cpp:146:29: error: expected primary-expression before '&' token
+   obstacleDetection(ADCClass& adc){
+                             ^
+../Src/main.cpp:146:31: error: 'adc' was not declared in this scope
+   obstacleDetection(ADCClass& adc){
+                               ^~~
+../Src/main.cpp:146:31: note: suggested alternative: 'Adc1'
+   obstacleDetection(ADCClass& adc){
+                               ^~~
+                               Adc1
+../Src/main.cpp: In function 'bool obstacleDetection(ADCClass&)':
+../Src/main.cpp:183:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [Src/subdir.mk:73: Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+23:41:14 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+../Src/main.cpp: In function 'int main()':
+../Src/main.cpp:146:32: error: expected primary-expression before '&' token
+   if(obstacleDetection(ADCClass& adc)){
+                                ^
+../Src/main.cpp:146:34: error: 'adc' was not declared in this scope
+   if(obstacleDetection(ADCClass& adc)){
+                                  ^~~
+../Src/main.cpp:146:34: note: suggested alternative: 'Adc1'
+   if(obstacleDetection(ADCClass& adc)){
+                                  ^~~
+                                  Adc1
+../Src/main.cpp: In function 'bool obstacleDetection(ADCClass&)':
+../Src/main.cpp:183:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [Src/subdir.mk:73: Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+23:42:02 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+../Src/main.cpp: In function 'int main()':
+../Src/main.cpp:146:24: error: too few arguments to function 'bool obstacleDetection(ADCClass&)'
+   if(obstacleDetection()){
+                        ^
+../Src/main.cpp:72:6: note: declared here
+ bool obstacleDetection(ADCClass& adc);
+      ^~~~~~~~~~~~~~~~~
+../Src/main.cpp: In function 'bool obstacleDetection(ADCClass&)':
+../Src/main.cpp:183:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [Src/subdir.mk:73: Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+23:43:21 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+../Src/main.cpp: In function 'int main()':
+../Src/main.cpp:146:32: error: expected primary-expression before '&' token
+   if(obstacleDetection(ADCClass&)){
+                                ^
+../Src/main.cpp:146:33: error: expected primary-expression before ')' token
+   if(obstacleDetection(ADCClass&)){
+                                 ^
+../Src/main.cpp: In function 'bool obstacleDetection(ADCClass&)':
+../Src/main.cpp:183:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [Src/subdir.mk:73: Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+23:43:47 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+../Src/main.cpp: In function 'int main()':
+../Src/main.cpp:146:33: error: expected primary-expression before '&' token
+   if(obstacleDetection(ADCClass & adc)){
+                                 ^
+../Src/main.cpp:146:35: error: 'adc' was not declared in this scope
+   if(obstacleDetection(ADCClass & adc)){
+                                   ^~~
+../Src/main.cpp:146:35: note: suggested alternative: 'Adc1'
+   if(obstacleDetection(ADCClass & adc)){
+                                   ^~~
+                                   Adc1
+../Src/main.cpp: In function 'bool obstacleDetection(ADCClass&)':
+../Src/main.cpp:183:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [Src/subdir.mk:73: Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+23:47:15 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+../Src/main.cpp: In function 'int main()':
+../Src/main.cpp:146:32: error: expected primary-expression before '&' token
+   if(obstacleDetection(ADCClass&)){
+                                ^
+../Src/main.cpp:146:33: error: expected primary-expression before ')' token
+   if(obstacleDetection(ADCClass&)){
+                                 ^
+../Src/main.cpp: In function 'bool obstacleDetection(ADCClass&)':
+../Src/main.cpp:183:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [Src/subdir.mk:73: Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+23:47:23 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+../Src/main.cpp: In function 'int main()':
+../Src/main.cpp:146:24: error: too few arguments to function 'bool obstacleDetection(ADCClass&)'
+   if(obstacleDetection()){
+                        ^
+../Src/main.cpp:72:6: note: declared here
+ bool obstacleDetection(ADCClass& adc);
+      ^~~~~~~~~~~~~~~~~
+../Src/main.cpp: In function 'bool obstacleDetection(ADCClass&)':
+../Src/main.cpp:183:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [Src/subdir.mk:73: Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+23:47:58 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+../Src/main.cpp: In function 'int main()':
+../Src/main.cpp:146:24: error: 'adc' was not declared in this scope
+   if(obstacleDetection(adc)){
+                        ^~~
+../Src/main.cpp:146:24: note: suggested alternative: 'Adc1'
+   if(obstacleDetection(adc)){
+                        ^~~
+                        Adc1
+../Src/main.cpp: In function 'bool obstacleDetection(ADCClass&)':
+../Src/main.cpp:183:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [Src/subdir.mk:73: Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+23:49:01 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+../Src/main.cpp: In function 'int main()':
+../Src/main.cpp:146:24: error: too few arguments to function 'bool obstacleDetection(ADCClass&)'
+   if(obstacleDetection()){
+                        ^
+../Src/main.cpp:72:6: note: declared here
+ bool obstacleDetection(ADCClass& adc);
+      ^~~~~~~~~~~~~~~~~
+../Src/main.cpp: In function 'bool obstacleDetection(ADCClass&)':
+../Src/main.cpp:183:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [Src/subdir.mk:73: Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+23:51:04 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+../Src/main.cpp: In function 'int main()':
+../Src/main.cpp:149:16: error: too few arguments to function 'void controlSpeed(PWM&, float, float)'
+   controlSpeed();
+                ^
+../Src/main.cpp:73:6: note: declared here
+ void controlSpeed(PWM& motorPWM, float referenceSpeed, float actualSpeed);
+      ^~~~~~~~~~~~
+../Src/main.cpp: In function 'bool obstacleDetection(ADCClass&)':
+../Src/main.cpp:184:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [Src/subdir.mk:73: Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+23:51:26 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+../Src/main.cpp: In function 'int main()':
+../Src/main.cpp:149:19: error: expected primary-expression before '&' token
+   controlSpeed(PWM&, float, float);
+                   ^
+../Src/main.cpp:149:20: error: expected primary-expression before ',' token
+   controlSpeed(PWM&, float, float);
+                    ^
+../Src/main.cpp:149:22: error: expected primary-expression before 'float'
+   controlSpeed(PWM&, float, float);
+                      ^~~~~
+../Src/main.cpp:149:29: error: expected primary-expression before 'float'
+   controlSpeed(PWM&, float, float);
+                             ^~~~~
+../Src/main.cpp: In function 'bool obstacleDetection(ADCClass&)':
+../Src/main.cpp:184:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [Src/subdir.mk:73: Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+23:52:21 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+../Src/main.cpp: In function 'int main()':
+../Src/main.cpp:149:16: error: 'motorPWM' was not declared in this scope
+   controlSpeed(motorPWM, referenceSpeed, actualSpeed);
+                ^~~~~~~~
+../Src/main.cpp:149:26: error: 'referenceSpeed' was not declared in this scope
+   controlSpeed(motorPWM, referenceSpeed, actualSpeed);
+                          ^~~~~~~~~~~~~~
+../Src/main.cpp:149:42: error: 'actualSpeed' was not declared in this scope
+   controlSpeed(motorPWM, referenceSpeed, actualSpeed);
+                                          ^~~~~~~~~~~
+../Src/main.cpp:149:42: note: suggested alternative: 'controlSpeed'
+   controlSpeed(motorPWM, referenceSpeed, actualSpeed);
+                                          ^~~~~~~~~~~
+                                          controlSpeed
+../Src/main.cpp: In function 'bool obstacleDetection(ADCClass&)':
+../Src/main.cpp:184:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [Src/subdir.mk:73: Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+23:53:37 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+../Src/main.cpp: In function 'bool obstacleDetection(ADCClass&)':
+../Src/main.cpp:184:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F446RETX_FLASH.ld" -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32_Project_Graduation.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
+arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 305408	   2796	   7592	 315796	  4d194	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_Project_Graduation.bin
+ 
+Finished building: STM32_Project_Graduation.list
+ 
