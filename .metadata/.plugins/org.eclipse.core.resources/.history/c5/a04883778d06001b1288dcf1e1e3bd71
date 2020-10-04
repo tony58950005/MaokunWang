@@ -197,7 +197,7 @@ void setSteering(PWM& servoPWM, float steeringAngle)
 	//TODO: set the steering for the servo
 	//two points(-90degree,0 percent_for_PWM),(90,100) match one straight line
 	//the line function servoPWM=1/9*steeringAngle+100;
-	int percent=(int)5/9*steeringAngle+50;
+	int percent=(int)1/9*steeringAngle+100;
 	servoPWM.setPWM(percent);
 }
 
