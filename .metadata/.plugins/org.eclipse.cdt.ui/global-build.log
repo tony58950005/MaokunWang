@@ -1665,3 +1665,24 @@ Finished building: STM32_Project_Graduation.bin
  
 Finished building: STM32_Project_Graduation.list
  
+16:18:25 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+../Src/main.cpp: In function 'bool obstacleDetection(ADCClass&)':
+../Src/main.cpp:185:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F446RETX_FLASH.ld" -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32_Project_Graduation.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
+arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 305424	   2796	   7592	 315812	  4d1a4	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_Project_Graduation.bin
+ 
+Finished building: STM32_Project_Graduation.list
+ 

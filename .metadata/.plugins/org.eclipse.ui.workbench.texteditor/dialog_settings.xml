@@ -8,6 +8,7 @@
 		<item key="isRegEx" value="false"/>
 		<item key="selection" value="PID"/>
 		<list key="findhistory">
+			<item value="if(obstacleDetection()){"/>
 			<item value="pid"/>
 			<item value="TIM"/>
 		</list>

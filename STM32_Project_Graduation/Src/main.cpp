@@ -32,6 +32,7 @@
 #include "stdlib.h"
 #include "stdio.h"
 #include <cstdlib>
+#define maxSpeed 100
 
 
 
@@ -187,8 +188,8 @@ void controlSpeed(PWM& motorPWM, float referenceSpeed, float actualSpeed)
 {
 	//TODO: implement a PID controller for speed
 	PID_Controller pid;
-	pid.PIDController_Update(referenceSpeed, actualSpeed);
-	int percent=(int)actualSpeed/referenceSpeed*100;
+	float outputSpeed=pid.PIDController_Update(referenceSpeed, actualSpeed);
+	int percent=(int)outputSpeed/maxSpeed*100;
 	motorPWM.setPWM(percent);
 }
 
