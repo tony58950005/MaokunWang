@@ -17,7 +17,7 @@
 class PWM {
 public:
 	PWM(TIM_HandleTypeDef htim);
-	bool setPWM(uint8_t percent);
+	bool setPWM(float percent);
 private:
 	TIM_HandleTypeDef htim;
 

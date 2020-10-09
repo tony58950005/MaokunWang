@@ -11,27 +11,18 @@
 
 class PID_Controller {
 public:
-	PID_Controller();
+	PID_Controller(float Kp, float Ki, float Kd, float limMin, float limMax);
 	float PIDController_Update(float setpoint, float measurement);
 private:
 	float Kp;//controller gains
 	float Ki;
 	float Kd;
 
-	float tau;//derivative low-pass filter time constant****
 	float limMin;//output limits
 	float limMax;
 
-	float T=0.01;//sample time (in seconds) Take 10ms(0.01s) here
-
 	float integrator;// controller memory
 	float prevError;//required for integrator
-	float differentiator;
-	float prevMeasurement;//required for differentiator
-
-	float out;//controller output
-
-
 };
 
 #endif /* PIDCONTROLLER_H_ */

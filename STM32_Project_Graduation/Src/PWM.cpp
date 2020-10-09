@@ -74,7 +74,7 @@ PWM::PWM(TIM_HandleTypeDef h) :
 	}
 }
 
-bool PWM::setPWM(uint8_t percent)
+bool PWM::setPWM(float percent)
 {
 	if(percent <= 100)
 	{

@@ -7,69 +7,47 @@
 
 #include <PIDController.h>
 #include "main.h"
-PID_Controller::PID_Controller(){
+PID_Controller::PID_Controller(float Kp, float Ki, float Kd, float limMin, float limMax) :
+	Kp(Kp),
+	Ki(Ki),
+	Kd(Kd),
+	limMin(limMin),
+	limMax(limMax)
+
+{
 	integrator = 0.0f;
 	prevError = 0.0f;
-
-	differentiator = 0.0f;
-	prevMeasurement = 0.0f;
-
-	out = 0.0f;
 }
 
 
 float PID_Controller::PIDController_Update(float setpoint, float measurement){
 	//error signal
-	float error =setpoint- measurement;
-
+	float error = setpoint - measurement;
 
 	//proportional
-	float proportional =Kp * error;
+	float proportional = Kp * error;
+
+	//derivative
+	float differentiator = Kd * (error - prevError);
 
 	//integral
-	integrator = integrator + 0.5f * Ki * T * (error+ prevError);
-
-	//anti-windup via dynamic integrator clamping
-	float limMinInt, limMaxInt;
-
-	//compare integrator limits,set up limits we need to set on the integrator
-	if(limMax > proportional){
-		limMaxInt=limMax-proportional;
-	}else{
-		limMaxInt=0.0f;
-	}
-
-	if(limMin < proportional){
-		limMinInt=limMin-proportional;
-	}else{
-		limMinInt=0.0f;
-	}
-
-	//clamp integrator
-	if(integrator > limMaxInt){
-		integrator = limMaxInt;
-	}else if(integrator < limMinInt){
-		integrator = limMinInt;
-	}
-
-	//derivative band-limited differentiator
-	differentiator= (2.0f* Kd * (measurement -prevMeasurement)
-			+(2.0f * tau-T)* differentiator)
-					/(2.0f * tau + T);
+	integrator += Ki * error;
 
 	//compute output and apply limits
-	out=proportional + integrator +differentiator;
-	if(out > limMax){
-		out = limMax;
-	}else if(out < limMax){
-		out=limMin;
-	}
+	float out = proportional + integrator + differentiator;
+	float outLimited = out;
+	if(out > limMax)
+		outLimited = limMax;
+	else if(out < limMin)
+		outLimited = limMin;
+
+	//anti-windup
+	integrator += (outLimited - out);
+
 	//store error and measurement for later use
 	prevError = error;
-	prevMeasurement = measurement;
 
 	//return controller output
 	return out;
-
 }
 

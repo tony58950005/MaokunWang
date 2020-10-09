@@ -20,21 +20,16 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include <ADCClass.h>
-#include "main.h"
-#include "stm32f4xx.h"
-#include "stm32f4xx_hal.h"
-#include "stm32f4xx_hal_uart.h"
-#include "stm32f4xx_hal_tim.h"
-#include "string.h"
 #include <HighLevelComm.h>
 #include <PIDController.h>
+#include "main.h"
+#include "stm32f4xx_hal.h"
+#include "string.h"
 #include "stdint.h"
 #include "stdlib.h"
 #include "stdio.h"
 #include <cstdlib>
-#define maxSpeed 100
-
-
+#include <cmath>
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -63,13 +58,7 @@
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
-void ADC_Multichannel_Config(void);
-void DMA_Configuration(void);
 void MX_GPIO_Init(void);
-void USART2_Config(uint32_t uBaud);
-void USART2_Configuration(uint32_t uBaud);
-void USART2_NVIC_Configuration(void);
-void USART2f_IRQHandler(void);
 bool obstacleDetection(ADCClass& adc);
 void controlSpeed(PWM& motorPWM, float referenceSpeed, float actualSpeed);
 void setSteering(PWM& servoPWM, float steeringAngle);
@@ -94,7 +83,7 @@ int _write(int file, char *ptr, int len)
 UART_HandleTypeDef huart2;
 TIM_HandleTypeDef htim2;
 ADC_HandleTypeDef hadc1;
-float distance[3];
+PID_Controller pid(1.0, 1.0, 0.0, 0.0, 100.0);
 /* USER CODE END 0 */
 
 /**
@@ -108,36 +97,16 @@ float distance[3];
 
 int main(void)
 {
-  /* USER CODE BEGIN 1 */
+	/* MCU Configuration--------------------------------------------------------*/
+	/* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+	HAL_Init();
 
-  /* USER CODE END 1 */
-  
+	/* Configure the system clock */
+	SystemClock_Config();
 
-  /* MCU Configuration--------------------------------------------------------*/
-
-  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-  HAL_Init();
-
-  /* USER CODE BEGIN Init */
-
-  /* USER CODE END Init */
-
-  /* Configure the system clock */
-  SystemClock_Config();
-  //DMA_Configuration();
-
-  /* USER CODE BEGIN SysInit */
-
-  /* USER CODE END SysInit */
-
-  /* Initialize all configured peripherals */
-
+	/* Initialize all configured peripherals */
 	MX_GPIO_Init();
-	//printf("Hello World\n");
-	/* USER CODE END 2 */
-	/* Infinite loop */
-	/* USER CODE BEGIN WHILE */
-	/* USER CODE BEGIN 3 */
+
 	ADCClass adc(hadc1);
 	HighLevelComm HighLevelCommTest(huart2, htim2);
 
@@ -149,48 +118,45 @@ int main(void)
 			HighLevelCommTest.Stop();
 		}
 	}
-
 }
 
 bool obstacleDetection(ADCClass& adc)
 {
 	//Measure the signals of the Sharp sensors
-
 	float sensorsVoltage[3];
 	for (int i = 0; i < 3; i++) {
 		sensorsVoltage[i] = adc.getAnalogValue(i);
 	}
 
-	//TODO: convert the voltage[V] to distance[cm] using the characteristics of the sensor
+	//Convert the voltage[V] to distance[cm] using the characteristics of the sensor
+	//Sensor measuring distance (4cm-30cm)
 	//the slope1[4cm-6cm] has little difference with the slope2[6cm-30cm]
+	float distance[3];
 	for (int i = 0; i < 3; i++) {
-		if (sensorsVoltage[i] >= 2.02 && sensorsVoltage[i] <= 2.73) {
+		if (sensorsVoltage[i] >= 2.0 && sensorsVoltage[i] <= 3.0) {
 			distance[i] = 8.55 / (sensorsVoltage[i] - 0.5925); //distance->[4cm,6cm]
 		} else if (sensorsVoltage[i] >= 0.41) {
 			distance[i] = 13.156 / (sensorsVoltage[i] + 0.0289); //distance->[6cm,30cm]
 		} else {
-			distance[i] = -1; //the distance here does not make sense.
+			distance[i] = infinityf(); //the distance here does not make sense.
 		}
 	}
-	//Sensor measuring distance (4cm-30cm)
 
-
-	//TODO: check distances: return true when there is some obstacle in front of the car.
-	//Use some threshold value (e.g, 10 cm)
+	//Check distances: return true when there is some obstacle in front of the car.
+	//Use threshold value: 10 cm
 	for (int i = 0; i < 3; i++) {
-		if (distance[i] <= 10 && distance[i] > 0) {
+		if (distance[i] <= 10) {
 			return true;
 		}
 	}
+	return false;
 }
 
 void controlSpeed(PWM& motorPWM, float referenceSpeed, float actualSpeed)
 {
-	//TODO: implement a PID controller for speed
-	PID_Controller pid;
-	float outputSpeed=pid.PIDController_Update(referenceSpeed, actualSpeed);
-	int percent=(int)outputSpeed/maxSpeed*100;
-	motorPWM.setPWM(percent);
+	//PID for speed controlling
+	float output = pid.PIDController_Update(referenceSpeed, actualSpeed);
+	motorPWM.setPWM(output);
 }
 
 void setSteering(PWM& servoPWM, float steeringAngle)
@@ -313,7 +279,7 @@ void MX_GPIO_Init(void)
 void Error_Handler(void)
 {
 	/* USER CODE BEGIN Error_Handler_Debug */
-	while(1);
+	while(1);	//TODO: store some error information in a global variable, it can be read from the high level comm
 	/* USER CODE END Error_Handler_Debug */
 }
 
