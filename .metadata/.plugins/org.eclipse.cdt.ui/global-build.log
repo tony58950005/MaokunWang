@@ -1686,3 +1686,818 @@ Finished building: STM32_Project_Graduation.bin
  
 Finished building: STM32_Project_Graduation.list
  
+01:05:11 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+arm-none-eabi-g++ "../Src/PIDController.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/PIDController.d" -MT"Src/PIDController.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/PIDController.o"
+arm-none-eabi-g++ "../Src/PWM.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/PWM.d" -MT"Src/PWM.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/PWM.o"
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::Move(int)':
+../Src/HighLevelComm.cpp:82:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F446RETX_FLASH.ld" -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32_Project_Graduation.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
+arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 305568	   2796	   7608	 315972	  4d244	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_Project_Graduation.bin
+ 
+Finished building: STM32_Project_Graduation.list
+ 
+19:51:56 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/PWM.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/PWM.d" -MT"Src/PWM.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/PWM.o"
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+../Src/PWM.cpp: In member function 'bool PWM::setPWM(float)':
+../Src/PWM.cpp:85:3: error: 'now' was not declared in this scope
+   now=PWMError;
+   ^~~
+../Src/PWM.cpp:85:7: error: 'PWMError' was not declared in this scope
+   now=PWMError;
+       ^~~~~~~~
+../Src/PWM.cpp:85:7: note: suggested alternative: 'strerror'
+   now=PWMError;
+       ^~~~~~~~
+       strerror
+make: *** [Src/subdir.mk:69: Src/PWM.o] Error 1
+make: *** Waiting for unfinished jobs....
+../Src/main.cpp:49:1: error: 'string' does not name a type; did you mean 'stdin'?
+ string ErrorInfo=NULL;
+ ^~~~~~
+ stdin
+../Src/main.cpp: In function 'void Error_Handler()':
+../Src/main.cpp:296:4: error: 'ErrorInfo' was not declared in this scope
+    ErrorInfo= "PWM error!\n";
+    ^~~~~~~~~
+../Src/main.cpp:296:4: note: suggested alternative: 'Error'
+    ErrorInfo= "PWM error!\n";
+    ^~~~~~~~~
+    Error
+make: *** [Src/subdir.mk:73: Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+19:52:41 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/ADCClass.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ADCClass.d" -MT"Src/ADCClass.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ADCClass.o"
+arm-none-eabi-g++ "../Src/ClassUartTest.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ClassUartTest.d" -MT"Src/ClassUartTest.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ClassUartTest.o"
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+arm-none-eabi-g++ "../Src/PIDController.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/PIDController.d" -MT"Src/PIDController.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/PIDController.o"
+arm-none-eabi-g++ "../Src/PWM.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/PWM.d" -MT"Src/PWM.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/PWM.o"
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+arm-none-eabi-gcc "../Src/stm32f4xx_hal_msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/stm32f4xx_hal_msp.d" -MT"Src/stm32f4xx_hal_msp.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/stm32f4xx_hal_msp.o"
+arm-none-eabi-gcc "../Src/stm32f4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/stm32f4xx_it.d" -MT"Src/stm32f4xx_it.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/stm32f4xx_it.o"
+In file included from ../Inc/PWM.h:11:0,
+                 from ../Src/PWM.cpp:8:
+../Inc/main.h:51:1: error: 'string' does not name a type; did you mean 'strupr'?
+ string ErrorInfo=NULL;
+ ^~~~~~
+ strupr
+In file included from ../Inc/ClassUartTest.h:14:0,
+                 from ../Src/ClassUartTest.cpp:8:
+../Inc/main.h:51:1: error: 'string' does not name a type; did you mean 'strupr'?
+ string ErrorInfo=NULL;
+ ^~~~~~
+ strupr
+In file included from ../Inc/PIDController.h:10:0,
+                 from ../Src/PIDController.cpp:8:
+../Inc/main.h:51:1: error: 'string' does not name a type; did you mean 'strupr'?
+ string ErrorInfo=NULL;
+ ^~~~~~
+ strupr
+In file included from ../Inc/ADCClass.h:11:0,
+                 from ../Src/ADCClass.cpp:8:
+../Inc/main.h:51:1: error: 'string' does not name a type; did you mean 'strupr'?
+ string ErrorInfo=NULL;
+ ^~~~~~
+ strupr
+make: *** [Src/subdir.mk:69: Src/PWM.o] Error 1
+make: *** Waiting for unfinished jobs....
+make: *** [Src/subdir.mk:63: Src/ClassUartTest.o] Error 1
+make: *** [Src/subdir.mk:67: Src/PIDController.o] Error 1
+make: *** [Src/subdir.mk:61: Src/ADCClass.o] Error 1
+In file included from ../Inc/ClassUartTest.h:14:0,
+                 from ../Inc/HighLevelComm.h:11,
+                 from ../Src/HighLevelComm.cpp:8:
+../Inc/main.h:51:1: error: 'string' does not name a type; did you mean 'stdin'?
+ string ErrorInfo=NULL;
+ ^~~~~~
+ stdin
+In file included from ../Inc/ADCClass.h:11:0,
+                 from ../Src/main.cpp:22:
+../Inc/main.h:51:1: error: 'string' does not name a type; did you mean 'stdin'?
+ string ErrorInfo=NULL;
+ ^~~~~~
+ stdin
+../Src/main.cpp: In function 'void Error_Handler()':
+../Src/main.cpp:287:4: error: 'ErrorInfo' was not declared in this scope
+    ErrorInfo= "PWM error!\n";
+    ^~~~~~~~~
+../Src/main.cpp:287:4: note: suggested alternative: 'Error'
+    ErrorInfo= "PWM error!\n";
+    ^~~~~~~~~
+    Error
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::Move(int)':
+../Src/HighLevelComm.cpp:82:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [Src/subdir.mk:65: Src/HighLevelComm.o] Error 1
+make: *** [Src/subdir.mk:73: Src/main.o] Error 1
+In file included from ../Src/stm32f4xx_it.c:22:0:
+../Inc/main.h:50:1: error: unknown type name 'Error'; use 'enum' keyword to refer to the type
+ Error now= NoError;
+ ^~~~~
+ enum 
+In file included from ../Src/stm32f4xx_hal_msp.c:23:0:
+../Inc/main.h:50:1: error: unknown type name 'Error'; use 'enum' keyword to refer to the type
+ Error now= NoError;
+ ^~~~~
+ enum 
+../Inc/main.h:51:1: error: unknown type name 'string'; did you mean 'stricmp'?
+ string ErrorInfo=NULL;
+ ^~~~~~
+ stricmp
+../Inc/main.h:51:18: warning: initialization makes integer from pointer without a cast [-Wint-conversion]
+ string ErrorInfo=NULL;
+                  ^~~~
+../Inc/main.h:51:1: error: unknown type name 'string'; did you mean 'stricmp'?
+ string ErrorInfo=NULL;
+ ^~~~~~
+ stricmp
+../Inc/main.h:51:18: warning: initialization makes integer from pointer without a cast [-Wint-conversion]
+ string ErrorInfo=NULL;
+                  ^~~~
+make: *** [Src/subdir.mk:79: Src/stm32f4xx_hal_msp.o] Error 1
+make: *** [Src/subdir.mk:81: Src/stm32f4xx_it.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+19:53:50 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/ADCClass.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ADCClass.d" -MT"Src/ADCClass.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ADCClass.o"
+arm-none-eabi-g++ "../Src/ClassUartTest.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ClassUartTest.d" -MT"Src/ClassUartTest.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ClassUartTest.o"
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+arm-none-eabi-g++ "../Src/PIDController.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/PIDController.d" -MT"Src/PIDController.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/PIDController.o"
+arm-none-eabi-g++ "../Src/PWM.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/PWM.d" -MT"Src/PWM.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/PWM.o"
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+arm-none-eabi-gcc "../Src/stm32f4xx_hal_msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/stm32f4xx_hal_msp.d" -MT"Src/stm32f4xx_hal_msp.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/stm32f4xx_hal_msp.o"
+arm-none-eabi-gcc "../Src/stm32f4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/stm32f4xx_it.d" -MT"Src/stm32f4xx_it.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/stm32f4xx_it.o"
+../Src/PWM.cpp: In member function 'bool PWM::setPWM(float)':
+../Src/PWM.cpp:85:3: error: 'now' was not declared in this scope
+   now=PWMError;
+   ^~~
+make: *** [Src/subdir.mk:69: Src/PWM.o] Error 1
+make: *** Waiting for unfinished jobs....
+../Src/main.cpp:41:1: error: 'string' does not name a type; did you mean 'stdin'?
+ string ErrorInfo=NULL;
+ ^~~~~~
+ stdin
+../Src/main.cpp: In function 'void Error_Handler()':
+../Src/main.cpp:288:4: error: 'ErrorInfo' was not declared in this scope
+    ErrorInfo= "PWM error!\n";
+    ^~~~~~~~~
+../Src/main.cpp:288:4: note: suggested alternative: 'Error'
+    ErrorInfo= "PWM error!\n";
+    ^~~~~~~~~
+    Error
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::Move(int)':
+../Src/HighLevelComm.cpp:82:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [Src/subdir.mk:73: Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+19:55:13 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/ADCClass.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ADCClass.d" -MT"Src/ADCClass.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ADCClass.o"
+arm-none-eabi-g++ "../Src/ClassUartTest.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ClassUartTest.d" -MT"Src/ClassUartTest.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ClassUartTest.o"
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+arm-none-eabi-g++ "../Src/PIDController.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/PIDController.d" -MT"Src/PIDController.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/PIDController.o"
+arm-none-eabi-gcc "../Src/stm32f4xx_hal_msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/stm32f4xx_hal_msp.d" -MT"Src/stm32f4xx_hal_msp.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/stm32f4xx_hal_msp.o"
+arm-none-eabi-gcc "../Src/stm32f4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/stm32f4xx_it.d" -MT"Src/stm32f4xx_it.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/stm32f4xx_it.o"
+arm-none-eabi-g++ "../Src/PWM.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/PWM.d" -MT"Src/PWM.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/PWM.o"
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+In file included from ../Src/stm32f4xx_hal_msp.c:23:0:
+../Inc/main.h:50:1: error: unknown type name 'Error'; use 'enum' keyword to refer to the type
+ Error now= NoError;
+ ^~~~~
+ enum 
+In file included from ../Src/stm32f4xx_it.c:22:0:
+../Inc/main.h:50:1: error: unknown type name 'Error'; use 'enum' keyword to refer to the type
+ Error now= NoError;
+ ^~~~~
+ enum 
+make: *** [Src/subdir.mk:79: Src/stm32f4xx_hal_msp.o] Error 1
+make: *** Waiting for unfinished jobs....
+make: *** [Src/subdir.mk:81: Src/stm32f4xx_it.o] Error 1
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::Move(int)':
+../Src/HighLevelComm.cpp:82:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+../Src/main.cpp:41:1: error: 'string' does not name a type; did you mean 'stdin'?
+ string ErrorInfo=NULL;
+ ^~~~~~
+ stdin
+../Src/main.cpp: In function 'void Error_Handler()':
+../Src/main.cpp:288:4: error: 'ErrorInfo' was not declared in this scope
+    ErrorInfo= "PWM error!\n";
+    ^~~~~~~~~
+../Src/main.cpp:288:4: note: suggested alternative: 'Error'
+    ErrorInfo= "PWM error!\n";
+    ^~~~~~~~~
+    Error
+make: *** [Src/subdir.mk:73: Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+19:58:07 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/PWM.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/PWM.d" -MT"Src/PWM.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/PWM.o"
+arm-none-eabi-g++ "../Src/ADCClass.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ADCClass.d" -MT"Src/ADCClass.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ADCClass.o"
+arm-none-eabi-g++ "../Src/ClassUartTest.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ClassUartTest.d" -MT"Src/ClassUartTest.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ClassUartTest.o"
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+arm-none-eabi-g++ "../Src/PIDController.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/PIDController.d" -MT"Src/PIDController.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/PIDController.o"
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+arm-none-eabi-gcc "../Src/stm32f4xx_hal_msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/stm32f4xx_hal_msp.d" -MT"Src/stm32f4xx_hal_msp.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/stm32f4xx_hal_msp.o"
+arm-none-eabi-gcc "../Src/stm32f4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/stm32f4xx_it.d" -MT"Src/stm32f4xx_it.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/stm32f4xx_it.o"
+../Src/PWM.cpp: In member function 'bool PWM::setPWM(float)':
+../Src/PWM.cpp:85:3: error: 'now' was not declared in this scope
+   now=Error::PWMError;
+   ^~~
+../Src/PWM.cpp:85:7: error: 'Error' has not been declared
+   now=Error::PWMError;
+       ^~~~~
+make: *** [Src/subdir.mk:69: Src/PWM.o] Error 1
+make: *** Waiting for unfinished jobs....
+../Src/main.cpp:49:1: error: 'string' does not name a type; did you mean 'stdin'?
+ string ErrorInfo=NULL;
+ ^~~~~~
+ stdin
+../Src/main.cpp: In function 'void Error_Handler()':
+../Src/main.cpp:296:4: error: 'ErrorInfo' was not declared in this scope
+    ErrorInfo= "PWM error!\n";
+    ^~~~~~~~~
+../Src/main.cpp:296:4: note: suggested alternative: 'Error'
+    ErrorInfo= "PWM error!\n";
+    ^~~~~~~~~
+    Error
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::Move(int)':
+../Src/HighLevelComm.cpp:82:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [Src/subdir.mk:73: Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+19:58:53 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/PWM.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/PWM.d" -MT"Src/PWM.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/PWM.o"
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+../Src/PWM.cpp: In member function 'bool PWM::setPWM(float)':
+../Src/PWM.cpp:85:3: error: 'now' was not declared in this scope
+   now=Error::PWMError;
+   ^~~
+../Src/PWM.cpp:85:7: error: 'Error' has not been declared
+   now=Error::PWMError;
+       ^~~~~
+make: *** [Src/subdir.mk:69: Src/PWM.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+20:01:49 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+arm-none-eabi-g++ "../Src/ADCClass.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ADCClass.d" -MT"Src/ADCClass.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ADCClass.o"
+arm-none-eabi-g++ "../Src/ClassUartTest.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ClassUartTest.d" -MT"Src/ClassUartTest.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ClassUartTest.o"
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+arm-none-eabi-g++ "../Src/PIDController.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/PIDController.d" -MT"Src/PIDController.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/PIDController.o"
+arm-none-eabi-g++ "../Src/PWM.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/PWM.d" -MT"Src/PWM.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/PWM.o"
+arm-none-eabi-gcc "../Src/stm32f4xx_hal_msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/stm32f4xx_hal_msp.d" -MT"Src/stm32f4xx_hal_msp.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/stm32f4xx_hal_msp.o"
+arm-none-eabi-gcc "../Src/stm32f4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/stm32f4xx_it.d" -MT"Src/stm32f4xx_it.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/stm32f4xx_it.o"
+In file included from ../Src/stm32f4xx_it.c:22:0:
+../Inc/main.h:43:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+ {
+ ^
+In file included from ../Src/stm32f4xx_hal_msp.c:23:0:
+../Inc/main.h:43:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+ {
+ ^
+make: *** [Src/subdir.mk:81: Src/stm32f4xx_it.o] Error 1
+make: *** Waiting for unfinished jobs....
+make: *** [Src/subdir.mk:79: Src/stm32f4xx_hal_msp.o] Error 1
+In file included from ../Inc/ClassUartTest.h:14:0,
+                 from ../Src/ClassUartTest.cpp:8:
+../Inc/main.h:44:1: error: expected identifier before 'private'
+ private:
+ ^~~~~~~
+../Inc/main.h:44:1: error: expected '}' before 'private'
+../Inc/main.h:44:1: error: expected unqualified-id before 'private'
+../Inc/main.h:80:1: error: expected declaration before '}' token
+ }
+ ^
+In file included from ../Inc/ADCClass.h:11:0,
+                 from ../Src/ADCClass.cpp:8:
+../Inc/main.h:44:1: error: expected identifier before 'private'
+ private:
+ ^~~~~~~
+../Inc/main.h:44:1: error: expected '}' before 'private'
+../Inc/main.h:44:1: error: expected unqualified-id before 'private'
+../Inc/main.h:80:1: error: expected declaration before '}' token
+ }
+ ^
+In file included from ../Inc/PIDController.h:10:0,
+                 from ../Src/PIDController.cpp:8:
+../Inc/main.h:44:1: error: expected identifier before 'private'
+ private:
+ ^~~~~~~
+../Inc/main.h:44:1: error: expected '}' before 'private'
+../Inc/main.h:44:1: error: expected unqualified-id before 'private'
+../Inc/main.h:80:1: error: expected declaration before '}' token
+ }
+ ^
+make: *** [Src/subdir.mk:63: Src/ClassUartTest.o] Error 1
+In file included from ../Inc/PWM.h:11:0,
+                 from ../Src/PWM.cpp:8:
+../Inc/main.h:44:1: error: expected identifier before 'private'
+ private:
+ ^~~~~~~
+../Inc/main.h:44:1: error: expected '}' before 'private'
+../Inc/main.h:44:1: error: expected unqualified-id before 'private'
+../Inc/main.h:80:1: error: expected declaration before '}' token
+ }
+ ^
+make: *** [Src/subdir.mk:67: Src/PIDController.o] Error 1
+make: *** [Src/subdir.mk:69: Src/PWM.o] Error 1
+make: *** [Src/subdir.mk:61: Src/ADCClass.o] Error 1
+In file included from ../Inc/ADCClass.h:11:0,
+                 from ../Src/main.cpp:22:
+../Inc/main.h:44:1: error: expected identifier before 'private'
+ private:
+ ^~~~~~~
+../Inc/main.h:44:1: error: expected '}' before 'private'
+../Inc/main.h:44:1: error: expected unqualified-id before 'private'
+../Inc/main.h:80:1: error: expected declaration before '}' token
+ }
+ ^
+make: *** [Src/subdir.mk:73: Src/main.o] Error 1
+In file included from ../Inc/ClassUartTest.h:14:0,
+                 from ../Inc/HighLevelComm.h:11,
+                 from ../Src/HighLevelComm.cpp:8:
+../Inc/main.h:44:1: error: expected identifier before 'private'
+ private:
+ ^~~~~~~
+../Inc/main.h:44:1: error: expected '}' before 'private'
+../Inc/main.h:44:1: error: expected unqualified-id before 'private'
+../Inc/main.h:80:1: error: expected declaration before '}' token
+ }
+ ^
+make: *** [Src/subdir.mk:65: Src/HighLevelComm.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+20:03:50 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/ADCClass.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ADCClass.d" -MT"Src/ADCClass.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ADCClass.o"
+arm-none-eabi-g++ "../Src/ClassUartTest.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ClassUartTest.d" -MT"Src/ClassUartTest.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ClassUartTest.o"
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+arm-none-eabi-g++ "../Src/PIDController.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/PIDController.d" -MT"Src/PIDController.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/PIDController.o"
+arm-none-eabi-g++ "../Src/PWM.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/PWM.d" -MT"Src/PWM.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/PWM.o"
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+arm-none-eabi-gcc "../Src/stm32f4xx_hal_msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/stm32f4xx_hal_msp.d" -MT"Src/stm32f4xx_hal_msp.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/stm32f4xx_hal_msp.o"
+arm-none-eabi-gcc "../Src/stm32f4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/stm32f4xx_it.d" -MT"Src/stm32f4xx_it.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/stm32f4xx_it.o"
+In file included from ../Src/stm32f4xx_hal_msp.c:23:0:
+../Inc/main.h:43:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+ {
+ ^
+In file included from ../Src/stm32f4xx_it.c:22:0:
+../Inc/main.h:43:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+ {
+ ^
+../Inc/main.h:50:1: error: unknown type name 'Error'
+ Error now= Error::NoError;
+ ^~~~~
+../Inc/main.h:50:12: error: 'Error' undeclared here (not in a function)
+ Error now= Error::NoError;
+            ^~~~~
+../Inc/main.h:50:17: error: expected ',' or ';' before ':' token
+ Error now= Error::NoError;
+                 ^
+../Inc/main.h:50:1: error: unknown type name 'Error'
+ Error now= Error::NoError;
+ ^~~~~
+../Inc/main.h:50:12: error: 'Error' undeclared here (not in a function)
+ Error now= Error::NoError;
+            ^~~~~
+../Inc/main.h:50:17: error: expected ',' or ';' before ':' token
+ Error now= Error::NoError;
+                 ^
+make: *** [Src/subdir.mk:79: Src/stm32f4xx_hal_msp.o] Error 1
+make: *** Waiting for unfinished jobs....
+make: *** [Src/subdir.mk:81: Src/stm32f4xx_it.o] Error 1
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::Move(int)':
+../Src/HighLevelComm.cpp:82:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+20:05:57 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/ADCClass.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ADCClass.d" -MT"Src/ADCClass.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ADCClass.o"
+arm-none-eabi-g++ "../Src/ClassUartTest.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ClassUartTest.d" -MT"Src/ClassUartTest.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ClassUartTest.o"
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+arm-none-eabi-g++ "../Src/PIDController.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/PIDController.d" -MT"Src/PIDController.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/PIDController.o"
+arm-none-eabi-g++ "../Src/PWM.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/PWM.d" -MT"Src/PWM.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/PWM.o"
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+arm-none-eabi-gcc "../Src/stm32f4xx_hal_msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/stm32f4xx_hal_msp.d" -MT"Src/stm32f4xx_hal_msp.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/stm32f4xx_hal_msp.o"
+arm-none-eabi-gcc "../Src/stm32f4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/stm32f4xx_it.d" -MT"Src/stm32f4xx_it.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/stm32f4xx_it.o"
+In file included from ../Src/stm32f4xx_hal_msp.c:23:0:
+../Inc/main.h:43:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+ {
+ ^
+../Inc/main.h:50:1: error: unknown type name 'Error'
+ Error now= Error::NoError;
+ ^~~~~
+In file included from ../Src/stm32f4xx_it.c:22:0:
+../Inc/main.h:43:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+ {
+ ^
+../Inc/main.h:50:12: error: 'Error' undeclared here (not in a function)
+ Error now= Error::NoError;
+            ^~~~~
+../Inc/main.h:50:17: error: expected ',' or ';' before ':' token
+ Error now= Error::NoError;
+                 ^
+../Inc/main.h:50:1: error: unknown type name 'Error'
+ Error now= Error::NoError;
+ ^~~~~
+../Inc/main.h:50:12: error: 'Error' undeclared here (not in a function)
+ Error now= Error::NoError;
+            ^~~~~
+../Inc/main.h:50:17: error: expected ',' or ';' before ':' token
+ Error now= Error::NoError;
+                 ^
+make: *** [Src/subdir.mk:79: Src/stm32f4xx_hal_msp.o] Error 1
+make: *** Waiting for unfinished jobs....
+make: *** [Src/subdir.mk:81: Src/stm32f4xx_it.o] Error 1
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::Move(int)':
+../Src/HighLevelComm.cpp:82:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+20:06:43 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/ADCClass.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ADCClass.d" -MT"Src/ADCClass.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ADCClass.o"
+arm-none-eabi-g++ "../Src/ClassUartTest.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ClassUartTest.d" -MT"Src/ClassUartTest.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ClassUartTest.o"
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+arm-none-eabi-g++ "../Src/PIDController.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/PIDController.d" -MT"Src/PIDController.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/PIDController.o"
+arm-none-eabi-g++ "../Src/PWM.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/PWM.d" -MT"Src/PWM.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/PWM.o"
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+arm-none-eabi-gcc "../Src/stm32f4xx_hal_msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/stm32f4xx_hal_msp.d" -MT"Src/stm32f4xx_hal_msp.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/stm32f4xx_hal_msp.o"
+arm-none-eabi-gcc "../Src/stm32f4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/stm32f4xx_it.d" -MT"Src/stm32f4xx_it.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/stm32f4xx_it.o"
+In file included from ../Src/stm32f4xx_it.c:22:0:
+../Inc/main.h:43:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+ {
+ ^
+In file included from ../Src/stm32f4xx_hal_msp.c:23:0:
+../Inc/main.h:43:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+ {
+ ^
+make: *** [Src/subdir.mk:81: Src/stm32f4xx_it.o] Error 1
+make: *** Waiting for unfinished jobs....
+make: *** [Src/subdir.mk:79: Src/stm32f4xx_hal_msp.o] Error 1
+../Src/PWM.cpp: In member function 'bool PWM::setPWM(float)':
+../Src/PWM.cpp:85:3: error: 'now' was not declared in this scope
+   now=Error::PWMError;
+   ^~~
+make: *** [Src/subdir.mk:69: Src/PWM.o] Error 1
+../Src/main.cpp: In function 'void Error_Handler()':
+../Src/main.cpp:285:10: error: 'now' was not declared in this scope
+  switch (now)
+          ^~~
+../Src/main.cpp:285:10: note: suggested alternative: 'pow'
+  switch (now)
+          ^~~
+          pow
+../Src/main.cpp:287:15: error: could not convert 'PWMError' from 'Error' to '<type error>'
+   case Error::PWMError:
+               ^~~~~~~~
+../Src/main.cpp:290:15: error: could not convert 'ADCError' from 'Error' to '<type error>'
+   case Error::ADCError:
+               ^~~~~~~~
+../Src/main.cpp:293:15: error: could not convert 'HighLevelCommError' from 'Error' to '<type error>'
+   case Error::HighLevelCommError:
+               ^~~~~~~~~~~~~~~~~~
+../Src/main.cpp:296:15: error: could not convert 'AssertFailError' from 'Error' to '<type error>'
+   case Error::AssertFailError:
+               ^~~~~~~~~~~~~~~
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::Move(int)':
+../Src/HighLevelComm.cpp:82:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [Src/subdir.mk:73: Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+20:07:29 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/PWM.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/PWM.d" -MT"Src/PWM.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/PWM.o"
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+arm-none-eabi-gcc "../Src/stm32f4xx_hal_msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/stm32f4xx_hal_msp.d" -MT"Src/stm32f4xx_hal_msp.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/stm32f4xx_hal_msp.o"
+arm-none-eabi-gcc "../Src/stm32f4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/stm32f4xx_it.d" -MT"Src/stm32f4xx_it.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/stm32f4xx_it.o"
+In file included from ../Src/stm32f4xx_hal_msp.c:23:0:
+../Inc/main.h:43:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+ {
+ ^
+In file included from ../Src/stm32f4xx_it.c:22:0:
+../Inc/main.h:43:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+ {
+ ^
+make: *** [Src/subdir.mk:79: Src/stm32f4xx_hal_msp.o] Error 1
+make: *** Waiting for unfinished jobs....
+make: *** [Src/subdir.mk:81: Src/stm32f4xx_it.o] Error 1
+../Src/PWM.cpp: In member function 'bool PWM::setPWM(float)':
+../Src/PWM.cpp:85:3: error: 'now' was not declared in this scope
+   now=Error::PWMError;
+   ^~~
+make: *** [Src/subdir.mk:69: Src/PWM.o] Error 1
+../Src/main.cpp: In function 'void Error_Handler()':
+../Src/main.cpp:285:10: error: 'now' was not declared in this scope
+  switch (now)
+          ^~~
+../Src/main.cpp:285:10: note: suggested alternative: 'pow'
+  switch (now)
+          ^~~
+          pow
+../Src/main.cpp:287:15: error: could not convert 'PWMError' from 'Error' to '<type error>'
+   case Error::PWMError:
+               ^~~~~~~~
+../Src/main.cpp:290:15: error: could not convert 'ADCError' from 'Error' to '<type error>'
+   case Error::ADCError:
+               ^~~~~~~~
+../Src/main.cpp:293:15: error: could not convert 'HighLevelCommError' from 'Error' to '<type error>'
+   case Error::HighLevelCommError:
+               ^~~~~~~~~~~~~~~~~~
+../Src/main.cpp:296:15: error: could not convert 'AssertFailError' from 'Error' to '<type error>'
+   case Error::AssertFailError:
+               ^~~~~~~~~~~~~~~
+make: *** [Src/subdir.mk:73: Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+20:07:36 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/ADCClass.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ADCClass.d" -MT"Src/ADCClass.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ADCClass.o"
+arm-none-eabi-g++ "../Src/ClassUartTest.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ClassUartTest.d" -MT"Src/ClassUartTest.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ClassUartTest.o"
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+arm-none-eabi-g++ "../Src/PIDController.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/PIDController.d" -MT"Src/PIDController.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/PIDController.o"
+arm-none-eabi-g++ "../Src/PWM.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/PWM.d" -MT"Src/PWM.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/PWM.o"
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+arm-none-eabi-gcc "../Src/stm32f4xx_hal_msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/stm32f4xx_hal_msp.d" -MT"Src/stm32f4xx_hal_msp.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/stm32f4xx_hal_msp.o"
+arm-none-eabi-gcc "../Src/stm32f4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/stm32f4xx_it.d" -MT"Src/stm32f4xx_it.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/stm32f4xx_it.o"
+In file included from ../Src/stm32f4xx_it.c:22:0:
+../Inc/main.h:43:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+ {
+ ^
+In file included from ../Src/stm32f4xx_hal_msp.c:23:0:
+../Inc/main.h:43:1: error: expected '=', ',', ';', 'asm' or '__attribute__' before '{' token
+ {
+ ^
+make: *** [Src/subdir.mk:81: Src/stm32f4xx_it.o] Error 1
+make: *** Waiting for unfinished jobs....
+make: *** [Src/subdir.mk:79: Src/stm32f4xx_hal_msp.o] Error 1
+../Src/PWM.cpp: In member function 'bool PWM::setPWM(float)':
+../Src/PWM.cpp:85:3: error: 'now' was not declared in this scope
+   now=Error::PWMError;
+   ^~~
+make: *** [Src/subdir.mk:69: Src/PWM.o] Error 1
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::Move(int)':
+../Src/HighLevelComm.cpp:82:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+20:08:25 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/ADCClass.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ADCClass.d" -MT"Src/ADCClass.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ADCClass.o"
+arm-none-eabi-g++ "../Src/ClassUartTest.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ClassUartTest.d" -MT"Src/ClassUartTest.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ClassUartTest.o"
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+arm-none-eabi-g++ "../Src/PIDController.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/PIDController.d" -MT"Src/PIDController.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/PIDController.o"
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+arm-none-eabi-g++ "../Src/PWM.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/PWM.d" -MT"Src/PWM.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/PWM.o"
+arm-none-eabi-gcc "../Src/stm32f4xx_hal_msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/stm32f4xx_hal_msp.d" -MT"Src/stm32f4xx_hal_msp.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/stm32f4xx_hal_msp.o"
+arm-none-eabi-gcc "../Src/stm32f4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/stm32f4xx_it.d" -MT"Src/stm32f4xx_it.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/stm32f4xx_it.o"
+../Src/PWM.cpp: In member function 'bool PWM::setPWM(float)':
+../Src/PWM.cpp:85:3: error: 'now' was not declared in this scope
+   now=Error::PWMError;
+   ^~~
+../Src/PWM.cpp:85:7: error: 'Error' has not been declared
+   now=Error::PWMError;
+       ^~~~~
+make: *** [Src/subdir.mk:69: Src/PWM.o] Error 1
+make: *** Waiting for unfinished jobs....
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::Move(int)':
+../Src/HighLevelComm.cpp:82:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+20:09:33 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-gcc "../Src/stm32f4xx_hal_msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/stm32f4xx_hal_msp.d" -MT"Src/stm32f4xx_hal_msp.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/stm32f4xx_hal_msp.o"
+arm-none-eabi-gcc "../Src/stm32f4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/stm32f4xx_it.d" -MT"Src/stm32f4xx_it.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/stm32f4xx_it.o"
+arm-none-eabi-g++ "../Src/ADCClass.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ADCClass.d" -MT"Src/ADCClass.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ADCClass.o"
+arm-none-eabi-g++ "../Src/ClassUartTest.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ClassUartTest.d" -MT"Src/ClassUartTest.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ClassUartTest.o"
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+arm-none-eabi-g++ "../Src/PIDController.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/PIDController.d" -MT"Src/PIDController.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/PIDController.o"
+arm-none-eabi-g++ "../Src/PWM.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/PWM.d" -MT"Src/PWM.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/PWM.o"
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+In file included from ../Src/stm32f4xx_hal_msp.c:23:0:
+../Inc/main.h:42:1: error: unknown type name 'Error'
+ Error now;
+ ^~~~~
+make: *** [Src/subdir.mk:79: Src/stm32f4xx_hal_msp.o] Error 1
+make: *** Waiting for unfinished jobs....
+In file included from ../Src/stm32f4xx_it.c:22:0:
+../Inc/main.h:42:1: error: unknown type name 'Error'
+ Error now;
+ ^~~~~
+make: *** [Src/subdir.mk:81: Src/stm32f4xx_it.o] Error 1
+In file included from ../Inc/PWM.h:11:0,
+                 from ../Src/PWM.cpp:8:
+../Inc/main.h:42:1: error: 'Error' does not name a type
+ Error now;
+ ^~~~~
+../Src/PWM.cpp: In member function 'bool PWM::setPWM(float)':
+../Src/PWM.cpp:85:3: error: 'now' was not declared in this scope
+   now=Error::PWMError;
+   ^~~
+In file included from ../Inc/ClassUartTest.h:14:0,
+                 from ../Src/ClassUartTest.cpp:8:
+../Inc/main.h:42:1: error: 'Error' does not name a type
+ Error now;
+ ^~~~~
+../Src/PWM.cpp:85:7: error: 'Error' has not been declared
+   now=Error::PWMError;
+       ^~~~~
+In file included from ../Inc/PIDController.h:10:0,
+                 from ../Src/PIDController.cpp:8:
+../Inc/main.h:42:1: error: 'Error' does not name a type
+ Error now;
+ ^~~~~
+make: *** [Src/subdir.mk:69: Src/PWM.o] Error 1
+make: *** [Src/subdir.mk:63: Src/ClassUartTest.o] Error 1
+make: *** [Src/subdir.mk:67: Src/PIDController.o] Error 1
+In file included from ../Inc/ADCClass.h:11:0,
+                 from ../Src/ADCClass.cpp:8:
+../Inc/main.h:42:1: error: 'Error' does not name a type
+ Error now;
+ ^~~~~
+make: *** [Src/subdir.mk:61: Src/ADCClass.o] Error 1
+In file included from ../Inc/ClassUartTest.h:14:0,
+                 from ../Inc/HighLevelComm.h:11,
+                 from ../Src/HighLevelComm.cpp:8:
+../Inc/main.h:42:1: error: 'Error' does not name a type
+ Error now;
+ ^~~~~
+In file included from ../Inc/ADCClass.h:11:0,
+                 from ../Src/main.cpp:22:
+../Inc/main.h:42:1: error: 'Error' does not name a type
+ Error now;
+ ^~~~~
+../Src/main.cpp:48:1: error: 'now' does not name a type; did you mean 'pow'?
+ now= Error::NoError;
+ ^~~
+ pow
+../Src/main.cpp: In function 'void Error_Handler()':
+../Src/main.cpp:293:10: error: 'now' was not declared in this scope
+  switch (now)
+          ^~~
+../Src/main.cpp:293:10: note: suggested alternative: 'pow'
+  switch (now)
+          ^~~
+          pow
+../Src/main.cpp:295:15: error: could not convert 'PWMError' from 'Error' to '<type error>'
+   case Error::PWMError:
+               ^~~~~~~~
+../Src/main.cpp:298:15: error: could not convert 'ADCError' from 'Error' to '<type error>'
+   case Error::ADCError:
+               ^~~~~~~~
+../Src/main.cpp:301:15: error: could not convert 'HighLevelCommError' from 'Error' to '<type error>'
+   case Error::HighLevelCommError:
+               ^~~~~~~~~~~~~~~~~~
+../Src/main.cpp:304:15: error: could not convert 'AssertFailError' from 'Error' to '<type error>'
+   case Error::AssertFailError:
+               ^~~~~~~~~~~~~~~
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::Move(int)':
+../Src/HighLevelComm.cpp:82:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [Src/subdir.mk:65: Src/HighLevelComm.o] Error 1
+make: *** [Src/subdir.mk:73: Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+20:10:35 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/ADCClass.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ADCClass.d" -MT"Src/ADCClass.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ADCClass.o"
+arm-none-eabi-g++ "../Src/ClassUartTest.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ClassUartTest.d" -MT"Src/ClassUartTest.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ClassUartTest.o"
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+arm-none-eabi-g++ "../Src/PIDController.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/PIDController.d" -MT"Src/PIDController.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/PIDController.o"
+arm-none-eabi-g++ "../Src/PWM.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/PWM.d" -MT"Src/PWM.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/PWM.o"
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+arm-none-eabi-gcc "../Src/stm32f4xx_hal_msp.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/stm32f4xx_hal_msp.d" -MT"Src/stm32f4xx_hal_msp.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/stm32f4xx_hal_msp.o"
+arm-none-eabi-gcc "../Src/stm32f4xx_it.c" -mcpu=cortex-m4 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/stm32f4xx_it.d" -MT"Src/stm32f4xx_it.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/stm32f4xx_it.o"
+../Src/PWM.cpp: In member function 'bool PWM::setPWM(float)':
+../Src/PWM.cpp:85:3: error: 'Error' was not declared in this scope
+   Error->now=Error::PWMError;
+   ^~~~~
+../Src/PWM.cpp:85:14: error: 'Error' is not a class, namespace, or enumeration
+   Error->now=Error::PWMError;
+              ^~~~~
+make: *** [Src/subdir.mk:69: Src/PWM.o] Error 1
+make: *** Waiting for unfinished jobs....
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::Move(int)':
+../Src/HighLevelComm.cpp:82:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+20:18:04 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+arm-none-eabi-g++ "../Src/ErrorState.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ErrorState.d" -MT"Src/ErrorState.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ErrorState.o"
+arm-none-eabi-g++ "../Src/PWM.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/PWM.d" -MT"Src/PWM.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/PWM.o"
+../Src/PWM.cpp: In member function 'bool PWM::setPWM(float)':
+../Src/PWM.cpp:85:3: error: 'now' was not declared in this scope
+   now=PWMError;
+   ^~~
+../Src/PWM.cpp:85:7: error: 'PWMError' was not declared in this scope
+   now=PWMError;
+       ^~~~~~~~
+../Src/PWM.cpp:85:7: note: suggested alternative: 'strerror'
+   now=PWMError;
+       ^~~~~~~~
+       strerror
+make: *** [Src/subdir.mk:74: Src/PWM.o] Error 1
+make: *** Waiting for unfinished jobs....
+../Src/main.cpp: In function 'void Error_Handler()':
+../Src/main.cpp:286:10: error: 'now' was not declared in this scope
+  switch (now)
+          ^~~
+../Src/main.cpp:286:10: note: suggested alternative: 'pow'
+  switch (now)
+          ^~~
+          pow
+make: *** [Src/subdir.mk:78: Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+20:18:41 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+arm-none-eabi-g++ "../Src/PWM.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/PWM.d" -MT"Src/PWM.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/PWM.o"
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+../Src/PWM.cpp: In member function 'bool PWM::setPWM(float)':
+../Src/PWM.cpp:85:3: error: 'now' was not declared in this scope
+   now=PWMError;
+   ^~~
+make: *** [Src/subdir.mk:74: Src/PWM.o] Error 1
+make: *** Waiting for unfinished jobs....
+../Src/main.cpp: In function 'void Error_Handler()':
+../Src/main.cpp:286:10: error: 'now' was not declared in this scope
+  switch (now)
+          ^~~
+../Src/main.cpp:286:10: note: suggested alternative: 'pow'
+  switch (now)
+          ^~~
+          pow
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::Move(int)':
+../Src/HighLevelComm.cpp:82:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [Src/subdir.mk:78: Src/main.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+20:19:35 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/PWM.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/PWM.d" -MT"Src/PWM.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/PWM.o"
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F446RETX_FLASH.ld" -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32_Project_Graduation.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
+arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 305832	   2796	   7632	 316260	  4d364	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_Project_Graduation.bin
+ 
+Finished building: STM32_Project_Graduation.list
+ 
+20:30:48 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/PWM.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/PWM.d" -MT"Src/PWM.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/PWM.o"
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+arm-none-eabi-g++ "../Src/ErrorState.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ErrorState.d" -MT"Src/ErrorState.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ErrorState.o"
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::Move(int)':
+../Src/HighLevelComm.cpp:86:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F446RETX_FLASH.ld" -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32_Project_Graduation.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
+arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 305896	   2796	   7632	 316324	  4d3a4	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_Project_Graduation.bin
+ 
+Finished building: STM32_Project_Graduation.list
+ 

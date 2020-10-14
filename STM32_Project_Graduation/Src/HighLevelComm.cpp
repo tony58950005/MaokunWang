@@ -30,8 +30,10 @@ bool HighLevelComm::ParseMessage()
 	int32_t receivedNumber;
 	memset(receivedCommand,0,100);
 
-	if (!uart.receiveMessage(&myRxData_1byte, sizeof(myRxData_1byte), 100))
+	if (!uart.receiveMessage(&myRxData_1byte, sizeof(myRxData_1byte), 100)){
+		NowState=UartError;
 		return false;
+	}
 
 	if (myRxData_1byte != '\n')	//Store character, if it is not '\n'
 	{
@@ -74,8 +76,10 @@ bool HighLevelComm::Move(int x)  //x means moving at x millimeter/second.
 		if(x==100){
 			if (uart.sendMessage(myTxData_OK, sizeof(myTxData_OK), 100) == true) {
 				return true;
-			} else
+			} else{
+				NowState=UartError;
 				return false;
+			}
 		}
 	} else
 		return false;
@@ -89,8 +93,10 @@ bool HighLevelComm::Stop()
 			if (uart.sendMessage(myTxData_OK, sizeof(myTxData_OK), 100)
 					== true) {
 				return true;
-			} else
+			} else{
+				NowState=UartError;
 				return false;
+			}
 		} else
 			return false;
 	} else
@@ -104,7 +110,10 @@ bool HighLevelComm::Turn(int x) //'x' means the angle of the steering system fro
 		if (uart.sendMessage(myTxData_OK, sizeof(myTxData_OK), 100) == true) {
 			return true;
 		} else
+		{
+			NowState=UartError;
 			return false;
+		}
 		//}else
 		//return false;
 	} else
@@ -118,7 +127,10 @@ bool HighLevelComm::showBattery()
 		//myTxData_Battery saves the data from the battery sensor about its battery life.
 		return true;
 	} else
+	{
+		NowState=UartError;
 		return false;
+	}
 }
 
 bool HighLevelComm::showDistance()
@@ -128,7 +140,10 @@ bool HighLevelComm::showDistance()
 			//myTxData_Distance saves the data from the distance sensor.
 			return true;
 		} else
+		{
+			NowState=UartError;
 			return false;
+		}
 	//} else
 		//return false;
 }

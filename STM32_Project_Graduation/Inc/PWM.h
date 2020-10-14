@@ -8,6 +8,7 @@
 #ifndef PWM_H_
 #define PWM_H_
 #include "string.h"
+#include <ErrorState.h>
 #include "main.h"
 #include "stm32f4xx.h"
 #include "stm32f4xx_hal.h"

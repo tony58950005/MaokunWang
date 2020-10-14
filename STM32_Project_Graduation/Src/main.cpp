@@ -22,6 +22,7 @@
 #include <ADCClass.h>
 #include <HighLevelComm.h>
 #include <PIDController.h>
+#include <ErrorState.h>
 #include "main.h"
 #include "stm32f4xx_hal.h"
 #include "string.h"
@@ -38,6 +39,7 @@
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
 
+std::string ErrorInfo=NULL;
 
 /* USER CODE END PTD */
 
@@ -116,6 +118,9 @@ int main(void)
 		if(obstacleDetection(adc)){
 			//stop the vehicle
 			HighLevelCommTest.Stop();
+		}else
+		{
+			NowState=HighLevelCommError;
 		}
 	}
 }
@@ -154,7 +159,7 @@ bool obstacleDetection(ADCClass& adc)
 
 void controlSpeed(PWM& motorPWM, float referenceSpeed, float actualSpeed)
 {
-	//PID for speed controlling
+	//PID for speed control
 	float output = pid.PIDController_Update(referenceSpeed, actualSpeed);
 	motorPWM.setPWM(output);
 }
@@ -162,10 +167,12 @@ void controlSpeed(PWM& motorPWM, float referenceSpeed, float actualSpeed)
 void setSteering(PWM& servoPWM, float steeringAngle)
 {
 	//TODO: set the steering for the servo
-	//two points(-90degree,0 percent_for_PWM),(90,100) match one straight line
-	//the line function servoPWM=1/9*steeringAngle+100;
-	int percent=(int)5/9*steeringAngle+50;
-	servoPWM.setPWM(percent);
+	//presuming the do-able steeringAngle ranges from -45 (PWM->5%) to 45(PWM->10%) degrees.
+	// the characteristic line (saturated steeringAgnle, PWM high level line[1.5ms, 2.5ms])
+	//goes through point (45, 10[%]),(-45, 5[%])
+	int percent=(int)1/18*steeringAngle+135/18;
+	if(servoPWM.setPWM(percent)==false)
+		NowState=PWMError;
 }
 
 
@@ -280,6 +287,26 @@ void Error_Handler(void)
 {
 	/* USER CODE BEGIN Error_Handler_Debug */
 	while(1);	//TODO: store some error information in a global variable, it can be read from the high level comm
+	switch (NowState)
+	{
+		case PWMError:
+			ErrorInfo= "PWM error!\n";
+			break;
+		case ADCError:
+			ErrorInfo= "ADC error!\n";
+			break;
+		case HighLevelCommError:
+			ErrorInfo= "High-Level Communication error!\n";
+			break;
+		case AssertFailError:
+			ErrorInfo= "Assert Fail error!\n";
+			break;
+		case UartError:
+			ErrorInfo= "UART error!\n";
+			break;
+		default:
+			break;
+	}
 	/* USER CODE END Error_Handler_Debug */
 }
 

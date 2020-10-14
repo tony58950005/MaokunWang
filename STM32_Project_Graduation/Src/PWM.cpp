@@ -82,6 +82,7 @@ bool PWM::setPWM(float percent)
 		return true;
 	}else
 	{
+		//NowState=PWMError;
 		return false;
 	}
 }
