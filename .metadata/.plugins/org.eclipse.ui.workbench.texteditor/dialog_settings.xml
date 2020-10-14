@@ -6,8 +6,12 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="PID"/>
+		<item key="selection" value=""/>
 		<list key="findhistory">
+			<item value="sendMessage"/>
+			<item value="HAL_ERROR"/>
+			<item value="handler"/>
+			<item value="enum"/>
 			<item value="if(obstacleDetection()){"/>
 			<item value="pid"/>
 			<item value="TIM"/>

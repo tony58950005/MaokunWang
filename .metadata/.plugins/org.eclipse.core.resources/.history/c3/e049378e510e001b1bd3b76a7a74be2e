@@ -7,7 +7,6 @@
 
 #include "PWM.h"
 #include "main.h"
-#include <ErrorState.h>
 #include"stm32f4xx_hal_tim.h"
 #include "stm32f4xx.h"
 #include "stm32f4xx_hal.h"
@@ -24,7 +23,6 @@ PWM::PWM(TIM_HandleTypeDef h) :
 
 	if (HAL_TIM_Base_DeInit(&htim) != HAL_OK)
 	{
-		NowState=PWMError;
 		Error_Handler();
 	}
 
@@ -37,20 +35,17 @@ PWM::PWM(TIM_HandleTypeDef h) :
 	htim.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
 	if (HAL_TIM_Base_Init(&htim) != HAL_OK)
 	{
-		NowState=PWMError;
 		Error_Handler();
 	}
 
 	sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
 	if (HAL_TIM_ConfigClockSource(&htim, &sClockSourceConfig) != HAL_OK)
 	{
-		NowState=PWMError;
 		Error_Handler();
 	}
 
 	if (HAL_TIM_PWM_Init(&htim) != HAL_OK)
 	{
-		NowState=PWMError;
 		Error_Handler();
 	}
 
@@ -58,7 +53,6 @@ PWM::PWM(TIM_HandleTypeDef h) :
 	sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
 	if (HAL_TIMEx_MasterConfigSynchronization(&htim, &sMasterConfig) != HAL_OK)
 	{
-		NowState=PWMError;
 		Error_Handler();
 	}
 
@@ -71,13 +65,11 @@ PWM::PWM(TIM_HandleTypeDef h) :
 	sConfigOC.OCNIdleState = TIM_OCNIDLESTATE_RESET;
 	if(HAL_TIM_PWM_ConfigChannel(&htim, &sConfigOC, TIM_CHANNEL_1)!=HAL_OK)
 	{
-		NowState=PWMError;
 		Error_Handler();
 	}
 
 	if (HAL_TIM_PWM_Start(&htim, TIM_CHANNEL_1)!=HAL_OK)
 	{
-		NowState=PWMError;
 		Error_Handler();
 	}
 }

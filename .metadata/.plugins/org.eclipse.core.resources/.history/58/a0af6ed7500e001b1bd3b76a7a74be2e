@@ -62,7 +62,6 @@ float ADCClass::getAnalogValue(uint8_t sensorIndex)
 
 		default:
 			Error_Handler();
-			NowState=ADCError;
 			break;
 	}
 

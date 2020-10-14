@@ -6,7 +6,6 @@
  */
 
 #include <ADCClass.h>
-#include <ErrorState.h>
 #include "main.h"
 #include "stm32f4xx.h"
 #include "stm32f4xx_hal.h"
@@ -27,7 +26,6 @@ ADCClass::ADCClass(ADC_HandleTypeDef h) :
 	hadc1.Init.DMAContinuousRequests = DISABLE;
 	hadc1.Init.EOCSelection = ADC_EOC_SEQ_CONV;
 	if (HAL_ADC_Init(&hadc1) != HAL_OK) {
-		NowState=ADCError;
 		Error_Handler();
 	}
 }
@@ -62,21 +60,14 @@ float ADCClass::getAnalogValue(uint8_t sensorIndex)
 
 		default:
 			Error_Handler();
-			NowState=ADCError;
 			break;
 	}
 
 	if (HAL_ADC_Start(&hadc1) != HAL_OK)
-	{
-		NowState=ADCError;
 		Error_Handler();
-	}
 
 	if (HAL_ADC_PollForConversion(&hadc1,100) != HAL_OK)
-	{
-		NowState=ADCError;
 		Error_Handler();
-	}
 
 	uint32_t analogValue_voltage = HAL_ADC_GetValue(&hadc1);
 	float val = 3300.0f * analogValue_voltage / 4095;
