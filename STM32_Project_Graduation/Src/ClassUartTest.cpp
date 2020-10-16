@@ -6,7 +6,6 @@
  */
 
 #include "ClassUartTest.h"
-#include <ErrorState.h>
 #include "stm32f4xx_hal.h"
 #include "stm32f4xx_hal_uart.h"
 #include "string.h"
@@ -26,8 +25,7 @@ ClassUartTest::ClassUartTest(UART_HandleTypeDef h) :
 
 	if (HAL_UART_Init(&huart) != HAL_OK)
 	{
-		NowState=UartError;
-		Error_Handler();
+		Error_Handler(UartError);
 	}
 }
 

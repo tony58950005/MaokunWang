@@ -21,7 +21,7 @@ HighLevelComm::HighLevelComm(UART_HandleTypeDef& uart,TIM_HandleTypeDef& pwm) :
 	myTxData_Battery("50\r\n"), //initial battery life is 50%
 	myTxData_Distance("30\r\n"), //initial distance is 50mm
 	uart(uart),
-	pwm(pwm)
+	pwm()
 {
 }
 bool HighLevelComm::ParseMessage()
@@ -31,7 +31,6 @@ bool HighLevelComm::ParseMessage()
 	memset(receivedCommand,0,100);
 
 	if (!uart.receiveMessage(&myRxData_1byte, sizeof(myRxData_1byte), 100)){
-		NowState=UartError;
 		return false;
 	}
 
@@ -77,7 +76,7 @@ bool HighLevelComm::Move(int x)  //x means moving at x millimeter/second.
 			if (uart.sendMessage(myTxData_OK, sizeof(myTxData_OK), 100) == true) {
 				return true;
 			} else{
-				NowState=UartError;
+				Error_Handler(UartError);
 				return false;
 			}
 		}
@@ -94,7 +93,7 @@ bool HighLevelComm::Stop()
 					== true) {
 				return true;
 			} else{
-				NowState=UartError;
+				Error_Handler(UartError);
 				return false;
 			}
 		} else
@@ -111,7 +110,7 @@ bool HighLevelComm::Turn(int x) //'x' means the angle of the steering system fro
 			return true;
 		} else
 		{
-			NowState=UartError;
+			Error_Handler(UartError);
 			return false;
 		}
 		//}else
@@ -128,7 +127,7 @@ bool HighLevelComm::showBattery()
 		return true;
 	} else
 	{
-		NowState=UartError;
+		Error_Handler(UartError);
 		return false;
 	}
 }
@@ -141,7 +140,7 @@ bool HighLevelComm::showDistance()
 			return true;
 		} else
 		{
-			NowState=UartError;
+			Error_Handler(UartError);
 			return false;
 		}
 	//} else

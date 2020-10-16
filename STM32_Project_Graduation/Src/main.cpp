@@ -22,7 +22,6 @@
 #include <ADCClass.h>
 #include <HighLevelComm.h>
 #include <PIDController.h>
-#include <ErrorState.h>
 #include "main.h"
 #include "stm32f4xx_hal.h"
 #include "string.h"
@@ -38,8 +37,6 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-
-std::string ErrorInfo=NULL;
 
 /* USER CODE END PTD */
 
@@ -84,7 +81,6 @@ int _write(int file, char *ptr, int len)
 /* USER CODE BEGIN 0 */
 UART_HandleTypeDef huart2;
 TIM_HandleTypeDef htim2;
-ADC_HandleTypeDef hadc1;
 PID_Controller pid(1.0, 1.0, 0.0, 0.0, 100.0);
 /* USER CODE END 0 */
 
@@ -93,7 +89,6 @@ PID_Controller pid(1.0, 1.0, 0.0, 0.0, 100.0);
   * @retval int
   */
 
-//TODO (Akos): Change uC to STM32F405xx
 //TODO (Akos): PWM class with three channels
 //TODO (Akos): High-level architecture
 
@@ -109,18 +104,24 @@ int main(void)
 	/* Initialize all configured peripherals */
 	MX_GPIO_Init();
 
-	ADCClass adc(hadc1);
-	HighLevelComm HighLevelCommTest(huart2, htim2);
+	ADCClass adc;
+	PWM servoPWM;
+	//HighLevelComm HighLevelCommTest(huart2, htim2);
 
 	while (1)
 	{
-		HighLevelCommTest.ParseMessage();
+		HAL_Delay(1000);
+		setSteering(servoPWM, 0.0);
+		HAL_Delay(1000);
+		setSteering(servoPWM, 10.0);
+		HAL_Delay(1000);
+		setSteering(servoPWM, 20.0);
+		HAL_Delay(1000);
+		setSteering(servoPWM, 30.0);
+		//HighLevelCommTest.ParseMessage();
 		if(obstacleDetection(adc)){
 			//stop the vehicle
-			HighLevelCommTest.Stop();
-		}else
-		{
-			NowState=HighLevelCommError;
+			//HighLevelCommTest.Stop();
 		}
 	}
 }
@@ -130,7 +131,7 @@ bool obstacleDetection(ADCClass& adc)
 	//Measure the signals of the Sharp sensors
 	float sensorsVoltage[3];
 	for (int i = 0; i < 3; i++) {
-		sensorsVoltage[i] = adc.getAnalogValue(i);
+		sensorsVoltage[i] = adc.getAnalogValue(i) / 1000.0f;
 	}
 
 	//Convert the voltage[V] to distance[cm] using the characteristics of the sensor
@@ -170,9 +171,9 @@ void setSteering(PWM& servoPWM, float steeringAngle)
 	//presuming the do-able steeringAngle ranges from -45 (PWM->5%) to 45(PWM->10%) degrees.
 	// the characteristic line (saturated steeringAgnle, PWM high level line[1.5ms, 2.5ms])
 	//goes through point (45, 10[%]),(-45, 5[%])
-	int percent=(int)1/18*steeringAngle+135/18;
+	float percent=1.0f/18.0f*steeringAngle + 135.0f/18.0f;
 	if(servoPWM.setPWM(percent)==false)
-		NowState=PWMError;
+		Error_Handler(PWMError);
 }
 
 
@@ -188,7 +189,7 @@ void SystemClock_Config(void)
   /** Configure the main internal regulator output voltage 
   */
   __HAL_RCC_PWR_CLK_ENABLE();
-  __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE3);
+  __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE2);
   /** Initializes the CPU, AHB and APB busses clocks 
   */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
@@ -200,10 +201,9 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLN = 336;
   RCC_OscInitStruct.PLL.PLLP = RCC_PLLP_DIV4;
   RCC_OscInitStruct.PLL.PLLQ = 2;
-  RCC_OscInitStruct.PLL.PLLR = 2;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
-    Error_Handler();
+	  Error_Handler(ClockError);
   }
   /** Initializes the CPU, AHB and APB busses clocks 
   */
@@ -216,7 +216,7 @@ void SystemClock_Config(void)
 
   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
   {
-    Error_Handler();
+    Error_Handler(ClockError);
   }
 }
 
@@ -235,9 +235,6 @@ void MX_GPIO_Init(void)
   __HAL_RCC_GPIOH_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
-
-  /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
 
   /*Configure GPIO pin : PC13 */
   GPIO_InitStruct.Pin = GPIO_PIN_13;
@@ -274,6 +271,25 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   GPIO_InitStruct.Alternate = GPIO_AF3_TIM8;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
+  //Sharp power GPIO configuration
+  GPIO_InitStruct.Pin = GPIO_PIN_4 | GPIO_PIN_5;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
+  //Servo PWM GPIO configuration
+  GPIO_InitStruct.Pin = GPIO_PIN_8;
+  GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  GPIO_InitStruct.Alternate = GPIO_AF3_TIM10;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+  //Enable Sharp and Servo 5V power supply
+  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_5, GPIO_PIN_RESET);
 }
 
 /* USER CODE BEGIN 4 */
@@ -283,11 +299,11 @@ void MX_GPIO_Init(void)
   * @brief  This function is executed in case of error occurrence.
   * @retval None
   */
-void Error_Handler(void)
+void Error_Handler(ErrorState errorSource)
 {
 	/* USER CODE BEGIN Error_Handler_Debug */
 	while(1);	//TODO: store some error information in a global variable, it can be read from the high level comm
-	switch (NowState)
+	/*switch (errorSource)
 	{
 		case PWMError:
 			ErrorInfo= "PWM error!\n";
@@ -306,7 +322,7 @@ void Error_Handler(void)
 			break;
 		default:
 			break;
-	}
+	}*/
 	/* USER CODE END Error_Handler_Debug */
 }
 
@@ -323,7 +339,7 @@ void assert_failed(uint8_t *file, uint32_t line)
   /* USER CODE BEGIN 6 */
   /* User can add his own implementation to report the file name and line number,
      tex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
-	Error_Handler();
+	Error_Handler(AssertFailError);
   /* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */

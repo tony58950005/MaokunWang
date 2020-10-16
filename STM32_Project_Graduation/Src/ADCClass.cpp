@@ -6,29 +6,27 @@
  */
 
 #include <ADCClass.h>
-#include <ErrorState.h>
 #include "main.h"
-#include "stm32f4xx.h"
 #include "stm32f4xx_hal.h"
-#include "stm32f446xx.h"
 
-ADCClass::ADCClass(ADC_HandleTypeDef h) :
-	hadc1(h)
+ADCClass::ADCClass()
 {
-	hadc1.Instance = ADC1;
-	hadc1.Init.ClockPrescaler = ADC_CLOCK_SYNC_PCLK_DIV4;
-	hadc1.Init.Resolution = ADC_RESOLUTION_12B;
-	hadc1.Init.ScanConvMode = ENABLE;
-	hadc1.Init.ContinuousConvMode = ENABLE;
-	hadc1.Init.DiscontinuousConvMode = DISABLE;
-	hadc1.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
-	hadc1.Init.DataAlign = ADC_DATAALIGN_RIGHT;
-	hadc1.Init.NbrOfConversion = 3;
-	hadc1.Init.DMAContinuousRequests = DISABLE;
-	hadc1.Init.EOCSelection = ADC_EOC_SEQ_CONV;
-	if (HAL_ADC_Init(&hadc1) != HAL_OK) {
-		NowState=ADCError;
-		Error_Handler();
+	__HAL_RCC_ADC3_CLK_ENABLE();
+
+	hadc.Instance = ADC3;
+	hadc.Init.ClockPrescaler = ADC_CLOCK_SYNC_PCLK_DIV4;
+	hadc.Init.Resolution = ADC_RESOLUTION_12B;
+	hadc.Init.ScanConvMode = DISABLE;
+	hadc.Init.ContinuousConvMode = DISABLE;
+	hadc.Init.DiscontinuousConvMode = DISABLE;
+	hadc.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
+	hadc.Init.ExternalTrigConv = ADC_EXTERNALTRIGCONV_T1_CC1;
+	hadc.Init.DataAlign = ADC_DATAALIGN_RIGHT;
+	hadc.Init.NbrOfConversion = 1;
+	hadc.Init.DMAContinuousRequests = DISABLE;
+	hadc.Init.EOCSelection = ADC_EOC_SINGLE_CONV;
+	if (HAL_ADC_Init(&hadc) != HAL_OK) {
+		Error_Handler(ADCError);
 	}
 }
 
@@ -37,48 +35,40 @@ float ADCClass::getAnalogValue(uint8_t sensorIndex)
 	ADC_ChannelConfTypeDef myADCchannel;
 
 	//Config selected channel
+	myADCchannel.Rank = 1;
+	myADCchannel.Offset = 0;
+	myADCchannel.SamplingTime = ADC_SAMPLETIME_28CYCLES;
 	switch (sensorIndex)
 	{
 		case 0:
 			myADCchannel.Channel = ADC_CHANNEL_10;
-			myADCchannel.Rank = 1;
-			myADCchannel.SamplingTime = ADC_SAMPLETIME_144CYCLES;
-			HAL_ADC_ConfigChannel(&hadc1, &myADCchannel);
 			break;
 
 		case 1:
 			myADCchannel.Channel = ADC_CHANNEL_11;
-			myADCchannel.Rank = 1;
-			myADCchannel.SamplingTime = ADC_SAMPLETIME_144CYCLES;
-			HAL_ADC_ConfigChannel(&hadc1, &myADCchannel);
 			break;
 
 		case 2:
 			myADCchannel.Channel = ADC_CHANNEL_12;
-			myADCchannel.Rank = 1;
-			myADCchannel.SamplingTime = ADC_SAMPLETIME_144CYCLES;
-			HAL_ADC_ConfigChannel(&hadc1, &myADCchannel);
 			break;
 
 		default:
-			Error_Handler();
-			NowState=ADCError;
+			Error_Handler(ADCError);
 			break;
 	}
+	HAL_ADC_ConfigChannel(&hadc, &myADCchannel);
 
-	if (HAL_ADC_Start(&hadc1) != HAL_OK)
+	if (HAL_ADC_Start(&hadc) != HAL_OK)
 	{
-		NowState=ADCError;
-		Error_Handler();
+		Error_Handler(ADCError);
 	}
 
-	if (HAL_ADC_PollForConversion(&hadc1,100) != HAL_OK)
+	if (HAL_ADC_PollForConversion(&hadc, 100) != HAL_OK)
 	{
-		NowState=ADCError;
-		Error_Handler();
+		Error_Handler(ADCError);
 	}
 
-	uint32_t analogValue_voltage = HAL_ADC_GetValue(&hadc1);
+	uint32_t analogValue_voltage = HAL_ADC_GetValue(&hadc);
 	float val = 3300.0f * analogValue_voltage / 4095;
 
 	return val;

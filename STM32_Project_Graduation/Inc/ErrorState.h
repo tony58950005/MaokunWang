@@ -8,17 +8,14 @@
 #ifndef ERRORSTATE_H_
 #define ERRORSTATE_H_
 
-//class ErrorState {
-//};
-enum Error
+typedef enum
 {
-	NoError,
+	ClockError,
 	PWMError,
 	ADCError,
 	HighLevelCommError,
 	UartError,
 	AssertFailError
-};
-extern Error NowState;
+} ErrorState;
 
 #endif /* ERRORSTATE_H_ */

@@ -33,6 +33,7 @@ extern "C" {
 #include "stm32f4xx_hal_uart.h"
 #include "stm32f4xx_hal_tim.h"
 #include "string.h"
+#include "ErrorState.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 /* USER CODE END Includes */
@@ -50,11 +51,10 @@ extern "C" {
 
 /* Exported macro ------------------------------------------------------------*/
 /* USER CODE BEGIN EM */
-
 /* USER CODE END EM */
 
 /* Exported functions prototypes ---------------------------------------------*/
-void Error_Handler(void);
+void Error_Handler(ErrorState errorSource);
 
 /* USER CODE BEGIN EFP */
 
