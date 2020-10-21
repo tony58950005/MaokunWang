@@ -6,8 +6,10 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value=""/>
+		<item key="selection" value="Error_Handler"/>
 		<list key="findhistory">
+			<item value="Error_Handler"/>
+			<item value="ErrorHandler"/>
 			<item value="sendMessage"/>
 			<item value="HAL_ERROR"/>
 			<item value="handler"/>

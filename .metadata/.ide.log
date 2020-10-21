@@ -30,3 +30,25 @@
 
 
 2020-10-14 21:07:05,072 [INFO] Activator:177 - !SESSION log4j initialized
+2020-10-14 21:47:40,534 [INFO] Activator:176 - 
+
+
+2020-10-14 21:47:40,536 [INFO] Activator:177 - !SESSION log4j initialized
+2020-10-14 21:48:17,843 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] 2020-10-14 21:48:17.837:INFO::Start Help Server: Logging initialized @43241ms to org.eclipse.jetty.util.log.StdErrLog
+2020-10-14 21:48:18,009 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] 2020-10-14 21:48:18.008:INFO:oejs.session:Start Help Server: DefaultSessionIdManager workerName=node0
+2020-10-14 21:48:18,012 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] 2020-10-14 21:48:18.009:INFO:oejs.session:Start Help Server: No SessionScavenger set, using defaults
+2020-10-14 21:48:18,015 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] 2020-10-14 21:48:18.013:INFO:oejs.session:Start Help Server: node0 Scavenging every 600000ms
+2020-10-14 21:48:18,057 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] 2020-10-14 21:48:18.056:INFO:oejs.session:Start Help Server: node0 Scavenging every 660000ms
+2020-10-16 07:45:23,540 [ERROR] LogOutputStream:74 - [STDERR_REDIRECT] 2020-10-16 07:45:23.538:INFO:oejs.session:Stop Help Server: node0 Stopped scavenging
+2020-10-16 08:45:43,811 [INFO] Activator:176 - 
+
+
+2020-10-16 08:45:43,815 [INFO] Activator:177 - !SESSION log4j initialized
+2020-10-16 11:27:04,392 [INFO] Activator:176 - 
+
+
+2020-10-16 11:27:04,395 [INFO] Activator:177 - !SESSION log4j initialized
+2020-10-17 11:14:21,042 [INFO] Activator:176 - 
+
+
+2020-10-17 11:14:21,045 [INFO] Activator:177 - !SESSION log4j initialized

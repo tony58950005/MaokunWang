@@ -34,7 +34,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 /* USER CODE END Includes */
-
+uint8_t distanceR,distanceL,distanceM;
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
 
@@ -106,7 +106,7 @@ int main(void)
 
 	ADCClass adc;
 	PWM servoPWM;
-	//HighLevelComm HighLevelCommTest(huart2, htim2);
+	HighLevelComm HighLevelCommTest(huart2, htim2);
 
 	while (1)
 	{
@@ -119,12 +119,58 @@ int main(void)
 		HAL_Delay(1000);
 		setSteering(servoPWM, 30.0);
 		//HighLevelCommTest.ParseMessage();
-		if(obstacleDetection(adc)){
-			//stop the vehicle
-			//HighLevelCommTest.Stop();
+
+
+//		if(obstacleDetection(adc)){
+//			//Simple algorithm: if meet obstacle ->move back ->Detect&Turn
+//			HighLevelCommTest.Stop();
+//			HAL_Delay(100);
+//			//moveBackward();
+//			HAL_Delay(300);
+//			HighLevelCommTest.Stop();
+//			HAL_Delay(200);
+//			if(distanceR>=distanceL){
+//				HighLevelCommTest.Turn(30);//turn right
+//				HighLevelCommTest.Stop();
+//			}else{
+//				HighLevelCommTest.Turn(-30);//turn left
+//				HighLevelCommTest.Stop();
+//			}
+//		}else{
+//			HighLevelCommTest.Move(10);
+//		}
+
+		//Simple algorithm: 8 cases with solution based on 3 distance sensors(permutation&combination)
+		if(distanceL>10 && distanceM>10 && distanceR>10){
+			HighLevelCommTest.Move(10);
+		}else if(distanceL>10 && distanceM<=10 && distanceR>10){
+			HighLevelCommTest.Stop();
+			HighLevelCommTest.Turn(-30);
+		}else if(distanceL>10 && distanceM>10 && distanceR<=10){
+			HighLevelCommTest.Stop();
+			HighLevelCommTest.Turn(-30);
+		}else if(distanceL<=10 && distanceM>10 && distanceR>10){
+			HighLevelCommTest.Stop();
+			HighLevelCommTest.Turn(30);
+		}else if(distanceL>10 && distanceM<=10 && distanceR<=10){
+			HighLevelCommTest.Stop();
+			HighLevelCommTest.Turn(-30);
+		}else if(distanceL<=10 && distanceM<=10 && distanceR>10){
+			HighLevelCommTest.Stop();
+			HighLevelCommTest.Turn(30);
+		}else if(distanceL<=10 && distanceM>10 && distanceR<=10){
+			HighLevelCommTest.Stop();
+			HighLevelCommTest.Move(10);
+		}else if(distanceL<=10 && distanceM<=10 && distanceR<=10){
+			HighLevelCommTest.Stop();
+		}else{
+
 		}
+
+
 	}
 }
+
 
 bool obstacleDetection(ADCClass& adc)
 {
@@ -147,6 +193,10 @@ bool obstacleDetection(ADCClass& adc)
 			distance[i] = infinityf(); //the distance here does not make sense.
 		}
 	}
+	distanceL=distance[0];
+	distanceM=distance[1];
+	distanceR=distance[2];
+
 
 	//Check distances: return true when there is some obstacle in front of the car.
 	//Use threshold value: 10 cm

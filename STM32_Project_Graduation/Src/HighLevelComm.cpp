@@ -102,7 +102,7 @@ bool HighLevelComm::Stop()
 		return false;
 }
 
-bool HighLevelComm::Turn(int x) //'x' means the angle of the steering system from -180 degrees to 180 degrees
+bool HighLevelComm::Turn(int x) //'x' means the angle of the steering system from -45 degrees to 45 degrees
 {
 	if (isRun == true) {	//"Turn\n"
 		//if (setSteering(x)) {//finish the turning

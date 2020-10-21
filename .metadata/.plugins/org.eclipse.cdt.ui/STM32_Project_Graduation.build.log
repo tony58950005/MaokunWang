@@ -1,17 +1,14 @@
-21:15:12 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+21:15:45 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
 make -j12 all 
-arm-none-eabi-g++ "../Src/ADCClass.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ADCClass.d" -MT"Src/ADCClass.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ADCClass.o"
-arm-none-eabi-g++ "../Src/ClassUartTest.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ClassUartTest.d" -MT"Src/ClassUartTest.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ClassUartTest.o"
-arm-none-eabi-g++ "../Src/PWM.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/PWM.d" -MT"Src/PWM.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/PWM.o"
-arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F446xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
-arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F446RETX_FLASH.ld" -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F407xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F407VGTX_FLASH.ld" -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
 Finished building target: STM32_Project_Graduation.elf
  
 arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
 arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
 arm-none-eabi-size   STM32_Project_Graduation.elf 
    text	   data	    bss	    dec	    hex	filename
- 305984	   2796	   7632	 316412	  4d3fc	STM32_Project_Graduation.elf
+ 300916	   2788	   7016	 310720	  4bdc0	STM32_Project_Graduation.elf
 Finished building: default.size.stdout
  
 Finished building: STM32_Project_Graduation.bin
@@ -19,5 +16,5 @@ Finished building: STM32_Project_Graduation.bin
 Finished building: STM32_Project_Graduation.list
  
 
-21:15:19 Build Finished. 0 errors, 0 warnings. (took 7s.243ms)
+21:15:50 Build Finished. 0 errors, 0 warnings. (took 5s.67ms)
 
