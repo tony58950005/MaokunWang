@@ -20,8 +20,7 @@ HighLevelComm::HighLevelComm(UART_HandleTypeDef& uart,TIM_HandleTypeDef& pwm) :
 	myTxData_OK("OK\r\n"),
 	myTxData_Battery("50\r\n"), //initial battery life is 50%
 	myTxData_Distance("30\r\n"), //initial distance is 50mm
-	uart(uart),
-	pwm()
+	uart(uart)
 {
 }
 bool HighLevelComm::ParseMessage()
@@ -70,7 +69,7 @@ bool HighLevelComm::ParseMessage()
 bool HighLevelComm::Move(int x)  //x means moving at x millimeter/second.
 {
 	//TODO-Akos: You can check the input parameter here.
-	if (pwm.setPWM(x / MaxSpeed)) {
+	/*if (pwm.setPWM(x / MaxSpeed)) {
 		isRun = true;
 		if(x==100){
 			if (uart.sendMessage(myTxData_OK, sizeof(myTxData_OK), 100) == true) {
@@ -80,14 +79,14 @@ bool HighLevelComm::Move(int x)  //x means moving at x millimeter/second.
 				return false;
 			}
 		}
-	} else
+	} else*/
 		return false;
 }
 
 bool HighLevelComm::Stop()
 {
 	if (isRun == true) {	//"Stop\n"
-		if (pwm.setPWM(0)) {
+		/*if (pwm.setPWM(0)) {
 			isRun = false;
 			if (uart.sendMessage(myTxData_OK, sizeof(myTxData_OK), 100)
 					== true) {
@@ -96,7 +95,7 @@ bool HighLevelComm::Stop()
 				Error_Handler(UartError);
 				return false;
 			}
-		} else
+		} else*/
 			return false;
 	} else
 		return false;

@@ -17,7 +17,7 @@
 #ifdef __cplusplus
 class PWM {
 public:
-	PWM();
+	PWM(TIM_TypeDef* timer, TIM_Base_InitTypeDef timerInit, TIM_OC_InitTypeDef ocInit, uint32_t Channel);
 	bool setPWM(float percent);
 private:
 	TIM_HandleTypeDef htim;

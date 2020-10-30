@@ -59,8 +59,10 @@ uint8_t distanceR,distanceL,distanceM;
 void SystemClock_Config(void);
 void MX_GPIO_Init(void);
 bool obstacleDetection(ADCClass& adc);
-void controlSpeed(PWM& motorPWM, float referenceSpeed, float actualSpeed);
+void controlSpeed(PID_Controller& motor, float referenceSpeed, float actualSpeed);
 void setSteering(PWM& servoPWM, float steeringAngle);
+PID_Controller motorControlInit(void);
+PWM steeringServoInit(void);
 
 int _write(int file, char *ptr, int len)
 {
@@ -81,7 +83,6 @@ int _write(int file, char *ptr, int len)
 /* USER CODE BEGIN 0 */
 UART_HandleTypeDef huart2;
 TIM_HandleTypeDef htim2;
-PID_Controller pid(1.0, 1.0, 0.0, 0.0, 100.0);
 /* USER CODE END 0 */
 
 /**
@@ -105,11 +106,17 @@ int main(void)
 	MX_GPIO_Init();
 
 	ADCClass adc;
-	PWM servoPWM;
+	PWM servoPWM = steeringServoInit();
+	PID_Controller motor = motorControlInit();
+
 	HighLevelComm HighLevelCommTest(huart2, htim2);
 
 	while (1)
 	{
+		setSteering(servoPWM, 0.0f);
+		controlSpeed(motor, 0.0f, 0.0f);
+	/*	HighLevelCommTest.ParseMessage();
+
 		HAL_Delay(1000);
 		setSteering(servoPWM, 0.0);
 		HAL_Delay(1000);
@@ -119,7 +126,7 @@ int main(void)
 		HAL_Delay(1000);
 		setSteering(servoPWM, 30.0);
 		//HighLevelCommTest.ParseMessage();
-
+*/
 
 //		if(obstacleDetection(adc)){
 //			//Simple algorithm: if meet obstacle ->move back ->Detect&Turn
@@ -141,7 +148,7 @@ int main(void)
 //		}
 
 		//Simple algorithm: 8 cases with solution based on 3 distance sensors(permutation&combination)
-		if(distanceL>10 && distanceM>10 && distanceR>10){
+	/*	if(distanceL>10 && distanceM>10 && distanceR>10){
 			HighLevelCommTest.Move(10);
 		}else if(distanceL>10 && distanceM<=10 && distanceR>10){
 			HighLevelCommTest.Stop();
@@ -166,11 +173,56 @@ int main(void)
 		}else{
 
 		}
-
+	 */
 
 	}
 }
 
+PWM steeringServoInit()
+{
+	TIM_Base_InitTypeDef servoInit;
+	servoInit.Prescaler = 83;
+	servoInit.CounterMode = TIM_COUNTERMODE_UP;
+	servoInit.Period = 20000;
+	servoInit.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+	servoInit.RepetitionCounter = 0;
+
+	TIM_OC_InitTypeDef sConfigOC = {0};
+	sConfigOC.OCMode = TIM_OCMODE_PWM1;
+	sConfigOC.Pulse = 1500;
+	sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
+	sConfigOC.OCNPolarity = TIM_OCNPOLARITY_HIGH;
+	sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
+	sConfigOC.OCIdleState = TIM_OCIDLESTATE_RESET;
+	sConfigOC.OCNIdleState = TIM_OCNIDLESTATE_RESET;
+	PWM servoPWM(TIM10, servoInit, sConfigOC, TIM_CHANNEL_1);
+
+	return servoPWM;
+}
+
+PID_Controller motorControlInit()
+{
+	TIM_Base_InitTypeDef servoInit;
+	servoInit.Prescaler = 1;
+	servoInit.CounterMode = TIM_COUNTERMODE_CENTERALIGNED3;
+	servoInit.Period = 2100;
+	servoInit.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+	servoInit.RepetitionCounter = 0;
+
+	TIM_OC_InitTypeDef sConfigOC = {0};
+	sConfigOC.OCMode = TIM_OCMODE_PWM1;
+	sConfigOC.Pulse = servoInit.Period/2;
+	sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
+	sConfigOC.OCNPolarity = TIM_OCNPOLARITY_HIGH;
+	sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
+	sConfigOC.OCIdleState = TIM_OCIDLESTATE_SET;
+	sConfigOC.OCNIdleState = TIM_OCNIDLESTATE_RESET;
+	PWM motorPWM1(TIM8, servoInit, sConfigOC, TIM_CHANNEL_1);
+	PWM motorPWM2(TIM8, servoInit, sConfigOC, TIM_CHANNEL_2);
+	PID_Controller motorController(1.0, 0.0, 0.0, motorPWM1, motorPWM2);
+
+	return motorController;
+}
 
 bool obstacleDetection(ADCClass& adc)
 {
@@ -208,11 +260,10 @@ bool obstacleDetection(ADCClass& adc)
 	return false;
 }
 
-void controlSpeed(PWM& motorPWM, float referenceSpeed, float actualSpeed)
+void controlSpeed(PID_Controller& motor, float referenceSpeed, float actualSpeed)
 {
 	//PID for speed control
-	float output = pid.PIDController_Update(referenceSpeed, actualSpeed);
-	motorPWM.setPWM(output);
+	motor.PIDController_Update(referenceSpeed, actualSpeed);
 }
 
 void setSteering(PWM& servoPWM, float steeringAngle)
@@ -286,6 +337,9 @@ void MX_GPIO_Init(void)
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
+  __HAL_RCC_TIM10_CLK_ENABLE();
+  __HAL_RCC_TIM8_CLK_ENABLE();
+
   /*Configure GPIO pin : PC13 */
   GPIO_InitStruct.Pin = GPIO_PIN_13;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
@@ -336,6 +390,21 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   GPIO_InitStruct.Alternate = GPIO_AF3_TIM10;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+  //Motor EN GPIO configuration
+  GPIO_InitStruct.Pin = GPIO_PIN_8;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
+  //Motor PWM GPIO configuration
+  GPIO_InitStruct.Pin = GPIO_PIN_6 | GPIO_PIN_7;
+  GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  GPIO_InitStruct.Alternate = GPIO_AF3_TIM8;
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
   //Enable Sharp and Servo 5V power supply
   HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_RESET);

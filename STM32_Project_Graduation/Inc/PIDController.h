@@ -7,22 +7,27 @@
 
 #ifndef PIDCONTROLLER_H_
 #define PIDCONTROLLER_H_
-#include "main.h"
+#include "stm32f4xx_hal.h"
+#include "PWM.h"
 
 class PID_Controller {
 public:
-	PID_Controller(float Kp, float Ki, float Kd, float limMin, float limMax);
-	float PIDController_Update(float setpoint, float measurement);
+	PID_Controller(float Kp, float Ki, float Kd, PWM motorPWM1, PWM motorPWM2);
+	void PIDController_Update(float setpoint, float measurement);
 private:
+	void setSpeed(float percent);
+
 	float Kp;//controller gains
 	float Ki;
 	float Kd;
 
-	float limMin;//output limits
-	float limMax;
+	float limit;
 
 	float integrator;// controller memory
 	float prevError;//required for integrator
+
+	PWM motorPWM1;
+	PWM motorPWM2;
 };
 
 #endif /* PIDCONTROLLER_H_ */

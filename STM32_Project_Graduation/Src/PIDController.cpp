@@ -7,20 +7,37 @@
 
 #include <PIDController.h>
 #include "main.h"
-PID_Controller::PID_Controller(float Kp, float Ki, float Kd, float limMin, float limMax) :
+PID_Controller::PID_Controller(float Kp, float Ki, float Kd, PWM motorPWM1, PWM motorPWM2) :
 	Kp(Kp),
 	Ki(Ki),
 	Kd(Kd),
-	limMin(limMin),
-	limMax(limMax)
-
+	limit(100),
+	motorPWM1(motorPWM1),
+	motorPWM2(motorPWM2)
 {
 	integrator = 0.0f;
 	prevError = 0.0f;
+
+	setSpeed(0.0f);
+	HAL_GPIO_WritePin(GPIOC, GPIO_PIN_8, GPIO_PIN_SET);
+}
+
+/*
+ * Speed: -limit < speed < limit
+ */
+void PID_Controller::setSpeed(float speed)
+{
+	if (speed > limit)
+		speed = limit;
+	else if (speed < -limit)
+		speed = -limit;
+
+	motorPWM1.setPWM(50.0f + speed * 0.5f * 100.0f / limit);
+	motorPWM1.setPWM(50.0f - speed * 0.5f * 100.0f / limit);
 }
 
 
-float PID_Controller::PIDController_Update(float setpoint, float measurement){
+void PID_Controller::PIDController_Update(float setpoint, float measurement){
 	//error signal
 	float error = setpoint - measurement;
 
@@ -36,10 +53,10 @@ float PID_Controller::PIDController_Update(float setpoint, float measurement){
 	//compute output and apply limits
 	float out = proportional + integrator + differentiator;
 	float outLimited = out;
-	if(out > limMax)
-		outLimited = limMax;
-	else if(out < limMin)
-		outLimited = limMin;
+	if(out > limit)
+		outLimited = limit;
+	else if(out < -limit)
+		outLimited = -limit;
 
 	//anti-windup
 	integrator += (outLimited - out);
@@ -48,6 +65,6 @@ float PID_Controller::PIDController_Update(float setpoint, float measurement){
 	prevError = error;
 
 	//return controller output
-	return out;
+	setSpeed(out);
 }
 

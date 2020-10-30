@@ -39,7 +39,6 @@ public:
 		char receivedCommand[100];
 		uint8_t realNumber=0;
 		ClassUartTest uart;
-		PWM pwm;
 };
 
 #endif /* HIGHLEVELCOMM_H_ */
