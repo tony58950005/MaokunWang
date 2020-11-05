@@ -62,10 +62,11 @@ void SpeedMeasurement::Encoder_Init_TIM8()
 
 
 }
-uint8_t getTIMx_DeltaCnt(TIM_TypeDef* TIMx)
+uint8_t SpeedMeasurement::getTIMx_DeltaCnt(TIM_TypeDef* TIMx)
 {
+	// it needs the difference between two counts
 	uint8_t cnt;
-	cnt = TIMx->CNT-0x7fff;//the encoder cannot achieve the pulse change to 0x7fff
+	cnt = TIMx->CNT-0x7fff;//the encoder reads the values and reduce the middle value 0x7fff
 	TIMx->CNT=0x7fff;
 	return cnt;
 }
@@ -83,8 +84,8 @@ uint8_t getTIMx_DeltaCnt(TIM_TypeDef* TIMx)
  * the radius of the wheel: e.g. 0.003m
  * the perimeter:2*pi*r
  * the distance for one duty cycle
- * 	left:2*pi*0.003/1560
- * 	right:2*pi*0.003/1560
+ * 	left:2*pi*0.003/1000
+ * 	right:2*pi*0.003/1000
  *
  */
 
