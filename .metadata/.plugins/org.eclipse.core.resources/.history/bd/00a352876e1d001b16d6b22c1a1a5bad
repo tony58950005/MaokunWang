@@ -1,0 +1,62 @@
+/*
+ * SpeedMeasurement.cpp
+ *
+ *  Created on: 2020年11月2日
+ *      Author: 59488
+ */
+
+#include <SpeedMeasurement.h>
+#include "main.h"
+#include "stm32f4xx.h"
+#include "stm32f4xx_hal.h"
+SpeedMeasurement::SpeedMeasurement()
+{
+
+
+}
+
+void SpeedMeasurement::Encoder_Init_TIM2(void)
+{
+	//MOTOR PWM is for TIM2, PC8
+
+}
+
+void SpeedMeasurement::Encoder_Init_TIM4(void)
+{
+	//MOTOR PWM is for TIM2, PC8
+
+}
+
+int8_t SpeedMeasurement::getTIMx_DetaCnt(TIM_TypeDef * TIMx)
+{
+	int8_t cnt;
+	cnt=TIMx-> CNT-0x7fff;
+	TIMx->CNT = 0x7fff;
+	return cnt;
+
+}
+
+/*function: calculate the speed of roatation
+ * input param: uint8_t *LeftSpeed, uint8_t *rightSpeed
+ * return: void
+ * calculate the linear speed of the rotation, positive/negative, speed=value*1000(unit: mm/s)
+ * the changed value of the encoder(converted into distance in straight line) * 200s(5ms for one count),
+ * and get m/s*1000 converted into integers
+ * the number of duty cycle for one circle
+ * left: 1560
+ * right: 1560
+ * the radius of the wheel: 0.003m
+ * the perimeter:2*pi*r
+ * the distance for one duty cycle
+ * 	left:2*pi*0.003/1560
+ * 	right:2*pi*0.003/1560
+ *
+ */
+void SpeedMeasurement::Get_Motor_Speed(uint8_t *leftSpeed, uint8_t *rightSpeed)
+{
+	//5ms speed measurement, one time unit is 5ms
+	*leftSpeed = getTIMx_DetaCnt(TIM2)*1000*200*2*3.1416*0.003/1560;
+	*rightSpeed = getTIMx_DetaCnt(TIM4)*1000*200*2*3.1416*0.003/1560;
+
+}
+

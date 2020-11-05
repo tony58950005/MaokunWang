@@ -1,20 +1,13 @@
-21:15:45 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+07:26:25 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
 make -j12 all 
 arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g3 -DUSE_HAL_DRIVER -DSTM32F407xx -DDEBUG -DUSE_FULL_ASSERT -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o"  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
 arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F407VGTX_FLASH.ld" -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static  -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
-Finished building target: STM32_Project_Graduation.elf
- 
-arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
-arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
-arm-none-eabi-size   STM32_Project_Graduation.elf 
-   text	   data	    bss	    dec	    hex	filename
- 300916	   2788	   7016	 310720	  4bdc0	STM32_Project_Graduation.elf
-Finished building: default.size.stdout
- 
-Finished building: STM32_Project_Graduation.bin
- 
-Finished building: STM32_Project_Graduation.list
- 
+Src/main.o: In function `getMotorSpeed(SpeedMeasurement&)':
+C:/Users/59488/Documents/GitHub/MaokunWang/STM32_Project_Graduation/Debug/../Src/main.cpp:159: undefined reference to `SpeedMeasurement::getTIMx_DeltaCnt(TIM_TypeDef*)'
+C:/Users/59488/Documents/GitHub/MaokunWang/STM32_Project_Graduation/Debug/../Src/main.cpp:160: undefined reference to `SpeedMeasurement::getTIMx_DeltaCnt(TIM_TypeDef*)'
+collect2.exe: error: ld returned 1 exit status
+make: *** [makefile:59: STM32_Project_Graduation.elf] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
 
-21:15:50 Build Finished. 0 errors, 0 warnings. (took 5s.67ms)
+07:26:27 Build Failed. 3 errors, 0 warnings. (took 2s.336ms)
 

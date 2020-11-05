@@ -1,0 +1,14 @@
+/*
+ * SpeedMeasurement.h
+ *
+ *  Created on: 2020年11月2日
+ *      Author: 59488
+ */
+
+#ifndef SPEEDMEASUREMENT_H_
+#define SPEEDMEASUREMENT_H_
+
+class SpeedMeasurement {
+};
+
+#endif /* SPEEDMEASUREMENT_H_ */

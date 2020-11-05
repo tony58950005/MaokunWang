@@ -15,7 +15,8 @@ typedef enum
 	ADCError,
 	HighLevelCommError,
 	UartError,
-	AssertFailError
+	AssertFailError,
+	SpeedMeasurementError
 } ErrorState;
 
 #endif /* ERRORSTATE_H_ */

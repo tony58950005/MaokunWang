@@ -22,7 +22,9 @@
 #include <ADCClass.h>
 #include <HighLevelComm.h>
 #include <PIDController.h>
+#include <SpeedMeasurement.h>
 #include "main.h"
+#include "stm32f4xx_hal_tim.h"
 #include "stm32f4xx_hal.h"
 #include "string.h"
 #include "stdint.h"
@@ -35,6 +37,9 @@
 /* USER CODE BEGIN Includes */
 /* USER CODE END Includes */
 uint8_t distanceR,distanceL,distanceM;
+uint8_t realLeftSpeed, realRightSpeed;
+uint32_t EncoderPulseCount;
+const char* ErrorInfo;
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
 
@@ -50,7 +55,7 @@ uint8_t distanceR,distanceL,distanceM;
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
-
+TIM_HandleTypeDef htim8;
 /* USER CODE BEGIN PV */
 
 /* USER CODE END PV */
@@ -59,9 +64,11 @@ uint8_t distanceR,distanceL,distanceM;
 void SystemClock_Config(void);
 void MX_GPIO_Init(void);
 bool obstacleDetection(ADCClass& adc);
+void getMotorSpeed(SpeedMeasurement& motorSpeed);
 void controlSpeed(PID_Controller& motor, float referenceSpeed, float actualSpeed);
 void setSteering(PWM& servoPWM, float steeringAngle);
 PID_Controller motorControlInit(void);
+SpeedMeasurement motorSpeedInit(void);
 PWM steeringServoInit(void);
 
 int _write(int file, char *ptr, int len)
@@ -72,6 +79,8 @@ int _write(int file, char *ptr, int len)
 	  ITM_SendChar((*ptr++));
 	return len;
 }
+
+
 
 
 
@@ -104,10 +113,14 @@ int main(void)
 
 	/* Initialize all configured peripherals */
 	MX_GPIO_Init();
+	HAL_TIM_Encoder_Start (&htim8, TIM_CHANNEL_1);
+	HAL_TIM_Encoder_Start (&htim8, TIM_CHANNEL_2);
 
 	ADCClass adc;
 	PWM servoPWM = steeringServoInit();
 	PID_Controller motor = motorControlInit();
+	SpeedMeasurement motorSpeed=motorSpeedInit();
+
 
 	HighLevelComm HighLevelCommTest(huart2, htim2);
 
@@ -115,67 +128,46 @@ int main(void)
 	{
 		setSteering(servoPWM, 0.0f);
 		controlSpeed(motor, 0.0f, 0.0f);
+		getMotorSpeed(motorSpeed);
 	/*	HighLevelCommTest.ParseMessage();
 
-		HAL_Delay(1000);
-		setSteering(servoPWM, 0.0);
-		HAL_Delay(1000);
-		setSteering(servoPWM, 10.0);
-		HAL_Delay(1000);
-		setSteering(servoPWM, 20.0);
-		HAL_Delay(1000);
-		setSteering(servoPWM, 30.0);
-		//HighLevelCommTest.ParseMessage();
-*/
 
-//		if(obstacleDetection(adc)){
-//			//Simple algorithm: if meet obstacle ->move back ->Detect&Turn
-//			HighLevelCommTest.Stop();
-//			HAL_Delay(100);
-//			//moveBackward();
-//			HAL_Delay(300);
-//			HighLevelCommTest.Stop();
-//			HAL_Delay(200);
-//			if(distanceR>=distanceL){
-//				HighLevelCommTest.Turn(30);//turn right
-//				HighLevelCommTest.Stop();
-//			}else{
-//				HighLevelCommTest.Turn(-30);//turn left
-//				HighLevelCommTest.Stop();
-//			}
-//		}else{
-//			HighLevelCommTest.Move(10);
-//		}
-
-		//Simple algorithm: 8 cases with solution based on 3 distance sensors(permutation&combination)
-	/*	if(distanceL>10 && distanceM>10 && distanceR>10){
-			HighLevelCommTest.Move(10);
-		}else if(distanceL>10 && distanceM<=10 && distanceR>10){
-			HighLevelCommTest.Stop();
-			HighLevelCommTest.Turn(-30);
-		}else if(distanceL>10 && distanceM>10 && distanceR<=10){
-			HighLevelCommTest.Stop();
-			HighLevelCommTest.Turn(-30);
-		}else if(distanceL<=10 && distanceM>10 && distanceR>10){
-			HighLevelCommTest.Stop();
-			HighLevelCommTest.Turn(30);
-		}else if(distanceL>10 && distanceM<=10 && distanceR<=10){
-			HighLevelCommTest.Stop();
-			HighLevelCommTest.Turn(-30);
-		}else if(distanceL<=10 && distanceM<=10 && distanceR>10){
-			HighLevelCommTest.Stop();
-			HighLevelCommTest.Turn(30);
-		}else if(distanceL<=10 && distanceM>10 && distanceR<=10){
-			HighLevelCommTest.Stop();
-			HighLevelCommTest.Move(10);
-		}else if(distanceL<=10 && distanceM<=10 && distanceR<=10){
-			HighLevelCommTest.Stop();
-		}else{
-
-		}
 	 */
 
 	}
+}
+
+SpeedMeasurement motorSpeedInit()
+{
+	SpeedMeasurement DCMotor;
+	DCMotor.Encoder_Init_TIM8();
+	//SpeedMeasurement::Encoder_Init_TIM4();
+	HAL_TIM_Base_Init(&htim8);//initialize the timer, 5ms per second
+	return DCMotor;
+}
+
+
+
+void getMotorSpeed(SpeedMeasurement& motorSpeed)
+{
+	//5ms speed measurement, one time unit is 5ms
+	static int leftWheelEncoderNow    = 0;
+	static int rightWheelEncoderNow   = 0;
+	static int leftWheelEncoderLast   = 0;
+	static int rightWheelEncoderLast  = 0;
+
+	leftWheelEncoderNow += motorSpeed.getTIMx_DeltaCnt(TIM8); //(TIM8->CCR1);
+	rightWheelEncoderNow+= motorSpeed.getTIMx_DeltaCnt(TIM8);//(TIM8->CCR2);
+
+	 //speed measurement for every 5ms
+	realLeftSpeed   = (leftWheelEncoderNow - leftWheelEncoderLast)*1000*200*2*3.14*0.003/1000;
+	realRightSpeed  = (rightWheelEncoderNow - rightWheelEncoderLast)*1000*200*2*3.14*0.003/1000;
+
+	//record the last time encoder value
+	leftWheelEncoderLast  = leftWheelEncoderNow;
+	rightWheelEncoderLast = rightWheelEncoderNow;
+	//realLeftSpeed = (TIM8->CNT)*1000*200*2*3.1416*0.003/1000;
+	//realRightSpeed =(TIM8->CNT)*1000*200*2*3.1416*0.003/1000;
 }
 
 PWM steeringServoInit()
@@ -422,7 +414,7 @@ void Error_Handler(ErrorState errorSource)
 {
 	/* USER CODE BEGIN Error_Handler_Debug */
 	while(1);	//TODO: store some error information in a global variable, it can be read from the high level comm
-	/*switch (errorSource)
+	switch (errorSource)
 	{
 		case PWMError:
 			ErrorInfo= "PWM error!\n";
@@ -441,7 +433,7 @@ void Error_Handler(ErrorState errorSource)
 			break;
 		default:
 			break;
-	}*/
+	}
 	/* USER CODE END Error_Handler_Debug */
 }
 
