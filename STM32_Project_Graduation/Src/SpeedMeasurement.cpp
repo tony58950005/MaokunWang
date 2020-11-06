@@ -11,64 +11,43 @@
 #include "stm32f4xx_hal.h"
 SpeedMeasurement::SpeedMeasurement()
 {
-	HAL_TIM_OC_Start (&htim8, TIM_CHANNEL_1);
-	HAL_TIM_OC_Start (&htim8, TIM_CHANNEL_2);
-	HAL_TIM_Encoder_Start(&htim8,TIM_CHANNEL_1);
-	HAL_TIM_Encoder_Start(&htim8,TIM_CHANNEL_2 );
+	TIM_Encoder_InitTypeDef sConfig = {0};
+	TIM_MasterConfigTypeDef sMasterConfig = {0};
 
+	htim.Instance = TIM2;
+	htim.Init.Prescaler = 0x0;
+	htim.Init.CounterMode = TIM_COUNTERMODE_UP;
+	htim.Init.Period = 1999;//read the encoder value every 5ms
+	htim.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+	htim.Init.RepetitionCounter = 0;
 
+	if (HAL_TIM_Base_Init(&htim) != HAL_OK)
+	{
+		Error_Handler(SpeedMeasurementError);
+	}
+
+	sConfig.EncoderMode = TIM_ENCODERMODE_TI12;
+	sConfig.IC1Polarity = TIM_ICPOLARITY_RISING;
+	sConfig.IC1Selection = TIM_ICSELECTION_DIRECTTI;
+	sConfig.IC1Prescaler = TIM_ICPSC_DIV1;
+	sConfig.IC1Filter = 0;
+	sConfig.IC2Polarity = TIM_ICPOLARITY_RISING;
+	sConfig.IC2Selection = TIM_ICSELECTION_DIRECTTI;
+	sConfig.IC2Prescaler = TIM_ICPSC_DIV1;
+	sConfig.IC2Filter = 0;
+	if (HAL_TIM_Encoder_Init(&htim, &sConfig) != HAL_OK)
+	{
+		Error_Handler(SpeedMeasurementError);
+	}
+
+	HAL_TIM_Encoder_Start(&htim,TIM_CHANNEL_1);
+	HAL_TIM_Encoder_Start(&htim,TIM_CHANNEL_2);
 }
 
-
-void SpeedMeasurement::Encoder_Init_TIM8()
-{
-	//MOTOR PWM is for TIM8, CH1, CH2
-	  TIM_Encoder_InitTypeDef sConfig = {0};
-	  TIM_MasterConfigTypeDef sMasterConfig = {0};
-
-	  GPIO_InitTypeDef GPIO_InitStructure;
-	  GPIO_InitStructure.Pin = GPIO_PIN_6||GPIO_PIN_7;	//port setting
-	  GPIO_InitStructure.Mode = GPIO_MODE_INPUT;
-	  HAL_GPIO_Init(GPIOC, &GPIO_InitStructure);
-
-	  htim8.Instance = TIM8;
-	  htim8.Init.Prescaler = 0x0;
-	  htim8.Init.CounterMode = TIM_COUNTERMODE_UP;
-	  htim8.Init.Period = 1999;//read the encoder value every 5ms
-	  htim8.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-	  //htim8.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
-	  sConfig.EncoderMode = TIM_ENCODERMODE_TI1;
-	  sConfig.IC1Polarity = TIM_ICPOLARITY_RISING;
-	  sConfig.IC1Selection = TIM_ICSELECTION_DIRECTTI;
-	  sConfig.IC1Prescaler = TIM_ICPSC_DIV1;
-	  sConfig.IC1Filter = 0;
-	  sConfig.IC2Polarity = TIM_ICPOLARITY_RISING;
-	  sConfig.IC2Selection = TIM_ICSELECTION_DIRECTTI;
-	  sConfig.IC2Prescaler = TIM_ICPSC_DIV1;
-	  sConfig.IC2Filter = 0;
-	  if (HAL_TIM_Encoder_Init(&htim8, &sConfig) != HAL_OK)
-	  {
-	    Error_Handler(SpeedMeasurementError);
-	  }
-	  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
-	  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
-	  if (HAL_TIMEx_MasterConfigSynchronization(&htim8, &sMasterConfig) != HAL_OK)
-	  {
-	    Error_Handler(SpeedMeasurementError);
-	  }
-	  __HAL_TIM_SET_COUNTER(&htim8,0);
-	  TIM8->CNT = 0x7fff;
-	 // TIM_Cmd(TIM8, ENABLE);
-
-
-}
-uint8_t SpeedMeasurement::getTIMx_DeltaCnt(TIM_TypeDef* TIMx)
+uint32_t SpeedMeasurement::getTIMx_DeltaCnt(uint8_t channel1)
 {
 	// it needs the difference between two counts
-	uint8_t cnt;
-	cnt = TIMx->CNT-0x7fff;//the encoder reads the values and reduce the middle value 0x7fff
-	TIMx->CNT=0x7fff;
-	return cnt;
+	return htim.Instance->CCR1;
 }
 
 

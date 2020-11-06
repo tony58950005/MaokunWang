@@ -47,6 +47,7 @@ const char* ErrorInfo;
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+#define USE_FULL_ASSERT
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -68,7 +69,7 @@ bool getMotorSpeed(SpeedMeasurement& motorSpeed);
 void controlSpeed(PID_Controller& motor, float referenceSpeed, float actualSpeed);
 void setSteering(PWM& servoPWM, float steeringAngle);
 PID_Controller motorControlInit(void);
-SpeedMeasurement motorSpeedInit(void);
+//SpeedMeasurement motorSpeedInit(void);
 PWM steeringServoInit(void);
 
 int _write(int file, char *ptr, int len)
@@ -113,15 +114,11 @@ int main(void)
 
 	/* Initialize all configured peripherals */
 	MX_GPIO_Init();
-	HAL_TIM_Encoder_Start (&htim8, TIM_CHANNEL_1);
-	HAL_TIM_Encoder_Start (&htim8, TIM_CHANNEL_2);
 
 	ADCClass adc;
 	PWM servoPWM = steeringServoInit();
 	PID_Controller motor = motorControlInit();
-	SpeedMeasurement motorSpeed=motorSpeedInit();
-
-
+	SpeedMeasurement motorSpeed; //=motorSpeedInit();
 	HighLevelComm HighLevelCommTest(huart2, htim2);
 
 	while (1)
@@ -129,8 +126,8 @@ int main(void)
 		setSteering(servoPWM, 0.0f);
 		controlSpeed(motor, 0.0f, 0.0f);
 		if(getMotorSpeed(motorSpeed)){
-			std::cout<<"leftSpeed="<<realLeftSpeed<<std::endl;
-			std::cout<<"rightSpeed="<<realRightSpeed<<std::endl;
+		//	std::cout<<"leftSpeed="<<realLeftSpeed<<std::endl;
+		//	std::cout<<"rightSpeed="<<realRightSpeed<<std::endl;
 		}
 	/*	HighLevelCommTest.ParseMessage();
 	 */
@@ -140,9 +137,6 @@ int main(void)
 SpeedMeasurement motorSpeedInit()
 {
 	SpeedMeasurement DCMotor;
-	DCMotor.Encoder_Init_TIM8();
-	//SpeedMeasurement::Encoder_Init_TIM4();
-	HAL_TIM_Base_Init(&htim8);//initialize the timer, 5ms per second
 	return DCMotor;
 }
 
@@ -156,8 +150,8 @@ bool getMotorSpeed(SpeedMeasurement& motorSpeed)
 	static uint8_t leftWheelEncoderLast   = 0;
 	static uint8_t rightWheelEncoderLast  = 0;
 
-	leftWheelEncoderNow += motorSpeed.getTIMx_DeltaCnt(TIM8); //(TIM8->CCR1);
-	rightWheelEncoderNow+= motorSpeed.getTIMx_DeltaCnt(TIM8);//(TIM8->CCR2);
+	leftWheelEncoderNow += motorSpeed.getTIMx_DeltaCnt(1); //(TIM8->CCR1);
+	rightWheelEncoderNow+= motorSpeed.getTIMx_DeltaCnt(0);//(TIM8->CCR2);
 
 	 //speed measurement for every 5ms
 	realLeftSpeed   = (leftWheelEncoderNow - leftWheelEncoderLast)*1000*200*2*3.14*0.003/1000;//modify the last number "1000"->"xxxx"
@@ -329,6 +323,7 @@ void MX_GPIO_Init(void)
 
   __HAL_RCC_TIM10_CLK_ENABLE();
   __HAL_RCC_TIM8_CLK_ENABLE();
+  __HAL_RCC_TIM2_CLK_ENABLE();
 
   /*Configure GPIO pin : PC13 */
   GPIO_InitStruct.Pin = GPIO_PIN_13;
@@ -395,6 +390,13 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   GPIO_InitStruct.Alternate = GPIO_AF3_TIM8;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+
+  //Encoder GPIO configuration
+  GPIO_InitTypeDef GPIO_InitStructure;
+  GPIO_InitStructure.Pin = GPIO_PIN_0||GPIO_PIN_1;	//port setting
+  GPIO_InitStructure.Mode = GPIO_MODE_AF_PP;
+  GPIO_InitStructure.Alternate = GPIO_AF1_TIM2;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStructure);
 
   //Enable Sharp and Servo 5V power supply
   HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_RESET);

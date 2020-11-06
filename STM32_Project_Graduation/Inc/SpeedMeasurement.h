@@ -14,11 +14,9 @@
 class SpeedMeasurement {
 public:
 	SpeedMeasurement();
-	void Encoder_Init_TIM8();
-	//static void Encoder_Init_TIM4(void);
-	uint8_t getTIMx_DeltaCnt(TIM_TypeDef * TIMx);
+	uint32_t getTIMx_DeltaCnt(uint8_t channel1);
 private:
-	TIM_HandleTypeDef htim8;
+	TIM_HandleTypeDef htim;
 };
 
 #endif /* SPEEDMEASUREMENT_H_ */
