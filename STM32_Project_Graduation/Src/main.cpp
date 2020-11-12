@@ -69,6 +69,9 @@ bool getMotorSpeed(SpeedMeasurement& motorSpeed);
 void controlSpeed(PID_Controller& motor, float referenceSpeed, float actualSpeed);
 void setSteering(PWM& servoPWM, float steeringAngle);
 PID_Controller motorControlInit(void);
+int getDistanceL();
+int getDistanceM();
+int getDistanceR();
 //SpeedMeasurement motorSpeedInit(void);
 PWM steeringServoInit(void);
 
@@ -126,11 +129,13 @@ int main(void)
 		setSteering(servoPWM, 0.0f);
 		controlSpeed(motor, 0.0f, 0.0f);
 		if(getMotorSpeed(motorSpeed)){
-		//	std::cout<<"leftSpeed="<<realLeftSpeed<<std::endl;
-		//	std::cout<<"rightSpeed="<<realRightSpeed<<std::endl;
+
 		}
-	/*	HighLevelCommTest.ParseMessage();
-	 */
+		if(obstacleDetection(adc)){
+
+		}
+		HighLevelCommTest.ParseMessage();
+
 	}
 }
 
@@ -150,8 +155,8 @@ bool getMotorSpeed(SpeedMeasurement& motorSpeed)
 	static uint8_t leftWheelEncoderLast   = 0;
 	static uint8_t rightWheelEncoderLast  = 0;
 
-	leftWheelEncoderNow += motorSpeed.getTIMx_DeltaCnt(1); //(TIM8->CCR1);
-	rightWheelEncoderNow+= motorSpeed.getTIMx_DeltaCnt(0);//(TIM8->CCR2);
+	leftWheelEncoderNow += motorSpeed.getTIMx_DeltaCnt(1); //(TIM2->CCR1);
+	rightWheelEncoderNow+= motorSpeed.getTIMx_DeltaCnt(0);//(TIM2->CCR2);
 
 	 //speed measurement for every 5ms
 	realLeftSpeed   = (leftWheelEncoderNow - leftWheelEncoderLast)*1000*200*2*3.14*0.003/1000;//modify the last number "1000"->"xxxx"
@@ -244,6 +249,15 @@ bool obstacleDetection(ADCClass& adc)
 	return false;
 }
 
+int getDistanceL(){
+	return distanceL;
+}
+int getDistanceM(){
+	return distanceM;
+}
+int getDistanceR(){
+	return distanceR;
+}
 void controlSpeed(PID_Controller& motor, float referenceSpeed, float actualSpeed)
 {
 	//PID for speed control

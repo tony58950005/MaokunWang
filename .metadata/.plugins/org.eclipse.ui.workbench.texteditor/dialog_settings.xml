@@ -6,24 +6,31 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="Error_Handler"/>
+		<item key="selection" value="motorSpeed"/>
 		<list key="findhistory">
-			<item value="Error_Handler"/>
-			<item value="ErrorHandler"/>
-			<item value="sendMessage"/>
-			<item value="HAL_ERROR"/>
-			<item value="handler"/>
-			<item value="enum"/>
-			<item value="if(obstacleDetection()){"/>
-			<item value="pid"/>
-			<item value="TIM"/>
+			<item value="motorSpeed"/>
+			<item value="TIM8"/>
+			<item value="7fff"/>
+			<item value="Encoder_Init_TIM8"/>
+			<item value="speed"/>
+			<item value="Set"/>
+			<item value="SetCounter"/>
+			<item value="Set Counter"/>
+			<item value="Counter"/>
+			<item value="TIM_SetCounter"/>
+			<item value="CNT"/>
+			<item value="TIM8_CNT"/>
+			<item value="TIM8_"/>
+			<item value="CHANNEL"/>
+			<item value="channel"/>
 		</list>
 		<list key="replacehistory">
+			<item value="tim8"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
-		<item key="DIALOG_X_ORIGIN" value="1319"/>
-		<item key="DIALOG_Y_ORIGIN" value="120"/>
+		<item key="DIALOG_X_ORIGIN" value="9"/>
+		<item key="DIALOG_Y_ORIGIN" value="507"/>
 		<item key="DIALOG_WIDTH" value="356"/>
 		<item key="DIALOG_HEIGHT" value="454"/>
 		<item key="DIALOG_FONT_NAME" value="1|Microsoft YaHei UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Microsoft YaHei UI"/>

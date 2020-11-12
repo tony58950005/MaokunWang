@@ -1,4 +1,4 @@
-HAL_Delay(1000);
+/*HAL_Delay(1000);
 setSteering(servoPWM, 0.0);
 HAL_Delay(1000);
 setSteering(servoPWM, 10.0);
@@ -6,7 +6,7 @@ HAL_Delay(1000);
 setSteering(servoPWM, 20.0);
 HAL_Delay(1000);
 setSteering(servoPWM, 30.0);
-//HighLevelCommTest.ParseMessage();
+HighLevelCommTest.ParseMessage();
 */
 
 if(obstacleDetection(adc)){
