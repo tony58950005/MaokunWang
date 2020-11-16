@@ -1,10 +1,5 @@
-11:22:57 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+15:34:30 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
 make -j12 all 
-arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
-../Src/main.cpp: In function 'bool getMotorSpeed(SpeedMeasurement&)':
-../Src/main.cpp:168:1: warning: no return statement in function returning non-void [-Wreturn-type]
- }
- ^
 arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
 Finished building target: STM32_Project_Graduation.elf
  
@@ -12,7 +7,7 @@ arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Grad
 arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
 arm-none-eabi-size   STM32_Project_Graduation.elf 
    text	   data	    bss	    dec	    hex	filename
- 174260	    756	   6904	 181920	  2c6a0	STM32_Project_Graduation.elf
+ 174756	    756	   6888	 182400	  2c880	STM32_Project_Graduation.elf
 Finished building: default.size.stdout
  
 Finished building: STM32_Project_Graduation.bin
@@ -20,5 +15,5 @@ Finished building: STM32_Project_Graduation.bin
 Finished building: STM32_Project_Graduation.list
  
 
-11:23:00 Build Finished. 0 errors, 1 warnings. (took 3s.102ms)
+15:34:32 Build Finished. 0 errors, 0 warnings. (took 2s.539ms)
 

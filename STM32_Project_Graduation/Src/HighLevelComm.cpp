@@ -5,22 +5,31 @@
  *      Author: 59488
  */
 
-#include <HighLevelComm.h>
+#include "HighLevelComm.h"
 #include "ClassUartTest.h"
+#include "ADCClass.h"
+#include "PIDController.h"
+#include "SpeedMeasurement.h"
+#include "stm32f4xx_hal_tim.h"
+#include "stm32f407xx.h"
 #include "PWM.h"
 #include "string.h"
 #include "main.h"
 #include <stdlib.h>
-#include<stdlib.h>
-#include<string.h>
-#include<math.h>
+#include <string.h>
+#include <math.h>
 #include <iostream>
 
-HighLevelComm::HighLevelComm(UART_HandleTypeDef& uart,TIM_HandleTypeDef& pwm) :
+HighLevelComm::HighLevelComm(UART_HandleTypeDef& uart,TIM_Base_InitTypeDef servoInit,TIM_OC_InitTypeDef sConfigOC) :
 	myTxData_OK("OK\r\n"),
-	myTxData_Battery("50\r\n"), //initial battery life is 50%
-	myTxData_Distance("30\r\n"), //initial distance is 50mm
-	uart(uart)
+	myTxData_Battery("-1"),
+	myTxData_Distance("-1"),
+	uart(uart),
+	adc(adc),
+	servoPWM(TIM10, servoInit, sConfigOC, TIM_CHANNEL_1),
+	motorPWM1(TIM8, servoInit, sConfigOC, TIM_CHANNEL_1),
+	motorPWM2(TIM8, servoInit, sConfigOC, TIM_CHANNEL_2),
+	motor(1.0,0.0,0.0,motorPWM1, motorPWM2)
 {
 }
 bool HighLevelComm::ParseMessage()
@@ -60,6 +69,8 @@ bool HighLevelComm::ParseMessage()
 		Move(receivedNumber);
 	}else if (sscanf(receivedCommand,"Turn,%ld", &receivedNumber) == 1){
 		Turn(receivedNumber);
+	}else if (sscanf(receivedCommand,"Delay,%ld", &receivedNumber) == 1){//Delay unit:milliseconds
+		Delay(receivedNumber);
 	}else{
 		return false;
 	}
@@ -68,61 +79,72 @@ bool HighLevelComm::ParseMessage()
 }
 bool HighLevelComm::Move(int x)  //x means moving at x millimeter/second.
 {
+
 	//TODO-Akos: You can check the input parameter here.
-	/*if (pwm.setPWM(x / MaxSpeed)) {
+	if(!motor.motorControlInit()){
+
+	}
+	if(!getMotorSpeed(motorSpeed)){
+
+	}
+	if (controlSpeed(motor, 0, (realLeftSpeed+realRightSpeed)/2)) {
 		isRun = true;
-		if(x==100){
-			if (uart.sendMessage(myTxData_OK, sizeof(myTxData_OK), 100) == true) {
-				return true;
-			} else{
-				Error_Handler(UartError);
-				return false;
-			}
+		if (uart.sendMessage(myTxData_OK, sizeof(myTxData_OK), 100) == true) {
+			return true;
+		} else {
+			Error_Handler(UartError);
+			return false;
 		}
-	} else*/
+	} else{
+		Error_Handler(ControlSpeedError);
 		return false;
+	}
 }
 
 bool HighLevelComm::Stop()
 {
+	motor.motorControlInit();
+	getMotorSpeed(motorSpeed);
 	if (isRun == true) {	//"Stop\n"
-		/*if (pwm.setPWM(0)) {
+		if (controlSpeed(motor, 0, (realLeftSpeed+realRightSpeed)/2)) {
 			isRun = false;
-			if (uart.sendMessage(myTxData_OK, sizeof(myTxData_OK), 100)
-					== true) {
+			if (uart.sendMessage(myTxData_OK, sizeof(myTxData_OK), 100)== true) {
 				return true;
-			} else{
+			} else {
 				Error_Handler(UartError);
 				return false;
 			}
-		} else*/
+		} else {
+			Error_Handler(ControlSpeedError);
 			return false;
-	} else
+		}
+	} else {
 		return false;
+	}
 }
 
 bool HighLevelComm::Turn(int x) //'x' means the angle of the steering system from -45 degrees to 45 degrees
 {
-	if (isRun == true) {	//"Turn\n"
-		//if (setSteering(x)) {//finish the turning
+	servoPWM.steeringServoInit();
+	if (setSteering(servoPWM, x)) {	//finish the turning
 		if (uart.sendMessage(myTxData_OK, sizeof(myTxData_OK), 100) == true) {
 			return true;
-		} else
-		{
+		} else {
 			Error_Handler(UartError);
 			return false;
 		}
-		//}else
-		//return false;
-	} else
+	} else{
+		Error_Handler(SteeringError);
 		return false;
+	}
+
 }
 
 bool HighLevelComm::showBattery()
 {
 	//"Battery\n" means getting the battery life information
+	//myTxData_Battery saves the data from the battery sensor about its battery life.
 	if (uart.sendMessage(myTxData_Battery, sizeof(myTxData_Battery), 100)== true) {
-		//myTxData_Battery saves the data from the battery sensor about its battery life.
 		return true;
 	} else
 	{
@@ -132,16 +154,105 @@ bool HighLevelComm::showBattery()
 }
 
 bool HighLevelComm::showDistance()
- {
-	//if (isRun == true) {//"Distance\n" means getting the distance of the nearest obstacle information
-		if (uart.sendMessage(myTxData_Distance, sizeof(myTxData_Distance), 100)== true) {
-			//myTxData_Distance saves the data from the distance sensor.
-			return true;
-		} else
-		{
-			Error_Handler(UartError);
-			return false;
-		}
-	//} else
-		//return false;
+{
+	//"Distance\n" means getting the distance of the nearest obstacle information
+	//myTxData_Distance saves the data from the distance sensor.
+	obstacleDetection(adc);
+	myTxData_Distance[0]=distanceL;
+	myTxData_Distance[1]=':';
+	myTxData_Distance[2]=distanceM;
+	myTxData_Distance[3]=':';
+	myTxData_Distance[4]=distanceR;
+	if (uart.sendMessage(myTxData_Distance, sizeof(myTxData_Distance), 100)== true) {
+		return true;
+	} else
+	{
+		Error_Handler(UartError);
+		return false;
+	}
 }
+
+bool HighLevelComm::Delay(int x) //Delay unit:,milliseconds
+{
+	HAL_Delay(x);
+}
+
+bool HighLevelComm::setSteering(PWM& servoPWM, float steeringAngle)
+{
+	//TODO: set the steering for the servo
+	//presuming the do-able steeringAngle ranges from -45 (PWM->5%) to 45(PWM->10%) degrees.
+	// the characteristic line (saturated steeringAgnle, PWM high level line[1.5ms, 2.5ms])
+	//goes through point (45, 10[%]),(-45, 5[%])
+	float percent=1.0f/18.0f*steeringAngle + 135.0f/18.0f;
+	if(servoPWM.setPWM(percent)==false){
+		Error_Handler(PWMError);
+		return false;
+	}
+	return true;
+}
+
+bool HighLevelComm::controlSpeed(PID_Controller& motor, float referenceSpeed, float actualSpeed)
+{
+	//PID for speed control
+	motor.PIDController_Update(referenceSpeed, actualSpeed);
+}
+
+bool HighLevelComm::getMotorSpeed(SpeedMeasurement& motorSpeed)
+{
+	//5ms speed measurement, one time unit is 5ms
+	leftWheelEncoderNow += motorSpeed.getTIMx_DeltaCnt(1); //(TIM2->CCR1);
+	rightWheelEncoderNow+= motorSpeed.getTIMx_DeltaCnt(0);//(TIM2->CCR2);
+
+	 //speed measurement for every 5ms
+	realLeftSpeed   = (leftWheelEncoderNow - leftWheelEncoderLast)*1000*200*2*3.14*0.003/1000;//modify the last number "1000"->"xxxx"
+	realRightSpeed  = (rightWheelEncoderNow - rightWheelEncoderLast)*1000*200*2*3.14*0.003/1000;
+
+	//record the last time encoder value
+	leftWheelEncoderLast  = leftWheelEncoderNow;
+	rightWheelEncoderLast = rightWheelEncoderNow;
+}
+
+void HighLevelComm::obstacleDetection(ADCClass& adc)
+{
+	//Measure the signals of the Sharp sensors
+	float sensorsVoltage[3];
+	for (int i = 0; i < 3; i++) {
+		sensorsVoltage[i] = adc.getAnalogValue(i) / 1000.0f;
+	}
+
+	//Convert the voltage[V] to distance[cm] using the characteristics of the sensor
+	//Sensor measuring distance (4cm-30cm)
+	//the slope1[4cm-6cm] has little difference with the slope2[6cm-30cm]
+	float distance[3];
+	for (int i = 0; i < 3; i++) {
+		if (sensorsVoltage[i] >= 2.0 && sensorsVoltage[i] <= 3.0) {
+			distance[i] = 8.55 / (sensorsVoltage[i] - 0.5925); //distance->[4cm,6cm]
+		} else if (sensorsVoltage[i] >= 0.41) {
+			distance[i] = 13.156 / (sensorsVoltage[i] + 0.0289); //distance->[6cm,30cm]
+		} else {
+			distance[i] = infinityf(); //the distance here does not make sense.
+		}
+	}
+	distanceL=(int)distance[0];
+	distanceM=(int)distance[1];
+	distanceR=(int)distance[2];
+	//Check distances: return true when there is some obstacle in front of the car.
+	//Use threshold value: 10 cm
+//	for (int i = 0; i < 3; i++) {
+//		if (distance[i] <= 10) {
+//			return true;
+//		}
+//	}
+//	return false;
+}
+
+
+//*uint8_t HighLevelComm::copy(uint8_t array[], uint8_t a[], uint8_t b[], uint8_t n, uint8_t m)
+//{
+//	uint8_t i,j;
+//	for (i=0; i<n; i++)
+//		b[i]=array[i];
+//	for (j=0; j<m; j++, i++)
+//		b[i]=a[j];
+//	return b;
+//}

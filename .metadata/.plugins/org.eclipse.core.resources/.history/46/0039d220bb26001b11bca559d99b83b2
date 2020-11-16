@@ -1,0 +1,158 @@
+/*
+ * HighLevelComm.cpp
+ *
+ *  Created on: 2020年7月14日
+ *      Author: 59488
+ */
+
+#include <HighLevelComm.h>
+#include "ClassUartTest.h"
+#include "PWM.h"
+#include "string.h"
+#include "main.h"
+#include <stdlib.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+#include <iostream>
+
+HighLevelComm::HighLevelComm(UART_HandleTypeDef& uart,TIM_HandleTypeDef& pwm) :
+	myTxData_OK("OK\r\n"),
+	myTxData_Battery("-1\r\n"), //initial battery life is 50%
+	myTxData_Distance("-1\r\n"), //initial distance is 50mm
+	uart(uart)
+{
+}
+bool HighLevelComm::ParseMessage()
+{
+	uint8_t myRxData_1byte;
+	int32_t receivedNumber;
+	memset(receivedCommand,0,100);
+
+	if (!uart.receiveMessage(&myRxData_1byte, sizeof(myRxData_1byte), 100)){
+		return false;
+	}
+
+	if (myRxData_1byte != '\n')	//Store character, if it is not '\n'
+	{
+		receivedQueue.Buffer_Write(myRxData_1byte);
+		return false;
+	}
+
+	//receivedQueue.Buffer_Write('\0');
+	//Parse received line
+	size_t j=0;
+	while (receivedQueue.Buffer_Read((uint8_t*)(receivedCommand + j)) && j < sizeof(receivedCommand)) {
+		j++;
+	}
+
+	if (j == sizeof(receivedCommand))	//Check receivedCommand length
+		return false;
+
+	//TODO-Akos: You get the received line in receivedCommand, parse the line using strstr and sscanf. I give you an example:
+	if (strstr(receivedCommand, "Stop") != NULL){
+		Stop();
+	}else if (strstr(receivedCommand, "Battery") != NULL){
+		showBattery();
+	}else if (strstr(receivedCommand, "Distance") != NULL){
+		showDistance();
+	}else if (sscanf(receivedCommand,"Move,%ld", &receivedNumber) == 1){
+		Move(receivedNumber);
+	}else if (sscanf(receivedCommand,"Turn,%ld", &receivedNumber) == 1){
+		Turn(receivedNumber);
+	}else{
+		return false;
+	}
+
+	return true;
+}
+bool HighLevelComm::Move(int x)  //x means moving at x millimeter/second.
+{
+	//TODO-Akos: You can check the input parameter here.
+	if (pwm.setPWM(x / MaxSpeed)) {
+		isRun = true;
+		if(x==100){
+			if (uart.sendMessage(myTxData_OK, sizeof(myTxData_OK), 100) == true) {
+				return true;
+			} else{
+				Error_Handler(UartError);
+				return false;
+			}
+		}
+	} else
+		return false;
+}
+
+bool HighLevelComm::Stop()
+{
+	if (isRun == true) {	//"Stop\n"
+		if (pwm.setPWM(0)) {
+			isRun = false;
+			if (uart.sendMessage(myTxData_OK, sizeof(myTxData_OK), 100)
+					== true) {
+				return true;
+			} else{
+				Error_Handler(UartError);
+				return false;
+			}
+		} else
+			return false;
+	} else
+		return false;
+}
+
+bool HighLevelComm::Turn(float x) //'x' means the angle of the steering system from -45 degrees to 45 degrees
+{
+	if (isRun == true) {	//"Turn\n"
+		if (setSteering(&servoPWM, x)) {	//finish the turning
+			if (uart.sendMessage(myTxData_OK, sizeof(myTxData_OK), 100)
+					== true) {
+				return true;
+			} else {
+				Error_Handler(UartError);
+				return false;
+			}
+		}else
+			return false;
+	} else
+		return false;
+}
+
+bool HighLevelComm::showBattery()
+{
+	//"Battery\n" means getting the battery life information
+	if (uart.sendMessage(myTxData_Battery, sizeof(myTxData_Battery), 100)== true) {
+		//myTxData_Battery saves the data from the battery sensor about its battery life.
+		return true;
+	} else
+	{
+		Error_Handler(UartError);
+		return false;
+	}
+}
+
+bool HighLevelComm::showDistance()
+{
+
+	if (isRun == true) {//"Distance\n" means getting the distance of the nearest obstacle information
+		if (uart.sendMessage(myTxData_Distance, sizeof(myTxData_Distance), 100)== true) {
+			//myTxData_Distance saves the data from the distance sensor.
+			return true;
+		} else
+		{
+			Error_Handler(UartError);
+			return false;
+		}
+	} else
+		return false;
+}
+
+//*uint8_t HighLevelComm::copy(uint8_t array[], uint8_t a[], uint8_t b[], uint8_t n, uint8_t m)
+//{
+//	uint8_t i,j;
+//	for (i=0; i<n; i++)
+//		b[i]=array[i];
+//	for (j=0; j<m; j++, i++)
+//		b[i]=a[j];
+//	return b;
+//}

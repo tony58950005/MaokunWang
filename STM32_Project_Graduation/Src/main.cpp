@@ -36,10 +36,10 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 /* USER CODE END Includes */
-uint8_t distanceR,distanceL,distanceM;
-uint8_t realLeftSpeed, realRightSpeed;
+//uint8_t distanceR,distanceL,distanceM;
 uint32_t EncoderPulseCount;
 const char* ErrorInfo;
+
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
 
@@ -67,13 +67,14 @@ void MX_GPIO_Init(void);
 bool obstacleDetection(ADCClass& adc);
 bool getMotorSpeed(SpeedMeasurement& motorSpeed);
 void controlSpeed(PID_Controller& motor, float referenceSpeed, float actualSpeed);
-void setSteering(PWM& servoPWM, float steeringAngle);
+//void setSteering(PWM& servoPWM, float steeringAngle);
+
 PID_Controller motorControlInit(void);
-int getDistanceL();
-int getDistanceM();
-int getDistanceR();
-//SpeedMeasurement motorSpeedInit(void);
-PWM steeringServoInit(void);
+
+//int getDistanceL();
+//int getDistanceM();
+//int getDistanceR();
+//PWM steeringServoInit(void);
 
 int _write(int file, char *ptr, int len)
 {
@@ -96,6 +97,8 @@ int _write(int file, char *ptr, int len)
 /* USER CODE BEGIN 0 */
 UART_HandleTypeDef huart2;
 TIM_HandleTypeDef htim2;
+TIM_Base_InitTypeDef servoInit2;
+TIM_OC_InitTypeDef sConfigOC2;
 /* USER CODE END 0 */
 
 /**
@@ -119,21 +122,21 @@ int main(void)
 	MX_GPIO_Init();
 
 	ADCClass adc;
-	PWM servoPWM = steeringServoInit();
-	PID_Controller motor = motorControlInit();
-	SpeedMeasurement motorSpeed; //=motorSpeedInit();
-	HighLevelComm HighLevelCommTest(huart2, htim2);
+	//PWM servoPWM = steeringServoInit();
+	//PID_Controller motor = motorControlInit();
+	//SpeedMeasurement motorSpeed; //=motorSpeedInit();
+	HighLevelComm HighLevelCommTest(huart2, servoInit2,sConfigOC2);
 
 	while (1)
 	{
-		setSteering(servoPWM, 0.0f);
-		controlSpeed(motor, 0.0f, 0.0f);
-		if(getMotorSpeed(motorSpeed)){
-
-		}
-		if(obstacleDetection(adc)){
-
-		}
+		//setSteering(servoPWM, 0.0f);
+		//controlSpeed(motor, 0.0f, 0.0f);
+//		if(getMotorSpeed(motorSpeed)){
+//
+//		}
+//		if(obstacleDetection(adc)){
+//
+//		}
 		HighLevelCommTest.ParseMessage();
 
 	}
@@ -147,133 +150,27 @@ SpeedMeasurement motorSpeedInit()
 
 
 
-bool getMotorSpeed(SpeedMeasurement& motorSpeed)
-{
-	//5ms speed measurement, one time unit is 5ms
-	static uint8_t leftWheelEncoderNow    = 0;
-	static uint8_t rightWheelEncoderNow   = 0;
-	static uint8_t leftWheelEncoderLast   = 0;
-	static uint8_t rightWheelEncoderLast  = 0;
-
-	leftWheelEncoderNow += motorSpeed.getTIMx_DeltaCnt(1); //(TIM2->CCR1);
-	rightWheelEncoderNow+= motorSpeed.getTIMx_DeltaCnt(0);//(TIM2->CCR2);
-
-	 //speed measurement for every 5ms
-	realLeftSpeed   = (leftWheelEncoderNow - leftWheelEncoderLast)*1000*200*2*3.14*0.003/1000;//modify the last number "1000"->"xxxx"
-	realRightSpeed  = (rightWheelEncoderNow - rightWheelEncoderLast)*1000*200*2*3.14*0.003/1000;
-
-	//record the last time encoder value
-	leftWheelEncoderLast  = leftWheelEncoderNow;
-	rightWheelEncoderLast = rightWheelEncoderNow;
-}
-
-PWM steeringServoInit()
-{
-	TIM_Base_InitTypeDef servoInit;
-	servoInit.Prescaler = 83;
-	servoInit.CounterMode = TIM_COUNTERMODE_UP;
-	servoInit.Period = 20000;
-	servoInit.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-	servoInit.RepetitionCounter = 0;
-
-	TIM_OC_InitTypeDef sConfigOC = {0};
-	sConfigOC.OCMode = TIM_OCMODE_PWM1;
-	sConfigOC.Pulse = 1500;
-	sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
-	sConfigOC.OCNPolarity = TIM_OCNPOLARITY_HIGH;
-	sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
-	sConfigOC.OCIdleState = TIM_OCIDLESTATE_RESET;
-	sConfigOC.OCNIdleState = TIM_OCNIDLESTATE_RESET;
-	PWM servoPWM(TIM10, servoInit, sConfigOC, TIM_CHANNEL_1);
-
-	return servoPWM;
-}
-
-PID_Controller motorControlInit()
-{
-	TIM_Base_InitTypeDef servoInit;
-	servoInit.Prescaler = 1;
-	servoInit.CounterMode = TIM_COUNTERMODE_CENTERALIGNED3;
-	servoInit.Period = 2100;
-	servoInit.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-	servoInit.RepetitionCounter = 0;
-
-	TIM_OC_InitTypeDef sConfigOC = {0};
-	sConfigOC.OCMode = TIM_OCMODE_PWM1;
-	sConfigOC.Pulse = servoInit.Period/2;
-	sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
-	sConfigOC.OCNPolarity = TIM_OCNPOLARITY_HIGH;
-	sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
-	sConfigOC.OCIdleState = TIM_OCIDLESTATE_SET;
-	sConfigOC.OCNIdleState = TIM_OCNIDLESTATE_RESET;
-	PWM motorPWM1(TIM8, servoInit, sConfigOC, TIM_CHANNEL_1);
-	PWM motorPWM2(TIM8, servoInit, sConfigOC, TIM_CHANNEL_2);
-	PID_Controller motorController(1.0, 0.0, 0.0, motorPWM1, motorPWM2);
-
-	return motorController;
-}
-
-bool obstacleDetection(ADCClass& adc)
-{
-	//Measure the signals of the Sharp sensors
-	float sensorsVoltage[3];
-	for (int i = 0; i < 3; i++) {
-		sensorsVoltage[i] = adc.getAnalogValue(i) / 1000.0f;
-	}
-
-	//Convert the voltage[V] to distance[cm] using the characteristics of the sensor
-	//Sensor measuring distance (4cm-30cm)
-	//the slope1[4cm-6cm] has little difference with the slope2[6cm-30cm]
-	float distance[3];
-	for (int i = 0; i < 3; i++) {
-		if (sensorsVoltage[i] >= 2.0 && sensorsVoltage[i] <= 3.0) {
-			distance[i] = 8.55 / (sensorsVoltage[i] - 0.5925); //distance->[4cm,6cm]
-		} else if (sensorsVoltage[i] >= 0.41) {
-			distance[i] = 13.156 / (sensorsVoltage[i] + 0.0289); //distance->[6cm,30cm]
-		} else {
-			distance[i] = infinityf(); //the distance here does not make sense.
-		}
-	}
-	distanceL=distance[0];
-	distanceM=distance[1];
-	distanceR=distance[2];
 
 
-	//Check distances: return true when there is some obstacle in front of the car.
-	//Use threshold value: 10 cm
-	for (int i = 0; i < 3; i++) {
-		if (distance[i] <= 10) {
-			return true;
-		}
-	}
-	return false;
-}
 
-int getDistanceL(){
-	return distanceL;
-}
-int getDistanceM(){
-	return distanceM;
-}
-int getDistanceR(){
-	return distanceR;
-}
-void controlSpeed(PID_Controller& motor, float referenceSpeed, float actualSpeed)
-{
-	//PID for speed control
-	motor.PIDController_Update(referenceSpeed, actualSpeed);
-}
 
-void setSteering(PWM& servoPWM, float steeringAngle)
-{
-	//TODO: set the steering for the servo
-	//presuming the do-able steeringAngle ranges from -45 (PWM->5%) to 45(PWM->10%) degrees.
-	// the characteristic line (saturated steeringAgnle, PWM high level line[1.5ms, 2.5ms])
-	//goes through point (45, 10[%]),(-45, 5[%])
-	float percent=1.0f/18.0f*steeringAngle + 135.0f/18.0f;
-	if(servoPWM.setPWM(percent)==false)
-		Error_Handler(PWMError);
-}
+
+
+
+
+//int getDistanceL(){
+//	return distanceL;
+//}
+//int getDistanceM(){
+//	return distanceM;
+//}
+//int getDistanceR(){
+//	return distanceR;
+//}
+
+
+
+
 
 
 /**

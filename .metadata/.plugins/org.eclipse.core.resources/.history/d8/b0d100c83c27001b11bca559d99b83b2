@@ -1,0 +1,199 @@
+/*
+ * HighLevelComm.cpp
+ *
+ *  Created on: 2020年7月14日
+ *      Author: 59488
+ */
+
+#include <HighLevelComm.h>
+#include "ClassUartTest.h"
+#include <PIDController.h>
+#include <SpeedMeasurement.h>
+#include "stm32f4xx_hal_tim.h"
+#include "stm32f407xx.h"
+#include "PWM.h"
+#include "string.h"
+#include "main.h"
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+#include <iostream>
+
+HighLevelComm::HighLevelComm(UART_HandleTypeDef& uart,TIM_Base_InitTypeDef servoInit,TIM_OC_InitTypeDef sConfigOC) :
+	myTxData_OK("OK\r\n"),
+	myTxData_Battery("50\r\n"), //initial battery life is 50%
+	myTxData_Distance("50\r\n"), //initial distance is 50mm
+	uart(uart),
+	servoPWM(TIM10, servoInit, sConfigOC, TIM_CHANNEL_1)
+{
+}
+bool HighLevelComm::ParseMessage()
+{
+	uint8_t myRxData_1byte;
+	int32_t receivedNumber;
+	memset(receivedCommand,0,100);
+
+	if (!uart.receiveMessage(&myRxData_1byte, sizeof(myRxData_1byte), 100)){
+		return false;
+	}
+
+	if (myRxData_1byte != '\n')	//Store character, if it is not '\n'
+	{
+		receivedQueue.Buffer_Write(myRxData_1byte);
+		return false;
+	}
+
+	//receivedQueue.Buffer_Write('\0');
+	//Parse received line
+	size_t j=0;
+	while (receivedQueue.Buffer_Read((uint8_t*)(receivedCommand + j)) && j < sizeof(receivedCommand)) {
+		j++;
+	}
+
+	if (j == sizeof(receivedCommand))	//Check receivedCommand length
+		return false;
+
+	//TODO-Akos: You get the received line in receivedCommand, parse the line using strstr and sscanf. I give you an example:
+	if (strstr(receivedCommand, "Stop") != NULL){
+		Stop();
+	}else if (strstr(receivedCommand, "Battery") != NULL){
+		showBattery();
+	}else if (strstr(receivedCommand, "Distance") != NULL){
+		showDistance();
+	}else if (sscanf(receivedCommand,"Move,%ld", &receivedNumber) == 1){
+		Move(receivedNumber);
+	}else if (sscanf(receivedCommand,"Turn,%ld", &receivedNumber) == 1){
+		Turn(receivedNumber);
+	}else{
+		return false;
+	}
+
+	return true;
+}
+bool HighLevelComm::Move(int x)  //x means moving at x millimeter/second.
+{
+	//TODO-Akos: You can check the input parameter here.
+//	if (servoPWM.setPWM(x / MaxSpeed)) {
+//		isRun = true;
+//		if(x==100){
+//			if (uart.sendMessage(myTxData_OK, sizeof(myTxData_OK), 100) == true) {
+//				return true;
+//			} else{
+//				Error_Handler(UartError);
+//				return false;
+//			}
+//		}
+//	} else
+		return false;
+}
+
+bool HighLevelComm::Stop()
+{
+	motor.motorControlInit();
+	if (isRun == true) {	//"Stop\n"
+		if (controlSpeed(motor, 0, leftWheelEncoderNow)) {
+			isRun = false;
+			if (uart.sendMessage(myTxData_OK, sizeof(myTxData_OK), 100)
+					== true) {
+				return true;
+			} else {
+				Error_Handler(UartError);
+				return false;
+			}
+		} else {
+			return false;
+		}
+	} else {
+		return false;
+	}
+}
+
+bool HighLevelComm::Turn(int x) //'x' means the angle of the steering system from -45 degrees to 45 degrees
+{
+	servoPWM.steeringServoInit();
+	//"Turn\n"
+	if (setSteering(servoPWM, x)) {	//finish the turning
+		if (uart.sendMessage(myTxData_OK, sizeof(myTxData_OK), 100) == true) {
+			return true;
+		} else {
+			Error_Handler(UartError);
+			return false;
+		}
+	} else
+		return false;
+
+}
+
+bool HighLevelComm::showBattery()
+{
+	//"Battery\n" means getting the battery life information
+	if (uart.sendMessage(myTxData_Battery, sizeof(myTxData_Battery), 100)== true) {
+		//myTxData_Battery saves the data from the battery sensor about its battery life.
+		return true;
+	} else
+	{
+		Error_Handler(UartError);
+		return false;
+	}
+}
+
+bool HighLevelComm::showDistance()
+{
+	//"Distance\n" means getting the distance of the nearest obstacle information
+	if (uart.sendMessage(myTxData_Distance, sizeof(myTxData_Distance), 100)== true) {
+		//myTxData_Distance saves the data from the distance sensor.
+		return true;
+	} else
+	{
+		Error_Handler(UartError);
+		return false;
+	}
+}
+
+bool HighLevelComm::setSteering(PWM& servoPWM, float steeringAngle)
+{
+	//TODO: set the steering for the servo
+	//presuming the do-able steeringAngle ranges from -45 (PWM->5%) to 45(PWM->10%) degrees.
+	// the characteristic line (saturated steeringAgnle, PWM high level line[1.5ms, 2.5ms])
+	//goes through point (45, 10[%]),(-45, 5[%])
+	float percent=1.0f/18.0f*steeringAngle + 135.0f/18.0f;
+	if(servoPWM.setPWM(percent)==false){
+		Error_Handler(PWMError);
+		return false;
+	}
+	return true;
+}
+
+bool HighLevelComm::controlSpeed(PID_Controller& motor, float referenceSpeed, float actualSpeed)
+{
+	//PID for speed control
+	motor.PIDController_Update(referenceSpeed, actualSpeed);
+}
+
+bool HighLevelComm::getMotorSpeed(SpeedMeasurement& motorSpeed)
+{
+	//5ms speed measurement, one time unit is 5ms
+
+
+	leftWheelEncoderNow += motorSpeed.getTIMx_DeltaCnt(1); //(TIM2->CCR1);
+	rightWheelEncoderNow+= motorSpeed.getTIMx_DeltaCnt(0);//(TIM2->CCR2);
+
+	 //speed measurement for every 5ms
+	realLeftSpeed   = (leftWheelEncoderNow - leftWheelEncoderLast)*1000*200*2*3.14*0.003/1000;//modify the last number "1000"->"xxxx"
+	realRightSpeed  = (rightWheelEncoderNow - rightWheelEncoderLast)*1000*200*2*3.14*0.003/1000;
+
+	//record the last time encoder value
+	leftWheelEncoderLast  = leftWheelEncoderNow;
+	rightWheelEncoderLast = rightWheelEncoderNow;
+}
+
+
+//*uint8_t HighLevelComm::copy(uint8_t array[], uint8_t a[], uint8_t b[], uint8_t n, uint8_t m)
+//{
+//	uint8_t i,j;
+//	for (i=0; i<n; i++)
+//		b[i]=array[i];
+//	for (j=0; j<m; j++, i++)
+//		b[i]=a[j];
+//	return b;
+//}

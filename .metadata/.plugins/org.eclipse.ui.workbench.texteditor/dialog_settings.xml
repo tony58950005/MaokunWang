@@ -6,23 +6,23 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="motorSpeed"/>
+		<item key="selection" value="setSteering"/>
 		<list key="findhistory">
+			<item value="setSteering"/>
+			<item value="getMotorSpeed"/>
+			<item value="huart2"/>
+			<item value="init"/>
+			<item value="servoPWM"/>
+			<item value="}"/>
+			<item value="setPWM"/>
+			<item value="pwm"/>
+			<item value="PWM"/>
+			<item value="uart"/>
+			<item value="distanceR"/>
 			<item value="motorSpeed"/>
 			<item value="TIM8"/>
 			<item value="7fff"/>
 			<item value="Encoder_Init_TIM8"/>
-			<item value="speed"/>
-			<item value="Set"/>
-			<item value="SetCounter"/>
-			<item value="Set Counter"/>
-			<item value="Counter"/>
-			<item value="TIM_SetCounter"/>
-			<item value="CNT"/>
-			<item value="TIM8_CNT"/>
-			<item value="TIM8_"/>
-			<item value="CHANNEL"/>
-			<item value="channel"/>
 		</list>
 		<list key="replacehistory">
 			<item value="tim8"/>

@@ -1,16 +1,20 @@
 #g++ -o main.so -shared -fPIC main.cpp
 #python ObstacleAvoidance.py
 import serial
-import ctypes
-so=ctypes.cdll.LoadLibrary
-lib=so("./main.so")
-print 'obstacleDetection(adc)'
-state=lib.obstacleDetection(adc)
+#import ctypes
+#so=ctypes.cdll.LoadLibrary
+#lib=so("./main.so")
+#print 'obstacleDetection(adc)'
+# state=lib.obstacleDetection(adc)
 #from main.cpp import obstacleDetction
 
-distanceL=lib.getDistanceL()
-distanceM=lib.getDistanceM()
-distanceR=lib.getDistanceR()
+# distanceL=lib.getDistanceL()
+# distanceM=lib.getDistanceM()
+# distanceR=lib.getDistanceR()
+distance_threshold=10
+distanceL=0
+distanceM=0
+distanceR=0
 serialport =serial.Serial("COM1", baudrate=115200, timeout=3.0)
 serialport.open()
 print(serialport)
@@ -19,54 +23,78 @@ if serialport.isOpen():
 else:
     print("open failed")
 
+
+def ObstacleDetection():
+    serialport.write("Distance\n")
+    str=print(serialport.readline())
+    distance=str.split(str=":")
+    new_numbers = []
+    for n in numbers:
+        new_numbers.append(int(n))
+    distance = new_numbers
+    distanceL=distance[0]
+    distanceM=distance[1]
+    distanceR=distance[2]
+    for i in range(len(distances)):
+        if(distance[i]<distance_threshold):
+            return False
+    
+def Stop():
+    serialport.write("Stop\n")
+    print(serialport.readline())
+
+
+def Move(x):
+    serialport.write("Move\n,x")
+    serialport.write("Delay\n,1000")
+    print(serialport.readline())
+
+def Turn(x):
+    serialport.write("Turn\n,x")
+    serialport.write("Delay\n,1000")
+    print(serialport.readline())
+
 #Simple algorithm: if meet obstacle ->move back ->Detect&Turn
 def ObstacleAvoid1():
-    if(state):
-        serialport.write("Stop\n")
-        #print(serialport.readline())
-        serialport.write("Move\n,-10")
-        #print(serialport.readline())
-        serialport.write("Stop\n")
-        #print(serialport.readline())
-        if():
-            serialport.write("Turn\n,45")
-            #print(serialport.readline())
-            serialport.write("Stop\n")
-            #print(serialport.readline())
+    if(ObstacleDetection()):
+        Stop()
+        Move(-10)
+        Stop()
+        if(distanceL<distanceR):
+            Turn(45)
+            Stop())
         else:
-            serialport.write("Turn\n,-45")
-            #print(serialport.readline())
-            serialport.write("Stop\n")
-            #print(serialport.readline())
+            Turn(-45)
+            Stop())
     else:
-        serialport.write("Move\n,10")
-        #print(serialport.readline())
+        Move(10)
+        
 
 #Handle 8 cases
 def ObstacleAvoid2():
-    if distanceL>10 & distanceM>10 & distanceR>10:
-        serialport.write("Move\n,10")
-    elif distanceL>10 & distanceM<=10 & distanceR>10:
-        serialport.write("Stop\n")
-        serialport.write("Turn\n,-45")
-    elif distanceL>10 & distanceM>10 & distanceR<=10:
-        serialport.write("Stop\n")
-        serialport.write("Turn\n,-45")
-    elif distanceL<=10 & distanceM>10 & distanceR>10:
-        serialport.write("Stop\n")
-        serialport.write("Turn\n,45")
-    elif distanceL>10 & distanceM<=10 & distanceR<=10:
-        serialport.write("Stop\n")
-        serialport.write("Turn\n,-45")
-    elif distanceL<=10 & distanceM<=10 & distanceR>10:
-        serialport.write("Stop\n")
-        serialport.write("Turn\n,45")
-    elif distanceL<=10 & distanceM>10 & distanceR<=10:
-        serialport.write("Stop\n")
-        serialport.write("Move\n,45")
-    elif distanceL<=10 & distanceM<=10 & distanceR<=10:
-        serialport.write("Stop\n")
-        serialport.write("Stop\n")
+    if distanceL>distance_threshold & distanceM>distance_threshold & distanceR>distance_threshold:
+        Move(10)
+    elif distanceL>distance_threshold & distanceM<=distance_threshold & distanceR>distance_threshold:
+        Stop()
+        Turn(-45)
+    elif distanceL>distance_threshold & distanceM>distance_threshold & distanceR<=distance_threshold:
+        Stop())
+        Turn(-45)
+    elif distanceL<=distance_threshold & distanceM>distance_threshold & distanceR>distance_threshold:
+        Stop()
+        Turn(45)
+    elif distanceL>distance_threshold & distanceM<=distance_threshold & distanceR<=distance_threshold:
+        Stop()
+        Turn(-45)
+    elif distanceL<=distance_threshold & distanceM<=distance_threshold & distanceR>distance_threshold:
+        Stop()
+        Turn(45)
+    elif distanceL<=distance_threshold & distanceM>distance_threshold & distanceR<=distance_threshold:
+        Stop()
+        Move(45)
+    elif distanceL<=distance_threshold & distanceM<=distance_threshold & distanceR<=distance_threshold:
+        Stop()
+        Stop()
     else:
         pass
 

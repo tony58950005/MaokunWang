@@ -14,6 +14,7 @@ class PID_Controller {
 public:
 	PID_Controller(float Kp, float Ki, float Kd, PWM motorPWM1, PWM motorPWM2);
 	void PIDController_Update(float setpoint, float measurement);
+	bool motorControlInit();
 private:
 	void setSpeed(float percent);
 
