@@ -42,17 +42,20 @@ def ObstacleDetection():
 def Stop():
     serialport.write("Stop\n")
     print(serialport.readline())
+	#TODO: check the response. It is okay, when you receive back OK. Otherwise, call an error handle, in which you stop the car.
 
 
 def Move(x):
     serialport.write("Move\n,x")
     serialport.write("Delay\n,1000")
     print(serialport.readline())
+	#TODO: check the response. It is okay, when you receive back OK. Otherwise, call an error handle, in which you stop the car.
 
 def Turn(x):
     serialport.write("Turn\n,x")
     serialport.write("Delay\n,1000")
     print(serialport.readline())
+	#TODO: check the response. It is okay, when you receive back OK. Otherwise, call an error handle, in which you stop the car.
 
 #Simple algorithm: if meet obstacle ->move back ->Detect&Turn
 def ObstacleAvoid1():

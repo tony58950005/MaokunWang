@@ -106,9 +106,6 @@ TIM_OC_InitTypeDef sConfigOC2;
   * @retval int
   */
 
-//TODO (Akos): PWM class with three channels
-//TODO (Akos): High-level architecture
-
 int main(void)
 {
 	/* MCU Configuration--------------------------------------------------------*/

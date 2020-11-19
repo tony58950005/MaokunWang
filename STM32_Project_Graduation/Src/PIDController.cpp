@@ -68,7 +68,7 @@ void PID_Controller::PIDController_Update(float setpoint, float measurement){
 	setSpeed(out);
 }
 
-bool PID_Controller::motorControlInit()
+bool PID_Controller::motorControlInit() //TODO: The PIDController.cpp is a general PID class, you put a specific instance here. Don't do that. You can create the PID controller in the high level comm class.
 {
 	TIM_Base_InitTypeDef servoInit;
 	servoInit.Prescaler = 1;

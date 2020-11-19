@@ -64,7 +64,7 @@ bool PWM::setPWM(float percent)
 	}
 }
 
-bool PWM::steeringServoInit()
+bool PWM::steeringServoInit()	//TODO: The PWM.cpp is a general PWM class, you put a specific instance here. Don't do that. You can create the servo PWM in the high level comm class.
 {
 	TIM_Base_InitTypeDef servoInit;
 	servoInit.Prescaler = 83;

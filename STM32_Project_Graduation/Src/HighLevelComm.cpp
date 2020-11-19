@@ -80,14 +80,14 @@ bool HighLevelComm::ParseMessage()
 bool HighLevelComm::Move(int x)  //x means moving at x millimeter/second.
 {
 
-	//TODO-Akos: You can check the input parameter here.
+	//TODO: Call init function in the ctor once
 	if(!motor.motorControlInit()){
 
 	}
 	if(!getMotorSpeed(motorSpeed)){
 
 	}
-	if (controlSpeed(motor, 0, (realLeftSpeed+realRightSpeed)/2)) {
+	if (controlSpeed(motor, 0, (realLeftSpeed+realRightSpeed)/2)) {	//TODO: reference is wrong (it is set to 0)
 		isRun = true;
 		if (uart.sendMessage(myTxData_OK, sizeof(myTxData_OK), 100) == true) {
 			return true;
@@ -96,6 +96,7 @@ bool HighLevelComm::Move(int x)  //x means moving at x millimeter/second.
 			return false;
 		}
 	} else{
+		//TODO: send back some error message over uart
 		Error_Handler(ControlSpeedError);
 		return false;
 	}
@@ -103,9 +104,12 @@ bool HighLevelComm::Move(int x)  //x means moving at x millimeter/second.
 
 bool HighLevelComm::Stop()
 {
+	//TODO: Call init function in the ctor once
 	motor.motorControlInit();
+	//TODO: You don't need to know the actual speed to stop the car
 	getMotorSpeed(motorSpeed);
 	if (isRun == true) {	//"Stop\n"
+		//TODO: Don't call the PID controller, simple stop the car
 		if (controlSpeed(motor, 0, (realLeftSpeed+realRightSpeed)/2)) {
 			isRun = false;
 			if (uart.sendMessage(myTxData_OK, sizeof(myTxData_OK), 100)== true) {
@@ -115,6 +119,7 @@ bool HighLevelComm::Stop()
 				return false;
 			}
 		} else {
+			//TODO: send back some error message over uart
 			Error_Handler(ControlSpeedError);
 			return false;
 		}
@@ -125,6 +130,7 @@ bool HighLevelComm::Stop()
 
 bool HighLevelComm::Turn(int x) //'x' means the angle of the steering system from -45 degrees to 45 degrees
 {
+	//TODO: Call this init function in the ctor once
 	servoPWM.steeringServoInit();
 	if (setSteering(servoPWM, x)) {	//finish the turning
 		if (uart.sendMessage(myTxData_OK, sizeof(myTxData_OK), 100) == true) {
@@ -134,6 +140,7 @@ bool HighLevelComm::Turn(int x) //'x' means the angle of the steering system fro
 			return false;
 		}
 	} else{
+		//TODO: send back some error message over uart
 		Error_Handler(SteeringError);
 		return false;
 	}
@@ -148,6 +155,7 @@ bool HighLevelComm::showBattery()
 		return true;
 	} else
 	{
+		//TODO: send back some error message over uart
 		Error_Handler(UartError);
 		return false;
 	}
@@ -157,7 +165,9 @@ bool HighLevelComm::showDistance()
 {
 	//"Distance\n" means getting the distance of the nearest obstacle information
 	//myTxData_Distance saves the data from the distance sensor.
+	//TODO: you call the obstacleDetection
 	obstacleDetection(adc);
+	//TODO: This code is wrong. Use snprintf to create the myTxData_Distance string with distance values.
 	myTxData_Distance[0]=distanceL;
 	myTxData_Distance[1]=':';
 	myTxData_Distance[2]=distanceM;
@@ -167,6 +177,7 @@ bool HighLevelComm::showDistance()
 		return true;
 	} else
 	{
+		//TODO: send back some error message over uart
 		Error_Handler(UartError);
 		return false;
 	}
@@ -179,7 +190,6 @@ bool HighLevelComm::Delay(int x) //Delay unit:,milliseconds
 
 bool HighLevelComm::setSteering(PWM& servoPWM, float steeringAngle)
 {
-	//TODO: set the steering for the servo
 	//presuming the do-able steeringAngle ranges from -45 (PWM->5%) to 45(PWM->10%) degrees.
 	// the characteristic line (saturated steeringAgnle, PWM high level line[1.5ms, 2.5ms])
 	//goes through point (45, 10[%]),(-45, 5[%])
