@@ -51,7 +51,7 @@ uint32_t SpeedMeasurement::getTIMx_DeltaCnt(uint8_t channel1)
 }
 
 
-/*function: calculate the speed of roatation
+/*function: calculate the speed of rotation
  * input param: uint8_t *LeftSpeed, uint8_t *rightSpeed
  * return: void
  * calculate the linear speed of the rotation, positive/negative, speed=value*1000(unit: mm/s)

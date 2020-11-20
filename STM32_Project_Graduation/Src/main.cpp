@@ -38,7 +38,7 @@
 /* USER CODE END Includes */
 //uint8_t distanceR,distanceL,distanceM;
 uint32_t EncoderPulseCount;
-const char* ErrorInfo;
+uint8_t ErrorInfo[33];
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
@@ -67,14 +67,6 @@ void MX_GPIO_Init(void);
 bool obstacleDetection(ADCClass& adc);
 bool getMotorSpeed(SpeedMeasurement& motorSpeed);
 void controlSpeed(PID_Controller& motor, float referenceSpeed, float actualSpeed);
-//void setSteering(PWM& servoPWM, float steeringAngle);
-
-PID_Controller motorControlInit(void);
-
-//int getDistanceL();
-//int getDistanceM();
-//int getDistanceR();
-//PWM steeringServoInit(void);
 
 int _write(int file, char *ptr, int len)
 {
@@ -84,10 +76,6 @@ int _write(int file, char *ptr, int len)
 	  ITM_SendChar((*ptr++));
 	return len;
 }
-
-
-
-
 
 /* USER CODE BEGIN PFP */
 
@@ -99,6 +87,7 @@ UART_HandleTypeDef huart2;
 TIM_HandleTypeDef htim2;
 TIM_Base_InitTypeDef servoInit2;
 TIM_OC_InitTypeDef sConfigOC2;
+ErrorState errorSource;
 /* USER CODE END 0 */
 
 /**
@@ -126,50 +115,9 @@ int main(void)
 
 	while (1)
 	{
-		//setSteering(servoPWM, 0.0f);
-		//controlSpeed(motor, 0.0f, 0.0f);
-//		if(getMotorSpeed(motorSpeed)){
-//
-//		}
-//		if(obstacleDetection(adc)){
-//
-//		}
 		HighLevelCommTest.ParseMessage();
-
 	}
 }
-
-SpeedMeasurement motorSpeedInit()
-{
-	SpeedMeasurement DCMotor;
-	return DCMotor;
-}
-
-
-
-
-
-
-
-
-
-
-
-//int getDistanceL(){
-//	return distanceL;
-//}
-//int getDistanceM(){
-//	return distanceM;
-//}
-//int getDistanceR(){
-//	return distanceR;
-//}
-
-
-
-
-
-
 /**
   * @brief System Clock Configuration
   * @retval None
@@ -325,19 +273,37 @@ void Error_Handler(ErrorState errorSource)
 	switch (errorSource)
 	{
 		case PWMError:
-			ErrorInfo= "PWM error!\n";
+			strcpy((char*)ErrorInfo, "PWM error!\r\n");
 			break;
 		case ADCError:
-			ErrorInfo= "ADC error!\n";
+			strcpy((char*)ErrorInfo, "ADC error!\r\n");
 			break;
 		case HighLevelCommError:
-			ErrorInfo= "High-Level Communication error!\n";
+			strcpy((char*)ErrorInfo, "High-Level Communication error!\r\n");
 			break;
 		case AssertFailError:
-			ErrorInfo= "Assert Fail error!\n";
+			strcpy((char*)ErrorInfo, "Assert Fail error!\r\n");
 			break;
 		case UartError:
-			ErrorInfo= "UART error!\n";
+			strcpy((char*)ErrorInfo, "UART error!\r\n");
+			break;
+		case GetMotorSpeedError:
+			strcpy((char*)ErrorInfo, "Get Motor Speed error!\r\n");
+			break;
+		case SteeringError:
+			strcpy((char*)ErrorInfo, "Steering error!\r\n");
+			break;
+		case ControlSpeedError:
+			strcpy((char*)ErrorInfo, "Control Speed error!\r\n");
+			break;
+		case MotorControlInitError:
+			strcpy((char*)ErrorInfo, "Motor Control Initialization Error!\r\n");
+			break;
+		case SteeringServoInit:
+			strcpy((char*)ErrorInfo, "Steering Servo Motor Initialization Error!\r\n");
+			break;
+		case ObstacleDetectionError:
+			strcpy((char*)ErrorInfo, "Obstacle Detection Error!\r\n");
 			break;
 		default:
 			break;

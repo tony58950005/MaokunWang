@@ -20,7 +20,7 @@
 #include <math.h>
 #include <iostream>
 
-HighLevelComm::HighLevelComm(UART_HandleTypeDef& uart,TIM_Base_InitTypeDef servoInit,TIM_OC_InitTypeDef sConfigOC) :
+HighLevelComm::HighLevelComm(UART_HandleTypeDef& uart,TIM_Base_InitTypeDef servoInit,TIM_OC_InitTypeDef sConfigOC):
 	myTxData_OK("OK\r\n"),
 	myTxData_Battery("-1"),
 	myTxData_Distance("-1"),
@@ -31,6 +31,15 @@ HighLevelComm::HighLevelComm(UART_HandleTypeDef& uart,TIM_Base_InitTypeDef servo
 	motorPWM2(TIM8, servoInit, sConfigOC, TIM_CHANNEL_2),
 	motor(1.0,0.0,0.0,motorPWM1, motorPWM2)
 {
+	if(!motorControlInit()){
+//		Error_Handler(MotorControlInitError);
+//		//HAL_UART_Transmit(&huart, buffer, bufferLength, timeout);
+//		uart.sendMessage(ErrorInfo,sizeof(ErrorInfo),100);
+	}
+	if(!steeringServoInit()){
+//		Error_Handler(SteeringServoInit);
+//		uart.sendMessage(ErrorInfo,sizeof(ErrorInfo),100);
+	}
 }
 bool HighLevelComm::ParseMessage()
 {
@@ -81,23 +90,23 @@ bool HighLevelComm::Move(int x)  //x means moving at x millimeter/second.
 {
 
 	//TODO: Call init function in the ctor once
-	if(!motor.motorControlInit()){
-
-	}
 	if(!getMotorSpeed(motorSpeed)){
-
+		Error_Handler(GetMotorSpeedError);
+		uart.sendMessage(ErrorInfo,sizeof(ErrorInfo),100);
 	}
-	if (controlSpeed(motor, 0, (realLeftSpeed+realRightSpeed)/2)) {	//TODO: reference is wrong (it is set to 0)
+	if (controlSpeed(motor, x, (realLeftSpeed+realRightSpeed)/2)) {	//TODO: reference is wrong (it is set to 0)
 		isRun = true;
 		if (uart.sendMessage(myTxData_OK, sizeof(myTxData_OK), 100) == true) {
 			return true;
 		} else {
 			Error_Handler(UartError);
+			uart.sendMessage(ErrorInfo,sizeof(ErrorInfo),100);
 			return false;
 		}
 	} else{
 		//TODO: send back some error message over uart
 		Error_Handler(ControlSpeedError);
+		uart.sendMessage(ErrorInfo,sizeof(ErrorInfo),100);
 		return false;
 	}
 }
@@ -105,24 +114,26 @@ bool HighLevelComm::Move(int x)  //x means moving at x millimeter/second.
 bool HighLevelComm::Stop()
 {
 	//TODO: Call init function in the ctor once
-	motor.motorControlInit();
 	//TODO: You don't need to know the actual speed to stop the car
-	getMotorSpeed(motorSpeed);
+	//getMotorSpeed(motorSpeed);
 	if (isRun == true) {	//"Stop\n"
 		//TODO: Don't call the PID controller, simple stop the car
-		if (controlSpeed(motor, 0, (realLeftSpeed+realRightSpeed)/2)) {
-			isRun = false;
-			if (uart.sendMessage(myTxData_OK, sizeof(myTxData_OK), 100)== true) {
-				return true;
-			} else {
-				Error_Handler(UartError);
-				return false;
-			}
-		} else {
-			//TODO: send back some error message over uart
-			Error_Handler(ControlSpeedError);
-			return false;
-		}
+//		if (controlSpeed(motor, 0, (realLeftSpeed+realRightSpeed)/2)) {
+//			isRun = false;
+//			if (uart.sendMessage(myTxData_OK, sizeof(myTxData_OK), 100)== true) {
+//				return true;
+//			} else {
+//				//Error_Handler(UartError);
+//				error->sendError(Error_Handler(UartError),sizeof(Error_Handler(UartError)),100);
+//				return false;
+//			}
+//		} else {
+//			//TODO: send back some error message over uart
+//			//Error_Handler(ControlSpeedError);
+//			error->sendError(Error_Handler(ControlSpeedError),sizeof(Error_Handler(ControlSpeedError)),100);
+//			return false;
+//		}
+		Move(0);
 	} else {
 		return false;
 	}
@@ -131,17 +142,19 @@ bool HighLevelComm::Stop()
 bool HighLevelComm::Turn(int x) //'x' means the angle of the steering system from -45 degrees to 45 degrees
 {
 	//TODO: Call this init function in the ctor once
-	servoPWM.steeringServoInit();
+	//servoPWM.steeringServoInit();
 	if (setSteering(servoPWM, x)) {	//finish the turning
 		if (uart.sendMessage(myTxData_OK, sizeof(myTxData_OK), 100) == true) {
 			return true;
 		} else {
 			Error_Handler(UartError);
+			uart.sendMessage(ErrorInfo,sizeof(ErrorInfo),100);
 			return false;
 		}
 	} else{
 		//TODO: send back some error message over uart
 		Error_Handler(SteeringError);
+		uart.sendMessage(ErrorInfo,sizeof(ErrorInfo),100);
 		return false;
 	}
 
@@ -157,6 +170,7 @@ bool HighLevelComm::showBattery()
 	{
 		//TODO: send back some error message over uart
 		Error_Handler(UartError);
+		uart.sendMessage(ErrorInfo,sizeof(ErrorInfo),100);
 		return false;
 	}
 }
@@ -166,24 +180,27 @@ bool HighLevelComm::showDistance()
 	//"Distance\n" means getting the distance of the nearest obstacle information
 	//myTxData_Distance saves the data from the distance sensor.
 	//TODO: you call the obstacleDetection
-	obstacleDetection(adc);
+	if(!obstacleDetection(adc)){
+//
+	}
 	//TODO: This code is wrong. Use snprintf to create the myTxData_Distance string with distance values.
-	myTxData_Distance[0]=distanceL;
-	myTxData_Distance[1]=':';
-	myTxData_Distance[2]=distanceM;
-	myTxData_Distance[3]=':';
-	myTxData_Distance[4]=distanceR;
+	snprintf((char*)myTxData_Distance, sizeof(myTxData_Distance), "%d", distanceL);
+	snprintf((char*)myTxData_Distance+2, sizeof(myTxData_Distance), "%c", ':');
+	snprintf((char*)myTxData_Distance+3, sizeof(myTxData_Distance), "%d", distanceM);
+	snprintf((char*)myTxData_Distance+5, sizeof(myTxData_Distance), "%c", ':');
+	snprintf((char*)myTxData_Distance+6, sizeof(myTxData_Distance), "%d", distanceR);
 	if (uart.sendMessage(myTxData_Distance, sizeof(myTxData_Distance), 100)== true) {
 		return true;
 	} else
 	{
 		//TODO: send back some error message over uart
 		Error_Handler(UartError);
+		uart.sendMessage(ErrorInfo,sizeof(ErrorInfo),100);
 		return false;
 	}
 }
 
-bool HighLevelComm::Delay(int x) //Delay unit:,milliseconds
+bool HighLevelComm::Delay(int x) //Delay unit: milliseconds
 {
 	HAL_Delay(x);
 }
@@ -191,11 +208,12 @@ bool HighLevelComm::Delay(int x) //Delay unit:,milliseconds
 bool HighLevelComm::setSteering(PWM& servoPWM, float steeringAngle)
 {
 	//presuming the do-able steeringAngle ranges from -45 (PWM->5%) to 45(PWM->10%) degrees.
-	// the characteristic line (saturated steeringAgnle, PWM high level line[1.5ms, 2.5ms])
+	//the characteristic line (saturated steeringAgnle, PWM high level line[1.5ms, 2.5ms])
 	//goes through point (45, 10[%]),(-45, 5[%])
 	float percent=1.0f/18.0f*steeringAngle + 135.0f/18.0f;
 	if(servoPWM.setPWM(percent)==false){
 		Error_Handler(PWMError);
+		uart.sendMessage(ErrorInfo,sizeof(ErrorInfo),100);
 		return false;
 	}
 	return true;
@@ -222,7 +240,7 @@ bool HighLevelComm::getMotorSpeed(SpeedMeasurement& motorSpeed)
 	rightWheelEncoderLast = rightWheelEncoderNow;
 }
 
-void HighLevelComm::obstacleDetection(ADCClass& adc)
+bool HighLevelComm::obstacleDetection(ADCClass& adc)
 {
 	//Measure the signals of the Sharp sensors
 	float sensorsVoltage[3];
@@ -248,12 +266,58 @@ void HighLevelComm::obstacleDetection(ADCClass& adc)
 	distanceR=(int)distance[2];
 	//Check distances: return true when there is some obstacle in front of the car.
 	//Use threshold value: 10 cm
-//	for (int i = 0; i < 3; i++) {
-//		if (distance[i] <= 10) {
-//			return true;
-//		}
-//	}
-//	return false;
+	for (int i = 0; i < 3; i++) {
+		if (distance[i] <= 10) {
+			return true;
+		}
+	}
+	return false;
+}
+
+bool HighLevelComm::steeringServoInit()	//TODO: The PWM.cpp is a general PWM class, you put a specific instance here. Don't do that. You can create the servo PWM in the high level comm class.
+{
+	TIM_Base_InitTypeDef servoInit;
+	servoInit.Prescaler = 83;
+	servoInit.CounterMode = TIM_COUNTERMODE_UP;
+	servoInit.Period = 20000;
+	servoInit.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+	servoInit.RepetitionCounter = 0;
+
+	TIM_OC_InitTypeDef sConfigOC = {0};
+	sConfigOC.OCMode = TIM_OCMODE_PWM1;
+	sConfigOC.Pulse = 1500;
+	sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
+	sConfigOC.OCNPolarity = TIM_OCNPOLARITY_HIGH;
+	sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
+	sConfigOC.OCIdleState = TIM_OCIDLESTATE_RESET;
+	sConfigOC.OCNIdleState = TIM_OCNIDLESTATE_RESET;
+	PWM servoPWM(TIM10, servoInit, sConfigOC, TIM_CHANNEL_1);
+
+	//return servoPWM;
+}
+
+bool HighLevelComm::motorControlInit() //TODO: The PIDController.cpp is a general PID class, you put a specific instance here. Don't do that. You can create the PID controller in the high level comm class.
+{
+	TIM_Base_InitTypeDef servoInit;
+	servoInit.Prescaler = 1;
+	servoInit.CounterMode = TIM_COUNTERMODE_CENTERALIGNED3;
+	servoInit.Period = 2100;
+	servoInit.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+	servoInit.RepetitionCounter = 0;
+
+	TIM_OC_InitTypeDef sConfigOC = {0};
+	sConfigOC.OCMode = TIM_OCMODE_PWM1;
+	sConfigOC.Pulse = servoInit.Period/2;
+	sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
+	sConfigOC.OCNPolarity = TIM_OCNPOLARITY_HIGH;
+	sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
+	sConfigOC.OCIdleState = TIM_OCIDLESTATE_SET;
+	sConfigOC.OCNIdleState = TIM_OCNIDLESTATE_RESET;
+//	PWM motorPWM1(TIM8, servoInit, sConfigOC, TIM_CHANNEL_1);
+//	PWM motorPWM2(TIM8, servoInit, sConfigOC, TIM_CHANNEL_2);
+//	PID_Controller motorController(1.0, 0.0, 0.0, motorPWM1, motorPWM2);
+
+	//return motorController;
 }
 
 

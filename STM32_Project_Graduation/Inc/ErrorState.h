@@ -18,7 +18,11 @@ typedef enum
 	AssertFailError,
 	SpeedMeasurementError,
 	ControlSpeedError,
-	SteeringError
+	GetMotorSpeedError,
+	SteeringError,
+	MotorControlInitError,
+	SteeringServoInit,
+	ObstacleDetectionError
 } ErrorState;
 
 #endif /* ERRORSTATE_H_ */

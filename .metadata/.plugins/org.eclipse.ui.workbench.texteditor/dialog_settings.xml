@@ -6,8 +6,12 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="setSteering"/>
+		<item key="selection" value="error"/>
 		<list key="findhistory">
+			<item value="-&gt;"/>
+			<item value="error"/>
+			<item value="GetMotorSpeed"/>
+			<item value="send"/>
 			<item value="setSteering"/>
 			<item value="getMotorSpeed"/>
 			<item value="huart2"/>
@@ -19,10 +23,6 @@
 			<item value="PWM"/>
 			<item value="uart"/>
 			<item value="distanceR"/>
-			<item value="motorSpeed"/>
-			<item value="TIM8"/>
-			<item value="7fff"/>
-			<item value="Encoder_Init_TIM8"/>
 		</list>
 		<list key="replacehistory">
 			<item value="tim8"/>

@@ -64,25 +64,5 @@ bool PWM::setPWM(float percent)
 	}
 }
 
-bool PWM::steeringServoInit()	//TODO: The PWM.cpp is a general PWM class, you put a specific instance here. Don't do that. You can create the servo PWM in the high level comm class.
-{
-	TIM_Base_InitTypeDef servoInit;
-	servoInit.Prescaler = 83;
-	servoInit.CounterMode = TIM_COUNTERMODE_UP;
-	servoInit.Period = 20000;
-	servoInit.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-	servoInit.RepetitionCounter = 0;
 
-	TIM_OC_InitTypeDef sConfigOC = {0};
-	sConfigOC.OCMode = TIM_OCMODE_PWM1;
-	sConfigOC.Pulse = 1500;
-	sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
-	sConfigOC.OCNPolarity = TIM_OCNPOLARITY_HIGH;
-	sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
-	sConfigOC.OCIdleState = TIM_OCIDLESTATE_RESET;
-	sConfigOC.OCNIdleState = TIM_OCNIDLESTATE_RESET;
-	PWM servoPWM(TIM10, servoInit, sConfigOC, TIM_CHANNEL_1);
-
-	//return servoPWM;
-}
 
