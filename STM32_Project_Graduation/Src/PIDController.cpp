@@ -67,6 +67,10 @@ void PID_Controller::PIDController_Update(float setpoint, float measurement){
 	//return controller output
 	setSpeed(out);
 }
-
+ void PID_Controller::PIDController_Stop(){
+	 Kp=0;
+	 Ki=0;
+	 setSpeed(0);
+ }
 
 

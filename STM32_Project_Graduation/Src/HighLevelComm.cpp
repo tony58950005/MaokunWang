@@ -94,7 +94,7 @@ bool HighLevelComm::Move(int x)  //x means moving at x millimeter/second.
 		Error_Handler(GetMotorSpeedError);
 		uart.sendMessage(ErrorInfo,sizeof(ErrorInfo),100);
 	}
-	if (controlSpeed(motor, x, (realLeftSpeed+realRightSpeed)/2)) {	//TODO: reference is wrong (it is set to 0)
+	if (controlSpeed(motor, x, realSpeed)) {
 		isRun = true;
 		if (uart.sendMessage(myTxData_OK, sizeof(myTxData_OK), 100) == true) {
 			return true;
@@ -118,22 +118,7 @@ bool HighLevelComm::Stop()
 	//getMotorSpeed(motorSpeed);
 	if (isRun == true) {	//"Stop\n"
 		//TODO: Don't call the PID controller, simple stop the car
-//		if (controlSpeed(motor, 0, (realLeftSpeed+realRightSpeed)/2)) {
-//			isRun = false;
-//			if (uart.sendMessage(myTxData_OK, sizeof(myTxData_OK), 100)== true) {
-//				return true;
-//			} else {
-//				//Error_Handler(UartError);
-//				error->sendError(Error_Handler(UartError),sizeof(Error_Handler(UartError)),100);
-//				return false;
-//			}
-//		} else {
-//			//TODO: send back some error message over uart
-//			//Error_Handler(ControlSpeedError);
-//			error->sendError(Error_Handler(ControlSpeedError),sizeof(Error_Handler(ControlSpeedError)),100);
-//			return false;
-//		}
-		Move(0);
+		motor.PIDController_Stop();
 	} else {
 		return false;
 	}
@@ -180,15 +165,11 @@ bool HighLevelComm::showDistance()
 	//"Distance\n" means getting the distance of the nearest obstacle information
 	//myTxData_Distance saves the data from the distance sensor.
 	//TODO: you call the obstacleDetection
-	if(!obstacleDetection(adc)){
+	if(!measureDistance(adc)){
 //
 	}
 	//TODO: This code is wrong. Use snprintf to create the myTxData_Distance string with distance values.
-	snprintf((char*)myTxData_Distance, sizeof(myTxData_Distance), "%d", distanceL);
-	snprintf((char*)myTxData_Distance+2, sizeof(myTxData_Distance), "%c", ':');
-	snprintf((char*)myTxData_Distance+3, sizeof(myTxData_Distance), "%d", distanceM);
-	snprintf((char*)myTxData_Distance+5, sizeof(myTxData_Distance), "%c", ':');
-	snprintf((char*)myTxData_Distance+6, sizeof(myTxData_Distance), "%d", distanceR);
+	snprintf((char*)myTxData_Distance, 20,"%d%c%d%c%d", distanceL,':',distanceM,':',distanceR);
 	if (uart.sendMessage(myTxData_Distance, sizeof(myTxData_Distance), 100)== true) {
 		return true;
 	} else
@@ -203,6 +184,7 @@ bool HighLevelComm::showDistance()
 bool HighLevelComm::Delay(int x) //Delay unit: milliseconds
 {
 	HAL_Delay(x);
+	return true;
 }
 
 bool HighLevelComm::setSteering(PWM& servoPWM, float steeringAngle)
@@ -223,24 +205,26 @@ bool HighLevelComm::controlSpeed(PID_Controller& motor, float referenceSpeed, fl
 {
 	//PID for speed control
 	motor.PIDController_Update(referenceSpeed, actualSpeed);
+	return true;
 }
 
 bool HighLevelComm::getMotorSpeed(SpeedMeasurement& motorSpeed)
 {
 	//5ms speed measurement, one time unit is 5ms
-	leftWheelEncoderNow += motorSpeed.getTIMx_DeltaCnt(1); //(TIM2->CCR1);
-	rightWheelEncoderNow+= motorSpeed.getTIMx_DeltaCnt(0);//(TIM2->CCR2);
+	WheelEncoderNow += motorSpeed.getTIMx_DeltaCnt(1); //(TIM2->CCR1);
+	//rightWheelEncoderNow+= motorSpeed.getTIMx_DeltaCnt(0);//(TIM2->CCR2);
 
 	 //speed measurement for every 5ms
-	realLeftSpeed   = (leftWheelEncoderNow - leftWheelEncoderLast)*1000*200*2*3.14*0.003/1000;//modify the last number "1000"->"xxxx"
-	realRightSpeed  = (rightWheelEncoderNow - rightWheelEncoderLast)*1000*200*2*3.14*0.003/1000;
+	realSpeed   = (WheelEncoderNow - WheelEncoderLast)*1000*200*2*3.14*0.003/1000;//modify the last number "1000"->"xxxx"
+	//realRightSpeed  = (rightWheelEncoderNow - rightWheelEncoderLast)*1000*200*2*3.14*0.003/1000;
 
 	//record the last time encoder value
-	leftWheelEncoderLast  = leftWheelEncoderNow;
-	rightWheelEncoderLast = rightWheelEncoderNow;
+	WheelEncoderLast  = WheelEncoderNow;
+	//rightWheelEncoderLast = rightWheelEncoderNow;
+	return true;
 }
 
-bool HighLevelComm::obstacleDetection(ADCClass& adc)
+bool HighLevelComm::measureDistance(ADCClass& adc)
 {
 	//Measure the signals of the Sharp sensors
 	float sensorsVoltage[3];
@@ -266,12 +250,13 @@ bool HighLevelComm::obstacleDetection(ADCClass& adc)
 	distanceR=(int)distance[2];
 	//Check distances: return true when there is some obstacle in front of the car.
 	//Use threshold value: 10 cm
-	for (int i = 0; i < 3; i++) {
-		if (distance[i] <= 10) {
-			return true;
-		}
-	}
-	return false;
+//	for (int i = 0; i < 3; i++) {
+//		if (distance[i] <= 10) {
+//			return true;
+//		}
+//	}
+//	return false;
+	return true;
 }
 
 bool HighLevelComm::steeringServoInit()	//TODO: The PWM.cpp is a general PWM class, you put a specific instance here. Don't do that. You can create the servo PWM in the high level comm class.
@@ -294,6 +279,7 @@ bool HighLevelComm::steeringServoInit()	//TODO: The PWM.cpp is a general PWM cla
 	PWM servoPWM(TIM10, servoInit, sConfigOC, TIM_CHANNEL_1);
 
 	//return servoPWM;
+	return true;
 }
 
 bool HighLevelComm::motorControlInit() //TODO: The PIDController.cpp is a general PID class, you put a specific instance here. Don't do that. You can create the PID controller in the high level comm class.
@@ -318,6 +304,7 @@ bool HighLevelComm::motorControlInit() //TODO: The PIDController.cpp is a genera
 //	PID_Controller motorController(1.0, 0.0, 0.0, motorPWM1, motorPWM2);
 
 	//return motorController;
+	return true;
 }
 
 

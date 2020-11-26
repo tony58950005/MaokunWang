@@ -54,3 +54,23 @@ HAL_Delay(200);
 }else{
 
 }
+
+
+snprintf(myTxData_Distance, 20,"%d%c%d%c%d", distanceL,':',distanceM,':',distanceR);
+
+HighLevelComm 
+-myTxData_OK[5]: uint8_t
+-myTxData_Battery[6]: uint8_t
+-myTxData_Distance[6]: uint8_t
+-receivedCommand[100]: char
+-realNumber: uint8_t
+-uart: ClassUart
+-pwm: PWM
++HighLevelComm(UART_HandleTypeDef&, TIM_HandleTypeDef&)
++ParseMessage():bool
++Move(int): bool
++Stop():bool
++Turn(int): bool
++showBattery():bool
++showDistance():bool
++isRun: bool

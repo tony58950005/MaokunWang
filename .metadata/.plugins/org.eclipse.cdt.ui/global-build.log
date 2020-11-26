@@ -6595,3 +6595,510 @@ Finished building: STM32_Project_Graduation.bin
  
 Finished building: STM32_Project_Graduation.list
  
+06:24:49 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 174908	    756	   6920	 182584	  2c938	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+06:24:58 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 174908	    756	   6920	 182584	  2c938	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+09:13:22 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+arm-none-eabi-g++ "../Src/PIDController.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/PIDController.d" -MT"Src/PIDController.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/PIDController.o"
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+In file included from ../Src/PIDController.cpp:8:0:
+../Inc/PIDController.h:17:26: error: expected ';' at end of member declaration
+  void PIDController_Stop()
+                          ^
+make: *** [Src/subdir.mk:61: Src/PIDController.o] Error 1
+make: *** Waiting for unfinished jobs....
+In file included from ../Inc/HighLevelComm.h:13:0,
+                 from ../Src/main.cpp:23:
+../Inc/PIDController.h:17:26: error: expected ';' at end of member declaration
+  void PIDController_Stop()
+                          ^
+In file included from ../Inc/HighLevelComm.h:13:0,
+                 from ../Src/HighLevelComm.cpp:8:
+../Inc/PIDController.h:17:26: error: expected ';' at end of member declaration
+  void PIDController_Stop()
+                          ^
+In file included from ../Src/HighLevelComm.cpp:8:0:
+../Inc/HighLevelComm.h: In constructor 'HighLevelComm::HighLevelComm(UART_HandleTypeDef&, TIM_Base_InitTypeDef, TIM_OC_InitTypeDef)':
+../Inc/HighLevelComm.h:60:12: warning: 'HighLevelComm::adc' will be initialized after [-Wreorder]
+   ADCClass adc;
+            ^~~
+../Inc/HighLevelComm.h:57:7: warning:   'PWM HighLevelComm::servoPWM' [-Wreorder]
+   PWM servoPWM,motorPWM1, motorPWM2;
+       ^~~~~~~~
+../Src/HighLevelComm.cpp:23:1: warning:   when initialized here [-Wreorder]
+ HighLevelComm::HighLevelComm(UART_HandleTypeDef& uart,TIM_Base_InitTypeDef servoInit,TIM_OC_InitTypeDef sConfigOC):
+ ^~~~~~~~~~~~~
+../Src/HighLevelComm.cpp:23:1: warning: 'HighLevelComm::adc' is initialized with itself [-Winit-self]
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::showDistance()':
+../Src/HighLevelComm.cpp:187:11: error: invalid conversion from 'uint8_t* {aka unsigned char*}' to 'char*' [-fpermissive]
+  snprintf(myTxData_Distance, 20,"%d%c%d%c%d", distanceL,':',distanceM,':',distanceR);
+           ^~~~~~~~~~~~~~~~~
+In file included from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h:50:0,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h:47,
+                 from ../Inc/stm32f4xx_hal_conf.h:233,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:48,
+                 from ../Inc/main.h:33,
+                 from ../Inc/ADCClass.h:11,
+                 from ../Inc/HighLevelComm.h:11,
+                 from ../Src/HighLevelComm.cpp:8:
+c:\st\stm32cubeide_1.1.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610\tools\arm-none-eabi\include\stdio.h:266:5: note:   initializing argument 1 of 'int snprintf(char*, size_t, const char*, ...)'
+ int snprintf (char *__restrict, size_t, const char *__restrict, ...)
+     ^~~~~~~~
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::Delay(int)':
+../Src/HighLevelComm.cpp:202:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::controlSpeed(PID_Controller&, float, float)':
+../Src/HighLevelComm.cpp:222:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::getMotorSpeed(SpeedMeasurement&)':
+../Src/HighLevelComm.cpp:237:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::steeringServoInit()':
+../Src/HighLevelComm.cpp:293:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::motorControlInit()':
+../Src/HighLevelComm.cpp:317:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::Stop()':
+../Src/HighLevelComm.cpp:140:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [Src/subdir.mk:69: Src/main.o] Error 1
+make: *** [Src/subdir.mk:59: Src/HighLevelComm.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+09:13:36 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+arm-none-eabi-g++ "../Src/PIDController.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/PIDController.d" -MT"Src/PIDController.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/PIDController.o"
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+In file included from ../Src/HighLevelComm.cpp:8:0:
+../Inc/HighLevelComm.h: In constructor 'HighLevelComm::HighLevelComm(UART_HandleTypeDef&, TIM_Base_InitTypeDef, TIM_OC_InitTypeDef)':
+../Inc/HighLevelComm.h:60:12: warning: 'HighLevelComm::adc' will be initialized after [-Wreorder]
+   ADCClass adc;
+            ^~~
+../Inc/HighLevelComm.h:57:7: warning:   'PWM HighLevelComm::servoPWM' [-Wreorder]
+   PWM servoPWM,motorPWM1, motorPWM2;
+       ^~~~~~~~
+../Src/HighLevelComm.cpp:23:1: warning:   when initialized here [-Wreorder]
+ HighLevelComm::HighLevelComm(UART_HandleTypeDef& uart,TIM_Base_InitTypeDef servoInit,TIM_OC_InitTypeDef sConfigOC):
+ ^~~~~~~~~~~~~
+../Src/HighLevelComm.cpp:23:1: warning: 'HighLevelComm::adc' is initialized with itself [-Winit-self]
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::showDistance()':
+../Src/HighLevelComm.cpp:187:11: error: invalid conversion from 'uint8_t* {aka unsigned char*}' to 'char*' [-fpermissive]
+  snprintf(myTxData_Distance, 20,"%d%c%d%c%d", distanceL,':',distanceM,':',distanceR);
+           ^~~~~~~~~~~~~~~~~
+In file included from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_def.h:50:0,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_rcc.h:47,
+                 from ../Inc/stm32f4xx_hal_conf.h:233,
+                 from ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:48,
+                 from ../Inc/main.h:33,
+                 from ../Inc/ADCClass.h:11,
+                 from ../Inc/HighLevelComm.h:11,
+                 from ../Src/HighLevelComm.cpp:8:
+c:\st\stm32cubeide_1.1.0\stm32cubeide\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.win32_1.0.0.201904181610\tools\arm-none-eabi\include\stdio.h:266:5: note:   initializing argument 1 of 'int snprintf(char*, size_t, const char*, ...)'
+ int snprintf (char *__restrict, size_t, const char *__restrict, ...)
+     ^~~~~~~~
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::Delay(int)':
+../Src/HighLevelComm.cpp:202:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::controlSpeed(PID_Controller&, float, float)':
+../Src/HighLevelComm.cpp:222:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::getMotorSpeed(SpeedMeasurement&)':
+../Src/HighLevelComm.cpp:237:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::steeringServoInit()':
+../Src/HighLevelComm.cpp:293:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::motorControlInit()':
+../Src/HighLevelComm.cpp:317:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::Stop()':
+../Src/HighLevelComm.cpp:140:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [Src/subdir.mk:59: Src/HighLevelComm.o] Error 1
+make: *** Waiting for unfinished jobs....
+../Src/main.cpp: In function 'void Error_Handler(ErrorState)':
+../Src/main.cpp:282:10: warning: 'void* __builtin_memcpy(void*, const void*, unsigned int)' writing 34 bytes into a region of size 33 overflows the destination [-Wstringop-overflow=]
+    strcpy((char*)ErrorInfo, "High-Level Communication error!\r\n");
+    ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Src/main.cpp:300:10: warning: 'void* __builtin_memcpy(void*, const void*, unsigned int)' writing 38 bytes into a region of size 33 overflows the destination [-Wstringop-overflow=]
+    strcpy((char*)ErrorInfo, "Motor Control Initialization Error!\r\n");
+    ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Src/main.cpp:303:10: warning: 'void* __builtin_memcpy(void*, const void*, unsigned int)' writing 45 bytes into a region of size 33 overflows the destination [-Wstringop-overflow=]
+    strcpy((char*)ErrorInfo, "Steering Servo Motor Initialization Error!\r\n");
+    ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+09:14:04 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+In file included from ../Src/HighLevelComm.cpp:8:0:
+../Inc/HighLevelComm.h: In constructor 'HighLevelComm::HighLevelComm(UART_HandleTypeDef&, TIM_Base_InitTypeDef, TIM_OC_InitTypeDef)':
+../Inc/HighLevelComm.h:60:12: warning: 'HighLevelComm::adc' will be initialized after [-Wreorder]
+   ADCClass adc;
+            ^~~
+../Inc/HighLevelComm.h:57:7: warning:   'PWM HighLevelComm::servoPWM' [-Wreorder]
+   PWM servoPWM,motorPWM1, motorPWM2;
+       ^~~~~~~~
+../Src/HighLevelComm.cpp:23:1: warning:   when initialized here [-Wreorder]
+ HighLevelComm::HighLevelComm(UART_HandleTypeDef& uart,TIM_Base_InitTypeDef servoInit,TIM_OC_InitTypeDef sConfigOC):
+ ^~~~~~~~~~~~~
+../Src/HighLevelComm.cpp:23:1: warning: 'HighLevelComm::adc' is initialized with itself [-Winit-self]
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::Delay(int)':
+../Src/HighLevelComm.cpp:202:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::controlSpeed(PID_Controller&, float, float)':
+../Src/HighLevelComm.cpp:222:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::getMotorSpeed(SpeedMeasurement&)':
+../Src/HighLevelComm.cpp:237:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::steeringServoInit()':
+../Src/HighLevelComm.cpp:293:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::motorControlInit()':
+../Src/HighLevelComm.cpp:304:21: warning: variable 'sConfigOC' set but not used [-Wunused-but-set-variable]
+  TIM_OC_InitTypeDef sConfigOC = {0};
+                     ^~~~~~~~~
+../Src/HighLevelComm.cpp:317:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::Stop()':
+../Src/HighLevelComm.cpp:140:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32_Project_Graduation.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
+arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 175564	    756	   6920	 183240	  2cbc8	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_Project_Graduation.bin
+ 
+Finished building: STM32_Project_Graduation.list
+ 
+09:16:36 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+In file included from ../Src/HighLevelComm.cpp:8:0:
+../Inc/HighLevelComm.h: In constructor 'HighLevelComm::HighLevelComm(UART_HandleTypeDef&, TIM_Base_InitTypeDef, TIM_OC_InitTypeDef)':
+../Inc/HighLevelComm.h:60:12: warning: 'HighLevelComm::adc' will be initialized after [-Wreorder]
+   ADCClass adc;
+            ^~~
+../Inc/HighLevelComm.h:57:7: warning:   'PWM HighLevelComm::servoPWM' [-Wreorder]
+   PWM servoPWM,motorPWM1, motorPWM2;
+       ^~~~~~~~
+../Src/HighLevelComm.cpp:23:1: warning:   when initialized here [-Wreorder]
+ HighLevelComm::HighLevelComm(UART_HandleTypeDef& uart,TIM_Base_InitTypeDef servoInit,TIM_OC_InitTypeDef sConfigOC):
+ ^~~~~~~~~~~~~
+../Src/HighLevelComm.cpp:23:1: warning: 'HighLevelComm::adc' is initialized with itself [-Winit-self]
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::Delay(int)':
+../Src/HighLevelComm.cpp:187:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::controlSpeed(PID_Controller&, float, float)':
+../Src/HighLevelComm.cpp:207:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::getMotorSpeed(SpeedMeasurement&)':
+../Src/HighLevelComm.cpp:222:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::steeringServoInit()':
+../Src/HighLevelComm.cpp:278:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::motorControlInit()':
+../Src/HighLevelComm.cpp:289:21: warning: variable 'sConfigOC' set but not used [-Wunused-but-set-variable]
+  TIM_OC_InitTypeDef sConfigOC = {0};
+                     ^~~~~~~~~
+../Src/HighLevelComm.cpp:302:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::Stop()':
+../Src/HighLevelComm.cpp:125:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32_Project_Graduation.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
+arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 175564	    756	   6920	 183240	  2cbc8	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_Project_Graduation.bin
+ 
+Finished building: STM32_Project_Graduation.list
+ 
+09:22:13 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+In file included from ../Src/HighLevelComm.cpp:8:0:
+../Inc/HighLevelComm.h: In constructor 'HighLevelComm::HighLevelComm(UART_HandleTypeDef&, TIM_Base_InitTypeDef, TIM_OC_InitTypeDef)':
+../Inc/HighLevelComm.h:60:12: warning: 'HighLevelComm::adc' will be initialized after [-Wreorder]
+   ADCClass adc;
+            ^~~
+../Inc/HighLevelComm.h:57:7: warning:   'PWM HighLevelComm::servoPWM' [-Wreorder]
+   PWM servoPWM,motorPWM1, motorPWM2;
+       ^~~~~~~~
+../Src/HighLevelComm.cpp:23:1: warning:   when initialized here [-Wreorder]
+ HighLevelComm::HighLevelComm(UART_HandleTypeDef& uart,TIM_Base_InitTypeDef servoInit,TIM_OC_InitTypeDef sConfigOC):
+ ^~~~~~~~~~~~~
+../Src/HighLevelComm.cpp:23:1: warning: 'HighLevelComm::adc' is initialized with itself [-Winit-self]
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::Move(int)':
+../Src/HighLevelComm.cpp:97:40: error: expected ')' before '{' token
+  if (controlSpeed(motor, x, realSpeed) { //TODO: reference is wrong (it is set to 0)
+                                        ^
+../Src/HighLevelComm.cpp:112:1: error: expected primary-expression before '}' token
+ }
+ ^
+../Src/HighLevelComm.cpp:112:1: warning: no return statement in function returning non-void [-Wreturn-type]
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::Delay(int)':
+../Src/HighLevelComm.cpp:187:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::controlSpeed(PID_Controller&, float, float)':
+../Src/HighLevelComm.cpp:207:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::getMotorSpeed(SpeedMeasurement&)':
+../Src/HighLevelComm.cpp:222:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::steeringServoInit()':
+../Src/HighLevelComm.cpp:278:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::motorControlInit()':
+../Src/HighLevelComm.cpp:302:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::Stop()':
+../Src/HighLevelComm.cpp:125:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+../Src/main.cpp: In function 'void Error_Handler(ErrorState)':
+../Src/main.cpp:282:10: warning: 'void* __builtin_memcpy(void*, const void*, unsigned int)' writing 34 bytes into a region of size 33 overflows the destination [-Wstringop-overflow=]
+    strcpy((char*)ErrorInfo, "High-Level Communication error!\r\n");
+    ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Src/main.cpp:300:10: warning: 'void* __builtin_memcpy(void*, const void*, unsigned int)' writing 38 bytes into a region of size 33 overflows the destination [-Wstringop-overflow=]
+    strcpy((char*)ErrorInfo, "Motor Control Initialization Error!\r\n");
+    ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Src/main.cpp:303:10: warning: 'void* __builtin_memcpy(void*, const void*, unsigned int)' writing 45 bytes into a region of size 33 overflows the destination [-Wstringop-overflow=]
+    strcpy((char*)ErrorInfo, "Steering Servo Motor Initialization Error!\r\n");
+    ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+make: *** [Src/subdir.mk:59: Src/HighLevelComm.o] Error 1
+make: *** Waiting for unfinished jobs....
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+09:22:42 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+In file included from ../Src/HighLevelComm.cpp:8:0:
+../Inc/HighLevelComm.h: In constructor 'HighLevelComm::HighLevelComm(UART_HandleTypeDef&, TIM_Base_InitTypeDef, TIM_OC_InitTypeDef)':
+../Inc/HighLevelComm.h:60:12: warning: 'HighLevelComm::adc' will be initialized after [-Wreorder]
+   ADCClass adc;
+            ^~~
+../Inc/HighLevelComm.h:57:7: warning:   'PWM HighLevelComm::servoPWM' [-Wreorder]
+   PWM servoPWM,motorPWM1, motorPWM2;
+       ^~~~~~~~
+../Src/HighLevelComm.cpp:23:1: warning:   when initialized here [-Wreorder]
+ HighLevelComm::HighLevelComm(UART_HandleTypeDef& uart,TIM_Base_InitTypeDef servoInit,TIM_OC_InitTypeDef sConfigOC):
+ ^~~~~~~~~~~~~
+../Src/HighLevelComm.cpp:23:1: warning: 'HighLevelComm::adc' is initialized with itself [-Winit-self]
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::Delay(int)':
+../Src/HighLevelComm.cpp:187:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::controlSpeed(PID_Controller&, float, float)':
+../Src/HighLevelComm.cpp:207:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::getMotorSpeed(SpeedMeasurement&)':
+../Src/HighLevelComm.cpp:222:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::steeringServoInit()':
+../Src/HighLevelComm.cpp:278:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::motorControlInit()':
+../Src/HighLevelComm.cpp:289:21: warning: variable 'sConfigOC' set but not used [-Wunused-but-set-variable]
+  TIM_OC_InitTypeDef sConfigOC = {0};
+                     ^~~~~~~~~
+../Src/HighLevelComm.cpp:302:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::Stop()':
+../Src/HighLevelComm.cpp:125:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32_Project_Graduation.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
+arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 175404	    756	   6920	 183080	  2cb28	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_Project_Graduation.bin
+ 
+Finished building: STM32_Project_Graduation.list
+ 
+13:29:04 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+In file included from ../Src/HighLevelComm.cpp:8:0:
+../Inc/HighLevelComm.h: In constructor 'HighLevelComm::HighLevelComm(UART_HandleTypeDef&, TIM_Base_InitTypeDef, TIM_OC_InitTypeDef)':
+../Inc/HighLevelComm.h:60:12: warning: 'HighLevelComm::adc' will be initialized after [-Wreorder]
+   ADCClass adc;
+            ^~~
+../Inc/HighLevelComm.h:57:7: warning:   'PWM HighLevelComm::servoPWM' [-Wreorder]
+   PWM servoPWM,motorPWM1, motorPWM2;
+       ^~~~~~~~
+../Src/HighLevelComm.cpp:23:1: warning:   when initialized here [-Wreorder]
+ HighLevelComm::HighLevelComm(UART_HandleTypeDef& uart,TIM_Base_InitTypeDef servoInit,TIM_OC_InitTypeDef sConfigOC):
+ ^~~~~~~~~~~~~
+../Src/HighLevelComm.cpp:23:1: warning: 'HighLevelComm::adc' is initialized with itself [-Winit-self]
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::showDistance()':
+../Src/HighLevelComm.cpp:168:6: error: 'measureDistance' was not declared in this scope
+  if(!measureDistance(adc)){
+      ^~~~~~~~~~~~~~~
+../Src/HighLevelComm.cpp:168:6: note: suggested alternative: 'showDistance'
+  if(!measureDistance(adc)){
+      ^~~~~~~~~~~~~~~
+      showDistance
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::Delay(int)':
+../Src/HighLevelComm.cpp:187:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::controlSpeed(PID_Controller&, float, float)':
+../Src/HighLevelComm.cpp:207:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::getMotorSpeed(SpeedMeasurement&)':
+../Src/HighLevelComm.cpp:222:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+../Src/HighLevelComm.cpp: At global scope:
+../Src/HighLevelComm.cpp:224:50: error: no 'bool HighLevelComm::measureDistance(ADCClass&)' member function declared in class 'HighLevelComm'
+ bool HighLevelComm::measureDistance(ADCClass& adc)
+                                                  ^
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::steeringServoInit()':
+../Src/HighLevelComm.cpp:279:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::motorControlInit()':
+../Src/HighLevelComm.cpp:303:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::Stop()':
+../Src/HighLevelComm.cpp:125:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [Src/subdir.mk:59: Src/HighLevelComm.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+13:32:24 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+In file included from ../Src/HighLevelComm.cpp:8:0:
+../Inc/HighLevelComm.h: In constructor 'HighLevelComm::HighLevelComm(UART_HandleTypeDef&, TIM_Base_InitTypeDef, TIM_OC_InitTypeDef)':
+../Inc/HighLevelComm.h:60:12: warning: 'HighLevelComm::adc' will be initialized after [-Wreorder]
+   ADCClass adc;
+            ^~~
+../Inc/HighLevelComm.h:57:7: warning:   'PWM HighLevelComm::servoPWM' [-Wreorder]
+   PWM servoPWM,motorPWM1, motorPWM2;
+       ^~~~~~~~
+../Src/HighLevelComm.cpp:23:1: warning:   when initialized here [-Wreorder]
+ HighLevelComm::HighLevelComm(UART_HandleTypeDef& uart,TIM_Base_InitTypeDef servoInit,TIM_OC_InitTypeDef sConfigOC):
+ ^~~~~~~~~~~~~
+../Src/HighLevelComm.cpp:23:1: warning: 'HighLevelComm::adc' is initialized with itself [-Winit-self]
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::Delay(int)':
+../Src/HighLevelComm.cpp:187:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::controlSpeed(PID_Controller&, float, float)':
+../Src/HighLevelComm.cpp:207:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::getMotorSpeed(SpeedMeasurement&)':
+../Src/HighLevelComm.cpp:222:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::steeringServoInit()':
+../Src/HighLevelComm.cpp:279:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::motorControlInit()':
+../Src/HighLevelComm.cpp:290:21: warning: variable 'sConfigOC' set but not used [-Wunused-but-set-variable]
+  TIM_OC_InitTypeDef sConfigOC = {0};
+                     ^~~~~~~~~
+../Src/HighLevelComm.cpp:303:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::Stop()':
+../Src/HighLevelComm.cpp:125:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+../Src/main.cpp: In function 'void Error_Handler(ErrorState)':
+../Src/main.cpp:282:10: warning: 'void* __builtin_memcpy(void*, const void*, unsigned int)' writing 34 bytes into a region of size 33 overflows the destination [-Wstringop-overflow=]
+    strcpy((char*)ErrorInfo, "High-Level Communication error!\r\n");
+    ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Src/main.cpp:300:10: warning: 'void* __builtin_memcpy(void*, const void*, unsigned int)' writing 38 bytes into a region of size 33 overflows the destination [-Wstringop-overflow=]
+    strcpy((char*)ErrorInfo, "Motor Control Initialization Error!\r\n");
+    ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Src/main.cpp:303:10: warning: 'void* __builtin_memcpy(void*, const void*, unsigned int)' writing 45 bytes into a region of size 33 overflows the destination [-Wstringop-overflow=]
+    strcpy((char*)ErrorInfo, "Steering Servo Motor Initialization Error!\r\n");
+    ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32_Project_Graduation.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
+arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 175356	    756	   6920	 183032	  2caf8	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_Project_Graduation.bin
+ 
+Finished building: STM32_Project_Graduation.list
+ 

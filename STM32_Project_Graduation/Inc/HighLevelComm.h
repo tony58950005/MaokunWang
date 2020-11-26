@@ -40,7 +40,7 @@ public:
 		bool setSteering(PWM& servoPWM, float steeringAngle);
 		bool controlSpeed(PID_Controller& motor, float referenceSpeed, float actualSpeed);
 		bool getMotorSpeed(SpeedMeasurement& motorSpeed);
-		bool obstacleDetection(ADCClass& adc);
+		bool measureDistance(ADCClass& adc);
 		bool steeringServoInit();
 		bool motorControlInit();
 		//uint8_t *copy(uint8_t array[], uint8_t a[], uint8_t b[], uint8_t n, uint8_t m);
@@ -58,11 +58,11 @@ public:
 		PID_Controller motor;
 		SpeedMeasurement motorSpeed;
 		ADCClass adc;
-		uint8_t realLeftSpeed, realRightSpeed;
-		uint8_t leftWheelEncoderNow    = 0;
-		uint8_t rightWheelEncoderNow   = 0;
-		uint8_t leftWheelEncoderLast   = 0;
-		uint8_t rightWheelEncoderLast  = 0;
+		uint8_t realSpeed;
+		uint8_t WheelEncoderNow    = 0;
+	//	uint8_t rightWheelEncoderNow   = 0;
+		uint8_t WheelEncoderLast   = 0;
+	//	uint8_t rightWheelEncoderLast  = 0;
 
 };
 

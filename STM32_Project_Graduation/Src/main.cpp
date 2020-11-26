@@ -269,7 +269,7 @@ void MX_GPIO_Init(void)
 void Error_Handler(ErrorState errorSource)
 {
 	/* USER CODE BEGIN Error_Handler_Debug */
-	while(1);	//TODO: store some error information in a global variable, it can be read from the high level comm
+		//TODO: store some error information in a global variable, it can be read from the high level comm
 	switch (errorSource)
 	{
 		case PWMError:
@@ -308,6 +308,7 @@ void Error_Handler(ErrorState errorSource)
 		default:
 			break;
 	}
+	while(1);
 	/* USER CODE END Error_Handler_Debug */
 }
 
