@@ -107,14 +107,15 @@ int main(void)
 	/* Initialize all configured peripherals */
 	MX_GPIO_Init();
 
-	ADCClass adc;
+	//ADCClass adc;
 	//PWM servoPWM = steeringServoInit();
 	//PID_Controller motor = motorControlInit();
-	//SpeedMeasurement motorSpeed; //=motorSpeedInit();
+	//SpeedMeasurement motorSpeed;
 	HighLevelComm HighLevelCommTest(huart2, servoInit2,sConfigOC2);
 
 	while (1)
 	{
+		//motorSpeed.getDiffCount();
 		HighLevelCommTest.ParseMessage();
 	}
 }
@@ -179,7 +180,6 @@ void MX_GPIO_Init(void)
 
   __HAL_RCC_TIM10_CLK_ENABLE();
   __HAL_RCC_TIM8_CLK_ENABLE();
-  __HAL_RCC_TIM2_CLK_ENABLE();
 
   /*Configure GPIO pin : PC13 */
   GPIO_InitStruct.Pin = GPIO_PIN_13;
@@ -251,12 +251,21 @@ void MX_GPIO_Init(void)
   GPIO_InitTypeDef GPIO_InitStructure;
   GPIO_InitStructure.Pin = GPIO_PIN_0||GPIO_PIN_1;	//port setting
   GPIO_InitStructure.Mode = GPIO_MODE_AF_PP;
+  GPIO_InitStructure.Pull = GPIO_PULLUP;
   GPIO_InitStructure.Alternate = GPIO_AF1_TIM2;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStructure);
+
+  //Encoder EN GPIO configuration
+  GPIO_InitStruct.Pin = GPIO_PIN_15;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
   //Enable Sharp and Servo 5V power supply
   HAL_GPIO_WritePin(GPIOC, GPIO_PIN_4, GPIO_PIN_RESET);
   HAL_GPIO_WritePin(GPIOC, GPIO_PIN_5, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOC, GPIO_PIN_15, GPIO_PIN_RESET);
 }
 
 /* USER CODE BEGIN 4 */

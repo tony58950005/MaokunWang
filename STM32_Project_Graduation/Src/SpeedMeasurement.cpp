@@ -12,12 +12,13 @@
 SpeedMeasurement::SpeedMeasurement()
 {
 	TIM_Encoder_InitTypeDef sConfig = {0};
-	TIM_MasterConfigTypeDef sMasterConfig = {0};
+
+	__HAL_RCC_TIM2_CLK_ENABLE();
 
 	htim.Instance = TIM2;
 	htim.Init.Prescaler = 0x0;
 	htim.Init.CounterMode = TIM_COUNTERMODE_UP;
-	htim.Init.Period = 1999;//read the encoder value every 5ms
+	htim.Init.Period = 65535;//read the encoder value every 5ms
 	htim.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
 	htim.Init.RepetitionCounter = 0;
 
@@ -40,14 +41,16 @@ SpeedMeasurement::SpeedMeasurement()
 		Error_Handler(SpeedMeasurementError);
 	}
 
-	HAL_TIM_Encoder_Start(&htim,TIM_CHANNEL_1);
-	HAL_TIM_Encoder_Start(&htim,TIM_CHANNEL_2);
+	HAL_TIM_Encoder_Start(&htim, TIM_CHANNEL_ALL);
+
+	prevCounter = 0;
 }
 
-uint32_t SpeedMeasurement::getTIMx_DeltaCnt(uint8_t channel1)
+uint32_t SpeedMeasurement::getDiffCount()
 {
-	// it needs the difference between two counts
-	return htim.Instance->CCR1;
+	int32_t current = __HAL_TIM_GET_COUNTER(&htim);
+	int32_t diff = current - prevCounter;
+	prevCounter = current;
 }
 
 

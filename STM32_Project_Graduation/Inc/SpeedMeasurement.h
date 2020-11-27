@@ -14,9 +14,10 @@
 class SpeedMeasurement {
 public:
 	SpeedMeasurement();
-	uint32_t getTIMx_DeltaCnt(uint8_t channel1);
+	uint32_t getDiffCount();
 private:
 	TIM_HandleTypeDef htim;
+	uint32_t prevCounter;
 };
 
 #endif /* SPEEDMEASUREMENT_H_ */

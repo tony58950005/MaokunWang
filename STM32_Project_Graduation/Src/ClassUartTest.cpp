@@ -14,6 +14,8 @@
 ClassUartTest::ClassUartTest(UART_HandleTypeDef h) :
 	huart(h)
 {
+	__HAL_RCC_USART1_CLK_ENABLE();
+
 	huart.Instance = USART1;
 	huart.Init.BaudRate = 115200;
 	huart.Init.WordLength = UART_WORDLENGTH_8B;
@@ -39,4 +41,5 @@ bool ClassUartTest::receiveMessage(uint8_t* buffer, uint16_t bufferLength, uint3
 	return (HAL_UART_Receive(&huart, buffer, bufferLength, timeout) == HAL_OK);
 }
 
+//TODO: change uart.sendMessage to send only until \0 character. Use only one argument for uart.sendMessage.
 

@@ -48,7 +48,7 @@ public:
 	private:
 		uint8_t myTxData_OK[5];
 		uint8_t myTxData_Battery[6];
-		uint8_t myTxData_Distance[7];
+		char myTxData_Distance[20];
 		uint8_t distanceR,distanceL,distanceM;
 		Queue receivedQueue;
 		char receivedCommand[100];

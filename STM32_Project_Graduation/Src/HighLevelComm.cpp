@@ -25,11 +25,10 @@ HighLevelComm::HighLevelComm(UART_HandleTypeDef& uart,TIM_Base_InitTypeDef servo
 	myTxData_Battery("-1"),
 	myTxData_Distance("-1"),
 	uart(uart),
-	adc(adc),
 	servoPWM(TIM10, servoInit, sConfigOC, TIM_CHANNEL_1),
 	motorPWM1(TIM8, servoInit, sConfigOC, TIM_CHANNEL_1),
 	motorPWM2(TIM8, servoInit, sConfigOC, TIM_CHANNEL_2),
-	motor(1.0,0.0,0.0,motorPWM1, motorPWM2)
+	motor(1.0,0.0,0.0,motorPWM1, motorPWM2)	//TODO-Akos: fix init sequence
 {
 	if(!motorControlInit()){
 //		Error_Handler(MotorControlInitError);
@@ -53,7 +52,8 @@ bool HighLevelComm::ParseMessage()
 
 	if (myRxData_1byte != '\n')	//Store character, if it is not '\n'
 	{
-		receivedQueue.Buffer_Write(myRxData_1byte);
+		if (myRxData_1byte != '\r')
+			receivedQueue.Buffer_Write(myRxData_1byte);
 		return false;
 	}
 
@@ -67,7 +67,6 @@ bool HighLevelComm::ParseMessage()
 	if (j == sizeof(receivedCommand))	//Check receivedCommand length
 		return false;
 
-	//TODO-Akos: You get the received line in receivedCommand, parse the line using strstr and sscanf. I give you an example:
 	if (strstr(receivedCommand, "Stop") != NULL){
 		Stop();
 	}else if (strstr(receivedCommand, "Battery") != NULL){
@@ -88,8 +87,6 @@ bool HighLevelComm::ParseMessage()
 }
 bool HighLevelComm::Move(int x)  //x means moving at x millimeter/second.
 {
-
-	//TODO: Call init function in the ctor once
 	if(!getMotorSpeed(motorSpeed)){
 		Error_Handler(GetMotorSpeedError);
 		uart.sendMessage(ErrorInfo,sizeof(ErrorInfo),100);
@@ -104,6 +101,7 @@ bool HighLevelComm::Move(int x)  //x means moving at x millimeter/second.
 			return false;
 		}
 	} else{
+		//TODO: put the sendMessage fcn in the Error_Handler
 		//TODO: send back some error message over uart
 		Error_Handler(ControlSpeedError);
 		uart.sendMessage(ErrorInfo,sizeof(ErrorInfo),100);
@@ -117,7 +115,7 @@ bool HighLevelComm::Stop()
 	//TODO: You don't need to know the actual speed to stop the car
 	//getMotorSpeed(motorSpeed);
 	if (isRun == true) {	//"Stop\n"
-		//TODO: Don't call the PID controller, simple stop the car
+		//TODO: Don't call the PID controller, simple stop the car using the setSpeed fcn of the PID class
 		motor.PIDController_Stop();
 	} else {
 		return false;
@@ -164,13 +162,12 @@ bool HighLevelComm::showDistance()
 {
 	//"Distance\n" means getting the distance of the nearest obstacle information
 	//myTxData_Distance saves the data from the distance sensor.
-	//TODO: you call the obstacleDetection
 	if(!measureDistance(adc)){
 //
 	}
-	//TODO: This code is wrong. Use snprintf to create the myTxData_Distance string with distance values.
-	snprintf((char*)myTxData_Distance, 20,"%d%c%d%c%d", distanceL,':',distanceM,':',distanceR);
-	if (uart.sendMessage(myTxData_Distance, sizeof(myTxData_Distance), 100)== true) {
+	snprintf(myTxData_Distance, sizeof(myTxData_Distance),"%d:%d:%d", distanceL, distanceM, distanceR);
+
+	if (uart.sendMessage((uint8_t*)myTxData_Distance, sizeof(myTxData_Distance), 100)== true) {
 		return true;
 	} else
 	{
@@ -210,8 +207,10 @@ bool HighLevelComm::controlSpeed(PID_Controller& motor, float referenceSpeed, fl
 
 bool HighLevelComm::getMotorSpeed(SpeedMeasurement& motorSpeed)
 {
+	//TODO: we have only one speed measurement for the whole car, we don't have the speed of the wheels
+
 	//5ms speed measurement, one time unit is 5ms
-	WheelEncoderNow += motorSpeed.getTIMx_DeltaCnt(1); //(TIM2->CCR1);
+	WheelEncoderNow += motorSpeed.getDiffCount();
 	//rightWheelEncoderNow+= motorSpeed.getTIMx_DeltaCnt(0);//(TIM2->CCR2);
 
 	 //speed measurement for every 5ms
