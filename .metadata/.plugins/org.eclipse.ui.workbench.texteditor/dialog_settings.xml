@@ -6,8 +6,9 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="obstacle"/>
+		<item key="selection" value="Without"/>
 		<list key="findhistory">
+			<item value="without"/>
 			<item value="obstacle"/>
 			<item value="-&gt;"/>
 			<item value="error"/>
@@ -22,7 +23,6 @@
 			<item value="setPWM"/>
 			<item value="pwm"/>
 			<item value="PWM"/>
-			<item value="uart"/>
 		</list>
 		<list key="replacehistory">
 			<item value="tim8"/>

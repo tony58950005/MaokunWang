@@ -33,7 +33,15 @@ ClassUartTest::ClassUartTest(UART_HandleTypeDef h) :
 
 bool ClassUartTest::sendMessage(uint8_t* buffer, uint16_t bufferLength, uint32_t timeout)
 {
-	return (HAL_UART_Transmit(&huart, buffer, bufferLength, timeout) == HAL_OK);
+	int count = 0;
+	for (int i = 0; i < bufferLength; i++) {
+		if (buffer[i] != '\0') {
+			count++;
+		} else {
+			break;
+		}
+	}
+	return (HAL_UART_Transmit(&huart, buffer, count, timeout) == HAL_OK);
 }
 
 bool ClassUartTest::receiveMessage(uint8_t* buffer, uint16_t bufferLength, uint32_t timeout)
@@ -41,5 +49,16 @@ bool ClassUartTest::receiveMessage(uint8_t* buffer, uint16_t bufferLength, uint3
 	return (HAL_UART_Receive(&huart, buffer, bufferLength, timeout) == HAL_OK);
 }
 
+//bool ClassUartTest::sendMessageWithout0(uint8_t* buffer, uint16_t bufferLength, uint32_t timeout){
+//	int count=0;
+//	for(int i=0; i<bufferLength;i++){
+//		if(buffer[i]!='\0'){
+//			count++;
+//		}else{
+//			break;
+//		}
+//	}
+//	return (HAL_UART_Transmit(&huart, buffer, count, timeout) == HAL_OK);
+//}
 //TODO: change uart.sendMessage to send only until \0 character. Use only one argument for uart.sendMessage.
 

@@ -74,3 +74,5 @@ HighLevelComm
 +showBattery():bool
 +showDistance():bool
 +isRun: bool
+
+

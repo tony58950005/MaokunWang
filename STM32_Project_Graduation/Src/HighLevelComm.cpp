@@ -73,11 +73,11 @@ bool HighLevelComm::ParseMessage()
 		showBattery();
 	}else if (strstr(receivedCommand, "Distance") != NULL){
 		showDistance();
-	}else if (sscanf(receivedCommand,"Move,%ld", &receivedNumber) == 1){
+	}else if (sscanf(receivedCommand,"Move,%ld", &receivedNumber) >=0){
 		Move(receivedNumber);
-	}else if (sscanf(receivedCommand,"Turn,%ld", &receivedNumber) == 1){
+	}else if (sscanf(receivedCommand,"Turn,%ld", &receivedNumber) >=0){
 		Turn(receivedNumber);
-	}else if (sscanf(receivedCommand,"Delay,%ld", &receivedNumber) == 1){//Delay unit:milliseconds
+	}else if (sscanf(receivedCommand,"Delay,%ld", &receivedNumber) >=0){//Delay unit:milliseconds
 		Delay(receivedNumber);
 	}else{
 		return false;
@@ -89,22 +89,22 @@ bool HighLevelComm::Move(int x)  //x means moving at x millimeter/second.
 {
 	if(!getMotorSpeed(motorSpeed)){
 		Error_Handler(GetMotorSpeedError);
-		uart.sendMessage(ErrorInfo,sizeof(ErrorInfo),100);
+		uart.sendMessage((uint8_t*)ErrorInfo,sizeof(ErrorInfo),100);
 	}
 	if (controlSpeed(motor, x, realSpeed)) {
 		isRun = true;
-		if (uart.sendMessage(myTxData_OK, sizeof(myTxData_OK), 100) == true) {
+		if (uart.sendMessage((uint8_t*)myTxData_OK, sizeof(myTxData_OK), 100) == true) {
 			return true;
 		} else {
-			Error_Handler(UartError);
-			uart.sendMessage(ErrorInfo,sizeof(ErrorInfo),100);
+			//Error_Handler(UartError);
+			//uart.sendMessage(ErrorInfo,sizeof(ErrorInfo),100);
 			return false;
 		}
 	} else{
 		//TODO: put the sendMessage fcn in the Error_Handler
 		//TODO: send back some error message over uart
 		Error_Handler(ControlSpeedError);
-		uart.sendMessage(ErrorInfo,sizeof(ErrorInfo),100);
+		uart.sendMessage((uint8_t*)ErrorInfo,sizeof(ErrorInfo),100);
 		return false;
 	}
 }
@@ -114,32 +114,39 @@ bool HighLevelComm::Stop()
 	//TODO: Call init function in the ctor once
 	//TODO: You don't need to know the actual speed to stop the car
 	//getMotorSpeed(motorSpeed);
-	if (isRun == true) {	//"Stop\n"
+//	if (isRun == true) {	//"Stop\n"
 		//TODO: Don't call the PID controller, simple stop the car using the setSpeed fcn of the PID class
 		motor.PIDController_Stop();
-	} else {
-		return false;
-	}
+		if (uart.sendMessage((uint8_t*)myTxData_OK, sizeof(myTxData_OK), 100) == true) {
+			return true;
+		} else {
+			//Error_Handler(UartError);
+			//uart.sendMessage(ErrorInfo, sizeof(ErrorInfo), 100);
+			return false;
+		}
+//	} else {
+//		return false;
+//	}
 }
 
 bool HighLevelComm::Turn(int x) //'x' means the angle of the steering system from -45 degrees to 45 degrees
 {
 	//TODO: Call this init function in the ctor once
 	//servoPWM.steeringServoInit();
-	if (setSteering(servoPWM, x)) {	//finish the turning
-		if (uart.sendMessage(myTxData_OK, sizeof(myTxData_OK), 100) == true) {
+//	if (setSteering(servoPWM, x)) {	//finish the turning
+		if (uart.sendMessage((uint8_t*)myTxData_OK, sizeof(myTxData_OK), 100) == true) {
 			return true;
 		} else {
 			Error_Handler(UartError);
-			uart.sendMessage(ErrorInfo,sizeof(ErrorInfo),100);
+			uart.sendMessage((uint8_t*)ErrorInfo,sizeof(ErrorInfo),100);
 			return false;
 		}
-	} else{
-		//TODO: send back some error message over uart
-		Error_Handler(SteeringError);
-		uart.sendMessage(ErrorInfo,sizeof(ErrorInfo),100);
-		return false;
-	}
+//	} else{
+//		//TODO: send back some error message over uart
+//		Error_Handler(SteeringError);
+//		uart.sendMessage((uint8_t*)ErrorInfo,sizeof(ErrorInfo),100);
+//		return false;
+//	}
 
 }
 
@@ -147,13 +154,13 @@ bool HighLevelComm::showBattery()
 {
 	//"Battery\n" means getting the battery life information
 	//myTxData_Battery saves the data from the battery sensor about its battery life.
-	if (uart.sendMessage(myTxData_Battery, sizeof(myTxData_Battery), 100)== true) {
+	if (uart.sendMessage((uint8_t*)myTxData_Battery, sizeof(myTxData_Battery), 100)== true) {
 		return true;
 	} else
 	{
 		//TODO: send back some error message over uart
 		Error_Handler(UartError);
-		uart.sendMessage(ErrorInfo,sizeof(ErrorInfo),100);
+		uart.sendMessage((uint8_t*)ErrorInfo,sizeof(ErrorInfo),100);
 		return false;
 	}
 }
@@ -181,7 +188,13 @@ bool HighLevelComm::showDistance()
 bool HighLevelComm::Delay(int x) //Delay unit: milliseconds
 {
 	HAL_Delay(x);
-	return true;
+	if (uart.sendMessage((uint8_t*)myTxData_OK, sizeof(myTxData_OK), 100) == true) {
+		return true;
+	} else {
+		//Error_Handler(UartError);
+		//uart.sendMessage(ErrorInfo, sizeof(ErrorInfo), 100);
+		return false;
+	}
 }
 
 bool HighLevelComm::setSteering(PWM& servoPWM, float steeringAngle)
@@ -211,15 +224,12 @@ bool HighLevelComm::getMotorSpeed(SpeedMeasurement& motorSpeed)
 
 	//5ms speed measurement, one time unit is 5ms
 	WheelEncoderNow += motorSpeed.getDiffCount();
-	//rightWheelEncoderNow+= motorSpeed.getTIMx_DeltaCnt(0);//(TIM2->CCR2);
 
 	 //speed measurement for every 5ms
 	realSpeed   = (WheelEncoderNow - WheelEncoderLast)*1000*200*2*3.14*0.003/1000;//modify the last number "1000"->"xxxx"
-	//realRightSpeed  = (rightWheelEncoderNow - rightWheelEncoderLast)*1000*200*2*3.14*0.003/1000;
 
 	//record the last time encoder value
 	WheelEncoderLast  = WheelEncoderNow;
-	//rightWheelEncoderLast = rightWheelEncoderNow;
 	return true;
 }
 

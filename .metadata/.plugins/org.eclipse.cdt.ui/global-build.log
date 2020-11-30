@@ -7102,3 +7102,1087 @@ Finished building: STM32_Project_Graduation.bin
  
 Finished building: STM32_Project_Graduation.list
  
+14:21:54 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/ClassUartTest.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ClassUartTest.d" -MT"Src/ClassUartTest.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ClassUartTest.o"
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+arm-none-eabi-g++ "../Src/SpeedMeasurement.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/SpeedMeasurement.d" -MT"Src/SpeedMeasurement.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/SpeedMeasurement.o"
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+../Src/SpeedMeasurement.cpp: In member function 'uint32_t SpeedMeasurement::getDiffCount()':
+../Src/SpeedMeasurement.cpp:52:10: warning: unused variable 'diff' [-Wunused-variable]
+  int32_t diff = current - prevCounter;
+          ^~~~
+../Src/SpeedMeasurement.cpp:54:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::motorControlInit()':
+../Src/HighLevelComm.cpp:293:21: warning: variable 'sConfigOC' set but not used [-Wunused-but-set-variable]
+  TIM_OC_InitTypeDef sConfigOC = {0};
+                     ^~~~~~~~~
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::Stop()':
+../Src/HighLevelComm.cpp:123:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+../Src/main.cpp: In function 'void Error_Handler(ErrorState)':
+../Src/main.cpp:291:10: warning: 'void* __builtin_memcpy(void*, const void*, unsigned int)' writing 34 bytes into a region of size 33 overflows the destination [-Wstringop-overflow=]
+    strcpy((char*)ErrorInfo, "High-Level Communication error!\r\n");
+    ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Src/main.cpp:309:10: warning: 'void* __builtin_memcpy(void*, const void*, unsigned int)' writing 38 bytes into a region of size 33 overflows the destination [-Wstringop-overflow=]
+    strcpy((char*)ErrorInfo, "Motor Control Initialization Error!\r\n");
+    ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Src/main.cpp:312:10: warning: 'void* __builtin_memcpy(void*, const void*, unsigned int)' writing 45 bytes into a region of size 33 overflows the destination [-Wstringop-overflow=]
+    strcpy((char*)ErrorInfo, "Steering Servo Motor Initialization Error!\r\n");
+    ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32_Project_Graduation.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
+arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 175452	    756	   6920	 183128	  2cb58	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_Project_Graduation.bin
+ 
+Finished building: STM32_Project_Graduation.list
+ 
+14:22:42 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/ClassUartTest.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ClassUartTest.d" -MT"Src/ClassUartTest.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ClassUartTest.o"
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+arm-none-eabi-g++ "../Src/SpeedMeasurement.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/SpeedMeasurement.d" -MT"Src/SpeedMeasurement.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/SpeedMeasurement.o"
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+../Src/SpeedMeasurement.cpp: In member function 'uint32_t SpeedMeasurement::getDiffCount()':
+../Src/SpeedMeasurement.cpp:52:10: warning: unused variable 'diff' [-Wunused-variable]
+  int32_t diff = current - prevCounter;
+          ^~~~
+../Src/SpeedMeasurement.cpp:54:1: warning: no return statement in function returning non-void [-Wreturn-type]
+ }
+ ^
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::motorControlInit()':
+../Src/HighLevelComm.cpp:293:21: warning: variable 'sConfigOC' set but not used [-Wunused-but-set-variable]
+  TIM_OC_InitTypeDef sConfigOC = {0};
+                     ^~~~~~~~~
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::Stop()':
+../Src/HighLevelComm.cpp:123:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+../Src/main.cpp: In function 'void Error_Handler(ErrorState)':
+../Src/main.cpp:291:10: warning: 'void* __builtin_memcpy(void*, const void*, unsigned int)' writing 34 bytes into a region of size 33 overflows the destination [-Wstringop-overflow=]
+    strcpy((char*)ErrorInfo, "High-Level Communication error!\r\n");
+    ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Src/main.cpp:309:10: warning: 'void* __builtin_memcpy(void*, const void*, unsigned int)' writing 38 bytes into a region of size 33 overflows the destination [-Wstringop-overflow=]
+    strcpy((char*)ErrorInfo, "Motor Control Initialization Error!\r\n");
+    ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Src/main.cpp:312:10: warning: 'void* __builtin_memcpy(void*, const void*, unsigned int)' writing 45 bytes into a region of size 33 overflows the destination [-Wstringop-overflow=]
+    strcpy((char*)ErrorInfo, "Steering Servo Motor Initialization Error!\r\n");
+    ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32_Project_Graduation.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
+arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 175452	    756	   6920	 183128	  2cb58	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_Project_Graduation.bin
+ 
+Finished building: STM32_Project_Graduation.list
+ 
+14:24:28 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 175452	    756	   6920	 183128	  2cb58	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+14:24:30 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 175452	    756	   6920	 183128	  2cb58	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+14:33:02 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 175452	    756	   6920	 183128	  2cb58	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+14:35:14 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 175452	    756	   6920	 183128	  2cb58	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+15:38:05 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/ClassUartTest.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ClassUartTest.d" -MT"Src/ClassUartTest.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ClassUartTest.o"
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::motorControlInit()':
+../Src/HighLevelComm.cpp:290:21: warning: variable 'sConfigOC' set but not used [-Wunused-but-set-variable]
+  TIM_OC_InitTypeDef sConfigOC = {0};
+                     ^~~~~~~~~
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::Stop()':
+../Src/HighLevelComm.cpp:123:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+../Src/main.cpp: In function 'void Error_Handler(ErrorState)':
+../Src/main.cpp:291:10: warning: 'void* __builtin_memcpy(void*, const void*, unsigned int)' writing 34 bytes into a region of size 33 overflows the destination [-Wstringop-overflow=]
+    strcpy((char*)ErrorInfo, "High-Level Communication error!\r\n");
+    ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Src/main.cpp:309:10: warning: 'void* __builtin_memcpy(void*, const void*, unsigned int)' writing 38 bytes into a region of size 33 overflows the destination [-Wstringop-overflow=]
+    strcpy((char*)ErrorInfo, "Motor Control Initialization Error!\r\n");
+    ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Src/main.cpp:312:10: warning: 'void* __builtin_memcpy(void*, const void*, unsigned int)' writing 45 bytes into a region of size 33 overflows the destination [-Wstringop-overflow=]
+    strcpy((char*)ErrorInfo, "Steering Servo Motor Initialization Error!\r\n");
+    ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32_Project_Graduation.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
+arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 175548	    756	   6920	 183224	  2cbb8	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_Project_Graduation.bin
+ 
+Finished building: STM32_Project_Graduation.list
+ 
+04:22:28 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 175548	    756	   6920	 183224	  2cbb8	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+04:57:33 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 175548	    756	   6920	 183224	  2cbb8	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+05:14:43 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::motorControlInit()':
+../Src/HighLevelComm.cpp:296:21: warning: variable 'sConfigOC' set but not used [-Wunused-but-set-variable]
+  TIM_OC_InitTypeDef sConfigOC = {0};
+                     ^~~~~~~~~
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::Stop()':
+../Src/HighLevelComm.cpp:123:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32_Project_Graduation.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
+arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 175572	    756	   6920	 183248	  2cbd0	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_Project_Graduation.bin
+ 
+Finished building: STM32_Project_Graduation.list
+ 
+05:21:12 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+arm-none-eabi-g++ "../Src/ClassUartTest.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ClassUartTest.d" -MT"Src/ClassUartTest.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ClassUartTest.o"
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::motorControlInit()':
+../Src/HighLevelComm.cpp:296:21: warning: variable 'sConfigOC' set but not used [-Wunused-but-set-variable]
+  TIM_OC_InitTypeDef sConfigOC = {0};
+                     ^~~~~~~~~
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::Stop()':
+../Src/HighLevelComm.cpp:123:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32_Project_Graduation.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
+arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 175524	    756	   6920	 183200	  2cba0	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_Project_Graduation.bin
+ 
+Finished building: STM32_Project_Graduation.list
+ 
+05:34:35 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::motorControlInit()':
+../Src/HighLevelComm.cpp:303:21: warning: variable 'sConfigOC' set but not used [-Wunused-but-set-variable]
+  TIM_OC_InitTypeDef sConfigOC = {0};
+                     ^~~~~~~~~
+arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32_Project_Graduation.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
+arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 175548	    756	   6920	 183224	  2cbb8	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_Project_Graduation.bin
+ 
+Finished building: STM32_Project_Graduation.list
+ 
+05:36:54 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::motorControlInit()':
+../Src/HighLevelComm.cpp:303:21: warning: variable 'sConfigOC' set but not used [-Wunused-but-set-variable]
+  TIM_OC_InitTypeDef sConfigOC = {0};
+                     ^~~~~~~~~
+arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32_Project_Graduation.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
+arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 175540	    756	   6920	 183216	  2cbb0	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_Project_Graduation.bin
+ 
+Finished building: STM32_Project_Graduation.list
+ 
+05:42:30 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::motorControlInit()':
+../Src/HighLevelComm.cpp:303:21: warning: variable 'sConfigOC' set but not used [-Wunused-but-set-variable]
+  TIM_OC_InitTypeDef sConfigOC = {0};
+                     ^~~~~~~~~
+arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32_Project_Graduation.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
+arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 175164	    756	   6920	 182840	  2ca38	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_Project_Graduation.bin
+ 
+Finished building: STM32_Project_Graduation.list
+ 
+06:01:32 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::motorControlInit()':
+../Src/HighLevelComm.cpp:304:21: warning: variable 'sConfigOC' set but not used [-Wunused-but-set-variable]
+  TIM_OC_InitTypeDef sConfigOC = {0};
+                     ^~~~~~~~~
+arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32_Project_Graduation.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
+arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 174884	    756	   6920	 182560	  2c920	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_Project_Graduation.bin
+ 
+Finished building: STM32_Project_Graduation.list
+ 
+06:07:07 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::motorControlInit()':
+../Src/HighLevelComm.cpp:303:21: warning: variable 'sConfigOC' set but not used [-Wunused-but-set-variable]
+  TIM_OC_InitTypeDef sConfigOC = {0};
+                     ^~~~~~~~~
+arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32_Project_Graduation.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
+arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 175140	    756	   6920	 182816	  2ca20	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_Project_Graduation.bin
+ 
+Finished building: STM32_Project_Graduation.list
+ 
+10:54:40 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::motorControlInit()':
+../Src/HighLevelComm.cpp:303:21: warning: variable 'sConfigOC' set but not used [-Wunused-but-set-variable]
+  TIM_OC_InitTypeDef sConfigOC = {0};
+                     ^~~~~~~~~
+arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32_Project_Graduation.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
+arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 175140	    756	   6920	 182816	  2ca20	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_Project_Graduation.bin
+ 
+Finished building: STM32_Project_Graduation.list
+ 
+11:15:20 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/ClassUartTest.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/ClassUartTest.d" -MT"Src/ClassUartTest.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/ClassUartTest.o"
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::motorControlInit()':
+../Src/HighLevelComm.cpp:303:21: warning: variable 'sConfigOC' set but not used [-Wunused-but-set-variable]
+  TIM_OC_InitTypeDef sConfigOC = {0};
+                     ^~~~~~~~~
+arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32_Project_Graduation.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
+arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 175140	    756	   6920	 182816	  2ca20	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_Project_Graduation.bin
+ 
+Finished building: STM32_Project_Graduation.list
+ 
+11:19:53 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::motorControlInit()':
+../Src/HighLevelComm.cpp:303:21: warning: variable 'sConfigOC' set but not used [-Wunused-but-set-variable]
+  TIM_OC_InitTypeDef sConfigOC = {0};
+                     ^~~~~~~~~
+arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32_Project_Graduation.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
+arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 174852	    756	   6920	 182528	  2c900	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_Project_Graduation.bin
+ 
+Finished building: STM32_Project_Graduation.list
+ 
+11:22:27 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::motorControlInit()':
+../Src/HighLevelComm.cpp:303:21: warning: variable 'sConfigOC' set but not used [-Wunused-but-set-variable]
+  TIM_OC_InitTypeDef sConfigOC = {0};
+                     ^~~~~~~~~
+arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32_Project_Graduation.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
+arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 174852	    756	   6920	 182528	  2c900	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_Project_Graduation.bin
+ 
+Finished building: STM32_Project_Graduation.list
+ 
+11:22:52 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 174852	    756	   6920	 182528	  2c900	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+11:23:35 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 174852	    756	   6920	 182528	  2c900	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+11:41:56 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::motorControlInit()':
+../Src/HighLevelComm.cpp:304:21: warning: variable 'sConfigOC' set but not used [-Wunused-but-set-variable]
+  TIM_OC_InitTypeDef sConfigOC = {0};
+                     ^~~~~~~~~
+arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32_Project_Graduation.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
+arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 174884	    756	   6920	 182560	  2c920	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_Project_Graduation.bin
+ 
+Finished building: STM32_Project_Graduation.list
+ 
+11:42:50 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::motorControlInit()':
+../Src/HighLevelComm.cpp:305:21: warning: variable 'sConfigOC' set but not used [-Wunused-but-set-variable]
+  TIM_OC_InitTypeDef sConfigOC = {0};
+                     ^~~~~~~~~
+arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32_Project_Graduation.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
+arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 174900	    756	   6920	 182576	  2c930	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_Project_Graduation.bin
+ 
+Finished building: STM32_Project_Graduation.list
+ 
+11:48:16 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::motorControlInit()':
+../Src/HighLevelComm.cpp:305:21: warning: variable 'sConfigOC' set but not used [-Wunused-but-set-variable]
+  TIM_OC_InitTypeDef sConfigOC = {0};
+                     ^~~~~~~~~
+arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32_Project_Graduation.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
+arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 174900	    756	   6920	 182576	  2c930	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_Project_Graduation.bin
+ 
+Finished building: STM32_Project_Graduation.list
+ 
+11:54:53 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 174900	    756	   6920	 182576	  2c930	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+11:54:58 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::motorControlInit()':
+../Src/HighLevelComm.cpp:304:21: warning: variable 'sConfigOC' set but not used [-Wunused-but-set-variable]
+  TIM_OC_InitTypeDef sConfigOC = {0};
+                     ^~~~~~~~~
+arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32_Project_Graduation.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
+arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 174884	    756	   6920	 182560	  2c920	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_Project_Graduation.bin
+ 
+Finished building: STM32_Project_Graduation.list
+ 
+11:57:40 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 174884	    756	   6920	 182560	  2c920	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+12:13:56 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::motorControlInit()':
+../Src/HighLevelComm.cpp:303:21: warning: variable 'sConfigOC' set but not used [-Wunused-but-set-variable]
+  TIM_OC_InitTypeDef sConfigOC = {0};
+                     ^~~~~~~~~
+arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32_Project_Graduation.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
+arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 174852	    756	   6920	 182528	  2c900	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_Project_Graduation.bin
+ 
+Finished building: STM32_Project_Graduation.list
+ 
+12:18:47 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 174852	    756	   6920	 182528	  2c900	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+12:18:50 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 174852	    756	   6920	 182528	  2c900	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+12:19:54 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 174852	    756	   6920	 182528	  2c900	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+12:22:18 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 174852	    756	   6920	 182528	  2c900	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+12:23:38 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 174852	    756	   6920	 182528	  2c900	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+12:26:15 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::motorControlInit()':
+../Src/HighLevelComm.cpp:303:21: warning: variable 'sConfigOC' set but not used [-Wunused-but-set-variable]
+  TIM_OC_InitTypeDef sConfigOC = {0};
+                     ^~~~~~~~~
+arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32_Project_Graduation.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
+arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 174860	    756	   6920	 182536	  2c908	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_Project_Graduation.bin
+ 
+Finished building: STM32_Project_Graduation.list
+ 
+12:29:41 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 174860	    756	   6920	 182536	  2c908	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+12:32:22 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::motorControlInit()':
+../Src/HighLevelComm.cpp:303:21: warning: variable 'sConfigOC' set but not used [-Wunused-but-set-variable]
+  TIM_OC_InitTypeDef sConfigOC = {0};
+                     ^~~~~~~~~
+arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32_Project_Graduation.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
+arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 174852	    756	   6920	 182528	  2c900	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_Project_Graduation.bin
+ 
+Finished building: STM32_Project_Graduation.list
+ 
+12:34:05 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::motorControlInit()':
+../Src/HighLevelComm.cpp:303:21: warning: variable 'sConfigOC' set but not used [-Wunused-but-set-variable]
+  TIM_OC_InitTypeDef sConfigOC = {0};
+                     ^~~~~~~~~
+arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32_Project_Graduation.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
+arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 174852	    756	   6920	 182528	  2c900	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_Project_Graduation.bin
+ 
+Finished building: STM32_Project_Graduation.list
+ 
+12:35:36 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::motorControlInit()':
+../Src/HighLevelComm.cpp:303:21: warning: variable 'sConfigOC' set but not used [-Wunused-but-set-variable]
+  TIM_OC_InitTypeDef sConfigOC = {0};
+                     ^~~~~~~~~
+arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32_Project_Graduation.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
+arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 174852	    756	   6920	 182528	  2c900	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_Project_Graduation.bin
+ 
+Finished building: STM32_Project_Graduation.list
+ 
+12:36:52 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 174852	    756	   6920	 182528	  2c900	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+12:36:54 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 174852	    756	   6920	 182528	  2c900	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+12:40:49 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::motorControlInit()':
+../Src/HighLevelComm.cpp:303:21: warning: variable 'sConfigOC' set but not used [-Wunused-but-set-variable]
+  TIM_OC_InitTypeDef sConfigOC = {0};
+                     ^~~~~~~~~
+arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32_Project_Graduation.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
+arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 174852	    756	   6920	 182528	  2c900	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_Project_Graduation.bin
+ 
+Finished building: STM32_Project_Graduation.list
+ 
+12:52:25 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 174852	    756	   6920	 182528	  2c900	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+13:06:06 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::Move(int)':
+../Src/HighLevelComm.cpp:112:25: error: qualified-id in declaration before '(' token
+ bool HighLevelComm::Stop()
+                         ^
+../Src/HighLevelComm.cpp:132:25: error: qualified-id in declaration before '(' token
+ bool HighLevelComm::Turn(int x) //'x' means the angle of the steering system from -45 degrees to 45 degrees
+                         ^
+../Src/HighLevelComm.cpp:153:32: error: qualified-id in declaration before '(' token
+ bool HighLevelComm::showBattery()
+                                ^
+../Src/HighLevelComm.cpp:168:33: error: qualified-id in declaration before '(' token
+ bool HighLevelComm::showDistance()
+                                 ^
+../Src/HighLevelComm.cpp:188:26: error: qualified-id in declaration before '(' token
+ bool HighLevelComm::Delay(int x) //Delay unit: milliseconds
+                          ^
+../Src/HighLevelComm.cpp:200:32: error: qualified-id in declaration before '(' token
+ bool HighLevelComm::setSteering(PWM& servoPWM, float steeringAngle)
+                                ^
+../Src/HighLevelComm.cpp:214:33: error: qualified-id in declaration before '(' token
+ bool HighLevelComm::controlSpeed(PID_Controller& motor, float referenceSpeed, float actualSpeed)
+                                 ^
+../Src/HighLevelComm.cpp:221:34: error: qualified-id in declaration before '(' token
+ bool HighLevelComm::getMotorSpeed(SpeedMeasurement& motorSpeed)
+                                  ^
+../Src/HighLevelComm.cpp:236:36: error: qualified-id in declaration before '(' token
+ bool HighLevelComm::measureDistance(ADCClass& adc)
+                                    ^
+../Src/HighLevelComm.cpp:271:38: error: qualified-id in declaration before '(' token
+ bool HighLevelComm::steeringServoInit() //TODO: The PWM.cpp is a general PWM class, you put a specific instance here. Don't do that. You can create the servo PWM in the high level comm class.
+                                      ^
+../Src/HighLevelComm.cpp:294:37: error: qualified-id in declaration before '(' token
+ bool HighLevelComm::motorControlInit() //TODO: The PIDController.cpp is a general PID class, you put a specific instance here. Don't do that. You can create the PID controller in the high level comm class.
+                                     ^
+../Src/HighLevelComm.cpp:317:1: error: expected '}' at end of input
+ }
+ ^
+../Src/HighLevelComm.cpp:317:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+make: *** [Src/subdir.mk:59: Src/HighLevelComm.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+13:07:16 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::motorControlInit()':
+../Src/HighLevelComm.cpp:303:21: warning: variable 'sConfigOC' set but not used [-Wunused-but-set-variable]
+  TIM_OC_InitTypeDef sConfigOC = {0};
+                     ^~~~~~~~~
+arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32_Project_Graduation.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
+arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 175524	    756	   6920	 183200	  2cba0	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_Project_Graduation.bin
+ 
+Finished building: STM32_Project_Graduation.list
+ 
+13:08:58 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::motorControlInit()':
+../Src/HighLevelComm.cpp:303:21: warning: variable 'sConfigOC' set but not used [-Wunused-but-set-variable]
+  TIM_OC_InitTypeDef sConfigOC = {0};
+                     ^~~~~~~~~
+arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32_Project_Graduation.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
+arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 175364	    756	   6920	 183040	  2cb00	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_Project_Graduation.bin
+ 
+Finished building: STM32_Project_Graduation.list
+ 
+13:11:03 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::ParseMessage()':
+../Src/HighLevelComm.cpp:81:9: error: no matching function for call to 'HighLevelComm::Delay()'
+   Delay();
+         ^
+In file included from ../Src/HighLevelComm.cpp:8:0:
+../Inc/HighLevelComm.h:39:8: note: candidate: bool HighLevelComm::Delay(int)
+   bool Delay(int x);
+        ^~~~~
+../Inc/HighLevelComm.h:39:8: note:   candidate expects 1 argument, 0 provided
+../Src/HighLevelComm.cpp: At global scope:
+../Src/HighLevelComm.cpp:188:6: error: prototype for 'bool HighLevelComm::Delay()' does not match any in class 'HighLevelComm'
+ bool HighLevelComm::Delay() //Delay unit: milliseconds
+      ^~~~~~~~~~~~~
+In file included from ../Src/HighLevelComm.cpp:8:0:
+../Inc/HighLevelComm.h:39:8: error: candidate is: bool HighLevelComm::Delay(int)
+   bool Delay(int x);
+        ^~~~~
+make: *** [Src/subdir.mk:59: Src/HighLevelComm.o] Error 1
+"make -j12 all" terminated with exit code 2. Build might be incomplete.
+13:11:23 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::motorControlInit()':
+../Src/HighLevelComm.cpp:303:21: warning: variable 'sConfigOC' set but not used [-Wunused-but-set-variable]
+  TIM_OC_InitTypeDef sConfigOC = {0};
+                     ^~~~~~~~~
+../Src/main.cpp: In function 'void Error_Handler(ErrorState)':
+../Src/main.cpp:291:10: warning: 'void* __builtin_memcpy(void*, const void*, unsigned int)' writing 34 bytes into a region of size 33 overflows the destination [-Wstringop-overflow=]
+    strcpy((char*)ErrorInfo, "High-Level Communication error!\r\n");
+    ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Src/main.cpp:309:10: warning: 'void* __builtin_memcpy(void*, const void*, unsigned int)' writing 38 bytes into a region of size 33 overflows the destination [-Wstringop-overflow=]
+    strcpy((char*)ErrorInfo, "Motor Control Initialization Error!\r\n");
+    ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Src/main.cpp:312:10: warning: 'void* __builtin_memcpy(void*, const void*, unsigned int)' writing 45 bytes into a region of size 33 overflows the destination [-Wstringop-overflow=]
+    strcpy((char*)ErrorInfo, "Steering Servo Motor Initialization Error!\r\n");
+    ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32_Project_Graduation.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
+arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 175356	    756	   6920	 183032	  2caf8	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_Project_Graduation.bin
+ 
+Finished building: STM32_Project_Graduation.list
+ 
+13:13:01 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::motorControlInit()':
+../Src/HighLevelComm.cpp:303:21: warning: variable 'sConfigOC' set but not used [-Wunused-but-set-variable]
+  TIM_OC_InitTypeDef sConfigOC = {0};
+                     ^~~~~~~~~
+../Src/main.cpp: In function 'void Error_Handler(ErrorState)':
+../Src/main.cpp:291:10: warning: 'void* __builtin_memcpy(void*, const void*, unsigned int)' writing 34 bytes into a region of size 33 overflows the destination [-Wstringop-overflow=]
+    strcpy((char*)ErrorInfo, "High-Level Communication error!\r\n");
+    ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Src/main.cpp:309:10: warning: 'void* __builtin_memcpy(void*, const void*, unsigned int)' writing 38 bytes into a region of size 33 overflows the destination [-Wstringop-overflow=]
+    strcpy((char*)ErrorInfo, "Motor Control Initialization Error!\r\n");
+    ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Src/main.cpp:312:10: warning: 'void* __builtin_memcpy(void*, const void*, unsigned int)' writing 45 bytes into a region of size 33 overflows the destination [-Wstringop-overflow=]
+    strcpy((char*)ErrorInfo, "Steering Servo Motor Initialization Error!\r\n");
+    ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32_Project_Graduation.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
+arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 175364	    756	   6920	 183040	  2cb00	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_Project_Graduation.bin
+ 
+Finished building: STM32_Project_Graduation.list
+ 
+13:19:26 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+arm-none-eabi-g++ "../Src/main.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/main.o"
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::ParseMessage()':
+../Src/HighLevelComm.cpp:80:61: warning: format '%d' expects argument of type 'int*', but argument 3 has type 'int32_t* {aka long int*}' [-Wformat=]
+  }else if (sscanf(receivedCommand,"Delay%d", &receivedNumber) == 1){//Delay unit:milliseconds
+                                              ~~~~~~~~~~~~~~~^
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::motorControlInit()':
+../Src/HighLevelComm.cpp:303:21: warning: variable 'sConfigOC' set but not used [-Wunused-but-set-variable]
+  TIM_OC_InitTypeDef sConfigOC = {0};
+                     ^~~~~~~~~
+../Src/main.cpp: In function 'void Error_Handler(ErrorState)':
+../Src/main.cpp:291:10: warning: 'void* __builtin_memcpy(void*, const void*, unsigned int)' writing 34 bytes into a region of size 33 overflows the destination [-Wstringop-overflow=]
+    strcpy((char*)ErrorInfo, "High-Level Communication error!\r\n");
+    ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Src/main.cpp:309:10: warning: 'void* __builtin_memcpy(void*, const void*, unsigned int)' writing 38 bytes into a region of size 33 overflows the destination [-Wstringop-overflow=]
+    strcpy((char*)ErrorInfo, "Motor Control Initialization Error!\r\n");
+    ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+../Src/main.cpp:312:10: warning: 'void* __builtin_memcpy(void*, const void*, unsigned int)' writing 45 bytes into a region of size 33 overflows the destination [-Wstringop-overflow=]
+    strcpy((char*)ErrorInfo, "Steering Servo Motor Initialization Error!\r\n");
+    ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32_Project_Graduation.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
+arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 175356	    756	   6920	 183032	  2caf8	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_Project_Graduation.bin
+ 
+Finished building: STM32_Project_Graduation.list
+ 
+13:20:31 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::ParseMessage()':
+../Src/HighLevelComm.cpp:80:63: warning: format '%d' expects argument of type 'int*', but argument 3 has type 'int32_t* {aka long int*}' [-Wformat=]
+  }else if (sscanf(receivedCommand,"Delay,%1d", &receivedNumber) == 1){//Delay unit:milliseconds
+                                                ~~~~~~~~~~~~~~~^
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::motorControlInit()':
+../Src/HighLevelComm.cpp:303:21: warning: variable 'sConfigOC' set but not used [-Wunused-but-set-variable]
+  TIM_OC_InitTypeDef sConfigOC = {0};
+                     ^~~~~~~~~
+arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32_Project_Graduation.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
+arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 175364	    756	   6920	 183040	  2cb00	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_Project_Graduation.bin
+ 
+Finished building: STM32_Project_Graduation.list
+ 
+13:32:03 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::ParseMessage()':
+../Src/HighLevelComm.cpp:76:62: warning: format '%d' expects argument of type 'int*', but argument 3 has type 'int32_t* {aka long int*}' [-Wformat=]
+  }else if (sscanf(receivedCommand,"Move,%1d", &receivedNumber) == 1){
+                                               ~~~~~~~~~~~~~~~^
+../Src/HighLevelComm.cpp:78:62: warning: format '%d' expects argument of type 'int*', but argument 3 has type 'int32_t* {aka long int*}' [-Wformat=]
+  }else if (sscanf(receivedCommand,"Turn,%1d", &receivedNumber) == 1){
+                                               ~~~~~~~~~~~~~~~^
+../Src/HighLevelComm.cpp:80:63: warning: format '%d' expects argument of type 'int*', but argument 3 has type 'int32_t* {aka long int*}' [-Wformat=]
+  }else if (sscanf(receivedCommand,"Delay,%1d", &receivedNumber) == 1){//Delay unit:milliseconds
+                                                ~~~~~~~~~~~~~~~^
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::motorControlInit()':
+../Src/HighLevelComm.cpp:303:21: warning: variable 'sConfigOC' set but not used [-Wunused-but-set-variable]
+  TIM_OC_InitTypeDef sConfigOC = {0};
+                     ^~~~~~~~~
+arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32_Project_Graduation.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
+arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 175364	    756	   6920	 183040	  2cb00	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_Project_Graduation.bin
+ 
+Finished building: STM32_Project_Graduation.list
+ 
+13:34:18 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::motorControlInit()':
+../Src/HighLevelComm.cpp:303:21: warning: variable 'sConfigOC' set but not used [-Wunused-but-set-variable]
+  TIM_OC_InitTypeDef sConfigOC = {0};
+                     ^~~~~~~~~
+arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32_Project_Graduation.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
+arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 175364	    756	   6920	 183040	  2cb00	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_Project_Graduation.bin
+ 
+Finished building: STM32_Project_Graduation.list
+ 
+13:38:08 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::ParseMessage()':
+../Src/HighLevelComm.cpp:76:61: warning: format '%d' expects argument of type 'int*', but argument 3 has type 'int16_t* {aka short int*}' [-Wformat=]
+  }else if (sscanf(receivedCommand,"Move,%d", &receivedNumber) == 1){
+                                              ~~~~~~~~~~~~~~~^
+../Src/HighLevelComm.cpp:78:61: warning: format '%d' expects argument of type 'int*', but argument 3 has type 'int16_t* {aka short int*}' [-Wformat=]
+  }else if (sscanf(receivedCommand,"Turn,%d", &receivedNumber) == 1){
+                                              ~~~~~~~~~~~~~~~^
+../Src/HighLevelComm.cpp:80:62: warning: format '%d' expects argument of type 'int*', but argument 3 has type 'int16_t* {aka short int*}' [-Wformat=]
+  }else if (sscanf(receivedCommand,"Delay,%d", &receivedNumber) == 1){//Delay unit:milliseconds
+                                               ~~~~~~~~~~~~~~~^
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::motorControlInit()':
+../Src/HighLevelComm.cpp:303:21: warning: variable 'sConfigOC' set but not used [-Wunused-but-set-variable]
+  TIM_OC_InitTypeDef sConfigOC = {0};
+                     ^~~~~~~~~
+arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32_Project_Graduation.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
+arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 175364	    756	   6920	 183040	  2cb00	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_Project_Graduation.bin
+ 
+Finished building: STM32_Project_Graduation.list
+ 
+13:39:35 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::motorControlInit()':
+../Src/HighLevelComm.cpp:303:21: warning: variable 'sConfigOC' set but not used [-Wunused-but-set-variable]
+  TIM_OC_InitTypeDef sConfigOC = {0};
+                     ^~~~~~~~~
+arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32_Project_Graduation.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
+arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 175364	    756	   6920	 183040	  2cb00	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_Project_Graduation.bin
+ 
+Finished building: STM32_Project_Graduation.list
+ 
+13:43:10 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-g++ "../Src/HighLevelComm.cpp" -mcpu=cortex-m4 -std=gnu++14 -g -DUSE_HAL_DRIVER -DDEBUG -DSTM32F407xx -c -I../Inc -I../Drivers/CMSIS/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc -I../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-threadsafe-statics -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/HighLevelComm.d" -MT"Src/HighLevelComm.o" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "Src/HighLevelComm.o"
+../Src/HighLevelComm.cpp: In member function 'bool HighLevelComm::motorControlInit()':
+../Src/HighLevelComm.cpp:303:21: warning: variable 'sConfigOC' set but not used [-Wunused-but-set-variable]
+  TIM_OC_InitTypeDef sConfigOC = {0};
+                     ^~~~~~~~~
+arm-none-eabi-g++ -o "STM32_Project_Graduation.elf" @"objects.list"   -mcpu=cortex-m4 -T"C:\Users\59488\Documents\GitHub\MaokunWang\STM32_Project_Graduation\STM32F407VGTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="STM32_Project_Graduation.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+Finished building target: STM32_Project_Graduation.elf
+ 
+arm-none-eabi-objdump -h -S  STM32_Project_Graduation.elf  > "STM32_Project_Graduation.list"
+arm-none-eabi-objcopy  -O binary  STM32_Project_Graduation.elf  "STM32_Project_Graduation.bin"
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 175348	    756	   6920	 183024	  2caf0	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+Finished building: STM32_Project_Graduation.bin
+ 
+Finished building: STM32_Project_Graduation.list
+ 
+14:06:59 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 175348	    756	   6920	 183024	  2caf0	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
+14:07:51 **** Incremental Build of configuration Debug for project STM32_Project_Graduation ****
+make -j12 all 
+arm-none-eabi-size   STM32_Project_Graduation.elf 
+   text	   data	    bss	    dec	    hex	filename
+ 175348	    756	   6920	 183024	  2caf0	STM32_Project_Graduation.elf
+Finished building: default.size.stdout
+ 
