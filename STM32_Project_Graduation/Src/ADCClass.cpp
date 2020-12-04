@@ -14,6 +14,10 @@ ADCClass::ADCClass()
 	__HAL_RCC_ADC3_CLK_ENABLE();
 
 	hadc.Instance = ADC3;
+	if (HAL_ADC_DeInit(&hadc) != HAL_OK) {
+		Error_Handler(ADCError);
+	}
+
 	hadc.Init.ClockPrescaler = ADC_CLOCK_SYNC_PCLK_DIV4;
 	hadc.Init.Resolution = ADC_RESOLUTION_12B;
 	hadc.Init.ScanConvMode = DISABLE;

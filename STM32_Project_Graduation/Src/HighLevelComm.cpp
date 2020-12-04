@@ -20,26 +20,16 @@
 #include <math.h>
 #include <iostream>
 
-HighLevelComm::HighLevelComm(UART_HandleTypeDef& uart,TIM_Base_InitTypeDef servoInit,TIM_OC_InitTypeDef sConfigOC):
+HighLevelComm::HighLevelComm(UART_HandleTypeDef& uart, PWM servoPWM, PWM motorPWM1, PWM motorPWM2):
 	myTxData_OK("OK\r\n"),
 	myTxData_Battery("-1"),
 	myTxData_Distance("-1"),
 	uart(uart),
-	servoPWM(TIM10, servoInit, sConfigOC, TIM_CHANNEL_1),
-	motorPWM1(TIM8, servoInit, sConfigOC, TIM_CHANNEL_1),
-	motorPWM2(TIM8, servoInit, sConfigOC, TIM_CHANNEL_2),
-	motor(1.0,0.0,0.0,motorPWM1, motorPWM2)	//TODO-Akos: fix init sequence
+	servoPWM(servoPWM),
+	motor(1.0, 0.0, 0.0, motorPWM1, motorPWM2)
 {
-	if(!motorControlInit()){
-//		Error_Handler(MotorControlInitError);
-//		//HAL_UART_Transmit(&huart, buffer, bufferLength, timeout);
-//		uart.sendMessage(ErrorInfo,sizeof(ErrorInfo),100);
-	}
-	if(!steeringServoInit()){
-//		Error_Handler(SteeringServoInit);
-//		uart.sendMessage(ErrorInfo,sizeof(ErrorInfo),100);
-	}
 }
+
 bool HighLevelComm::ParseMessage()
 {
 	uint8_t myRxData_1byte;
@@ -73,11 +63,11 @@ bool HighLevelComm::ParseMessage()
 		showBattery();
 	}else if (strstr(receivedCommand, "Distance") != NULL){
 		showDistance();
-	}else if (sscanf(receivedCommand,"Move,%ld", &receivedNumber) >=0){
+	}else if (sscanf(receivedCommand,"Move,%ld", &receivedNumber) == 1){
 		Move(receivedNumber);
-	}else if (sscanf(receivedCommand,"Turn,%ld", &receivedNumber) >=0){
+	}else if (sscanf(receivedCommand,"Turn,%ld", &receivedNumber) == 1){
 		Turn(receivedNumber);
-	}else if (sscanf(receivedCommand,"Delay,%ld", &receivedNumber) >=0){//Delay unit:milliseconds
+	}else if (sscanf(receivedCommand,"Delay,%ld", &receivedNumber) == 1){//Delay unit:milliseconds
 		Delay(receivedNumber);
 	}else{
 		return false;
@@ -87,66 +77,62 @@ bool HighLevelComm::ParseMessage()
 }
 bool HighLevelComm::Move(int x)  //x means moving at x millimeter/second.
 {
-	if(!getMotorSpeed(motorSpeed)){
+	if(!getMotorSpeed()){
 		Error_Handler(GetMotorSpeedError);
-		uart.sendMessage((uint8_t*)ErrorInfo,sizeof(ErrorInfo),100);
+		uart.sendMessage(ErrorInfo,sizeof(ErrorInfo),100);
 	}
 	if (controlSpeed(motor, x, realSpeed)) {
 		isRun = true;
-		if (uart.sendMessage((uint8_t*)myTxData_OK, sizeof(myTxData_OK), 100) == true) {
+		if (uart.sendMessage(myTxData_OK, sizeof(myTxData_OK), 100) == true) {
 			return true;
 		} else {
-			//Error_Handler(UartError);
-			//uart.sendMessage(ErrorInfo,sizeof(ErrorInfo),100);
+			Error_Handler(UartError);
+			uart.sendMessage(ErrorInfo,sizeof(ErrorInfo),100);
 			return false;
 		}
 	} else{
 		//TODO: put the sendMessage fcn in the Error_Handler
 		//TODO: send back some error message over uart
 		Error_Handler(ControlSpeedError);
-		uart.sendMessage((uint8_t*)ErrorInfo,sizeof(ErrorInfo),100);
+		uart.sendMessage(ErrorInfo,sizeof(ErrorInfo),100);
 		return false;
 	}
 }
 
 bool HighLevelComm::Stop()
 {
-	//TODO: Call init function in the ctor once
-	//TODO: You don't need to know the actual speed to stop the car
-	//getMotorSpeed(motorSpeed);
-//	if (isRun == true) {	//"Stop\n"
-		//TODO: Don't call the PID controller, simple stop the car using the setSpeed fcn of the PID class
-		motor.PIDController_Stop();
-		if (uart.sendMessage((uint8_t*)myTxData_OK, sizeof(myTxData_OK), 100) == true) {
+	if (uart.sendMessage(myTxData_OK, sizeof(myTxData_OK), 100) == true) {
+		if (isRun == true) {	//"Stop\n"
+			motor.PIDController_Stop();
 			return true;
 		} else {
-			//Error_Handler(UartError);
-			//uart.sendMessage(ErrorInfo, sizeof(ErrorInfo), 100);
 			return false;
 		}
-//	} else {
-//		return false;
-//	}
+	} else {
+		Error_Handler(UartError);
+		uart.sendMessage(ErrorInfo,sizeof(ErrorInfo),100);
+		return false;
+	}
 }
 
 bool HighLevelComm::Turn(int x) //'x' means the angle of the steering system from -45 degrees to 45 degrees
 {
 	//TODO: Call this init function in the ctor once
 	//servoPWM.steeringServoInit();
-//	if (setSteering(servoPWM, x)) {	//finish the turning
-		if (uart.sendMessage((uint8_t*)myTxData_OK, sizeof(myTxData_OK), 100) == true) {
+	if (setSteering(servoPWM, x)) {	//finish the turning
+		if (uart.sendMessage(myTxData_OK, sizeof(myTxData_OK), 100) == true) {
 			return true;
 		} else {
 			Error_Handler(UartError);
-			uart.sendMessage((uint8_t*)ErrorInfo,sizeof(ErrorInfo),100);
+			uart.sendMessage(ErrorInfo,sizeof(ErrorInfo),100);
 			return false;
 		}
-//	} else{
-//		//TODO: send back some error message over uart
-//		Error_Handler(SteeringError);
-//		uart.sendMessage((uint8_t*)ErrorInfo,sizeof(ErrorInfo),100);
-//		return false;
-//	}
+	} else{
+		//TODO: send back some error message over uart
+		Error_Handler(SteeringError);
+		uart.sendMessage(ErrorInfo,sizeof(ErrorInfo),100);
+		return false;
+	}
 
 }
 
@@ -154,13 +140,13 @@ bool HighLevelComm::showBattery()
 {
 	//"Battery\n" means getting the battery life information
 	//myTxData_Battery saves the data from the battery sensor about its battery life.
-	if (uart.sendMessage((uint8_t*)myTxData_Battery, sizeof(myTxData_Battery), 100)== true) {
+	if (uart.sendMessage(myTxData_Battery, sizeof(myTxData_Battery), 100)== true) {
 		return true;
 	} else
 	{
 		//TODO: send back some error message over uart
 		Error_Handler(UartError);
-		uart.sendMessage((uint8_t*)ErrorInfo,sizeof(ErrorInfo),100);
+		uart.sendMessage(ErrorInfo,sizeof(ErrorInfo),100);
 		return false;
 	}
 }
@@ -169,10 +155,10 @@ bool HighLevelComm::showDistance()
 {
 	//"Distance\n" means getting the distance of the nearest obstacle information
 	//myTxData_Distance saves the data from the distance sensor.
-	if(!measureDistance(adc)){
+	if(!measureDistance()){
 //
 	}
-	snprintf(myTxData_Distance, sizeof(myTxData_Distance),"%d:%d:%d", distanceL, distanceM, distanceR);
+	snprintf(myTxData_Distance, sizeof(myTxData_Distance),"%f:%f:%f\r\n", distanceL, distanceM, distanceR);
 
 	if (uart.sendMessage((uint8_t*)myTxData_Distance, sizeof(myTxData_Distance), 100)== true) {
 		return true;
@@ -188,11 +174,12 @@ bool HighLevelComm::showDistance()
 bool HighLevelComm::Delay(int x) //Delay unit: milliseconds
 {
 	HAL_Delay(x);
-	if (uart.sendMessage((uint8_t*)myTxData_OK, sizeof(myTxData_OK), 100) == true) {
+
+	if (uart.sendMessage(myTxData_OK, sizeof(myTxData_OK), 100) == true) {
 		return true;
 	} else {
-		//Error_Handler(UartError);
-		//uart.sendMessage(ErrorInfo, sizeof(ErrorInfo), 100);
+		Error_Handler(UartError);
+		uart.sendMessage(ErrorInfo,sizeof(ErrorInfo),100);
 		return false;
 	}
 }
@@ -218,22 +205,25 @@ bool HighLevelComm::controlSpeed(PID_Controller& motor, float referenceSpeed, fl
 	return true;
 }
 
-bool HighLevelComm::getMotorSpeed(SpeedMeasurement& motorSpeed)
+bool HighLevelComm::getMotorSpeed()
 {
 	//TODO: we have only one speed measurement for the whole car, we don't have the speed of the wheels
 
 	//5ms speed measurement, one time unit is 5ms
-	WheelEncoderNow += motorSpeed.getDiffCount();
+	WheelEncoderNow = motorSpeed.getDiffCount();
+	//rightWheelEncoderNow+= motorSpeed.getTIMx_DeltaCnt(0);//(TIM2->CCR2);
 
 	 //speed measurement for every 5ms
 	realSpeed   = (WheelEncoderNow - WheelEncoderLast)*1000*200*2*3.14*0.003/1000;//modify the last number "1000"->"xxxx"
+	//realRightSpeed  = (rightWheelEncoderNow - rightWheelEncoderLast)*1000*200*2*3.14*0.003/1000;
 
 	//record the last time encoder value
 	WheelEncoderLast  = WheelEncoderNow;
+	//rightWheelEncoderLast = rightWheelEncoderNow;
 	return true;
 }
 
-bool HighLevelComm::measureDistance(ADCClass& adc)
+bool HighLevelComm::measureDistance()
 {
 	//Measure the signals of the Sharp sensors
 	float sensorsVoltage[3];
@@ -254,75 +244,10 @@ bool HighLevelComm::measureDistance(ADCClass& adc)
 			distance[i] = infinityf(); //the distance here does not make sense.
 		}
 	}
-	distanceL=(int)distance[0];
-	distanceM=(int)distance[1];
-	distanceR=(int)distance[2];
-	//Check distances: return true when there is some obstacle in front of the car.
-	//Use threshold value: 10 cm
-//	for (int i = 0; i < 3; i++) {
-//		if (distance[i] <= 10) {
-//			return true;
-//		}
-//	}
-//	return false;
+
+	distanceL = distance[0];
+	distanceM = distance[1];
+	distanceR = distance[2];
 	return true;
 }
 
-bool HighLevelComm::steeringServoInit()	//TODO: The PWM.cpp is a general PWM class, you put a specific instance here. Don't do that. You can create the servo PWM in the high level comm class.
-{
-	TIM_Base_InitTypeDef servoInit;
-	servoInit.Prescaler = 83;
-	servoInit.CounterMode = TIM_COUNTERMODE_UP;
-	servoInit.Period = 20000;
-	servoInit.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-	servoInit.RepetitionCounter = 0;
-
-	TIM_OC_InitTypeDef sConfigOC = {0};
-	sConfigOC.OCMode = TIM_OCMODE_PWM1;
-	sConfigOC.Pulse = 1500;
-	sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
-	sConfigOC.OCNPolarity = TIM_OCNPOLARITY_HIGH;
-	sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
-	sConfigOC.OCIdleState = TIM_OCIDLESTATE_RESET;
-	sConfigOC.OCNIdleState = TIM_OCNIDLESTATE_RESET;
-	PWM servoPWM(TIM10, servoInit, sConfigOC, TIM_CHANNEL_1);
-
-	//return servoPWM;
-	return true;
-}
-
-bool HighLevelComm::motorControlInit() //TODO: The PIDController.cpp is a general PID class, you put a specific instance here. Don't do that. You can create the PID controller in the high level comm class.
-{
-	TIM_Base_InitTypeDef servoInit;
-	servoInit.Prescaler = 1;
-	servoInit.CounterMode = TIM_COUNTERMODE_CENTERALIGNED3;
-	servoInit.Period = 2100;
-	servoInit.ClockDivision = TIM_CLOCKDIVISION_DIV1;
-	servoInit.RepetitionCounter = 0;
-
-	TIM_OC_InitTypeDef sConfigOC = {0};
-	sConfigOC.OCMode = TIM_OCMODE_PWM1;
-	sConfigOC.Pulse = servoInit.Period/2;
-	sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
-	sConfigOC.OCNPolarity = TIM_OCNPOLARITY_HIGH;
-	sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
-	sConfigOC.OCIdleState = TIM_OCIDLESTATE_SET;
-	sConfigOC.OCNIdleState = TIM_OCNIDLESTATE_RESET;
-//	PWM motorPWM1(TIM8, servoInit, sConfigOC, TIM_CHANNEL_1);
-//	PWM motorPWM2(TIM8, servoInit, sConfigOC, TIM_CHANNEL_2);
-//	PID_Controller motorController(1.0, 0.0, 0.0, motorPWM1, motorPWM2);
-
-	//return motorController;
-	return true;
-}
-
-
-//*uint8_t HighLevelComm::copy(uint8_t array[], uint8_t a[], uint8_t b[], uint8_t n, uint8_t m)
-//{
-//	uint8_t i,j;
-//	for (i=0; i<n; i++)
-//		b[i]=array[i];
-//	for (j=0; j<m; j++, i++)
-//		b[i]=a[j];
-//	return b;
-//}

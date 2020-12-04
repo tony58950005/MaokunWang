@@ -11,7 +11,7 @@ PID_Controller::PID_Controller(float Kp, float Ki, float Kd, PWM motorPWM1, PWM 
 	Kp(Kp),
 	Ki(Ki),
 	Kd(Kd),
-	limit(100),
+	limit(1000),
 	motorPWM1(motorPWM1),
 	motorPWM2(motorPWM2)
 {

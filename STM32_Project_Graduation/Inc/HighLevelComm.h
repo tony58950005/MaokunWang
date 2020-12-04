@@ -29,7 +29,7 @@ extern uint8_t ErrorInfo[33];
 
 class HighLevelComm {
 public:
-		HighLevelComm(UART_HandleTypeDef& uart,TIM_Base_InitTypeDef servoInit,TIM_OC_InitTypeDef sConfigOC);
+		HighLevelComm(UART_HandleTypeDef& uart, PWM servoPWM, PWM motorPWM1, PWM motorPWM2);
 		bool ParseMessage();
 		bool Move(int x);
 		bool Stop();
@@ -39,22 +39,20 @@ public:
 		bool Delay(int x);
 		bool setSteering(PWM& servoPWM, float steeringAngle);
 		bool controlSpeed(PID_Controller& motor, float referenceSpeed, float actualSpeed);
-		bool getMotorSpeed(SpeedMeasurement& motorSpeed);
-		bool measureDistance(ADCClass& adc);
-		bool steeringServoInit();
-		bool motorControlInit();
+		bool getMotorSpeed();
+		bool measureDistance();
 		//uint8_t *copy(uint8_t array[], uint8_t a[], uint8_t b[], uint8_t n, uint8_t m);
 		bool isRun=false;
 	private:
 		uint8_t myTxData_OK[5];
 		uint8_t myTxData_Battery[6];
-		char myTxData_Distance[20];
-		uint8_t distanceR,distanceL,distanceM;
+		char myTxData_Distance[50];
+		float distanceR,distanceL,distanceM;
 		Queue receivedQueue;
 		char receivedCommand[100];
 		uint8_t realNumber=0;
 		ClassUartTest uart;
-		PWM servoPWM,motorPWM1, motorPWM2;
+		PWM servoPWM;
 		PID_Controller motor;
 		SpeedMeasurement motorSpeed;
 		ADCClass adc;

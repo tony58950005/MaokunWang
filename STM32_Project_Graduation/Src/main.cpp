@@ -36,9 +36,6 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 /* USER CODE END Includes */
-//uint8_t distanceR,distanceL,distanceM;
-uint32_t EncoderPulseCount;
-uint8_t ErrorInfo[33];
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
@@ -47,7 +44,6 @@ uint8_t ErrorInfo[33];
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define USE_FULL_ASSERT
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -56,7 +52,6 @@ uint8_t ErrorInfo[33];
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
-TIM_HandleTypeDef htim8;
 /* USER CODE BEGIN PV */
 
 /* USER CODE END PV */
@@ -64,19 +59,8 @@ TIM_HandleTypeDef htim8;
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 void MX_GPIO_Init(void);
-bool obstacleDetection(ADCClass& adc);
-bool getMotorSpeed(SpeedMeasurement& motorSpeed);
-void controlSpeed(PID_Controller& motor, float referenceSpeed, float actualSpeed);
-
-int _write(int file, char *ptr, int len)
-{
-/* Implement your write code here, this is used by puts and printf for example */
-	int i=0;
-	for(i=0 ; i<len ; i++)
-	  ITM_SendChar((*ptr++));
-	return len;
-}
-
+void steeringServoInit();
+void motorControlInit();
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -84,10 +68,12 @@ int _write(int file, char *ptr, int len)
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 UART_HandleTypeDef huart2;
-TIM_HandleTypeDef htim2;
-TIM_Base_InitTypeDef servoInit2;
-TIM_OC_InitTypeDef sConfigOC2;
+PWM* servoPWM;
+PWM* motorPWM1;
+PWM* motorPWM2;
+
 ErrorState errorSource;
+uint8_t ErrorInfo[33];
 /* USER CODE END 0 */
 
 /**
@@ -107,15 +93,14 @@ int main(void)
 	/* Initialize all configured peripherals */
 	MX_GPIO_Init();
 
-	//ADCClass adc;
-	//PWM servoPWM = steeringServoInit();
-	//PID_Controller motor = motorControlInit();
-	//SpeedMeasurement motorSpeed;
-	HighLevelComm HighLevelCommTest(huart2, servoInit2,sConfigOC2);
+	steeringServoInit();
+	motorControlInit();
+	HighLevelComm HighLevelCommTest(huart2, *servoPWM, *motorPWM1, *motorPWM2);
 
 	while (1)
 	{
-		//motorSpeed.getDiffCount();
+		//HighLevelCommTest.getMotorSpeed();
+		//HighLevelCommTest.Move(200);
 		HighLevelCommTest.ParseMessage();
 	}
 }
@@ -252,6 +237,7 @@ void MX_GPIO_Init(void)
   GPIO_InitStructure.Pin = GPIO_PIN_0||GPIO_PIN_1;	//port setting
   GPIO_InitStructure.Mode = GPIO_MODE_AF_PP;
   GPIO_InitStructure.Pull = GPIO_PULLUP;
+  GPIO_InitStructure.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
   GPIO_InitStructure.Alternate = GPIO_AF1_TIM2;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStructure);
 
@@ -267,6 +253,49 @@ void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(GPIOC, GPIO_PIN_5, GPIO_PIN_RESET);
   HAL_GPIO_WritePin(GPIOC, GPIO_PIN_15, GPIO_PIN_RESET);
 }
+
+void steeringServoInit()
+{
+	TIM_Base_InitTypeDef servoInit;
+	servoInit.Prescaler = 83;
+	servoInit.CounterMode = TIM_COUNTERMODE_UP;
+	servoInit.Period = 20000;
+	servoInit.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+	servoInit.RepetitionCounter = 0;
+
+	TIM_OC_InitTypeDef sConfigOC = {0};
+	sConfigOC.OCMode = TIM_OCMODE_PWM1;
+	sConfigOC.Pulse = 1500;
+	sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
+	sConfigOC.OCNPolarity = TIM_OCNPOLARITY_HIGH;
+	sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
+	sConfigOC.OCIdleState = TIM_OCIDLESTATE_RESET;
+	sConfigOC.OCNIdleState = TIM_OCNIDLESTATE_RESET;
+	servoPWM = new PWM(TIM10, servoInit, sConfigOC, TIM_CHANNEL_1);
+}
+
+void motorControlInit()
+{
+	TIM_Base_InitTypeDef motorInit;
+	motorInit.Prescaler = 1;
+	motorInit.CounterMode = TIM_COUNTERMODE_CENTERALIGNED3;
+	motorInit.Period = 2100;
+	motorInit.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+	motorInit.RepetitionCounter = 0;
+
+	TIM_OC_InitTypeDef sConfigOC = {0};
+	sConfigOC.OCMode = TIM_OCMODE_PWM1;
+	sConfigOC.Pulse = 1050;
+	sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
+	sConfigOC.OCNPolarity = TIM_OCNPOLARITY_HIGH;
+	sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
+	sConfigOC.OCIdleState = TIM_OCIDLESTATE_SET;
+	sConfigOC.OCNIdleState = TIM_OCNIDLESTATE_RESET;
+
+	motorPWM1 = new PWM(TIM8, motorInit, sConfigOC, TIM_CHANNEL_1);
+	motorPWM2 = new PWM(TIM8, motorInit, sConfigOC, TIM_CHANNEL_2);
+}
+
 
 /* USER CODE BEGIN 4 */
 /* USER CODE END 4 */

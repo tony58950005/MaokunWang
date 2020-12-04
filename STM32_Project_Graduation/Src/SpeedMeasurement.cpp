@@ -18,7 +18,7 @@ SpeedMeasurement::SpeedMeasurement()
 	htim.Instance = TIM2;
 	htim.Init.Prescaler = 0x0;
 	htim.Init.CounterMode = TIM_COUNTERMODE_UP;
-	htim.Init.Period = 65535;//read the encoder value every 5ms
+	htim.Init.Period = 0xFFFFFFFF;
 	htim.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
 	htim.Init.RepetitionCounter = 0;
 
@@ -51,6 +51,7 @@ uint32_t SpeedMeasurement::getDiffCount()
 	int32_t current = __HAL_TIM_GET_COUNTER(&htim);
 	int32_t diff = current - prevCounter;
 	prevCounter = current;
+	return diff;
 }
 
 
